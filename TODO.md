@@ -2,7 +2,7 @@
 
 ## TODO
 
-### Somethíng to do
+### Something to do
 
 what?!?
 
