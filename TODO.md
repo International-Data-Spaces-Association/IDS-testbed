@@ -18,7 +18,7 @@ work in progress
 
 ## parking lot
 
-(nice ideas and all those things that hve no other place)
+(nice ideas and all those things that have no other place)
 
 ## DONE
 
