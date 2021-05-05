@@ -13,9 +13,17 @@ testbed -
          |
           - ParIS
          |
-          - Meta Data Broker
+          - Meta Data Broker 'basic'
          |
-          - Facility Connector
+          - Meta Data Broker 'advanced information'
+         |
+          - Meta Data Broker 'usage control'          
+         |
+          - Facility 'Base' Connector
+         |
+          - Facility 'Trusted' Connector 
+         |
+          - Facility 'Trusted Plus' Connector
          |
           - Applicant          
           
