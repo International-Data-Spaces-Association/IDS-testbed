@@ -17,7 +17,7 @@ This secure channel is only established if a DAT token was provided which can be
 ### Installation Guide
 The IDSCP2 Core with the logic to use different drivers can be installed with the following instructions:
 
-* in Rust: https://github.com/International-Data-Spaces-Association/idscp2-rust#building
+* in Rust: https://github.com/International-Data-Spaces-Association/idscp2-rust#building  
 System Requirements: the IDSCP2 Rust implementation currently only runs under Linux (tested with Ubuntu 18.04 and 20.04)
 
 * in Java: https://github.com/industrial-data-space/idscp2-java#build
@@ -27,14 +27,14 @@ System Requirements: the IDSCP2 Rust implementation currently only runs under Li
 https://github.com/International-Data-Spaces-Association/idscp2-rust#as-socket-tunnel
 
 * For the Java Implementation: 
-Maven artifacts are pushed to maven central and can be found here: https://search.maven.org/search?q=idscp2.
+Maven artifacts are pushed to maven central and can be found here: https://search.maven.org/search?q=idscp2.  
 More information about the usage can be found in the [IDSCP2 Documentation](https://github.com/industrial-data-space/idscp2-java/wiki).
 
 ### Other interesting Documents
 
 ### Contact Persons
-Leon Beckmann (leon.beckmann@aisec.fraunhofer.de)
-Oliver Braunsdorf (oliver.braunsdorf@aisec.fraunhofer.de)
-Monika Huber (monika.huber@aisec.fraunhofer.de)
-Michael Lux (michael.lux@aisec.fraunhofer.de)
-Gerd Brost (gerd.brost@aisec.fraunhofer.de)
+Leon Beckmann (leon.beckmann@aisec.fraunhofer.de)  
+Oliver Braunsdorf (oliver.braunsdorf@aisec.fraunhofer.de)  
+Monika Huber (monika.huber@aisec.fraunhofer.de)  
+Michael Lux (michael.lux@aisec.fraunhofer.de)  
+Gerd Brost (gerd.brost@aisec.fraunhofer.de)  
