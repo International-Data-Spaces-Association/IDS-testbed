@@ -11,5 +11,9 @@ latest version in the slideset on the certificate policy presented in the workin
 
 ### Installation Guide
 
+https://www.ejbca.org/download/ (Community Edition)
+
+x509v3 EE-Zertifikaten
+* Supported algorithms: RSA 4096, SHA256, SHA384, SHA512
 
 ### Other interesting Documents
