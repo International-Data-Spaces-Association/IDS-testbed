@@ -11,6 +11,6 @@ Internal Preparation
 https://github.com/International-Data-Spaces-Association/DataspaceConnector
 
 ### Installation Guide
-
+https://github.com/International-Data-Spaces-Association/DataspaceConnector/blob/develop/docs/index.md
 
 ### Other interesting Documents
