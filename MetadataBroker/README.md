@@ -15,3 +15,5 @@ https://github.com/International-Data-Spaces-Association/metadata-broker-open-co
 
 
 ### Other interesting Documents
+
+Contact Information: matthias.boeckmann@iais.fraunhofer.de
