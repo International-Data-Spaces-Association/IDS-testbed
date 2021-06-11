@@ -1,0 +1,41 @@
+What will it consist of?
+  Various (docker) containers with required interoperability functionalities
+  1 reference testbed + processes (during project) For certification purposes and for developers to test their components
+  only 1 reference implementation per component - different instanciations for the different security levels
+  Part of GitHub repository: installation scripts and instructions on how to set it up, integration test cases
+  Starting point: small ecosystem with reliable components that allows to connect with the outside, even if it´s manually, and start operating
+  
+How will it work?
+  Open Source
+  Easy to install - not too many requirements, dependencies
+  companies can use their own connector
+  Automatically deployed
+  continous integration environment
+  only validated components can enter the testbed
+  Link to repository with components code (no copy of code needed)
+  Define working processes for future developments
+  Starting point: only "positive" tests
+
+How will new (versions of) components be integrated?
+  Individual component assessment prior to integration in testbed
+  New versions need to be validated against specifications by testing them individually and integrating them in the testbed
+  Define Validation process + integration test cases
+  Installation manual and user manual need to be complete
+  
+Infrastructure to run Testbed
+  Monitoring tools: to check if testbed is up and running correctly and all endpoints are available
+  Testbed: easy to install by fulfilling minimum requirements
+  Testcenter: concrete infrastructure requirements out of scope
+
+What do we want to test?
+  6 different infrastructure components (connectors) - in scope of this project.
+  1st step: base connector. 2nd step: base broker
+  Final goal: test all other infrastructure components (not in scope for this project).
+  
+Open topics
+  Describe ecosystem (orchestration of components) semantically? Part of this project? (IDS)
+  Resulting testbed available on GitHub - who´s taking care of maintainance?
+  How Feedback from activities performed by component on testbed should be provided? Separate service?
+
+
+
