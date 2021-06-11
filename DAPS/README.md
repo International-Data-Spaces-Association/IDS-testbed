@@ -16,3 +16,5 @@ https://github.com/International-Data-Spaces-Association/omejdn-daps#running
 
 
 ### Other interesting Documents
+
+Contact information: martin.schanzenbach@aisec.fraunhofer.de
