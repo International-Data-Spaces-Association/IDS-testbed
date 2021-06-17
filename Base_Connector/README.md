@@ -31,7 +31,7 @@ usage policy patterns.
 
 ### IDS API
 * [Dataspace Connector Messages](https://international-data-spaces-association.github.io/DataspaceConnector/Documentation/Messages)
-* [Dataspace Connector Message Flow](https://github.com/International-Data-Spaces-Association/IDS-G-pre/tree/connector-interaction/Communication/sequence-diagrams/data-connector-to-data-connector#message-flows-for-connector-to-connector-communication)
+* [IDS Message Flow](https://github.com/International-Data-Spaces-Association/IDS-G-pre/tree/connector-interaction/Communication/sequence-diagrams/data-connector-to-data-connector#message-flows-for-connector-to-connector-communication)
 
 ---
 
