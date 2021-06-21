@@ -18,6 +18,7 @@ usage policy patterns.
 ## Repository with open source implementation
 * [Dataspace Connector Source Code](https://github.com/International-Data-Spaces-Association/DataspaceConnector)
 * [Dataspace Connector Core latest docker file](https://github.com/International-Data-Spaces-Association/DataspaceConnector/pkgs/container/dataspace-connector)
+* [Deployment Examples for Docker](https://github.com/International-Data-Spaces-Association/IDS-Deployment-Examples/tree/main/dataspace-connector)
 
 ## Installation Guide
 * [Quick start (without valid Identity in IDS)](https://international-data-spaces-association.github.io/DataspaceConnector/GettingStarted)
