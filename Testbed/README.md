@@ -2,12 +2,12 @@
 
 Download the .zip files in this repository. The installation process is explained below for each of the components. In case of requiring further explanation, the links to the original github repos will be added. The software required for the successful deployment of the testbed will also be mentioned.
 Software and versions used for the testbed:
-	Docker: 19.03.8
-	Docker-compose: 1.25
-	Java: 11.0.11
-	Maven: 3.6.3
-	Ruby: 2.7.0
-	Curl: 7.68
+- OS: Ubuntu 20.04.1 LTS
+- Docker: 19.03.8
+- Docker-compose: 1.25
+- Java: 11.0.11
+- Maven: 3.6.3
+- Ruby: 2.7.0
 
 ## The installation of the testbed will be structured as follows:
 * Installation of the components
