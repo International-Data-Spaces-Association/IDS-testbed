@@ -1,6 +1,8 @@
 # IDSA Reference Testbed Installation (WORK IN PROGRESS)
 
-Download the .zip files in this repository. The installation process is explained below for each of the components. In case of requiring further explanation, the links to the original github repos will be added. The software required for the successful deployment of the testbed will also be mentioned.
+Download the .zip files in this repository. The installation and configuration process is explained below for each of the components. To further support this document, the links to the official installation guides will be linked.
+
+The software required for the successful deployment of the testbed will also be mentioned.
 Software and versions used for the testbed:
 - OS: Ubuntu 20.04.1 LTS
 - Docker: 19.03.8
