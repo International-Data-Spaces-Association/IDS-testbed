@@ -1,4 +1,4 @@
-# IDSA Reference Testbed Installation (rough draft)
+# IDSA Reference Testbed Installation (WORK IN PROGRESS)
 
 Download the .zip files in this repository. The installation process is explained below for each of the components. In case of requiring further explanation, the links to the original github repos will be added. The software required for the successful deployment of the testbed will also be mentioned.
 Software and versions used for the testbed:
