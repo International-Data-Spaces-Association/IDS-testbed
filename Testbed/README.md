@@ -10,8 +10,8 @@ Software and versions used for the testbed:
 	Curl: 7.68
 
 ## The installation of the testbed will be structured as follows:
-Installation of the components
-Interconnectivity of the components
+> Installation of the components
+> Interconnectivity of the components
 
 Installation of the components
 BROKER
