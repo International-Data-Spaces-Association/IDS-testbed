@@ -13,8 +13,8 @@ Software and versions used for the testbed:
 * Installation of the components
 * Interconnectivity of the components
 
-Installation of the components
-BROKER
+## Installation of the components
+### BROKER
 1.	Prepare the SSL certificate: 
 On your host system, create a directory /etc/idscert/localhost and put two files into this directory:
 -	server.crt
@@ -32,7 +32,7 @@ If reverseproxy gives an error with the proxy, listen tcp 0.0.0.0:80 bind: addre
 If everything is setup correctly, you can find the Broker’s self-description with https://localhost
 An in-depth installation guide can be found in: https://github.com/International-Data-Spaces-Association/metadata-broker-open-core
 
-DATASPACE CONNECTOR:
+### DATASPACE CONNECTOR:
 1.	Quick start
 -	cd DataspaceConnector
 -	mvn clean package
@@ -69,7 +69,7 @@ If everything works well, the server code is 200 and the response body shows
 An in-depth installation guide can be found in https://international-data-spaces-association.github.io/DataspaceConnector/
 
 
-DAPS
+### DAPS
 1.	Running an Omejdn server
 -	cd omejdn-daps
 -	check you have the config/ and keys/ directories
@@ -98,7 +98,7 @@ If everything was setup correctly, we will get a response with a DAT with specif
 The installation guide can be found in: https://github.com/International-Data-Spaces-Association/omejdn-daps
 
 
-Interconnectivity of the components
+### Interconnectivity of the components
 Testbed connectivity
 Connector + Broker
 Build the Broker. Once it is setup make sure the self-description is showed in https://localhost.
