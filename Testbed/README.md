@@ -91,8 +91,8 @@ The official installation guide can be found in: https://international-data-spac
 1.	Running an Omejdn server
 -	cd omejdn-daps
 -	check you have the config/ and keys/ directories
--	docker run -d –name=omejdn -p 4567:4567 -v $PWD/config:/opt/config -v $PWD/keys:/opt/keys <dockerimage>
-<dockerimage> can be built with the command: docker build . -t <imageName>
+-	docker run -d –name=omejdn -p 4567:4567 -v $PWD/config:/opt/config -v $PWD/keys:/opt/keys dockerimage
+dockerimage can be built with the command: docker build . -t imageName
 If it runs successfully, you can run the server in http://localhost:4567
 2.	Adding a client
 -	Place the public key (filename.cert) in the keys/ folder
