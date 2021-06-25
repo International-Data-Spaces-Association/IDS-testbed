@@ -39,3 +39,6 @@ usage policy patterns.
 **Note:** The interface via which an IDS connector expects IDS messages is individual for each connector. This can be viewed via the self-description, which can be requested for the Dataspace Connector via ```GET {connector-url}/```. The interface for message processing is specified for the DSC with ```{connector-url}/api/ids/data```.
 
 ---
+
+## Contact
+info@dataspace-connector.de
