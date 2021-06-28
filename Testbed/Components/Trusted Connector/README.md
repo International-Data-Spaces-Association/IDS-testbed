@@ -1,5 +1,6 @@
 # Trusted Connector
 
+## Software version
 Version used in the current testbed: 5.0.0 (NOT WORKING)
 
 ## Requirements for the testbed
