@@ -6,4 +6,4 @@ Version used in the current testbed: 5.1.2
 * Java 11
 * Maven 3.6.3
 ## Component file
-The Dataspace Connector to be used in this testbed is available as a .zip file in this same repository.  
+The Dataspace Connector zip file to be used in the testbed is available in this directory.
