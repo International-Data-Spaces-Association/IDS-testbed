@@ -1,6 +1,6 @@
 # Metadata Broker 
 
-Version used in the current testbed: 4.0.3 (June 28)
+Version used in the current testbed: 4.0.3
 
 ## Requirements for the testbed
 * Java 11
