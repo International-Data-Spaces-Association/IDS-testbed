@@ -67,7 +67,7 @@ Save {yourKeyStore.p12} in /src/main/resources/conf.
 -	cd DataspaceConnector
 -	mvn clean package
 -	cd target
--	java -jar dataspaceconnector-5.1.1.jar
+-	java -jar dataspaceconnector-5.1.2.jar
 
 If everything is working correctly, find the self-description with https://localhost:8080 (this port number can be changed in DataspaceConnector/src/main/resources/application.properties line 6) and the API interface with https://localhost:8080/api/docs.
 
