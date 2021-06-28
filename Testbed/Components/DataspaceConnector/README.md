@@ -1,5 +1,6 @@
 # Dataspace Connector
 
+## Software version
 Version used in the current testbed: 5.1.2
 
 ## Requirements for the testbed
