@@ -1,5 +1,6 @@
 # Metadata Broker 
 
+## Software version
 Version used in the current testbed: 4.0.3
 
 ## Requirements for the testbed
