@@ -7,7 +7,7 @@ Software and versions used for the testbed:
 - OS: Ubuntu 20.04.1 LTS
 - Docker: 19.03.8
 - Docker-compose: 1.25
-- Java: 11.0.11
+- Java: 11
 - Maven: 3.6.3
 - Ruby: 2.7.0
 
