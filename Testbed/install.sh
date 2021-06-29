@@ -1,4 +1,5 @@
 #!/bin/bash
+## SCRIPT IS BEING UPDATED TO MAKE THE INSTALLER WORK SMOOTHLY
 
 ## DataspaceConnector
 # Unzip the folder
