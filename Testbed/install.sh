@@ -14,12 +14,12 @@ cd ..
 cp certs/dsc/testidsa1.p12 DataspaceConnector/DataspaceConnector-main/src/main/resources/conf
 
 sed -i '12s/idsc:TEST_DEPLOYMENT/idsc:PRODUCTIVE_DEPLOYMENT/' DataspaceConnector/src/main/resources/conf/config.json
-sed -i '60s/keystore-localhost.p12/testaitor.p12/' DataspaceConnector/src/main/resources/conf/config.json
+sed -i '60s/keystore-localhost.p12/testidsa1.p12/' DataspaceConnector/src/main/resources/conf/config.json
 
 cd DataspaceConnector/DataspaceConnector-main
-gnome-terminal -- mvn clean package
+mvn clean package
 cd target
-java -jar dataspaceconnector-5.1.2.jar
+gnome-terminal -- java -jar dataspaceconnector-5.1.2.jar
 cd ../../..
 
 ## Broker
