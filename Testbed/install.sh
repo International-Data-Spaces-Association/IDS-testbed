@@ -24,8 +24,8 @@ cd ../../..
 
 ## Broker
 sudo mkdir -p /etc/idscert/localhost
-sudo cp -i certs/broker/server.key /etc/idscert/localhost
-sudo cp -i certs/broker/server.crt /etc/idscert/localhost
+sudo cp -n certs/broker/server.key /etc/idscert/localhost
+sudo cp -n certs/broker/server.crt /etc/idscert/localhost
 
 cd MetadataBroker
 unzip metadata-broker-open-core.zip
