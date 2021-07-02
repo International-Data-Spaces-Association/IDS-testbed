@@ -3,7 +3,7 @@
 sudo apt-get install maven
 sudo apt install openjdk-11-jdk
 sudo apt install curl
-sudo apt isntall ruby
+sudo apt install ruby
 sudo gem install jwt
 
 ## DataspaceConnector
