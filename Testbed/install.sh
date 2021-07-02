@@ -2,6 +2,8 @@
 # Software dependencies
 sudo apt-get install maven
 sudo apt install openjdk-11-jdk
+sudo apt install curl
+sudo apt isntall ruby
 sudo gem install jwt
 
 ## DataspaceConnector
@@ -44,6 +46,7 @@ cd OmejdnDAPS
 unzip omejdn-daps.zip
 cd ..
 cp certs/daps/testidsa1.cert OmejdnDAPS/omejdn-daps-master/keys
+cp certs/daps/testidsa1.key OmejdnDAPS/omejdn-daps-master/scripts
 cd OmejdnDAPS/omejdn-daps-master
 
 docker build . -t daps
