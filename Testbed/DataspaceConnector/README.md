@@ -23,3 +23,8 @@ The Dataspace Connector zip file to be used in the testbed is available in this 
 * Line 65: Policy.allow-unsupported-patterns. Can be changed later in the UI (default: false)
 * Line 103: Path to the keystore file (default: keystore-localhost.p12)
 * Line 104: Keystore password (default: password)
+
+/DataspaceConnector/src/main/resources/conf/config.json
+* Line 12: Connector deploy mode. TEST_DEPLOYMENT vs PRODUCTIVE DEPLOYMENT (default: TEST_DEPLOYMENT)
+* Line 34: Access URL (default: https://localhost:8080/api/ids/data)
+* Line 60: keyStore. Configure your keyStore .p12 file here (default: keystore-localhost.p12)
