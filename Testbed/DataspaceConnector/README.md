@@ -30,5 +30,4 @@ The Dataspace Connector zip file to be used in the testbed is available in this 
 * Line 60: keyStore. Configure your keyStore .p12 file here (default: keystore-localhost.p12)
 
 https://localhost:8080/api/docs username:admin password:password
-
-IDS Messages > /api/ids/connector/update: Allows the user to register to the Broker of their choosing
+* IDS Messages > /api/ids/connector/update: Allows the user to register to the Broker of their choosing
