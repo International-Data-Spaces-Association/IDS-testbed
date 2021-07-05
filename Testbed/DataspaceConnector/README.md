@@ -28,3 +28,7 @@ The Dataspace Connector zip file to be used in the testbed is available in this 
 * Line 12: Connector deploy mode. TEST_DEPLOYMENT vs PRODUCTIVE DEPLOYMENT (default: TEST_DEPLOYMENT)
 * Line 34: Access URL (default: https://localhost:8080/api/ids/data)
 * Line 60: keyStore. Configure your keyStore .p12 file here (default: keystore-localhost.p12)
+
+https://localhost:8080/api/docs username:admin password:password
+
+IDS Messages > /api/ids/connector/update: Allows the user to register to the Broker of their choosing
