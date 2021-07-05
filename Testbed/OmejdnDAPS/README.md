@@ -12,5 +12,5 @@ The Omejdn DAPS zip file to be used in the testbed is available in this director
 
 ### Knowledge acquired
 * OmejdnDAPS/omejdn-daps-master/config:
-  * Client id: setup the id. For simplicity, can be the certificate name before the extension
-  * Name: 
+  * Client id: Setup the id. For simplicity, can be the certificate name before the extension
+  * Name: A desc
