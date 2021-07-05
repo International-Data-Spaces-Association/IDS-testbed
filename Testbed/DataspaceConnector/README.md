@@ -18,4 +18,8 @@ The Dataspace Connector zip file to be used in the testbed is available in this 
 * Line 52: keyStorePassword (default: password)
 * Line 54: trustStorePassword (default: password)
 * Line 56: DAPS. Lines 57 and 58 will be edited to connect the DSC to the testbed DAPS
-* Line 62: Clearing House. Line 63 will be edited to connect the DSC to the testbed Clearing House (future)
+* Line 60: Clearing House. Line 61 will be edited to connect the DSC to the testbed Clearing House **(FUTURE)**
+* Line 64: Policy.negotiation. Can be changed later in the UI (default: true)
+* Line 65: Policy.allow-unsupported-patterns. Can be changed later in the UI (default: false)
+* Line 103: Path to the keystore file (default: keystore-localhost.p12)
+* Line 104: Keystore password (default: password)
