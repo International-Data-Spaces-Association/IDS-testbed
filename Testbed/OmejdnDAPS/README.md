@@ -10,3 +10,7 @@ Version used in the current testbed: - (Last downloaded June 11th)
 ## Component file
 The Omejdn DAPS zip file to be used in the testbed is available in this directory.  
 
+### Knowledge acquired
+* OmejdnDAPS/omejdn-daps-master/config:
+  * client id: setup the id. For simplicity, can be the certificate name before the extension
+  * name: it is 
