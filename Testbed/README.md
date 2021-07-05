@@ -95,6 +95,7 @@ The official installation guide can be found in: https://international-data-spac
 
 dockerimage can be built with the command: docker build . -t imageName
 If it runs successfully, you can run the server in http://localhost:4567
+
 2.	Adding a client
 -	Place the public key (filename.cert) in the keys/ folder
 -	Add a client in config/clients.yml
