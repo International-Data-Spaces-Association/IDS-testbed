@@ -11,7 +11,7 @@ Still checking some issues with the API, waiting response from developers
 Functional on its own, isolated
 
 ### Trusted Connector
-Not working (last response: Unfortunately we do not have the capacity to offer this kind of support and I cannot help you in this case. I'm sorry and I hope you will understand.)
+Not working (last response: "Unfortunately we do not have the capacity to offer this kind of support and I cannot help you in this case. I'm sorry and I hope you will understand.")
 
 ## Interoperable components (DSC, MB)
 ### DSC + MB
