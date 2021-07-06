@@ -23,3 +23,7 @@ We got a response from the author of the testbed DAPS with a work around to the 
 Got an update on this matter yesterday (July 5th), working on it
 
 **AS SOON AS THE DAPS IN INTEROPERABLE WITH THE DSC AND THE MB, SICK WILL BE NOTIFIED**
+
+## Script for installation of the testbed
+
+"install.sh" will launch every component involved in the testbed automatically. The plan is to launch it ready to interoperate, and have a manual installation guide in case the user has a component that requires a setup. For example, introducing a new DAPS.
