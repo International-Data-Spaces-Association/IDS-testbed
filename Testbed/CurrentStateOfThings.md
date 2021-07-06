@@ -26,4 +26,4 @@ Got an update on this matter yesterday (July 5th), working on it
 
 ## Script for installation of the testbed
 
-"install.sh" will launch every component involved in the testbed automatically. The plan is to launch it ready to interoperate, and have a manual installation guide in case the user has a component that requires a setup. For example, introducing a new DAPS.
+"install.sh" will launch every component involved in the testbed automatically. The plan is to launch it ready to interoperate, and have a manual installation guide in case the user has a component that requires a setup. For example, introducing a new DAPS to the environment.
