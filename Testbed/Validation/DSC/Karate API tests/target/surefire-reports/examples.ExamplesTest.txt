@@ -1,0 +1,11 @@
+-------------------------------------------------------------------------------
+Test set: examples.ExamplesTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 15.034 s <<< FAILURE! - in examples.ExamplesTest
+testParallel  Time elapsed: 14.905 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+status code was: 404, expected: 200, response time in milliseconds: 435, url: https://jsonplaceholder.typicode.com/users/11, response: 
+{}
+classpath:examples/users/users.feature:44 ==> expected: <0> but was: <1>
+	at examples.ExamplesTest.testParallel(ExamplesTest.java:16)
+

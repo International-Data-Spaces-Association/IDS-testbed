@@ -1,0 +1,4984 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <link rel="stylesheet" href="res/bootstrap.min.css" type="text/css"/>
+    <link rel="stylesheet" href="res/karate-report.css" type="text/css"/>
+    <link rel="shortcut icon" href="favicon.ico"/>
+    <script type="text/javascript" src="res/jquery.min.js"></script>
+    <script type="text/javascript" src="res/jquery.tablesorter.min.js"></script>
+    <script type="text/javascript" src="res/bootstrap.min.js"></script>
+    <script type="text/javascript" src="res/karate-report.js"></script>
+    <title>DSC.Usage_control.usage_control</title>  
+  </head>
+  <body>   
+    <div id="root-container">
+      <div id="leftnav">
+                
+        <div>
+  <div class="nav-logo">
+    <a href="karate-summary.html">
+      <img src="karate-logo.svg" alt="Karate"/>
+    </a>
+    <div class="nav-count">
+      <div id="nav-pass" class="bg-success">3</div>
+      <div id="nav-fail" class="bg-danger">0</div>
+    </div>
+  </div>
+  <div id="nav-type">
+    <div>Scenarios</div>
+  </div>         
+  <div id="nav-date">
+    <div>2021-07-06 04:28:51 PM</div>
+  </div>        
+</div>
+
+        <div class="nav-container">
+          <div class="nav-item passed">
+            <a href="#[1:10]"><span>[1:10]</span> <span>Change the policy and then recieve it in the /api/examples/validation</span></a>
+          </div>
+          <div class="nav-item passed">
+            <a href="#[2:142]"><span>[2:142]</span> <span>Confirm change on /api/configuration/pattern</span></a>
+          </div>
+          <div class="nav-item passed">
+            <a href="#[3:168]"><span>[3:168]</span> <span>Confirm change on /api/configuration/negotiation</span></a>
+          </div>
+        </div>
+      </div>
+      <div id="content">
+        <div class="page-heading alert alert-primary">
+          <a href="karate-summary.html">Summary</a><span class="feature-label">|</span>
+          <a href="karate-tags.html">Tags</a><span class="feature-label">|</span>
+          <span class="feature-label">Feature:</span>
+          <span class="feature-path">DSC/Usage_control/usage_control.feature</span><span class="feature-label">|</span>
+          <span class="feature-name">rules karate test script</span>
+          <span class="feature-description">for help, see: https://github.com/intuit/karate/wiki/IDE-Support</span>
+        </div>
+        <div class="scenario">
+          <div class="scenario-heading" id="[1:10]">
+            <div class="heading-container">
+              <div class="scenario-tags">
+                
+              </div>
+              <div class="scenario-keyword">
+                Scenario: <span>[1:10]</span>
+                <span class="scenario-name">Change the policy and then recieve it in the /api/examples/validation</span>
+                <span></span>
+              </div>
+            </div>
+            <div class="scenario-time passed">
+              <span>ms:</span>&nbsp;<span>8879</span>
+            </div>
+          </div>
+          <div class="step-row">
+            <div class="step-container" id="[1:10]bg">
+              <div class="step-ref bg-step">&gt;&gt;</div>
+              <div class="step-cell passed">Background:</div>
+            </div>
+            <div class="time-cell passed"></div>
+          </div>
+          <div data-parent="[1:10]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.5">
+      <div class="step-ref bg-step">5</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>configure ssl = true</span>
+      </div>
+    </div>
+    <div class="time-cell passed">11</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.5">16:28:43.039 karate.env system property was: null 
+</div>   
+
+  
+
+</div>
+</div>
+          <div data-parent="[1:10]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.6">
+      <div class="step-ref bg-step">6</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def Auth = call read(&#39;../../basic-auth.js&#39;) { username: &#39;admin&#39;, password: &#39;password&#39; }</span>
+      </div>
+    </div>
+    <div class="time-cell passed">3</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div data-parent="[1:10]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.7">
+      <div class="step-ref bg-step">7</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>configure headers = ({Authorization: &#39;&#39;+Auth})</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div data-parent="[1:10]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.8">
+      <div class="step-ref bg-step">8</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>url envurl</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.12">
+      <div class="step-ref passed">12</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def policy = &#39;PROVIDE_ACCESS&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.13">
+      <div class="step-ref passed">13</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>path &#39;api/examples/policy&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.14">
+      <div class="step-ref passed">14</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>param type = policy</span>
+      </div>
+    </div>
+    <div class="time-cell passed">15</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.15">
+      <div class="step-ref passed">15</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method post</span>
+      </div>
+    </div>
+    <div class="time-cell passed">1475</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.15">16:28:43.168 request:
+1 &gt; POST https://localhost:8080/api/examples/policy?type=PROVIDE_ACCESS
+1 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+1 &gt; Host: localhost:8080
+1 &gt; Connection: Keep-Alive
+1 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+1 &gt; Accept-Encoding: gzip,deflate
+
+
+16:28:44.546 response time in milliseconds: 1378
+1 &lt; 200
+1 &lt; X-Content-Type-Options: nosniff
+1 &lt; X-XSS-Protection: 1; mode=block
+1 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+1 &lt; Pragma: no-cache
+1 &lt; Expires: 0
+1 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+1 &lt; X-Frame-Options: DENY
+1 &lt; Content-Type: application/json
+1 &lt; Transfer-Encoding: chunked
+1 &lt; Date: Tue, 06 Jul 2021 14:28:43 GMT
+1 &lt; Keep-Alive: timeout=60
+1 &lt; Connection: keep-alive
+{&quot;ids:postDuty&quot;:null,&quot;ids:action&quot;:[{&quot;@id&quot;:&quot;idsc:USE&quot;,&quot;properties&quot;:null}],&quot;ids:constraint&quot;:null,&quot;ids:assignee&quot;:null,&quot;@type&quot;:&quot;ids:Permission&quot;,&quot;ids:preDuty&quot;:null,&quot;ids:title&quot;:[{&quot;@value&quot;:&quot;Allow Data Usage&quot;,&quot;@type&quot;:&quot;http:\/\/www.w3.org\/2001\/XMLSchema#string&quot;}],&quot;ids:description&quot;:[{&quot;@value&quot;:&quot;provide-access&quot;,&quot;@type&quot;:&quot;http:\/\/www.w3.org\/2001\/XMLSchema#string&quot;}],&quot;ids:target&quot;:null,&quot;@id&quot;:&quot;https:\/\/w3id.org\/idsa\/autogen\/permission\/f1136af8-9e7c-4ce6-8a93-c4b094920719&quot;,&quot;ids:assigner&quot;:null,&quot;ids:assetRefinement&quot;:null}
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.16">
+      <div class="step-ref passed">16</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 200</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.19">
+      <div class="step-ref passed">19</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>path &#39;api/examples/validation&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.20">
+      <div class="step-ref passed">20</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>request response</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.21">
+      <div class="step-ref passed">21</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method post</span>
+      </div>
+    </div>
+    <div class="time-cell passed">999</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.21">16:28:44.548 request:
+2 &gt; POST https://localhost:8080/api/examples/validation
+2 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+2 &gt; Content-Type: application/json; charset=UTF-8
+2 &gt; Content-Length: 516
+2 &gt; Host: localhost:8080
+2 &gt; Connection: Keep-Alive
+2 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+2 &gt; Accept-Encoding: gzip,deflate
+{&quot;ids:postDuty&quot;:null,&quot;ids:action&quot;:[{&quot;@id&quot;:&quot;idsc:USE&quot;,&quot;properties&quot;:null}],&quot;ids:constraint&quot;:null,&quot;ids:assignee&quot;:null,&quot;@type&quot;:&quot;ids:Permission&quot;,&quot;ids:preDuty&quot;:null,&quot;ids:title&quot;:[{&quot;@value&quot;:&quot;Allow Data Usage&quot;,&quot;@type&quot;:&quot;http:\/\/www.w3.org\/2001\/XMLSchema#string&quot;}],&quot;ids:description&quot;:[{&quot;@value&quot;:&quot;provide-access&quot;,&quot;@type&quot;:&quot;http:\/\/www.w3.org\/2001\/XMLSchema#string&quot;}],&quot;ids:target&quot;:null,&quot;@id&quot;:&quot;https:\/\/w3id.org\/idsa\/autogen\/permission\/f1136af8-9e7c-4ce6-8a93-c4b094920719&quot;,&quot;ids:assigner&quot;:null,&quot;ids:assetRefinement&quot;:null}
+
+16:28:45.546 response time in milliseconds: 998
+2 &lt; 200
+2 &lt; X-Content-Type-Options: nosniff
+2 &lt; X-XSS-Protection: 1; mode=block
+2 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+2 &lt; Pragma: no-cache
+2 &lt; Expires: 0
+2 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+2 &lt; X-Frame-Options: DENY
+2 &lt; Content-Type: application/json
+2 &lt; Transfer-Encoding: chunked
+2 &lt; Date: Tue, 06 Jul 2021 14:28:44 GMT
+2 &lt; Keep-Alive: timeout=60
+2 &lt; Connection: keep-alive
+&quot;PROVIDE_ACCESS&quot;
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.22">
+      <div class="step-ref passed">22</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 200</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.23">
+      <div class="step-ref passed">23</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>match response == &#39;&quot;&#39;+policy+&#39;&quot;&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.25">
+      <div class="step-ref passed">25</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def policy = &#39;PROHIBIT_ACCESS&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.25">16:28:45.547 over-writing existing variable &#39;policy&#39; with new value: &#39;PROHIBIT_ACCESS&#39;
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.26">
+      <div class="step-ref passed">26</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>path &#39;api/examples/policy&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.27">
+      <div class="step-ref passed">27</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>param type = policy</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.28">
+      <div class="step-ref passed">28</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method post</span>
+      </div>
+    </div>
+    <div class="time-cell passed">763</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.28">16:28:45.549 request:
+3 &gt; POST https://localhost:8080/api/examples/policy?type=PROHIBIT_ACCESS
+3 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+3 &gt; Host: localhost:8080
+3 &gt; Connection: Keep-Alive
+3 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+3 &gt; Accept-Encoding: gzip,deflate
+
+
+16:28:46.311 response time in milliseconds: 762
+3 &lt; 200
+3 &lt; X-Content-Type-Options: nosniff
+3 &lt; X-XSS-Protection: 1; mode=block
+3 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+3 &lt; Pragma: no-cache
+3 &lt; Expires: 0
+3 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+3 &lt; X-Frame-Options: DENY
+3 &lt; Content-Type: application/json
+3 &lt; Transfer-Encoding: chunked
+3 &lt; Date: Tue, 06 Jul 2021 14:28:46 GMT
+3 &lt; Keep-Alive: timeout=60
+3 &lt; Connection: keep-alive
+{&quot;ids:action&quot;:[{&quot;@id&quot;:&quot;idsc:USE&quot;,&quot;properties&quot;:null}],&quot;ids:constraint&quot;:null,&quot;ids:assignee&quot;:null,&quot;@type&quot;:&quot;ids:Prohibition&quot;,&quot;ids:title&quot;:[{&quot;@value&quot;:&quot;Example Usage Policy&quot;,&quot;@type&quot;:&quot;http:\/\/www.w3.org\/2001\/XMLSchema#string&quot;}],&quot;ids:description&quot;:[{&quot;@value&quot;:&quot;prohibit-access&quot;,&quot;@type&quot;:&quot;http:\/\/www.w3.org\/2001\/XMLSchema#string&quot;}],&quot;ids:target&quot;:null,&quot;@id&quot;:&quot;https:\/\/w3id.org\/idsa\/autogen\/prohibition\/8644ccd2-620b-4582-8432-1d2245a45d28&quot;,&quot;ids:assigner&quot;:null,&quot;ids:assetRefinement&quot;:null}
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.29">
+      <div class="step-ref passed">29</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 200</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.32">
+      <div class="step-ref passed">32</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>path &#39;api/examples/validation&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.33">
+      <div class="step-ref passed">33</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>request response</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.34">
+      <div class="step-ref passed">34</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method post</span>
+      </div>
+    </div>
+    <div class="time-cell passed">385</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.34">16:28:46.312 request:
+4 &gt; POST https://localhost:8080/api/examples/validation
+4 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+4 &gt; Content-Type: application/json; charset=UTF-8
+4 &gt; Content-Length: 484
+4 &gt; Host: localhost:8080
+4 &gt; Connection: Keep-Alive
+4 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+4 &gt; Accept-Encoding: gzip,deflate
+{&quot;ids:action&quot;:[{&quot;@id&quot;:&quot;idsc:USE&quot;,&quot;properties&quot;:null}],&quot;ids:constraint&quot;:null,&quot;ids:assignee&quot;:null,&quot;@type&quot;:&quot;ids:Prohibition&quot;,&quot;ids:title&quot;:[{&quot;@value&quot;:&quot;Example Usage Policy&quot;,&quot;@type&quot;:&quot;http:\/\/www.w3.org\/2001\/XMLSchema#string&quot;}],&quot;ids:description&quot;:[{&quot;@value&quot;:&quot;prohibit-access&quot;,&quot;@type&quot;:&quot;http:\/\/www.w3.org\/2001\/XMLSchema#string&quot;}],&quot;ids:target&quot;:null,&quot;@id&quot;:&quot;https:\/\/w3id.org\/idsa\/autogen\/prohibition\/8644ccd2-620b-4582-8432-1d2245a45d28&quot;,&quot;ids:assigner&quot;:null,&quot;ids:assetRefinement&quot;:null}
+
+16:28:46.696 response time in milliseconds: 383
+4 &lt; 200
+4 &lt; X-Content-Type-Options: nosniff
+4 &lt; X-XSS-Protection: 1; mode=block
+4 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+4 &lt; Pragma: no-cache
+4 &lt; Expires: 0
+4 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+4 &lt; X-Frame-Options: DENY
+4 &lt; Content-Type: application/json
+4 &lt; Transfer-Encoding: chunked
+4 &lt; Date: Tue, 06 Jul 2021 14:28:46 GMT
+4 &lt; Keep-Alive: timeout=60
+4 &lt; Connection: keep-alive
+&quot;PROHIBIT_ACCESS&quot;
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.35">
+      <div class="step-ref passed">35</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 200</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.36">
+      <div class="step-ref passed">36</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>match response == &#39;&quot;&#39;+policy+&#39;&quot;&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.38">
+      <div class="step-ref passed">38</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def policy = &#39;N_TIMES_USAGE&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.38">16:28:46.696 over-writing existing variable &#39;policy&#39; with new value: &#39;N_TIMES_USAGE&#39;
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.39">
+      <div class="step-ref passed">39</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>path &#39;api/examples/policy&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.40">
+      <div class="step-ref passed">40</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>param type = policy</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.41">
+      <div class="step-ref passed">41</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method post</span>
+      </div>
+    </div>
+    <div class="time-cell passed">219</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.41">16:28:46.697 request:
+5 &gt; POST https://localhost:8080/api/examples/policy?type=N_TIMES_USAGE
+5 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+5 &gt; Host: localhost:8080
+5 &gt; Connection: Keep-Alive
+5 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+5 &gt; Accept-Encoding: gzip,deflate
+
+
+16:28:46.909 response time in milliseconds: 212
+5 &lt; 200
+5 &lt; X-Content-Type-Options: nosniff
+5 &lt; X-XSS-Protection: 1; mode=block
+5 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+5 &lt; Pragma: no-cache
+5 &lt; Expires: 0
+5 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+5 &lt; X-Frame-Options: DENY
+5 &lt; Content-Type: application/json
+5 &lt; Transfer-Encoding: chunked
+5 &lt; Date: Tue, 06 Jul 2021 14:28:46 GMT
+5 &lt; Keep-Alive: timeout=60
+5 &lt; Connection: keep-alive
+{&quot;ids:postDuty&quot;:null,&quot;ids:action&quot;:[{&quot;@id&quot;:&quot;idsc:USE&quot;,&quot;properties&quot;:null}],&quot;ids:constraint&quot;:[{&quot;@type&quot;:&quot;ids:Constraint&quot;,&quot;ids:unit&quot;:null,&quot;ids:pipEndpoint&quot;:null,&quot;ids:rightOperandReference&quot;:null,&quot;ids:rightOperand&quot;:{&quot;@value&quot;:&quot;5&quot;,&quot;@type&quot;:&quot;xsd:double&quot;},&quot;@id&quot;:&quot;https:\/\/w3id.org\/idsa\/autogen\/constraint\/a29abcfa-bebf-4eff-b543-07ce110072c0&quot;,&quot;ids:operator&quot;:{&quot;@id&quot;:&quot;idsc:LTEQ&quot;,&quot;properties&quot;:null},&quot;ids:leftOperand&quot;:{&quot;@id&quot;:&quot;idsc:COUNT&quot;,&quot;properties&quot;:null}}],&quot;ids:assignee&quot;:null,&quot;@type&quot;:&quot;ids:Permission&quot;,&quot;ids:preDuty&quot;:null,&quot;ids:title&quot;:[{&quot;@value&quot;:&quot;Example Usage Policy&quot;,&quot;@type&quot;:&quot;http:\/\/www.w3.org\/2001\/XMLSchema#string&quot;}],&quot;ids:description&quot;:[{&quot;@value&quot;:&quot;n-times-usage&quot;,&quot;@type&quot;:&quot;http:\/\/www.w3.org\/2001\/XMLSchema#string&quot;}],&quot;ids:target&quot;:null,&quot;@id&quot;:&quot;https:\/\/w3id.org\/idsa\/autogen\/permission\/bd1b4e0c-e134-40cb-9166-6693300dea40&quot;,&quot;ids:assigner&quot;:null,&quot;ids:assetRefinement&quot;:null}
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.42">
+      <div class="step-ref passed">42</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 200</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.45">
+      <div class="step-ref passed">45</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>path &#39;api/examples/validation&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.46">
+      <div class="step-ref passed">46</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>request response</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.47">
+      <div class="step-ref passed">47</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method post</span>
+      </div>
+    </div>
+    <div class="time-cell passed">216</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.47">16:28:46.924 request:
+6 &gt; POST https://localhost:8080/api/examples/validation
+6 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+6 &gt; Content-Type: application/json; charset=UTF-8
+6 &gt; Content-Length: 872
+6 &gt; Host: localhost:8080
+6 &gt; Connection: Keep-Alive
+6 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+6 &gt; Accept-Encoding: gzip,deflate
+{&quot;ids:postDuty&quot;:null,&quot;ids:action&quot;:[{&quot;@id&quot;:&quot;idsc:USE&quot;,&quot;properties&quot;:null}],&quot;ids:constraint&quot;:[{&quot;@type&quot;:&quot;ids:Constraint&quot;,&quot;ids:unit&quot;:null,&quot;ids:pipEndpoint&quot;:null,&quot;ids:rightOperandReference&quot;:null,&quot;ids:rightOperand&quot;:{&quot;@value&quot;:&quot;5&quot;,&quot;@type&quot;:&quot;xsd:double&quot;},&quot;@id&quot;:&quot;https:\/\/w3id.org\/idsa\/autogen\/constraint\/a29abcfa-bebf-4eff-b543-07ce110072c0&quot;,&quot;ids:operator&quot;:{&quot;@id&quot;:&quot;idsc:LTEQ&quot;,&quot;properties&quot;:null},&quot;ids:leftOperand&quot;:{&quot;@id&quot;:&quot;idsc:COUNT&quot;,&quot;properties&quot;:null}}],&quot;ids:assignee&quot;:null,&quot;@type&quot;:&quot;ids:Permission&quot;,&quot;ids:preDuty&quot;:null,&quot;ids:title&quot;:[{&quot;@value&quot;:&quot;Example Usage Policy&quot;,&quot;@type&quot;:&quot;http:\/\/www.w3.org\/2001\/XMLSchema#string&quot;}],&quot;ids:description&quot;:[{&quot;@value&quot;:&quot;n-times-usage&quot;,&quot;@type&quot;:&quot;http:\/\/www.w3.org\/2001\/XMLSchema#string&quot;}],&quot;ids:target&quot;:null,&quot;@id&quot;:&quot;https:\/\/w3id.org\/idsa\/autogen\/permission\/bd1b4e0c-e134-40cb-9166-6693300dea40&quot;,&quot;ids:assigner&quot;:null,&quot;ids:assetRefinement&quot;:null}
+
+16:28:47.131 response time in milliseconds: 207
+6 &lt; 200
+6 &lt; X-Content-Type-Options: nosniff
+6 &lt; X-XSS-Protection: 1; mode=block
+6 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+6 &lt; Pragma: no-cache
+6 &lt; Expires: 0
+6 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+6 &lt; X-Frame-Options: DENY
+6 &lt; Content-Type: application/json
+6 &lt; Transfer-Encoding: chunked
+6 &lt; Date: Tue, 06 Jul 2021 14:28:47 GMT
+6 &lt; Keep-Alive: timeout=60
+6 &lt; Connection: keep-alive
+&quot;N_TIMES_USAGE&quot;
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.48">
+      <div class="step-ref passed">48</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 200</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.49">
+      <div class="step-ref passed">49</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>match response == &#39;&quot;&#39;+policy+&#39;&quot;&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.51">
+      <div class="step-ref passed">51</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def policy = &#39;DURATION_USAGE&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.51">16:28:47.132 over-writing existing variable &#39;policy&#39; with new value: &#39;DURATION_USAGE&#39;
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.52">
+      <div class="step-ref passed">52</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>path &#39;api/examples/policy&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.53">
+      <div class="step-ref passed">53</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>param type = policy</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.54">
+      <div class="step-ref passed">54</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method post</span>
+      </div>
+    </div>
+    <div class="time-cell passed">515</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.54">16:28:47.133 request:
+7 &gt; POST https://localhost:8080/api/examples/policy?type=DURATION_USAGE
+7 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+7 &gt; Host: localhost:8080
+7 &gt; Connection: Keep-Alive
+7 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+7 &gt; Accept-Encoding: gzip,deflate
+
+
+16:28:47.647 response time in milliseconds: 513
+7 &lt; 200
+7 &lt; X-Content-Type-Options: nosniff
+7 &lt; X-XSS-Protection: 1; mode=block
+7 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+7 &lt; Pragma: no-cache
+7 &lt; Expires: 0
+7 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+7 &lt; X-Frame-Options: DENY
+7 &lt; Content-Type: application/json
+7 &lt; Transfer-Encoding: chunked
+7 &lt; Date: Tue, 06 Jul 2021 14:28:47 GMT
+7 &lt; Keep-Alive: timeout=60
+7 &lt; Connection: keep-alive
+{&quot;ids:postDuty&quot;:null,&quot;ids:action&quot;:[{&quot;@id&quot;:&quot;idsc:USE&quot;,&quot;properties&quot;:null}],&quot;ids:constraint&quot;:[{&quot;@type&quot;:&quot;ids:Constraint&quot;,&quot;ids:unit&quot;:null,&quot;ids:pipEndpoint&quot;:null,&quot;ids:rightOperandReference&quot;:null,&quot;ids:rightOperand&quot;:{&quot;@value&quot;:&quot;PT1M30.5S&quot;,&quot;@type&quot;:&quot;xsd:duration&quot;},&quot;@id&quot;:&quot;https:\/\/w3id.org\/idsa\/autogen\/constraint\/82b7001e-8915-421b-bce1-f6263936e1e5&quot;,&quot;ids:operator&quot;:{&quot;@id&quot;:&quot;idsc:SHORTER_EQ&quot;,&quot;properties&quot;:null},&quot;ids:leftOperand&quot;:{&quot;@id&quot;:&quot;idsc:ELAPSED_TIME&quot;,&quot;properties&quot;:null}}],&quot;ids:assignee&quot;:null,&quot;@type&quot;:&quot;ids:Permission&quot;,&quot;ids:preDuty&quot;:null,&quot;ids:title&quot;:[{&quot;@value&quot;:&quot;Example Usage Policy&quot;,&quot;@type&quot;:&quot;http:\/\/www.w3.org\/2001\/XMLSchema#string&quot;}],&quot;ids:description&quot;:[{&quot;@value&quot;:&quot;duration-usage&quot;,&quot;@type&quot;:&quot;http:\/\/www.w3.org\/2001\/XMLSchema#string&quot;}],&quot;ids:target&quot;:null,&quot;@id&quot;:&quot;https:\/\/w3id.org\/idsa\/autogen\/permission\/4280ff79-7380-4418-84f0-7950edf5f9be&quot;,&quot;ids:assigner&quot;:null,&quot;ids:assetRefinement&quot;:null}
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.55">
+      <div class="step-ref passed">55</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 200</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.58">
+      <div class="step-ref passed">58</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>path &#39;api/examples/validation&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.59">
+      <div class="step-ref passed">59</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>request response</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.60">
+      <div class="step-ref passed">60</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method post</span>
+      </div>
+    </div>
+    <div class="time-cell passed">177</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.60">16:28:47.654 request:
+8 &gt; POST https://localhost:8080/api/examples/validation
+8 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+8 &gt; Content-Type: application/json; charset=UTF-8
+8 &gt; Content-Length: 896
+8 &gt; Host: localhost:8080
+8 &gt; Connection: Keep-Alive
+8 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+8 &gt; Accept-Encoding: gzip,deflate
+{&quot;ids:postDuty&quot;:null,&quot;ids:action&quot;:[{&quot;@id&quot;:&quot;idsc:USE&quot;,&quot;properties&quot;:null}],&quot;ids:constraint&quot;:[{&quot;@type&quot;:&quot;ids:Constraint&quot;,&quot;ids:unit&quot;:null,&quot;ids:pipEndpoint&quot;:null,&quot;ids:rightOperandReference&quot;:null,&quot;ids:rightOperand&quot;:{&quot;@value&quot;:&quot;PT1M30.5S&quot;,&quot;@type&quot;:&quot;xsd:duration&quot;},&quot;@id&quot;:&quot;https:\/\/w3id.org\/idsa\/autogen\/constraint\/82b7001e-8915-421b-bce1-f6263936e1e5&quot;,&quot;ids:operator&quot;:{&quot;@id&quot;:&quot;idsc:SHORTER_EQ&quot;,&quot;properties&quot;:null},&quot;ids:leftOperand&quot;:{&quot;@id&quot;:&quot;idsc:ELAPSED_TIME&quot;,&quot;properties&quot;:null}}],&quot;ids:assignee&quot;:null,&quot;@type&quot;:&quot;ids:Permission&quot;,&quot;ids:preDuty&quot;:null,&quot;ids:title&quot;:[{&quot;@value&quot;:&quot;Example Usage Policy&quot;,&quot;@type&quot;:&quot;http:\/\/www.w3.org\/2001\/XMLSchema#string&quot;}],&quot;ids:description&quot;:[{&quot;@value&quot;:&quot;duration-usage&quot;,&quot;@type&quot;:&quot;http:\/\/www.w3.org\/2001\/XMLSchema#string&quot;}],&quot;ids:target&quot;:null,&quot;@id&quot;:&quot;https:\/\/w3id.org\/idsa\/autogen\/permission\/4280ff79-7380-4418-84f0-7950edf5f9be&quot;,&quot;ids:assigner&quot;:null,&quot;ids:assetRefinement&quot;:null}
+
+16:28:47.823 response time in milliseconds: 169
+8 &lt; 200
+8 &lt; X-Content-Type-Options: nosniff
+8 &lt; X-XSS-Protection: 1; mode=block
+8 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+8 &lt; Pragma: no-cache
+8 &lt; Expires: 0
+8 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+8 &lt; X-Frame-Options: DENY
+8 &lt; Content-Type: application/json
+8 &lt; Transfer-Encoding: chunked
+8 &lt; Date: Tue, 06 Jul 2021 14:28:47 GMT
+8 &lt; Keep-Alive: timeout=60
+8 &lt; Connection: keep-alive
+&quot;DURATION_USAGE&quot;
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.61">
+      <div class="step-ref passed">61</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 200</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.62">
+      <div class="step-ref passed">62</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>match response == &#39;&quot;&#39;+policy+&#39;&quot;&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.64">
+      <div class="step-ref passed">64</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def policy = &#39;USAGE_DURING_INTERVAL&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">1</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.64">16:28:47.825 over-writing existing variable &#39;policy&#39; with new value: &#39;USAGE_DURING_INTERVAL&#39;
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.65">
+      <div class="step-ref passed">65</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>path &#39;api/examples/policy&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.66">
+      <div class="step-ref passed">66</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>param type = policy</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.67">
+      <div class="step-ref passed">67</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method post</span>
+      </div>
+    </div>
+    <div class="time-cell passed">339</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.67">16:28:47.833 request:
+9 &gt; POST https://localhost:8080/api/examples/policy?type=USAGE_DURING_INTERVAL
+9 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+9 &gt; Host: localhost:8080
+9 &gt; Connection: Keep-Alive
+9 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+9 &gt; Accept-Encoding: gzip,deflate
+
+
+16:28:48.165 response time in milliseconds: 331
+9 &lt; 200
+9 &lt; X-Content-Type-Options: nosniff
+9 &lt; X-XSS-Protection: 1; mode=block
+9 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+9 &lt; Pragma: no-cache
+9 &lt; Expires: 0
+9 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+9 &lt; X-Frame-Options: DENY
+9 &lt; Content-Type: application/json
+9 &lt; Transfer-Encoding: chunked
+9 &lt; Date: Tue, 06 Jul 2021 14:28:48 GMT
+9 &lt; Keep-Alive: timeout=60
+9 &lt; Connection: keep-alive
+{&quot;ids:postDuty&quot;:null,&quot;ids:action&quot;:[{&quot;@id&quot;:&quot;idsc:USE&quot;,&quot;properties&quot;:null}],&quot;ids:constraint&quot;:[{&quot;@type&quot;:&quot;ids:Constraint&quot;,&quot;ids:unit&quot;:null,&quot;ids:pipEndpoint&quot;:null,&quot;ids:rightOperandReference&quot;:null,&quot;ids:rightOperand&quot;:{&quot;@value&quot;:&quot;2020-07-11T00:00:00Z&quot;,&quot;@type&quot;:&quot;xsd:dateTimeStamp&quot;},&quot;@id&quot;:&quot;https:\/\/w3id.org\/idsa\/autogen\/constraint\/9141a2b2-60f4-4d7c-a975-c5eee964bc81&quot;,&quot;ids:operator&quot;:{&quot;@id&quot;:&quot;idsc:AFTER&quot;,&quot;properties&quot;:null},&quot;ids:leftOperand&quot;:{&quot;@id&quot;:&quot;idsc:POLICY_EVALUATION_TIME&quot;,&quot;properties&quot;:null}},{&quot;@type&quot;:&quot;ids:Constraint&quot;,&quot;ids:unit&quot;:null,&quot;ids:pipEndpoint&quot;:null,&quot;ids:rightOperandReference&quot;:null,&quot;ids:rightOperand&quot;:{&quot;@value&quot;:&quot;2020-07-11T00:00:00Z&quot;,&quot;@type&quot;:&quot;xsd:dateTimeStamp&quot;},&quot;@id&quot;:&quot;https:\/\/w3id.org\/idsa\/autogen\/constraint\/4391095f-aeee-4b1a-917c-7f8134ff402e&quot;,&quot;ids:operator&quot;:{&quot;@id&quot;:&quot;idsc:BEFORE&quot;,&quot;properties&quot;:null},&quot;ids:leftOperand&quot;:{&quot;@id&quot;:&quot;idsc:POLICY_EVALUATION_TIME&quot;,&quot;properties&quot;:null}}],&quot;ids:assignee&quot;:null,&quot;@type&quot;:&quot;ids:Permission&quot;,&quot;ids:preDuty&quot;:null,&quot;ids:title&quot;:[{&quot;@value&quot;:&quot;Example Usage Policy&quot;,&quot;@type&quot;:&quot;http:\/\/www.w3.org\/2001\/XMLSchema#string&quot;}],&quot;ids:description&quot;:[{&quot;@value&quot;:&quot;usage-during-interval&quot;,&quot;@type&quot;:&quot;http:\/\/www.w3.org\/2001\/XMLSchema#string&quot;}],&quot;ids:target&quot;:null,&quot;@id&quot;:&quot;https:\/\/w3id.org\/idsa\/autogen\/permission\/22420d73-320d-4561-b5ab-9c62ef09c6e3&quot;,&quot;ids:assigner&quot;:null,&quot;ids:assetRefinement&quot;:null}
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.68">
+      <div class="step-ref passed">68</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 200</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.71">
+      <div class="step-ref passed">71</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>path &#39;api/examples/validation&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.72">
+      <div class="step-ref passed">72</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>request response</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.73">
+      <div class="step-ref passed">73</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method post</span>
+      </div>
+    </div>
+    <div class="time-cell passed">339</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.73">16:28:48.178 request:
+10 &gt; POST https://localhost:8080/api/examples/validation
+10 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+10 &gt; Content-Type: application/json; charset=UTF-8
+10 &gt; Content-Length: 1325
+10 &gt; Host: localhost:8080
+10 &gt; Connection: Keep-Alive
+10 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+10 &gt; Accept-Encoding: gzip,deflate
+{&quot;ids:postDuty&quot;:null,&quot;ids:action&quot;:[{&quot;@id&quot;:&quot;idsc:USE&quot;,&quot;properties&quot;:null}],&quot;ids:constraint&quot;:[{&quot;@type&quot;:&quot;ids:Constraint&quot;,&quot;ids:unit&quot;:null,&quot;ids:pipEndpoint&quot;:null,&quot;ids:rightOperandReference&quot;:null,&quot;ids:rightOperand&quot;:{&quot;@value&quot;:&quot;2020-07-11T00:00:00Z&quot;,&quot;@type&quot;:&quot;xsd:dateTimeStamp&quot;},&quot;@id&quot;:&quot;https:\/\/w3id.org\/idsa\/autogen\/constraint\/9141a2b2-60f4-4d7c-a975-c5eee964bc81&quot;,&quot;ids:operator&quot;:{&quot;@id&quot;:&quot;idsc:AFTER&quot;,&quot;properties&quot;:null},&quot;ids:leftOperand&quot;:{&quot;@id&quot;:&quot;idsc:POLICY_EVALUATION_TIME&quot;,&quot;properties&quot;:null}},{&quot;@type&quot;:&quot;ids:Constraint&quot;,&quot;ids:unit&quot;:null,&quot;ids:pipEndpoint&quot;:null,&quot;ids:rightOperandReference&quot;:null,&quot;ids:rightOperand&quot;:{&quot;@value&quot;:&quot;2020-07-11T00:00:00Z&quot;,&quot;@type&quot;:&quot;xsd:dateTimeStamp&quot;},&quot;@id&quot;:&quot;https:\/\/w3id.org\/idsa\/autogen\/constraint\/4391095f-aeee-4b1a-917c-7f8134ff402e&quot;,&quot;ids:operator&quot;:{&quot;@id&quot;:&quot;idsc:BEFORE&quot;,&quot;properties&quot;:null},&quot;ids:leftOperand&quot;:{&quot;@id&quot;:&quot;idsc:POLICY_EVALUATION_TIME&quot;,&quot;properties&quot;:null}}],&quot;ids:assignee&quot;:null,&quot;@type&quot;:&quot;ids:Permission&quot;,&quot;ids:preDuty&quot;:null,&quot;ids:title&quot;:[{&quot;@value&quot;:&quot;Example Usage Policy&quot;,&quot;@type&quot;:&quot;http:\/\/www.w3.org\/2001\/XMLSchema#string&quot;}],&quot;ids:description&quot;:[{&quot;@value&quot;:&quot;usage-during-interval&quot;,&quot;@type&quot;:&quot;http:\/\/www.w3.org\/2001\/XMLSchema#string&quot;}],&quot;ids:target&quot;:null,&quot;@id&quot;:&quot;https:\/\/w3id.org\/idsa\/autogen\/permission\/22420d73-320d-4561-b5ab-9c62ef09c6e3&quot;,&quot;ids:assigner&quot;:null,&quot;ids:assetRefinement&quot;:null}
+
+16:28:48.493 response time in milliseconds: 315
+10 &lt; 200
+10 &lt; X-Content-Type-Options: nosniff
+10 &lt; X-XSS-Protection: 1; mode=block
+10 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+10 &lt; Pragma: no-cache
+10 &lt; Expires: 0
+10 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+10 &lt; X-Frame-Options: DENY
+10 &lt; Content-Type: application/json
+10 &lt; Transfer-Encoding: chunked
+10 &lt; Date: Tue, 06 Jul 2021 14:28:48 GMT
+10 &lt; Keep-Alive: timeout=60
+10 &lt; Connection: keep-alive
+&quot;USAGE_DURING_INTERVAL&quot;
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.74">
+      <div class="step-ref passed">74</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 200</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.75">
+      <div class="step-ref passed">75</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>match response == &#39;&quot;&#39;+policy+&#39;&quot;&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">1</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.77">
+      <div class="step-ref passed">77</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def policy = &#39;USAGE_UNTIL_DELETION&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">2</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.77">16:28:48.505 over-writing existing variable &#39;policy&#39; with new value: &#39;USAGE_UNTIL_DELETION&#39;
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.78">
+      <div class="step-ref passed">78</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>path &#39;api/examples/policy&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.79">
+      <div class="step-ref passed">79</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>param type = policy</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.80">
+      <div class="step-ref passed">80</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method post</span>
+      </div>
+    </div>
+    <div class="time-cell passed">490</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.80">16:28:48.512 request:
+11 &gt; POST https://localhost:8080/api/examples/policy?type=USAGE_UNTIL_DELETION
+11 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+11 &gt; Host: localhost:8080
+11 &gt; Connection: Keep-Alive
+11 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+11 &gt; Accept-Encoding: gzip,deflate
+
+
+16:28:48.997 response time in milliseconds: 484
+11 &lt; 200
+11 &lt; X-Content-Type-Options: nosniff
+11 &lt; X-XSS-Protection: 1; mode=block
+11 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+11 &lt; Pragma: no-cache
+11 &lt; Expires: 0
+11 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+11 &lt; X-Frame-Options: DENY
+11 &lt; Content-Type: application/json
+11 &lt; Transfer-Encoding: chunked
+11 &lt; Date: Tue, 06 Jul 2021 14:28:48 GMT
+11 &lt; Keep-Alive: timeout=60
+11 &lt; Connection: keep-alive
+{&quot;ids:postDuty&quot;:[{&quot;ids:action&quot;:[{&quot;@id&quot;:&quot;idsc:DELETE&quot;,&quot;properties&quot;:null}],&quot;ids:constraint&quot;:[{&quot;@type&quot;:&quot;ids:Constraint&quot;,&quot;ids:unit&quot;:null,&quot;ids:pipEndpoint&quot;:null,&quot;ids:rightOperandReference&quot;:null,&quot;ids:rightOperand&quot;:{&quot;@value&quot;:&quot;2020-07-11T00:00:00Z&quot;,&quot;@type&quot;:&quot;xsd:dateTimeStamp&quot;},&quot;@id&quot;:&quot;https:\/\/w3id.org\/idsa\/autogen\/constraint\/d804837f-0680-415c-b769-cb885bf86a76&quot;,&quot;ids:operator&quot;:{&quot;@id&quot;:&quot;idsc:TEMPORAL_EQUALS&quot;,&quot;properties&quot;:null},&quot;ids:leftOperand&quot;:{&quot;@id&quot;:&quot;idsc:POLICY_EVALUATION_TIME&quot;,&quot;properties&quot;:null}}],&quot;ids:assignee&quot;:null,&quot;@type&quot;:&quot;ids:Duty&quot;,&quot;ids:title&quot;:null,&quot;ids:description&quot;:null,&quot;ids:target&quot;:null,&quot;@id&quot;:&quot;https:\/\/w3id.org\/idsa\/autogen\/duty\/23b0674a-1d33-4613-806f-74c793931f15&quot;,&quot;ids:assigner&quot;:null,&quot;ids:assetRefinement&quot;:null}],&quot;ids:action&quot;:[{&quot;@id&quot;:&quot;idsc:USE&quot;,&quot;properties&quot;:null}],&quot;ids:constraint&quot;:[{&quot;@type&quot;:&quot;ids:Constraint&quot;,&quot;ids:unit&quot;:null,&quot;ids:pipEndpoint&quot;:null,&quot;ids:rightOperandReference&quot;:null,&quot;ids:rightOperand&quot;:{&quot;@value&quot;:&quot;2020-07-11T00:00:00Z&quot;,&quot;@type&quot;:&quot;xsd:dateTimeStamp&quot;},&quot;@id&quot;:&quot;https:\/\/w3id.org\/idsa\/autogen\/constraint\/e32f3891-855c-4157-8419-e69e6e973833&quot;,&quot;ids:operator&quot;:{&quot;@id&quot;:&quot;idsc:AFTER&quot;,&quot;properties&quot;:null},&quot;ids:leftOperand&quot;:{&quot;@id&quot;:&quot;idsc:POLICY_EVALUATION_TIME&quot;,&quot;properties&quot;:null}},{&quot;@type&quot;:&quot;ids:Constraint&quot;,&quot;ids:unit&quot;:null,&quot;ids:pipEndpoint&quot;:null,&quot;ids:rightOperandReference&quot;:null,&quot;ids:rightOperand&quot;:{&quot;@value&quot;:&quot;2020-07-11T00:00:00Z&quot;,&quot;@type&quot;:&quot;xsd:dateTimeStamp&quot;},&quot;@id&quot;:&quot;https:\/\/w3id.org\/idsa\/autogen\/constraint\/24012aa7-1261-4307-9d79-d7e954b126c6&quot;,&quot;ids:operator&quot;:{&quot;@id&quot;:&quot;idsc:BEFORE&quot;,&quot;properties&quot;:null},&quot;ids:leftOperand&quot;:{&quot;@id&quot;:&quot;idsc:POLICY_EVALUATION_TIME&quot;,&quot;properties&quot;:null}}],&quot;ids:assignee&quot;:null,&quot;@type&quot;:&quot;ids:Permission&quot;,&quot;ids:preDuty&quot;:null,&quot;ids:title&quot;:[{&quot;@value&quot;:&quot;Example Usage Policy&quot;,&quot;@type&quot;:&quot;http:\/\/www.w3.org\/2001\/XMLSchema#string&quot;}],&quot;ids:description&quot;:[{&quot;@value&quot;:&quot;usage-until-deletion&quot;,&quot;@type&quot;:&quot;http:\/\/www.w3.org\/2001\/XMLSchema#string&quot;}],&quot;ids:target&quot;:null,&quot;@id&quot;:&quot;https:\/\/w3id.org\/idsa\/autogen\/permission\/8006d5af-536a-4494-8a7a-5c0b17b54135&quot;,&quot;ids:assigner&quot;:null,&quot;ids:assetRefinement&quot;:null}
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.81">
+      <div class="step-ref passed">81</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 200</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.84">
+      <div class="step-ref passed">84</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>path &#39;api/examples/validation&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.85">
+      <div class="step-ref passed">85</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>request response</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.86">
+      <div class="step-ref passed">86</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method post</span>
+      </div>
+    </div>
+    <div class="time-cell passed">302</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.86">16:28:48.998 request:
+12 &gt; POST https://localhost:8080/api/examples/validation
+12 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+12 &gt; Content-Type: application/json; charset=UTF-8
+12 &gt; Content-Length: 2037
+12 &gt; Host: localhost:8080
+12 &gt; Connection: Keep-Alive
+12 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+12 &gt; Accept-Encoding: gzip,deflate
+{&quot;ids:postDuty&quot;:[{&quot;ids:action&quot;:[{&quot;@id&quot;:&quot;idsc:DELETE&quot;,&quot;properties&quot;:null}],&quot;ids:constraint&quot;:[{&quot;@type&quot;:&quot;ids:Constraint&quot;,&quot;ids:unit&quot;:null,&quot;ids:pipEndpoint&quot;:null,&quot;ids:rightOperandReference&quot;:null,&quot;ids:rightOperand&quot;:{&quot;@value&quot;:&quot;2020-07-11T00:00:00Z&quot;,&quot;@type&quot;:&quot;xsd:dateTimeStamp&quot;},&quot;@id&quot;:&quot;https:\/\/w3id.org\/idsa\/autogen\/constraint\/d804837f-0680-415c-b769-cb885bf86a76&quot;,&quot;ids:operator&quot;:{&quot;@id&quot;:&quot;idsc:TEMPORAL_EQUALS&quot;,&quot;properties&quot;:null},&quot;ids:leftOperand&quot;:{&quot;@id&quot;:&quot;idsc:POLICY_EVALUATION_TIME&quot;,&quot;properties&quot;:null}}],&quot;ids:assignee&quot;:null,&quot;@type&quot;:&quot;ids:Duty&quot;,&quot;ids:title&quot;:null,&quot;ids:description&quot;:null,&quot;ids:target&quot;:null,&quot;@id&quot;:&quot;https:\/\/w3id.org\/idsa\/autogen\/duty\/23b0674a-1d33-4613-806f-74c793931f15&quot;,&quot;ids:assigner&quot;:null,&quot;ids:assetRefinement&quot;:null}],&quot;ids:action&quot;:[{&quot;@id&quot;:&quot;idsc:USE&quot;,&quot;properties&quot;:null}],&quot;ids:constraint&quot;:[{&quot;@type&quot;:&quot;ids:Constraint&quot;,&quot;ids:unit&quot;:null,&quot;ids:pipEndpoint&quot;:null,&quot;ids:rightOperandReference&quot;:null,&quot;ids:rightOperand&quot;:{&quot;@value&quot;:&quot;2020-07-11T00:00:00Z&quot;,&quot;@type&quot;:&quot;xsd:dateTimeStamp&quot;},&quot;@id&quot;:&quot;https:\/\/w3id.org\/idsa\/autogen\/constraint\/e32f3891-855c-4157-8419-e69e6e973833&quot;,&quot;ids:operator&quot;:{&quot;@id&quot;:&quot;idsc:AFTER&quot;,&quot;properties&quot;:null},&quot;ids:leftOperand&quot;:{&quot;@id&quot;:&quot;idsc:POLICY_EVALUATION_TIME&quot;,&quot;properties&quot;:null}},{&quot;@type&quot;:&quot;ids:Constraint&quot;,&quot;ids:unit&quot;:null,&quot;ids:pipEndpoint&quot;:null,&quot;ids:rightOperandReference&quot;:null,&quot;ids:rightOperand&quot;:{&quot;@value&quot;:&quot;2020-07-11T00:00:00Z&quot;,&quot;@type&quot;:&quot;xsd:dateTimeStamp&quot;},&quot;@id&quot;:&quot;https:\/\/w3id.org\/idsa\/autogen\/constraint\/24012aa7-1261-4307-9d79-d7e954b126c6&quot;,&quot;ids:operator&quot;:{&quot;@id&quot;:&quot;idsc:BEFORE&quot;,&quot;properties&quot;:null},&quot;ids:leftOperand&quot;:{&quot;@id&quot;:&quot;idsc:POLICY_EVALUATION_TIME&quot;,&quot;properties&quot;:null}}],&quot;ids:assignee&quot;:null,&quot;@type&quot;:&quot;ids:Permission&quot;,&quot;ids:preDuty&quot;:null,&quot;ids:title&quot;:[{&quot;@value&quot;:&quot;Example Usage Policy&quot;,&quot;@type&quot;:&quot;http:\/\/www.w3.org\/2001\/XMLSchema#string&quot;}],&quot;ids:description&quot;:[{&quot;@value&quot;:&quot;usage-until-deletion&quot;,&quot;@type&quot;:&quot;http:\/\/www.w3.org\/2001\/XMLSchema#string&quot;}],&quot;ids:target&quot;:null,&quot;@id&quot;:&quot;https:\/\/w3id.org\/idsa\/autogen\/permission\/8006d5af-536a-4494-8a7a-5c0b17b54135&quot;,&quot;ids:assigner&quot;:null,&quot;ids:assetRefinement&quot;:null}
+
+16:28:49.292 response time in milliseconds: 294
+12 &lt; 200
+12 &lt; X-Content-Type-Options: nosniff
+12 &lt; X-XSS-Protection: 1; mode=block
+12 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+12 &lt; Pragma: no-cache
+12 &lt; Expires: 0
+12 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+12 &lt; X-Frame-Options: DENY
+12 &lt; Content-Type: application/json
+12 &lt; Transfer-Encoding: chunked
+12 &lt; Date: Tue, 06 Jul 2021 14:28:49 GMT
+12 &lt; Keep-Alive: timeout=60
+12 &lt; Connection: keep-alive
+&quot;USAGE_UNTIL_DELETION&quot;
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.87">
+      <div class="step-ref passed">87</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 200</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.88">
+      <div class="step-ref passed">88</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>match response == &#39;&quot;&#39;+policy+&#39;&quot;&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.90">
+      <div class="step-ref passed">90</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def policy = &#39;USAGE_LOGGING&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">1</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.90">16:28:49.300 over-writing existing variable &#39;policy&#39; with new value: &#39;USAGE_LOGGING&#39;
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.91">
+      <div class="step-ref passed">91</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>path &#39;api/examples/policy&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.92">
+      <div class="step-ref passed">92</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>param type = policy</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.93">
+      <div class="step-ref passed">93</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method post</span>
+      </div>
+    </div>
+    <div class="time-cell passed">366</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.93">16:28:49.301 request:
+13 &gt; POST https://localhost:8080/api/examples/policy?type=USAGE_LOGGING
+13 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+13 &gt; Host: localhost:8080
+13 &gt; Connection: Keep-Alive
+13 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+13 &gt; Accept-Encoding: gzip,deflate
+
+
+16:28:49.666 response time in milliseconds: 365
+13 &lt; 200
+13 &lt; X-Content-Type-Options: nosniff
+13 &lt; X-XSS-Protection: 1; mode=block
+13 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+13 &lt; Pragma: no-cache
+13 &lt; Expires: 0
+13 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+13 &lt; X-Frame-Options: DENY
+13 &lt; Content-Type: application/json
+13 &lt; Transfer-Encoding: chunked
+13 &lt; Date: Tue, 06 Jul 2021 14:28:49 GMT
+13 &lt; Keep-Alive: timeout=60
+13 &lt; Connection: keep-alive
+{&quot;ids:postDuty&quot;:[{&quot;ids:action&quot;:[{&quot;@id&quot;:&quot;idsc:LOG&quot;,&quot;properties&quot;:null}],&quot;ids:constraint&quot;:null,&quot;ids:assignee&quot;:null,&quot;@type&quot;:&quot;ids:Duty&quot;,&quot;ids:title&quot;:null,&quot;ids:description&quot;:null,&quot;ids:target&quot;:null,&quot;@id&quot;:&quot;https:\/\/w3id.org\/idsa\/autogen\/duty\/2438e936-1cd8-4026-92fc-8a9ba073427b&quot;,&quot;ids:assigner&quot;:null,&quot;ids:assetRefinement&quot;:null}],&quot;ids:action&quot;:[{&quot;@id&quot;:&quot;idsc:USE&quot;,&quot;properties&quot;:null}],&quot;ids:constraint&quot;:null,&quot;ids:assignee&quot;:null,&quot;@type&quot;:&quot;ids:Permission&quot;,&quot;ids:preDuty&quot;:null,&quot;ids:title&quot;:[{&quot;@value&quot;:&quot;Example Usage Policy&quot;,&quot;@type&quot;:&quot;http:\/\/www.w3.org\/2001\/XMLSchema#string&quot;}],&quot;ids:description&quot;:[{&quot;@value&quot;:&quot;usage-logging&quot;,&quot;@type&quot;:&quot;http:\/\/www.w3.org\/2001\/XMLSchema#string&quot;}],&quot;ids:target&quot;:null,&quot;@id&quot;:&quot;https:\/\/w3id.org\/idsa\/autogen\/permission\/b5ce95fa-4004-482f-a2cb-6bf7c17771c6&quot;,&quot;ids:assigner&quot;:null,&quot;ids:assetRefinement&quot;:null}
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.94">
+      <div class="step-ref passed">94</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 200</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.97">
+      <div class="step-ref passed">97</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>path &#39;api/examples/validation&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.98">
+      <div class="step-ref passed">98</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>request response</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.99">
+      <div class="step-ref passed">99</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method post</span>
+      </div>
+    </div>
+    <div class="time-cell passed">250</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.99">16:28:49.670 request:
+14 &gt; POST https://localhost:8080/api/examples/validation
+14 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+14 &gt; Content-Type: application/json; charset=UTF-8
+14 &gt; Content-Length: 822
+14 &gt; Host: localhost:8080
+14 &gt; Connection: Keep-Alive
+14 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+14 &gt; Accept-Encoding: gzip,deflate
+{&quot;ids:postDuty&quot;:[{&quot;ids:action&quot;:[{&quot;@id&quot;:&quot;idsc:LOG&quot;,&quot;properties&quot;:null}],&quot;ids:constraint&quot;:null,&quot;ids:assignee&quot;:null,&quot;@type&quot;:&quot;ids:Duty&quot;,&quot;ids:title&quot;:null,&quot;ids:description&quot;:null,&quot;ids:target&quot;:null,&quot;@id&quot;:&quot;https:\/\/w3id.org\/idsa\/autogen\/duty\/2438e936-1cd8-4026-92fc-8a9ba073427b&quot;,&quot;ids:assigner&quot;:null,&quot;ids:assetRefinement&quot;:null}],&quot;ids:action&quot;:[{&quot;@id&quot;:&quot;idsc:USE&quot;,&quot;properties&quot;:null}],&quot;ids:constraint&quot;:null,&quot;ids:assignee&quot;:null,&quot;@type&quot;:&quot;ids:Permission&quot;,&quot;ids:preDuty&quot;:null,&quot;ids:title&quot;:[{&quot;@value&quot;:&quot;Example Usage Policy&quot;,&quot;@type&quot;:&quot;http:\/\/www.w3.org\/2001\/XMLSchema#string&quot;}],&quot;ids:description&quot;:[{&quot;@value&quot;:&quot;usage-logging&quot;,&quot;@type&quot;:&quot;http:\/\/www.w3.org\/2001\/XMLSchema#string&quot;}],&quot;ids:target&quot;:null,&quot;@id&quot;:&quot;https:\/\/w3id.org\/idsa\/autogen\/permission\/b5ce95fa-4004-482f-a2cb-6bf7c17771c6&quot;,&quot;ids:assigner&quot;:null,&quot;ids:assetRefinement&quot;:null}
+
+16:28:49.919 response time in milliseconds: 248
+14 &lt; 200
+14 &lt; X-Content-Type-Options: nosniff
+14 &lt; X-XSS-Protection: 1; mode=block
+14 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+14 &lt; Pragma: no-cache
+14 &lt; Expires: 0
+14 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+14 &lt; X-Frame-Options: DENY
+14 &lt; Content-Type: application/json
+14 &lt; Transfer-Encoding: chunked
+14 &lt; Date: Tue, 06 Jul 2021 14:28:49 GMT
+14 &lt; Keep-Alive: timeout=60
+14 &lt; Connection: keep-alive
+&quot;USAGE_LOGGING&quot;
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.100">
+      <div class="step-ref passed">100</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 200</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.101">
+      <div class="step-ref passed">101</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>match response == &#39;&quot;&#39;+policy+&#39;&quot;&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.103">
+      <div class="step-ref passed">103</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def policy = &#39;USAGE_NOTIFICATION&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.103">16:28:49.919 over-writing existing variable &#39;policy&#39; with new value: &#39;USAGE_NOTIFICATION&#39;
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.104">
+      <div class="step-ref passed">104</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>path &#39;api/examples/policy&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.105">
+      <div class="step-ref passed">105</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>param type = policy</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.106">
+      <div class="step-ref passed">106</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method post</span>
+      </div>
+    </div>
+    <div class="time-cell passed">313</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.106">16:28:49.921 request:
+15 &gt; POST https://localhost:8080/api/examples/policy?type=USAGE_NOTIFICATION
+15 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+15 &gt; Host: localhost:8080
+15 &gt; Connection: Keep-Alive
+15 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+15 &gt; Accept-Encoding: gzip,deflate
+
+
+16:28:50.233 response time in milliseconds: 311
+15 &lt; 200
+15 &lt; X-Content-Type-Options: nosniff
+15 &lt; X-XSS-Protection: 1; mode=block
+15 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+15 &lt; Pragma: no-cache
+15 &lt; Expires: 0
+15 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+15 &lt; X-Frame-Options: DENY
+15 &lt; Content-Type: application/json
+15 &lt; Transfer-Encoding: chunked
+15 &lt; Date: Tue, 06 Jul 2021 14:28:49 GMT
+15 &lt; Keep-Alive: timeout=60
+15 &lt; Connection: keep-alive
+{&quot;ids:postDuty&quot;:[{&quot;ids:action&quot;:[{&quot;@id&quot;:&quot;idsc:NOTIFY&quot;,&quot;properties&quot;:null}],&quot;ids:constraint&quot;:[{&quot;@type&quot;:&quot;ids:Constraint&quot;,&quot;ids:unit&quot;:null,&quot;ids:pipEndpoint&quot;:null,&quot;ids:rightOperandReference&quot;:null,&quot;ids:rightOperand&quot;:{&quot;@value&quot;:&quot;https:\/\/localhost:8080\/api\/ids\/data&quot;,&quot;@type&quot;:&quot;xsd:anyURI&quot;},&quot;@id&quot;:&quot;https:\/\/w3id.org\/idsa\/autogen\/constraint\/f989db9c-b4da-4c13-9f01-ba05208e7926&quot;,&quot;ids:operator&quot;:{&quot;@id&quot;:&quot;idsc:DEFINES_AS&quot;,&quot;properties&quot;:null},&quot;ids:leftOperand&quot;:{&quot;@id&quot;:&quot;idsc:ENDPOINT&quot;,&quot;properties&quot;:null}}],&quot;ids:assignee&quot;:null,&quot;@type&quot;:&quot;ids:Duty&quot;,&quot;ids:title&quot;:null,&quot;ids:description&quot;:null,&quot;ids:target&quot;:null,&quot;@id&quot;:&quot;https:\/\/w3id.org\/idsa\/autogen\/duty\/8b1305e6-b7b4-4700-9b85-8fe420a3f848&quot;,&quot;ids:assigner&quot;:null,&quot;ids:assetRefinement&quot;:null}],&quot;ids:action&quot;:[{&quot;@id&quot;:&quot;idsc:USE&quot;,&quot;properties&quot;:null}],&quot;ids:constraint&quot;:null,&quot;ids:assignee&quot;:null,&quot;@type&quot;:&quot;ids:Permission&quot;,&quot;ids:preDuty&quot;:null,&quot;ids:title&quot;:[{&quot;@value&quot;:&quot;Example Usage Policy&quot;,&quot;@type&quot;:&quot;http:\/\/www.w3.org\/2001\/XMLSchema#string&quot;}],&quot;ids:description&quot;:[{&quot;@value&quot;:&quot;usage-notification&quot;,&quot;@type&quot;:&quot;http:\/\/www.w3.org\/2001\/XMLSchema#string&quot;}],&quot;ids:target&quot;:null,&quot;@id&quot;:&quot;https:\/\/w3id.org\/idsa\/autogen\/permission\/875e864b-36e6-48bc-af62-0a7023de7429&quot;,&quot;ids:assigner&quot;:null,&quot;ids:assetRefinement&quot;:null}
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.107">
+      <div class="step-ref passed">107</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 200</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.110">
+      <div class="step-ref passed">110</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>path &#39;api/examples/validation&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.111">
+      <div class="step-ref passed">111</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>request response</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.112">
+      <div class="step-ref passed">112</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method post</span>
+      </div>
+    </div>
+    <div class="time-cell passed">346</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.112">16:28:50.261 request:
+16 &gt; POST https://localhost:8080/api/examples/validation
+16 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+16 &gt; Content-Type: application/json; charset=UTF-8
+16 &gt; Content-Length: 1231
+16 &gt; Host: localhost:8080
+16 &gt; Connection: Keep-Alive
+16 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+16 &gt; Accept-Encoding: gzip,deflate
+{&quot;ids:postDuty&quot;:[{&quot;ids:action&quot;:[{&quot;@id&quot;:&quot;idsc:NOTIFY&quot;,&quot;properties&quot;:null}],&quot;ids:constraint&quot;:[{&quot;@type&quot;:&quot;ids:Constraint&quot;,&quot;ids:unit&quot;:null,&quot;ids:pipEndpoint&quot;:null,&quot;ids:rightOperandReference&quot;:null,&quot;ids:rightOperand&quot;:{&quot;@value&quot;:&quot;https:\/\/localhost:8080\/api\/ids\/data&quot;,&quot;@type&quot;:&quot;xsd:anyURI&quot;},&quot;@id&quot;:&quot;https:\/\/w3id.org\/idsa\/autogen\/constraint\/f989db9c-b4da-4c13-9f01-ba05208e7926&quot;,&quot;ids:operator&quot;:{&quot;@id&quot;:&quot;idsc:DEFINES_AS&quot;,&quot;properties&quot;:null},&quot;ids:leftOperand&quot;:{&quot;@id&quot;:&quot;idsc:ENDPOINT&quot;,&quot;properties&quot;:null}}],&quot;ids:assignee&quot;:null,&quot;@type&quot;:&quot;ids:Duty&quot;,&quot;ids:title&quot;:null,&quot;ids:description&quot;:null,&quot;ids:target&quot;:null,&quot;@id&quot;:&quot;https:\/\/w3id.org\/idsa\/autogen\/duty\/8b1305e6-b7b4-4700-9b85-8fe420a3f848&quot;,&quot;ids:assigner&quot;:null,&quot;ids:assetRefinement&quot;:null}],&quot;ids:action&quot;:[{&quot;@id&quot;:&quot;idsc:USE&quot;,&quot;properties&quot;:null}],&quot;ids:constraint&quot;:null,&quot;ids:assignee&quot;:null,&quot;@type&quot;:&quot;ids:Permission&quot;,&quot;ids:preDuty&quot;:null,&quot;ids:title&quot;:[{&quot;@value&quot;:&quot;Example Usage Policy&quot;,&quot;@type&quot;:&quot;http:\/\/www.w3.org\/2001\/XMLSchema#string&quot;}],&quot;ids:description&quot;:[{&quot;@value&quot;:&quot;usage-notification&quot;,&quot;@type&quot;:&quot;http:\/\/www.w3.org\/2001\/XMLSchema#string&quot;}],&quot;ids:target&quot;:null,&quot;@id&quot;:&quot;https:\/\/w3id.org\/idsa\/autogen\/permission\/875e864b-36e6-48bc-af62-0a7023de7429&quot;,&quot;ids:assigner&quot;:null,&quot;ids:assetRefinement&quot;:null}
+
+16:28:50.579 response time in milliseconds: 318
+16 &lt; 200
+16 &lt; X-Content-Type-Options: nosniff
+16 &lt; X-XSS-Protection: 1; mode=block
+16 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+16 &lt; Pragma: no-cache
+16 &lt; Expires: 0
+16 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+16 &lt; X-Frame-Options: DENY
+16 &lt; Content-Type: application/json
+16 &lt; Transfer-Encoding: chunked
+16 &lt; Date: Tue, 06 Jul 2021 14:28:50 GMT
+16 &lt; Keep-Alive: timeout=60
+16 &lt; Connection: keep-alive
+&quot;USAGE_NOTIFICATION&quot;
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.113">
+      <div class="step-ref passed">113</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 200</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.114">
+      <div class="step-ref passed">114</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>match response == &#39;&quot;&#39;+policy+&#39;&quot;&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.116">
+      <div class="step-ref passed">116</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def policy = &#39;CONNECTOR_RESTRICTED_USAGE&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.116">16:28:50.580 over-writing existing variable &#39;policy&#39; with new value: &#39;CONNECTOR_RESTRICTED_USAGE&#39;
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.117">
+      <div class="step-ref passed">117</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>path &#39;api/examples/policy&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.118">
+      <div class="step-ref passed">118</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>param type = policy</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.119">
+      <div class="step-ref passed">119</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method post</span>
+      </div>
+    </div>
+    <div class="time-cell passed">305</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.119">16:28:50.581 request:
+17 &gt; POST https://localhost:8080/api/examples/policy?type=CONNECTOR_RESTRICTED_USAGE
+17 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+17 &gt; Host: localhost:8080
+17 &gt; Connection: Keep-Alive
+17 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+17 &gt; Accept-Encoding: gzip,deflate
+
+
+16:28:50.885 response time in milliseconds: 304
+17 &lt; 200
+17 &lt; X-Content-Type-Options: nosniff
+17 &lt; X-XSS-Protection: 1; mode=block
+17 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+17 &lt; Pragma: no-cache
+17 &lt; Expires: 0
+17 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+17 &lt; X-Frame-Options: DENY
+17 &lt; Content-Type: application/json
+17 &lt; Transfer-Encoding: chunked
+17 &lt; Date: Tue, 06 Jul 2021 14:28:50 GMT
+17 &lt; Keep-Alive: timeout=60
+17 &lt; Connection: keep-alive
+{&quot;ids:postDuty&quot;:null,&quot;ids:action&quot;:[{&quot;@id&quot;:&quot;idsc:USE&quot;,&quot;properties&quot;:null}],&quot;ids:constraint&quot;:[{&quot;@type&quot;:&quot;ids:Constraint&quot;,&quot;ids:unit&quot;:null,&quot;ids:pipEndpoint&quot;:null,&quot;ids:rightOperandReference&quot;:null,&quot;ids:rightOperand&quot;:{&quot;@value&quot;:&quot;https:\/\/example.com&quot;,&quot;@type&quot;:&quot;xsd:anyURI&quot;},&quot;@id&quot;:&quot;https:\/\/w3id.org\/idsa\/autogen\/constraint\/ce4dea1c-9256-4c7d-b686-f21fa74cc584&quot;,&quot;ids:operator&quot;:{&quot;@id&quot;:&quot;idsc:SAME_AS&quot;,&quot;properties&quot;:null},&quot;ids:leftOperand&quot;:{&quot;@id&quot;:&quot;idsc:SYSTEM&quot;,&quot;properties&quot;:null}}],&quot;ids:assignee&quot;:null,&quot;@type&quot;:&quot;ids:Permission&quot;,&quot;ids:preDuty&quot;:null,&quot;ids:title&quot;:[{&quot;@value&quot;:&quot;Example Usage Policy&quot;,&quot;@type&quot;:&quot;http:\/\/www.w3.org\/2001\/XMLSchema#string&quot;}],&quot;ids:description&quot;:[{&quot;@value&quot;:&quot;connector-restriction&quot;,&quot;@type&quot;:&quot;http:\/\/www.w3.org\/2001\/XMLSchema#string&quot;}],&quot;ids:target&quot;:null,&quot;@id&quot;:&quot;https:\/\/w3id.org\/idsa\/autogen\/permission\/813dd708-3537-4e9e-a6d3-72ba6d08f77d&quot;,&quot;ids:assigner&quot;:null,&quot;ids:assetRefinement&quot;:null}
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.120">
+      <div class="step-ref passed">120</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 200</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.123">
+      <div class="step-ref passed">123</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>path &#39;api/examples/validation&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.124">
+      <div class="step-ref passed">124</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>request response</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.125">
+      <div class="step-ref passed">125</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method post</span>
+      </div>
+    </div>
+    <div class="time-cell passed">217</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.125">16:28:50.886 request:
+18 &gt; POST https://localhost:8080/api/examples/validation
+18 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+18 &gt; Content-Type: application/json; charset=UTF-8
+18 &gt; Content-Length: 904
+18 &gt; Host: localhost:8080
+18 &gt; Connection: Keep-Alive
+18 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+18 &gt; Accept-Encoding: gzip,deflate
+{&quot;ids:postDuty&quot;:null,&quot;ids:action&quot;:[{&quot;@id&quot;:&quot;idsc:USE&quot;,&quot;properties&quot;:null}],&quot;ids:constraint&quot;:[{&quot;@type&quot;:&quot;ids:Constraint&quot;,&quot;ids:unit&quot;:null,&quot;ids:pipEndpoint&quot;:null,&quot;ids:rightOperandReference&quot;:null,&quot;ids:rightOperand&quot;:{&quot;@value&quot;:&quot;https:\/\/example.com&quot;,&quot;@type&quot;:&quot;xsd:anyURI&quot;},&quot;@id&quot;:&quot;https:\/\/w3id.org\/idsa\/autogen\/constraint\/ce4dea1c-9256-4c7d-b686-f21fa74cc584&quot;,&quot;ids:operator&quot;:{&quot;@id&quot;:&quot;idsc:SAME_AS&quot;,&quot;properties&quot;:null},&quot;ids:leftOperand&quot;:{&quot;@id&quot;:&quot;idsc:SYSTEM&quot;,&quot;properties&quot;:null}}],&quot;ids:assignee&quot;:null,&quot;@type&quot;:&quot;ids:Permission&quot;,&quot;ids:preDuty&quot;:null,&quot;ids:title&quot;:[{&quot;@value&quot;:&quot;Example Usage Policy&quot;,&quot;@type&quot;:&quot;http:\/\/www.w3.org\/2001\/XMLSchema#string&quot;}],&quot;ids:description&quot;:[{&quot;@value&quot;:&quot;connector-restriction&quot;,&quot;@type&quot;:&quot;http:\/\/www.w3.org\/2001\/XMLSchema#string&quot;}],&quot;ids:target&quot;:null,&quot;@id&quot;:&quot;https:\/\/w3id.org\/idsa\/autogen\/permission\/813dd708-3537-4e9e-a6d3-72ba6d08f77d&quot;,&quot;ids:assigner&quot;:null,&quot;ids:assetRefinement&quot;:null}
+
+16:28:51.102 response time in milliseconds: 216
+18 &lt; 200
+18 &lt; X-Content-Type-Options: nosniff
+18 &lt; X-XSS-Protection: 1; mode=block
+18 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+18 &lt; Pragma: no-cache
+18 &lt; Expires: 0
+18 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+18 &lt; X-Frame-Options: DENY
+18 &lt; Content-Type: application/json
+18 &lt; Transfer-Encoding: chunked
+18 &lt; Date: Tue, 06 Jul 2021 14:28:50 GMT
+18 &lt; Keep-Alive: timeout=60
+18 &lt; Connection: keep-alive
+&quot;CONNECTOR_RESTRICTED_USAGE&quot;
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.126">
+      <div class="step-ref passed">126</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 200</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.127">
+      <div class="step-ref passed">127</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>match response == &#39;&quot;&#39;+policy+&#39;&quot;&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.129">
+      <div class="step-ref passed">129</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def policy = &#39;PROVIDE_ACCESS&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.129">16:28:51.103 over-writing existing variable &#39;policy&#39; with new value: &#39;PROVIDE_ACCESS&#39;
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.130">
+      <div class="step-ref passed">130</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>path &#39;api/examples/policy&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.131">
+      <div class="step-ref passed">131</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>param type = policy</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.132">
+      <div class="step-ref passed">132</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method post</span>
+      </div>
+    </div>
+    <div class="time-cell passed">410</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.132">16:28:51.104 request:
+19 &gt; POST https://localhost:8080/api/examples/policy?type=PROVIDE_ACCESS
+19 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+19 &gt; Host: localhost:8080
+19 &gt; Connection: Keep-Alive
+19 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+19 &gt; Accept-Encoding: gzip,deflate
+
+
+16:28:51.512 response time in milliseconds: 408
+19 &lt; 200
+19 &lt; X-Content-Type-Options: nosniff
+19 &lt; X-XSS-Protection: 1; mode=block
+19 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+19 &lt; Pragma: no-cache
+19 &lt; Expires: 0
+19 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+19 &lt; X-Frame-Options: DENY
+19 &lt; Content-Type: application/json
+19 &lt; Transfer-Encoding: chunked
+19 &lt; Date: Tue, 06 Jul 2021 14:28:51 GMT
+19 &lt; Keep-Alive: timeout=60
+19 &lt; Connection: keep-alive
+{&quot;ids:postDuty&quot;:null,&quot;ids:action&quot;:[{&quot;@id&quot;:&quot;idsc:USE&quot;,&quot;properties&quot;:null}],&quot;ids:constraint&quot;:null,&quot;ids:assignee&quot;:null,&quot;@type&quot;:&quot;ids:Permission&quot;,&quot;ids:preDuty&quot;:null,&quot;ids:title&quot;:[{&quot;@value&quot;:&quot;Allow Data Usage&quot;,&quot;@type&quot;:&quot;http:\/\/www.w3.org\/2001\/XMLSchema#string&quot;}],&quot;ids:description&quot;:[{&quot;@value&quot;:&quot;provide-access&quot;,&quot;@type&quot;:&quot;http:\/\/www.w3.org\/2001\/XMLSchema#string&quot;}],&quot;ids:target&quot;:null,&quot;@id&quot;:&quot;https:\/\/w3id.org\/idsa\/autogen\/permission\/dfa8d0e6-0591-444b-9bf6-e8a4857df013&quot;,&quot;ids:assigner&quot;:null,&quot;ids:assetRefinement&quot;:null}
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.133">
+      <div class="step-ref passed">133</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 200</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.136">
+      <div class="step-ref passed">136</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>path &#39;api/examples/validation&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">1</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.137">
+      <div class="step-ref passed">137</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>request response</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.138">
+      <div class="step-ref passed">138</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method post</span>
+      </div>
+    </div>
+    <div class="time-cell passed">411</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.138">16:28:51.550 request:
+20 &gt; POST https://localhost:8080/api/examples/validation
+20 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+20 &gt; Content-Type: application/json; charset=UTF-8
+20 &gt; Content-Length: 516
+20 &gt; Host: localhost:8080
+20 &gt; Connection: Keep-Alive
+20 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+20 &gt; Accept-Encoding: gzip,deflate
+{&quot;ids:postDuty&quot;:null,&quot;ids:action&quot;:[{&quot;@id&quot;:&quot;idsc:USE&quot;,&quot;properties&quot;:null}],&quot;ids:constraint&quot;:null,&quot;ids:assignee&quot;:null,&quot;@type&quot;:&quot;ids:Permission&quot;,&quot;ids:preDuty&quot;:null,&quot;ids:title&quot;:[{&quot;@value&quot;:&quot;Allow Data Usage&quot;,&quot;@type&quot;:&quot;http:\/\/www.w3.org\/2001\/XMLSchema#string&quot;}],&quot;ids:description&quot;:[{&quot;@value&quot;:&quot;provide-access&quot;,&quot;@type&quot;:&quot;http:\/\/www.w3.org\/2001\/XMLSchema#string&quot;}],&quot;ids:target&quot;:null,&quot;@id&quot;:&quot;https:\/\/w3id.org\/idsa\/autogen\/permission\/dfa8d0e6-0591-444b-9bf6-e8a4857df013&quot;,&quot;ids:assigner&quot;:null,&quot;ids:assetRefinement&quot;:null}
+
+16:28:51.898 response time in milliseconds: 348
+20 &lt; 200
+20 &lt; X-Content-Type-Options: nosniff
+20 &lt; X-XSS-Protection: 1; mode=block
+20 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+20 &lt; Pragma: no-cache
+20 &lt; Expires: 0
+20 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+20 &lt; X-Frame-Options: DENY
+20 &lt; Content-Type: application/json
+20 &lt; Transfer-Encoding: chunked
+20 &lt; Date: Tue, 06 Jul 2021 14:28:51 GMT
+20 &lt; Keep-Alive: timeout=60
+20 &lt; Connection: keep-alive
+&quot;PROVIDE_ACCESS&quot;
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.139">
+      <div class="step-ref passed">139</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 200</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.140">
+      <div class="step-ref passed">140</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>match response == &#39;&quot;&#39;+policy+&#39;&quot;&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">1</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+        </div>
+        <div class="scenario">
+          <div class="scenario-heading" id="[2:142]">
+            <div class="heading-container">
+              <div class="scenario-tags">
+                
+              </div>
+              <div class="scenario-keyword">
+                Scenario: <span>[2:142]</span>
+                <span class="scenario-name">Confirm change on /api/configuration/pattern</span>
+                <span></span>
+              </div>
+            </div>
+            <div class="scenario-time passed">
+              <span>ms:</span>&nbsp;<span>2497</span>
+            </div>
+          </div>
+          <div class="step-row">
+            <div class="step-container" id="[2:142]bg">
+              <div class="step-ref bg-step">&gt;&gt;</div>
+              <div class="step-cell passed">Background:</div>
+            </div>
+            <div class="time-cell passed"></div>
+          </div>
+          <div data-parent="[2:142]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.5">
+      <div class="step-ref bg-step">5</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>configure ssl = true</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.5">16:28:43.338 karate.env system property was: null 
+</div>   
+
+  
+
+</div>
+</div>
+          <div data-parent="[2:142]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.6">
+      <div class="step-ref bg-step">6</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def Auth = call read(&#39;../../basic-auth.js&#39;) { username: &#39;admin&#39;, password: &#39;password&#39; }</span>
+      </div>
+    </div>
+    <div class="time-cell passed">1</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div data-parent="[2:142]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.7">
+      <div class="step-ref bg-step">7</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>configure headers = ({Authorization: &#39;&#39;+Auth})</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div data-parent="[2:142]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.8">
+      <div class="step-ref bg-step">8</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>url envurl</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.144">
+      <div class="step-ref passed">144</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def estado = true</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.146">
+      <div class="step-ref passed">146</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>path &#39;api/configuration/pattern&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.147">
+      <div class="step-ref passed">147</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>param status = estado</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.148">
+      <div class="step-ref passed">148</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method put</span>
+      </div>
+    </div>
+    <div class="time-cell passed">404</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.148">16:28:43.341 request:
+1 &gt; PUT https://localhost:8080/api/configuration/pattern?status=true
+1 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+1 &gt; Host: localhost:8080
+1 &gt; Connection: Keep-Alive
+1 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+1 &gt; Accept-Encoding: gzip,deflate
+
+
+16:28:43.743 response time in milliseconds: 402
+1 &lt; 200
+1 &lt; X-Content-Type-Options: nosniff
+1 &lt; X-XSS-Protection: 1; mode=block
+1 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+1 &lt; Pragma: no-cache
+1 &lt; Expires: 0
+1 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+1 &lt; X-Frame-Options: DENY
+1 &lt; Content-Type: application/json
+1 &lt; Transfer-Encoding: chunked
+1 &lt; Date: Tue, 06 Jul 2021 14:28:43 GMT
+1 &lt; Keep-Alive: timeout=60
+1 &lt; Connection: keep-alive
+{&quot;status&quot;:true}
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.149">
+      <div class="step-ref passed">149</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 200</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.151">
+      <div class="step-ref passed">151</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>path &#39;api/configuration/pattern&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.152">
+      <div class="step-ref passed">152</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method get</span>
+      </div>
+    </div>
+    <div class="time-cell passed">1264</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.152">16:28:43.745 request:
+2 &gt; GET https://localhost:8080/api/configuration/pattern
+2 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+2 &gt; Host: localhost:8080
+2 &gt; Connection: Keep-Alive
+2 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+2 &gt; Accept-Encoding: gzip,deflate
+
+
+16:28:45.008 response time in milliseconds: 1263
+2 &lt; 200
+2 &lt; X-Content-Type-Options: nosniff
+2 &lt; X-XSS-Protection: 1; mode=block
+2 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+2 &lt; Pragma: no-cache
+2 &lt; Expires: 0
+2 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+2 &lt; X-Frame-Options: DENY
+2 &lt; Content-Type: application/json
+2 &lt; Transfer-Encoding: chunked
+2 &lt; Date: Tue, 06 Jul 2021 14:28:44 GMT
+2 &lt; Keep-Alive: timeout=60
+2 &lt; Connection: keep-alive
+{&quot;status&quot;:true}
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.153">
+      <div class="step-ref passed">153</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 200</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.154">
+      <div class="step-ref passed">154</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>match response.status == estado</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.156">
+      <div class="step-ref passed">156</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def estado = false</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.156">16:28:45.009 over-writing existing variable &#39;estado&#39; with new value: false
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.158">
+      <div class="step-ref passed">158</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>path &#39;api/configuration/pattern&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.159">
+      <div class="step-ref passed">159</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>param status = estado</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.160">
+      <div class="step-ref passed">160</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method put</span>
+      </div>
+    </div>
+    <div class="time-cell passed">665</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.160">16:28:45.010 request:
+3 &gt; PUT https://localhost:8080/api/configuration/pattern?status=false
+3 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+3 &gt; Host: localhost:8080
+3 &gt; Connection: Keep-Alive
+3 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+3 &gt; Accept-Encoding: gzip,deflate
+
+
+16:28:45.674 response time in milliseconds: 664
+3 &lt; 200
+3 &lt; X-Content-Type-Options: nosniff
+3 &lt; X-XSS-Protection: 1; mode=block
+3 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+3 &lt; Pragma: no-cache
+3 &lt; Expires: 0
+3 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+3 &lt; X-Frame-Options: DENY
+3 &lt; Content-Type: application/json
+3 &lt; Transfer-Encoding: chunked
+3 &lt; Date: Tue, 06 Jul 2021 14:28:44 GMT
+3 &lt; Keep-Alive: timeout=60
+3 &lt; Connection: keep-alive
+{&quot;status&quot;:false}
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.161">
+      <div class="step-ref passed">161</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 200</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.163">
+      <div class="step-ref passed">163</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>path &#39;api/configuration/pattern&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.164">
+      <div class="step-ref passed">164</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method get</span>
+      </div>
+    </div>
+    <div class="time-cell passed">161</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.164">16:28:45.675 request:
+4 &gt; GET https://localhost:8080/api/configuration/pattern
+4 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+4 &gt; Host: localhost:8080
+4 &gt; Connection: Keep-Alive
+4 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+4 &gt; Accept-Encoding: gzip,deflate
+
+
+16:28:45.835 response time in milliseconds: 160
+4 &lt; 200
+4 &lt; X-Content-Type-Options: nosniff
+4 &lt; X-XSS-Protection: 1; mode=block
+4 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+4 &lt; Pragma: no-cache
+4 &lt; Expires: 0
+4 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+4 &lt; X-Frame-Options: DENY
+4 &lt; Content-Type: application/json
+4 &lt; Transfer-Encoding: chunked
+4 &lt; Date: Tue, 06 Jul 2021 14:28:44 GMT
+4 &lt; Keep-Alive: timeout=60
+4 &lt; Connection: keep-alive
+{&quot;status&quot;:false}
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.165">
+      <div class="step-ref passed">165</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 200</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.166">
+      <div class="step-ref passed">166</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>match response.status == estado</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+        </div>
+        <div class="scenario">
+          <div class="scenario-heading" id="[3:168]">
+            <div class="heading-container">
+              <div class="scenario-tags">
+                
+              </div>
+              <div class="scenario-keyword">
+                Scenario: <span>[3:168]</span>
+                <span class="scenario-name">Confirm change on /api/configuration/negotiation</span>
+                <span></span>
+              </div>
+            </div>
+            <div class="scenario-time passed">
+              <span>ms:</span>&nbsp;<span>2155</span>
+            </div>
+          </div>
+          <div class="step-row">
+            <div class="step-container" id="[3:168]bg">
+              <div class="step-ref bg-step">&gt;&gt;</div>
+              <div class="step-cell passed">Background:</div>
+            </div>
+            <div class="time-cell passed"></div>
+          </div>
+          <div data-parent="[3:168]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.5">
+      <div class="step-ref bg-step">5</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>configure ssl = true</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.5">16:28:43.510 karate.env system property was: null 
+</div>   
+
+  
+
+</div>
+</div>
+          <div data-parent="[3:168]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.6">
+      <div class="step-ref bg-step">6</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def Auth = call read(&#39;../../basic-auth.js&#39;) { username: &#39;admin&#39;, password: &#39;password&#39; }</span>
+      </div>
+    </div>
+    <div class="time-cell passed">1</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div data-parent="[3:168]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.7">
+      <div class="step-ref bg-step">7</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>configure headers = ({Authorization: &#39;&#39;+Auth})</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div data-parent="[3:168]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.8">
+      <div class="step-ref bg-step">8</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>url envurl</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.170">
+      <div class="step-ref passed">170</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def estado = true</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.172">
+      <div class="step-ref passed">172</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>path &#39;api/configuration/negotiation&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.173">
+      <div class="step-ref passed">173</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>param status = estado</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.174">
+      <div class="step-ref passed">174</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method put</span>
+      </div>
+    </div>
+    <div class="time-cell passed">518</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.174">16:28:43.513 request:
+1 &gt; PUT https://localhost:8080/api/configuration/negotiation?status=true
+1 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+1 &gt; Host: localhost:8080
+1 &gt; Connection: Keep-Alive
+1 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+1 &gt; Accept-Encoding: gzip,deflate
+
+
+16:28:44.028 response time in milliseconds: 515
+1 &lt; 200
+1 &lt; X-Content-Type-Options: nosniff
+1 &lt; X-XSS-Protection: 1; mode=block
+1 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+1 &lt; Pragma: no-cache
+1 &lt; Expires: 0
+1 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+1 &lt; X-Frame-Options: DENY
+1 &lt; Content-Type: application/json
+1 &lt; Transfer-Encoding: chunked
+1 &lt; Date: Tue, 06 Jul 2021 14:28:43 GMT
+1 &lt; Keep-Alive: timeout=60
+1 &lt; Connection: keep-alive
+{&quot;status&quot;:true}
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.175">
+      <div class="step-ref passed">175</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 200</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.177">
+      <div class="step-ref passed">177</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>path &#39;api/configuration/negotiation&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.178">
+      <div class="step-ref passed">178</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method get</span>
+      </div>
+    </div>
+    <div class="time-cell passed">468</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.178">16:28:44.055 request:
+2 &gt; GET https://localhost:8080/api/configuration/negotiation
+2 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+2 &gt; Host: localhost:8080
+2 &gt; Connection: Keep-Alive
+2 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+2 &gt; Accept-Encoding: gzip,deflate
+
+
+16:28:44.498 response time in milliseconds: 443
+2 &lt; 200
+2 &lt; X-Content-Type-Options: nosniff
+2 &lt; X-XSS-Protection: 1; mode=block
+2 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+2 &lt; Pragma: no-cache
+2 &lt; Expires: 0
+2 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+2 &lt; X-Frame-Options: DENY
+2 &lt; Content-Type: application/json
+2 &lt; Transfer-Encoding: chunked
+2 &lt; Date: Tue, 06 Jul 2021 14:28:43 GMT
+2 &lt; Keep-Alive: timeout=60
+2 &lt; Connection: keep-alive
+{&quot;status&quot;:true}
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.179">
+      <div class="step-ref passed">179</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 200</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.180">
+      <div class="step-ref passed">180</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>match response.status == estado</span>
+      </div>
+    </div>
+    <div class="time-cell passed">2</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.182">
+      <div class="step-ref passed">182</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def estado = false</span>
+      </div>
+    </div>
+    <div class="time-cell passed">8</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.182">16:28:44.505 over-writing existing variable &#39;estado&#39; with new value: false
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.184">
+      <div class="step-ref passed">184</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>path &#39;api/configuration/negotiation&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.185">
+      <div class="step-ref passed">185</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>param status = estado</span>
+      </div>
+    </div>
+    <div class="time-cell passed">5</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.186">
+      <div class="step-ref passed">186</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method put</span>
+      </div>
+    </div>
+    <div class="time-cell passed">887</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.186">16:28:44.519 request:
+3 &gt; PUT https://localhost:8080/api/configuration/negotiation?status=false
+3 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+3 &gt; Host: localhost:8080
+3 &gt; Connection: Keep-Alive
+3 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+3 &gt; Accept-Encoding: gzip,deflate
+
+
+16:28:45.401 response time in milliseconds: 881
+3 &lt; 200
+3 &lt; X-Content-Type-Options: nosniff
+3 &lt; X-XSS-Protection: 1; mode=block
+3 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+3 &lt; Pragma: no-cache
+3 &lt; Expires: 0
+3 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+3 &lt; X-Frame-Options: DENY
+3 &lt; Content-Type: application/json
+3 &lt; Transfer-Encoding: chunked
+3 &lt; Date: Tue, 06 Jul 2021 14:28:44 GMT
+3 &lt; Keep-Alive: timeout=60
+3 &lt; Connection: keep-alive
+{&quot;status&quot;:false}
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.187">
+      <div class="step-ref passed">187</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 200</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.189">
+      <div class="step-ref passed">189</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>path &#39;api/configuration/negotiation&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.190">
+      <div class="step-ref passed">190</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method get</span>
+      </div>
+    </div>
+    <div class="time-cell passed">265</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.190">16:28:45.402 request:
+4 &gt; GET https://localhost:8080/api/configuration/negotiation
+4 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+4 &gt; Host: localhost:8080
+4 &gt; Connection: Keep-Alive
+4 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+4 &gt; Accept-Encoding: gzip,deflate
+
+
+16:28:45.666 response time in milliseconds: 263
+4 &lt; 200
+4 &lt; X-Content-Type-Options: nosniff
+4 &lt; X-XSS-Protection: 1; mode=block
+4 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+4 &lt; Pragma: no-cache
+4 &lt; Expires: 0
+4 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+4 &lt; X-Frame-Options: DENY
+4 &lt; Content-Type: application/json
+4 &lt; Transfer-Encoding: chunked
+4 &lt; Date: Tue, 06 Jul 2021 14:28:44 GMT
+4 &lt; Keep-Alive: timeout=60
+4 &lt; Connection: keep-alive
+{&quot;status&quot;:false}
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.191">
+      <div class="step-ref passed">191</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 200</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.192">
+      <div class="step-ref passed">192</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>match response.status == estado</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
