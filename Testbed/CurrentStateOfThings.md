@@ -1,4 +1,4 @@
-# Current State of the Testbed
+# Current State of the Testbed (short)
 
 ## Isolated components (DSC, MB, DAPS, TC)
 ### DataspaceConnector
