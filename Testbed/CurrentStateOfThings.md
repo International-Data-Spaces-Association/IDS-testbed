@@ -4,7 +4,7 @@
 ### DataspaceConnector
 Functional on its own, isolated
 
-### Broker
+### Metadata Broker
 Still checking some issues with the API, waiting response from developers
 
 ### DAPS
