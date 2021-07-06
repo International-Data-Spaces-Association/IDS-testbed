@@ -5,7 +5,7 @@
 Working by itself
 
 ### Broker
-Working iteslf (still checking some issues with the API, waiting response)
+Working BY itself (still checking some issues with the API, waiting response)
 
 ### DAPS
 Working by itself
