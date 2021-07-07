@@ -1,0 +1,5821 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <link rel="stylesheet" href="res/bootstrap.min.css" type="text/css"/>
+    <link rel="stylesheet" href="res/karate-report.css" type="text/css"/>
+    <link rel="shortcut icon" href="favicon.ico"/>
+    <script type="text/javascript" src="res/jquery.min.js"></script>
+    <script type="text/javascript" src="res/jquery.tablesorter.min.js"></script>
+    <script type="text/javascript" src="res/bootstrap.min.js"></script>
+    <script type="text/javascript" src="res/karate-report.js"></script>
+    <title>DSC.Catalogs.catalogs</title>  
+  </head>
+  <body>   
+    <div id="root-container">
+      <div id="leftnav">
+                
+        <div>
+  <div class="nav-logo">
+    <a href="karate-summary.html">
+      <img src="karate-logo.svg" alt="Karate"/>
+    </a>
+    <div class="nav-count">
+      <div id="nav-pass" class="bg-success">7</div>
+      <div id="nav-fail" class="bg-danger">0</div>
+    </div>
+  </div>
+  <div id="nav-type">
+    <div>Scenarios</div>
+  </div>         
+  <div id="nav-date">
+    <div>2021-07-06 04:28:21 PM</div>
+  </div>        
+</div>
+
+        <div class="nav-container">
+          <div class="nav-item passed">
+            <a href="#[1:11]"><span>[1:11]</span> <span>GET &#39;/api/catalogs/&#39; create a catalog and get all catalogs looking for the one created</span></a>
+          </div>
+          <div class="nav-item passed">
+            <a href="#[2:31]"><span>[2:31]</span> <span>GET &#39;/api/catalogs/{id}&#39; create a catalog and then get it by id</span></a>
+          </div>
+          <div class="nav-item passed">
+            <a href="#[3:52]"><span>[3:52]</span> <span>PUT &#39;/api/catalogs/{id}&#39; create a catalog and modoify it by its id</span></a>
+          </div>
+          <div class="nav-item passed">
+            <a href="#[4:91]"><span>[4:91]</span> <span>DELETE &#39;/api/catalogs/{id}&#39; Create a catalog and then errase it</span></a>
+          </div>
+          <div class="nav-item passed">
+            <a href="#[5:120]"><span>[5:120]</span> <span>POST &#39;/api/catalogs/{id}/offers&#39; create a catalog, create an offer and link the offer to a catalog</span></a>
+          </div>
+          <div class="nav-item passed">
+            <a href="#[6:174]"><span>[6:174]</span> <span>PUT &#39;/api/catalogs/{id}/offers&#39; create two offers, create a  catalog and link the offer to a catalog, then change the link to the second offer</span></a>
+          </div>
+          <div class="nav-item passed">
+            <a href="#[7:265]"><span>[7:265]</span> <span>DELETE &#39;/api/offers/{id}/catalogs&#39; create a catalog, create an offer and link the offer to a catalog, then errase the offer from the catalog</span></a>
+          </div>
+        </div>
+      </div>
+      <div id="content">
+        <div class="page-heading alert alert-primary">
+          <a href="karate-summary.html">Summary</a><span class="feature-label">|</span>
+          <a href="karate-tags.html">Tags</a><span class="feature-label">|</span>
+          <span class="feature-label">Feature:</span>
+          <span class="feature-path">DSC/Catalogs/catalogs.feature</span><span class="feature-label">|</span>
+          <span class="feature-name">resource karate test script</span>
+          <span class="feature-description">for help, see: https://github.com/intuit/karate/wiki/IDE-Support</span>
+        </div>
+        <div class="scenario">
+          <div class="scenario-heading" id="[1:11]">
+            <div class="heading-container">
+              <div class="scenario-tags">
+                
+              </div>
+              <div class="scenario-keyword">
+                Scenario: <span>[1:11]</span>
+                <span class="scenario-name">GET &#39;/api/catalogs/&#39; create a catalog and get all catalogs looking for the one created</span>
+                <span></span>
+              </div>
+            </div>
+            <div class="scenario-time passed">
+              <span>ms:</span>&nbsp;<span>2085</span>
+            </div>
+          </div>
+          <div class="step-row">
+            <div class="step-container" id="[1:11]bg">
+              <div class="step-ref bg-step">&gt;&gt;</div>
+              <div class="step-cell passed">Background:</div>
+            </div>
+            <div class="time-cell passed"></div>
+          </div>
+          <div data-parent="[1:11]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.5">
+      <div class="step-ref bg-step">5</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>configure ssl = true</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.5">16:28:08.130 karate.env system property was: null 
+</div>   
+
+  
+
+</div>
+</div>
+          <div data-parent="[1:11]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.6">
+      <div class="step-ref bg-step">6</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def Auth = call read(&#39;../../basic-auth.js&#39;) { username: &#39;admin&#39;, password: &#39;password&#39; }</span>
+      </div>
+    </div>
+    <div class="time-cell passed">104</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div data-parent="[1:11]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.7">
+      <div class="step-ref bg-step">7</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>configure headers = ({Authorization: &#39;&#39;+Auth})</span>
+      </div>
+    </div>
+    <div class="time-cell passed">8</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div data-parent="[1:11]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.8">
+      <div class="step-ref bg-step">8</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>url envurl</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.12">
+      <div class="step-ref passed">12</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def catalog =</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  <div class="preformatted" data-parent="0.12">{
+    &quot;title&quot;: &quot;catalog_title&quot;,
+    &quot;description&quot;: &quot;catalog_description&quot;
+}</div>
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.20">
+      <div class="step-ref passed">20</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>path &#39;api/catalogs&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">1</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.21">
+      <div class="step-ref passed">21</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>request catalog</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.22">
+      <div class="step-ref passed">22</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method post</span>
+      </div>
+    </div>
+    <div class="time-cell passed">757</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.22">16:28:08.250 request:
+1 &gt; POST https://localhost:8080/api/catalogs
+1 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+1 &gt; Content-Type: application/json; charset=UTF-8
+1 &gt; Content-Length: 61
+1 &gt; Host: localhost:8080
+1 &gt; Connection: Keep-Alive
+1 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+1 &gt; Accept-Encoding: gzip,deflate
+{&quot;description&quot;:&quot;catalog_description&quot;,&quot;title&quot;:&quot;catalog_title&quot;}
+
+16:28:09.001 response time in milliseconds: 750
+1 &lt; 201
+1 &lt; Location: https://localhost:8080/api/catalogs/cf884f48-2496-4871-8207-fbba789686de
+1 &lt; X-Content-Type-Options: nosniff
+1 &lt; X-XSS-Protection: 1; mode=block
+1 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+1 &lt; Pragma: no-cache
+1 &lt; Expires: 0
+1 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+1 &lt; X-Frame-Options: DENY
+1 &lt; Content-Type: application/hal+json
+1 &lt; Transfer-Encoding: chunked
+1 &lt; Date: Tue, 06 Jul 2021 14:28:08 GMT
+1 &lt; Keep-Alive: timeout=60
+1 &lt; Connection: keep-alive
+{&quot;modificationDate&quot;:&quot;2021-07-06T16:28:08.993+0200&quot;,&quot;_links&quot;:{&quot;offers&quot;:{&quot;templated&quot;:true,&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/catalogs\/cf884f48-2496-4871-8207-fbba789686de\/offers{?page,size}&quot;},&quot;self&quot;:{&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/catalogs\/cf884f48-2496-4871-8207-fbba789686de&quot;}},&quot;additional&quot;:{},&quot;description&quot;:&quot;catalog_description&quot;,&quot;creationDate&quot;:&quot;2021-07-06T16:28:08.993+0200&quot;,&quot;title&quot;:&quot;catalog_title&quot;}
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.23">
+      <div class="step-ref passed">23</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 201</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.24">
+      <div class="step-ref passed">24</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>match response contains catalog</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.26">
+      <div class="step-ref passed">26</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>path &#39;api/catalogs&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">4</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.27">
+      <div class="step-ref passed">27</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method get</span>
+      </div>
+    </div>
+    <div class="time-cell passed">1210</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.27">16:28:09.008 request:
+2 &gt; GET https://localhost:8080/api/catalogs
+2 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+2 &gt; Host: localhost:8080
+2 &gt; Connection: Keep-Alive
+2 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+2 &gt; Accept-Encoding: gzip,deflate
+
+
+16:28:10.108 response time in milliseconds: 1091
+2 &lt; 200
+2 &lt; X-Content-Type-Options: nosniff
+2 &lt; X-XSS-Protection: 1; mode=block
+2 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+2 &lt; Pragma: no-cache
+2 &lt; Expires: 0
+2 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+2 &lt; X-Frame-Options: DENY
+2 &lt; Content-Type: application/hal+json
+2 &lt; Transfer-Encoding: chunked
+2 &lt; Date: Tue, 06 Jul 2021 14:28:09 GMT
+2 &lt; Keep-Alive: timeout=60
+2 &lt; Connection: keep-alive
+{&quot;_embedded&quot;:{&quot;catalogs&quot;:[{&quot;modificationDate&quot;:&quot;2021-07-06T16:23:09.625+0200&quot;,&quot;_links&quot;:{&quot;offers&quot;:{&quot;templated&quot;:true,&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/catalogs\/d240a864-9553-4b16-8f28-9097ff7d8551\/offers{?page,size}&quot;},&quot;self&quot;:{&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/catalogs\/d240a864-9553-4b16-8f28-9097ff7d8551&quot;}},&quot;additional&quot;:{},&quot;description&quot;:&quot;catalog_description&quot;,&quot;creationDate&quot;:&quot;2021-07-06T16:23:09.625+0200&quot;,&quot;title&quot;:&quot;catalog_title&quot;},{&quot;modificationDate&quot;:&quot;2021-07-06T16:23:11.721+0200&quot;,&quot;_links&quot;:{&quot;offers&quot;:{&quot;templated&quot;:true,&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/catalogs\/34e72d44-9415-4ac1-9f33-cddb13bc17b7\/offers{?page,size}&quot;},&quot;self&quot;:{&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/catalogs\/34e72d44-9415-4ac1-9f33-cddb13bc17b7&quot;}},&quot;additional&quot;:{},&quot;description&quot;:&quot;catalog_description&quot;,&quot;creationDate&quot;:&quot;2021-07-06T16:23:11.721+0200&quot;,&quot;title&quot;:&quot;catalog_title&quot;},{&quot;modificationDate&quot;:&quot;2021-07-06T16:23:14.966+0200&quot;,&quot;_links&quot;:{&quot;offers&quot;:{&quot;templated&quot;:true,&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/catalogs\/b0c65630-3703-435b-85bc-c7aeb97596b5\/offers{?page,size}&quot;},&quot;self&quot;:{&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/catalogs\/b0c65630-3703-435b-85bc-c7aeb97596b5&quot;}},&quot;additional&quot;:{},&quot;description&quot;:&quot;catalog2_description&quot;,&quot;creationDate&quot;:&quot;2021-07-06T16:23:13.668+0200&quot;,&quot;title&quot;:&quot;catalog2_title&quot;},{&quot;modificationDate&quot;:&quot;2021-07-06T16:23:16.596+0200&quot;,&quot;_links&quot;:{&quot;offers&quot;:{&quot;templated&quot;:true,&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/catalogs\/a624c62a-b47a-45a8-b210-4c472dd11590\/offers{?page,size}&quot;},&quot;self&quot;:{&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/catalogs\/a624c62a-b47a-45a8-b210-4c472dd11590&quot;}},&quot;additional&quot;:{},&quot;description&quot;:&quot;catalog_description&quot;,&quot;creationDate&quot;:&quot;2021-07-06T16:23:16.596+0200&quot;,&quot;title&quot;:&quot;catalog_title&quot;},{&quot;modificationDate&quot;:&quot;2021-07-06T16:23:16.953+0200&quot;,&quot;_links&quot;:{&quot;offers&quot;:{&quot;templated&quot;:true,&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/catalogs\/55c1826b-d0bf-4b39-83fe-7fe9d6fb5ebd\/offers{?page,size}&quot;},&quot;self&quot;:{&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/catalogs\/55c1826b-d0bf-4b39-83fe-7fe9d6fb5ebd&quot;}},&quot;additional&quot;:{},&quot;description&quot;:&quot;catalog_description&quot;,&quot;creationDate&quot;:&quot;2021-07-06T16:23:16.953+0200&quot;,&quot;title&quot;:&quot;catalog_title&quot;},{&quot;modificationDate&quot;:&quot;2021-07-06T16:23:17.630+0200&quot;,&quot;_links&quot;:{&quot;offers&quot;:{&quot;templated&quot;:true,&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/catalogs\/640d8bc8-a998-45d2-bae4-efca987fb561\/offers{?page,size}&quot;},&quot;self&quot;:{&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/catalogs\/640d8bc8-a998-45d2-bae4-efca987fb561&quot;}},&quot;additional&quot;:{},&quot;description&quot;:&quot;catalog_description&quot;,&quot;creationDate&quot;:&quot;2021-07-06T16:23:17.630+0200&quot;,&quot;title&quot;:&quot;catalog_title&quot;},{&quot;modificationDate&quot;:&quot;2021-07-06T16:23:18.220+0200&quot;,&quot;_links&quot;:{&quot;offers&quot;:{&quot;templated&quot;:true,&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/catalogs\/7372f4bf-2f65-4ca2-8f8b-99f3d550b895\/offers{?page,size}&quot;},&quot;self&quot;:{&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/catalogs\/7372f4bf-2f65-4ca2-8f8b-99f3d550b895&quot;}},&quot;additional&quot;:{},&quot;description&quot;:&quot;catalog_description&quot;,&quot;creationDate&quot;:&quot;2021-07-06T16:23:18.220+0200&quot;,&quot;title&quot;:&quot;catalog_title&quot;},{&quot;modificationDate&quot;:&quot;2021-07-06T16:23:40.304+0200&quot;,&quot;_links&quot;:{&quot;offers&quot;:{&quot;templated&quot;:true,&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/catalogs\/5562da61-37f5-42e8-af3d-6736bce271ee\/offers{?page,size}&quot;},&quot;self&quot;:{&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/catalogs\/5562da61-37f5-42e8-af3d-6736bce271ee&quot;}},&quot;additional&quot;:{},&quot;description&quot;:&quot;catalog_description&quot;,&quot;creationDate&quot;:&quot;2021-07-06T16:23:40.304+0200&quot;,&quot;title&quot;:&quot;catalog_title&quot;},{&quot;modificationDate&quot;:&quot;2021-07-06T16:23:40.314+0200&quot;,&quot;_links&quot;:{&quot;offers&quot;:{&quot;templated&quot;:true,&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/catalogs\/ab0c9b4f-a13f-470b-9326-01f3a57a7f62\/offers{?page,size}&quot;},&quot;self&quot;:{&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/catalogs\/ab0c9b4f-a13f-470b-9326-01f3a57a7f62&quot;}},&quot;additional&quot;:{},&quot;description&quot;:&quot;catalog_description1&quot;,&quot;creationDate&quot;:&quot;2021-07-06T16:23:40.314+0200&quot;,&quot;title&quot;:&quot;catalog_title1&quot;},{&quot;modificationDate&quot;:&quot;2021-07-06T16:23:41.119+0200&quot;,&quot;_links&quot;:{&quot;offers&quot;:{&quot;templated&quot;:true,&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/catalogs\/8acb5ef0-d4b6-47ec-881e-6d9a0d1bee67\/offers{?page,size}&quot;},&quot;self&quot;:{&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/catalogs\/8acb5ef0-d4b6-47ec-881e-6d9a0d1bee67&quot;}},&quot;additional&quot;:{},&quot;description&quot;:&quot;catalog_description2&quot;,&quot;creationDate&quot;:&quot;2021-07-06T16:23:41.119+0200&quot;,&quot;title&quot;:&quot;catalog_title2&quot;},{&quot;modificationDate&quot;:&quot;2021-07-06T16:23:41.244+0200&quot;,&quot;_links&quot;:{&quot;offers&quot;:{&quot;templated&quot;:true,&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/catalogs\/16f2c195-be84-4bf8-9da5-e75963d6f55a\/offers{?page,size}&quot;},&quot;self&quot;:{&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/catalogs\/16f2c195-be84-4bf8-9da5-e75963d6f55a&quot;}},&quot;additional&quot;:{},&quot;description&quot;:&quot;catalog_description&quot;,&quot;creationDate&quot;:&quot;2021-07-06T16:23:41.244+0200&quot;,&quot;title&quot;:&quot;catalog_title&quot;},{&quot;modificationDate&quot;:&quot;2021-07-06T16:28:08.993+0200&quot;,&quot;_links&quot;:{&quot;offers&quot;:{&quot;templated&quot;:true,&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/catalogs\/cf884f48-2496-4871-8207-fbba789686de\/offers{?page,size}&quot;},&quot;self&quot;:{&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/catalogs\/cf884f48-2496-4871-8207-fbba789686de&quot;}},&quot;additional&quot;:{},&quot;description&quot;:&quot;catalog_description&quot;,&quot;creationDate&quot;:&quot;2021-07-06T16:28:08.993+0200&quot;,&quot;title&quot;:&quot;catalog_title&quot;}]},&quot;_links&quot;:{&quot;self&quot;:{&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/catalogs?page=0&amp;size=30&quot;}},&quot;page&quot;:{&quot;number&quot;:0,&quot;size&quot;:30,&quot;totalPages&quot;:1,&quot;totalElements&quot;:12}}
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.28">
+      <div class="step-ref passed">28</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 200</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.29">
+      <div class="step-ref passed">29</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>match response._embedded.catalogs contains deep catalog</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+        </div>
+        <div class="scenario">
+          <div class="scenario-heading" id="[2:31]">
+            <div class="heading-container">
+              <div class="scenario-tags">
+                
+              </div>
+              <div class="scenario-keyword">
+                Scenario: <span>[2:31]</span>
+                <span class="scenario-name">GET &#39;/api/catalogs/{id}&#39; create a catalog and then get it by id</span>
+                <span></span>
+              </div>
+            </div>
+            <div class="scenario-time passed">
+              <span>ms:</span>&nbsp;<span>2852</span>
+            </div>
+          </div>
+          <div class="step-row">
+            <div class="step-container" id="[2:31]bg">
+              <div class="step-ref bg-step">&gt;&gt;</div>
+              <div class="step-cell passed">Background:</div>
+            </div>
+            <div class="time-cell passed"></div>
+          </div>
+          <div data-parent="[2:31]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.5">
+      <div class="step-ref bg-step">5</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>configure ssl = true</span>
+      </div>
+    </div>
+    <div class="time-cell passed">1</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.5">16:28:09.378 karate.env system property was: null 
+</div>   
+
+  
+
+</div>
+</div>
+          <div data-parent="[2:31]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.6">
+      <div class="step-ref bg-step">6</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def Auth = call read(&#39;../../basic-auth.js&#39;) { username: &#39;admin&#39;, password: &#39;password&#39; }</span>
+      </div>
+    </div>
+    <div class="time-cell passed">3</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div data-parent="[2:31]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.7">
+      <div class="step-ref bg-step">7</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>configure headers = ({Authorization: &#39;&#39;+Auth})</span>
+      </div>
+    </div>
+    <div class="time-cell passed">1</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div data-parent="[2:31]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.8">
+      <div class="step-ref bg-step">8</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>url envurl</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.32">
+      <div class="step-ref passed">32</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def catalog =</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  <div class="preformatted" data-parent="0.32">{
+    &quot;title&quot;: &quot;catalog_title&quot;,
+    &quot;description&quot;: &quot;catalog_description&quot;
+}</div>
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.39">
+      <div class="step-ref passed">39</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>path &#39;api/catalogs&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">1</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.40">
+      <div class="step-ref passed">40</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>request catalog</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.41">
+      <div class="step-ref passed">41</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method post</span>
+      </div>
+    </div>
+    <div class="time-cell passed">1583</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.41">16:28:09.400 request:
+1 &gt; POST https://localhost:8080/api/catalogs
+1 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+1 &gt; Content-Type: application/json; charset=UTF-8
+1 &gt; Content-Length: 61
+1 &gt; Host: localhost:8080
+1 &gt; Connection: Keep-Alive
+1 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+1 &gt; Accept-Encoding: gzip,deflate
+{&quot;description&quot;:&quot;catalog_description&quot;,&quot;title&quot;:&quot;catalog_title&quot;}
+
+16:28:10.967 response time in milliseconds: 1557
+1 &lt; 201
+1 &lt; Location: https://localhost:8080/api/catalogs/251438dd-876e-482f-a01e-802e74eb8a25
+1 &lt; X-Content-Type-Options: nosniff
+1 &lt; X-XSS-Protection: 1; mode=block
+1 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+1 &lt; Pragma: no-cache
+1 &lt; Expires: 0
+1 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+1 &lt; X-Frame-Options: DENY
+1 &lt; Content-Type: application/hal+json
+1 &lt; Transfer-Encoding: chunked
+1 &lt; Date: Tue, 06 Jul 2021 14:28:10 GMT
+1 &lt; Keep-Alive: timeout=60
+1 &lt; Connection: keep-alive
+{&quot;modificationDate&quot;:&quot;2021-07-06T16:28:10.897+0200&quot;,&quot;_links&quot;:{&quot;offers&quot;:{&quot;templated&quot;:true,&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/catalogs\/251438dd-876e-482f-a01e-802e74eb8a25\/offers{?page,size}&quot;},&quot;self&quot;:{&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/catalogs\/251438dd-876e-482f-a01e-802e74eb8a25&quot;}},&quot;additional&quot;:{},&quot;description&quot;:&quot;catalog_description&quot;,&quot;creationDate&quot;:&quot;2021-07-06T16:28:10.897+0200&quot;,&quot;title&quot;:&quot;catalog_title&quot;}
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.42">
+      <div class="step-ref passed">42</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 201</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.43">
+      <div class="step-ref passed">43</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>match response contains catalog</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.45">
+      <div class="step-ref passed">45</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def id_url = response._links.self.href</span>
+      </div>
+    </div>
+    <div class="time-cell passed">1</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.47">
+      <div class="step-ref passed">47</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>url id_url</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.48">
+      <div class="step-ref passed">48</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method get</span>
+      </div>
+    </div>
+    <div class="time-cell passed">1068</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.48">16:28:10.973 request:
+2 &gt; GET https://localhost:8080/api/catalogs/251438dd-876e-482f-a01e-802e74eb8a25
+2 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+2 &gt; Host: localhost:8080
+2 &gt; Connection: Keep-Alive
+2 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+2 &gt; Accept-Encoding: gzip,deflate
+
+
+16:28:12.037 response time in milliseconds: 1063
+2 &lt; 200
+2 &lt; X-Content-Type-Options: nosniff
+2 &lt; X-XSS-Protection: 1; mode=block
+2 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+2 &lt; Pragma: no-cache
+2 &lt; Expires: 0
+2 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+2 &lt; X-Frame-Options: DENY
+2 &lt; Content-Type: application/hal+json
+2 &lt; Transfer-Encoding: chunked
+2 &lt; Date: Tue, 06 Jul 2021 14:28:11 GMT
+2 &lt; Keep-Alive: timeout=60
+2 &lt; Connection: keep-alive
+{&quot;modificationDate&quot;:&quot;2021-07-06T16:28:10.897+0200&quot;,&quot;_links&quot;:{&quot;offers&quot;:{&quot;templated&quot;:true,&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/catalogs\/251438dd-876e-482f-a01e-802e74eb8a25\/offers{?page,size}&quot;},&quot;self&quot;:{&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/catalogs\/251438dd-876e-482f-a01e-802e74eb8a25&quot;}},&quot;additional&quot;:{},&quot;description&quot;:&quot;catalog_description&quot;,&quot;creationDate&quot;:&quot;2021-07-06T16:28:10.897+0200&quot;,&quot;title&quot;:&quot;catalog_title&quot;}
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.49">
+      <div class="step-ref passed">49</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 200</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.50">
+      <div class="step-ref passed">50</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>match response contains catalog</span>
+      </div>
+    </div>
+    <div class="time-cell passed">194</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+        </div>
+        <div class="scenario">
+          <div class="scenario-heading" id="[3:52]">
+            <div class="heading-container">
+              <div class="scenario-tags">
+                
+              </div>
+              <div class="scenario-keyword">
+                Scenario: <span>[3:52]</span>
+                <span class="scenario-name">PUT &#39;/api/catalogs/{id}&#39; create a catalog and modoify it by its id</span>
+                <span></span>
+              </div>
+            </div>
+            <div class="scenario-time passed">
+              <span>ms:</span>&nbsp;<span>2293</span>
+            </div>
+          </div>
+          <div class="step-row">
+            <div class="step-container" id="[3:52]bg">
+              <div class="step-ref bg-step">&gt;&gt;</div>
+              <div class="step-cell passed">Background:</div>
+            </div>
+            <div class="time-cell passed"></div>
+          </div>
+          <div data-parent="[3:52]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.5">
+      <div class="step-ref bg-step">5</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>configure ssl = true</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.5">16:28:10.265 karate.env system property was: null 
+</div>   
+
+  
+
+</div>
+</div>
+          <div data-parent="[3:52]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.6">
+      <div class="step-ref bg-step">6</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def Auth = call read(&#39;../../basic-auth.js&#39;) { username: &#39;admin&#39;, password: &#39;password&#39; }</span>
+      </div>
+    </div>
+    <div class="time-cell passed">1</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div data-parent="[3:52]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.7">
+      <div class="step-ref bg-step">7</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>configure headers = ({Authorization: &#39;&#39;+Auth})</span>
+      </div>
+    </div>
+    <div class="time-cell passed">54</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div data-parent="[3:52]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.8">
+      <div class="step-ref bg-step">8</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>url envurl</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.53">
+      <div class="step-ref passed">53</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def catalog1 =</span>
+      </div>
+    </div>
+    <div class="time-cell passed">45</div>
+  </div>
+
+   
+  
+  <div class="preformatted" data-parent="0.53">{
+    &quot;title&quot;: &quot;catalog1_title&quot;,
+    &quot;description&quot;: &quot;catalog1_description&quot;
+}</div>
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.60">
+      <div class="step-ref passed">60</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def catalog2 =</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  <div class="preformatted" data-parent="0.60">{
+    &quot;title&quot;: &quot;catalog2_title&quot;,
+    &quot;description&quot;: &quot;catalog2_description&quot;
+}</div>
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.68">
+      <div class="step-ref passed">68</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>path &#39;api/catalogs&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.69">
+      <div class="step-ref passed">69</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>request catalog1</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.70">
+      <div class="step-ref passed">70</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method post</span>
+      </div>
+    </div>
+    <div class="time-cell passed">372</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.70">16:28:10.382 request:
+1 &gt; POST https://localhost:8080/api/catalogs
+1 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+1 &gt; Content-Type: application/json; charset=UTF-8
+1 &gt; Content-Length: 63
+1 &gt; Host: localhost:8080
+1 &gt; Connection: Keep-Alive
+1 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+1 &gt; Accept-Encoding: gzip,deflate
+{&quot;description&quot;:&quot;catalog1_description&quot;,&quot;title&quot;:&quot;catalog1_title&quot;}
+
+16:28:10.751 response time in milliseconds: 368
+1 &lt; 201
+1 &lt; Location: https://localhost:8080/api/catalogs/1d0212ae-64dc-4506-a1b1-178e23dea995
+1 &lt; X-Content-Type-Options: nosniff
+1 &lt; X-XSS-Protection: 1; mode=block
+1 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+1 &lt; Pragma: no-cache
+1 &lt; Expires: 0
+1 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+1 &lt; X-Frame-Options: DENY
+1 &lt; Content-Type: application/hal+json
+1 &lt; Transfer-Encoding: chunked
+1 &lt; Date: Tue, 06 Jul 2021 14:28:10 GMT
+1 &lt; Keep-Alive: timeout=60
+1 &lt; Connection: keep-alive
+{&quot;modificationDate&quot;:&quot;2021-07-06T16:28:10.660+0200&quot;,&quot;_links&quot;:{&quot;offers&quot;:{&quot;templated&quot;:true,&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/catalogs\/1d0212ae-64dc-4506-a1b1-178e23dea995\/offers{?page,size}&quot;},&quot;self&quot;:{&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/catalogs\/1d0212ae-64dc-4506-a1b1-178e23dea995&quot;}},&quot;additional&quot;:{},&quot;description&quot;:&quot;catalog1_description&quot;,&quot;creationDate&quot;:&quot;2021-07-06T16:28:10.660+0200&quot;,&quot;title&quot;:&quot;catalog1_title&quot;}
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.71">
+      <div class="step-ref passed">71</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 201</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.72">
+      <div class="step-ref passed">72</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>match response contains catalog1</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.75">
+      <div class="step-ref passed">75</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def id_url = response._links.self.href</span>
+      </div>
+    </div>
+    <div class="time-cell passed">1</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.79">
+      <div class="step-ref passed">79</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>url id_url</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.80">
+      <div class="step-ref passed">80</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>request catalog2</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.81">
+      <div class="step-ref passed">81</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method put</span>
+      </div>
+    </div>
+    <div class="time-cell passed">464</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.81">16:28:10.754 request:
+2 &gt; PUT https://localhost:8080/api/catalogs/1d0212ae-64dc-4506-a1b1-178e23dea995
+2 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+2 &gt; Content-Type: application/json; charset=UTF-8
+2 &gt; Content-Length: 63
+2 &gt; Host: localhost:8080
+2 &gt; Connection: Keep-Alive
+2 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+2 &gt; Accept-Encoding: gzip,deflate
+{&quot;description&quot;:&quot;catalog2_description&quot;,&quot;title&quot;:&quot;catalog2_title&quot;}
+
+16:28:11.216 response time in milliseconds: 462
+2 &lt; 204
+2 &lt; X-Content-Type-Options: nosniff
+2 &lt; X-XSS-Protection: 1; mode=block
+2 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+2 &lt; Pragma: no-cache
+2 &lt; Expires: 0
+2 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+2 &lt; X-Frame-Options: DENY
+2 &lt; Date: Tue, 06 Jul 2021 14:28:10 GMT
+2 &lt; Keep-Alive: timeout=60
+2 &lt; Connection: keep-alive
+
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.82">
+      <div class="step-ref passed">82</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 204</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  <div class="step-row">
+    <div class="step-container">
+      <div class="step-ref passed"></div>
+      
+      <div class="step-cell comment">#And match response contains catalog1</div>
+    </div>
+    <div class="time-cell comment"></div>            
+  </div>
+
+  <div class="step-row">
+    <div class="step-container" id="0.85">
+      <div class="step-ref passed">85</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>url id_url</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.86">
+      <div class="step-ref passed">86</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method get</span>
+      </div>
+    </div>
+    <div class="time-cell passed">1355</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.86">16:28:11.218 request:
+3 &gt; GET https://localhost:8080/api/catalogs/1d0212ae-64dc-4506-a1b1-178e23dea995
+3 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+3 &gt; Host: localhost:8080
+3 &gt; Connection: Keep-Alive
+3 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+3 &gt; Accept-Encoding: gzip,deflate
+
+
+16:28:12.571 response time in milliseconds: 1353
+3 &lt; 200
+3 &lt; X-Content-Type-Options: nosniff
+3 &lt; X-XSS-Protection: 1; mode=block
+3 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+3 &lt; Pragma: no-cache
+3 &lt; Expires: 0
+3 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+3 &lt; X-Frame-Options: DENY
+3 &lt; Content-Type: application/hal+json
+3 &lt; Transfer-Encoding: chunked
+3 &lt; Date: Tue, 06 Jul 2021 14:28:11 GMT
+3 &lt; Keep-Alive: timeout=60
+3 &lt; Connection: keep-alive
+{&quot;modificationDate&quot;:&quot;2021-07-06T16:28:11.203+0200&quot;,&quot;_links&quot;:{&quot;offers&quot;:{&quot;templated&quot;:true,&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/catalogs\/1d0212ae-64dc-4506-a1b1-178e23dea995\/offers{?page,size}&quot;},&quot;self&quot;:{&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/catalogs\/1d0212ae-64dc-4506-a1b1-178e23dea995&quot;}},&quot;additional&quot;:{},&quot;description&quot;:&quot;catalog2_description&quot;,&quot;creationDate&quot;:&quot;2021-07-06T16:28:10.660+0200&quot;,&quot;title&quot;:&quot;catalog2_title&quot;}
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.87">
+      <div class="step-ref passed">87</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 200</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.88">
+      <div class="step-ref passed">88</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>match response contains catalog2</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.89">
+      <div class="step-ref passed">89</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>match response !contains catalog1</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+        </div>
+        <div class="scenario">
+          <div class="scenario-heading" id="[4:91]">
+            <div class="heading-container">
+              <div class="scenario-tags">
+                
+              </div>
+              <div class="scenario-keyword">
+                Scenario: <span>[4:91]</span>
+                <span class="scenario-name">DELETE &#39;/api/catalogs/{id}&#39; Create a catalog and then errase it</span>
+                <span></span>
+              </div>
+            </div>
+            <div class="scenario-time passed">
+              <span>ms:</span>&nbsp;<span>2343</span>
+            </div>
+          </div>
+          <div class="step-row">
+            <div class="step-container" id="[4:91]bg">
+              <div class="step-ref bg-step">&gt;&gt;</div>
+              <div class="step-cell passed">Background:</div>
+            </div>
+            <div class="time-cell passed"></div>
+          </div>
+          <div data-parent="[4:91]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.5">
+      <div class="step-ref bg-step">5</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>configure ssl = true</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.5">16:28:11.540 karate.env system property was: null 
+</div>   
+
+  
+
+</div>
+</div>
+          <div data-parent="[4:91]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.6">
+      <div class="step-ref bg-step">6</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def Auth = call read(&#39;../../basic-auth.js&#39;) { username: &#39;admin&#39;, password: &#39;password&#39; }</span>
+      </div>
+    </div>
+    <div class="time-cell passed">3</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div data-parent="[4:91]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.7">
+      <div class="step-ref bg-step">7</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>configure headers = ({Authorization: &#39;&#39;+Auth})</span>
+      </div>
+    </div>
+    <div class="time-cell passed">1</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div data-parent="[4:91]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.8">
+      <div class="step-ref bg-step">8</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>url envurl</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.92">
+      <div class="step-ref passed">92</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def catalog =</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  <div class="preformatted" data-parent="0.92">{
+    &quot;title&quot;: &quot;catalog_title&quot;,
+    &quot;description&quot;: &quot;catalog_description&quot;
+}</div>
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.99">
+      <div class="step-ref passed">99</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>path &#39;api/catalogs&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.100">
+      <div class="step-ref passed">100</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>request catalog</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.101">
+      <div class="step-ref passed">101</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method post</span>
+      </div>
+    </div>
+    <div class="time-cell passed">755</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.101">16:28:11.564 request:
+1 &gt; POST https://localhost:8080/api/catalogs
+1 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+1 &gt; Content-Type: application/json; charset=UTF-8
+1 &gt; Content-Length: 61
+1 &gt; Host: localhost:8080
+1 &gt; Connection: Keep-Alive
+1 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+1 &gt; Accept-Encoding: gzip,deflate
+{&quot;description&quot;:&quot;catalog_description&quot;,&quot;title&quot;:&quot;catalog_title&quot;}
+
+16:28:12.300 response time in milliseconds: 736
+1 &lt; 201
+1 &lt; Location: https://localhost:8080/api/catalogs/ff391f89-201e-4503-a417-851a3ff25714
+1 &lt; X-Content-Type-Options: nosniff
+1 &lt; X-XSS-Protection: 1; mode=block
+1 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+1 &lt; Pragma: no-cache
+1 &lt; Expires: 0
+1 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+1 &lt; X-Frame-Options: DENY
+1 &lt; Content-Type: application/hal+json
+1 &lt; Transfer-Encoding: chunked
+1 &lt; Date: Tue, 06 Jul 2021 14:28:11 GMT
+1 &lt; Keep-Alive: timeout=60
+1 &lt; Connection: keep-alive
+{&quot;modificationDate&quot;:&quot;2021-07-06T16:28:12.217+0200&quot;,&quot;_links&quot;:{&quot;offers&quot;:{&quot;templated&quot;:true,&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/catalogs\/ff391f89-201e-4503-a417-851a3ff25714\/offers{?page,size}&quot;},&quot;self&quot;:{&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/catalogs\/ff391f89-201e-4503-a417-851a3ff25714&quot;}},&quot;additional&quot;:{},&quot;description&quot;:&quot;catalog_description&quot;,&quot;creationDate&quot;:&quot;2021-07-06T16:28:12.217+0200&quot;,&quot;title&quot;:&quot;catalog_title&quot;}
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.102">
+      <div class="step-ref passed">102</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 201</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.103">
+      <div class="step-ref passed">103</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>match response contains catalog</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.105">
+      <div class="step-ref passed">105</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def id_url = response._links.self.href</span>
+      </div>
+    </div>
+    <div class="time-cell passed">53</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.107">
+      <div class="step-ref passed">107</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>url id_url</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.108">
+      <div class="step-ref passed">108</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method delete</span>
+      </div>
+    </div>
+    <div class="time-cell passed">802</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.108">16:28:12.356 request:
+2 &gt; DELETE https://localhost:8080/api/catalogs/ff391f89-201e-4503-a417-851a3ff25714
+2 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+2 &gt; Host: localhost:8080
+2 &gt; Connection: Keep-Alive
+2 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+2 &gt; Accept-Encoding: gzip,deflate
+
+
+16:28:13.157 response time in milliseconds: 800
+2 &lt; 204
+2 &lt; X-Content-Type-Options: nosniff
+2 &lt; X-XSS-Protection: 1; mode=block
+2 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+2 &lt; Pragma: no-cache
+2 &lt; Expires: 0
+2 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+2 &lt; X-Frame-Options: DENY
+2 &lt; Date: Tue, 06 Jul 2021 14:28:12 GMT
+2 &lt; Keep-Alive: timeout=60
+2 &lt; Connection: keep-alive
+
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.109">
+      <div class="step-ref passed">109</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 204</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.111">
+      <div class="step-ref passed">111</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>url id_url</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.112">
+      <div class="step-ref passed">112</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method get</span>
+      </div>
+    </div>
+    <div class="time-cell passed">727</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.112">16:28:13.158 request:
+3 &gt; GET https://localhost:8080/api/catalogs/ff391f89-201e-4503-a417-851a3ff25714
+3 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+3 &gt; Host: localhost:8080
+3 &gt; Connection: Keep-Alive
+3 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+3 &gt; Accept-Encoding: gzip,deflate
+
+
+16:28:13.883 response time in milliseconds: 725
+3 &lt; 404
+3 &lt; X-Content-Type-Options: nosniff
+3 &lt; X-XSS-Protection: 1; mode=block
+3 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+3 &lt; Pragma: no-cache
+3 &lt; Expires: 0
+3 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+3 &lt; X-Frame-Options: DENY
+3 &lt; Content-Type: application/json
+3 &lt; Transfer-Encoding: chunked
+3 &lt; Date: Tue, 06 Jul 2021 14:28:12 GMT
+3 &lt; Keep-Alive: timeout=60
+3 &lt; Connection: keep-alive
+{&quot;message&quot;:&quot;Resource not found.&quot;}
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.113">
+      <div class="step-ref passed">113</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 404</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+        </div>
+        <div class="scenario">
+          <div class="scenario-heading" id="[5:120]">
+            <div class="heading-container">
+              <div class="scenario-tags">
+                
+              </div>
+              <div class="scenario-keyword">
+                Scenario: <span>[5:120]</span>
+                <span class="scenario-name">POST &#39;/api/catalogs/{id}/offers&#39; create a catalog, create an offer and link the offer to a catalog</span>
+                <span></span>
+              </div>
+            </div>
+            <div class="scenario-time passed">
+              <span>ms:</span>&nbsp;<span>2032</span>
+            </div>
+          </div>
+          <div class="step-row">
+            <div class="step-container" id="[5:120]bg">
+              <div class="step-ref bg-step">&gt;&gt;</div>
+              <div class="step-cell passed">Background:</div>
+            </div>
+            <div class="time-cell passed"></div>
+          </div>
+          <div data-parent="[5:120]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.5">
+      <div class="step-ref bg-step">5</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>configure ssl = true</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.5">16:28:11.905 karate.env system property was: null 
+</div>   
+
+  
+
+</div>
+</div>
+          <div data-parent="[5:120]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.6">
+      <div class="step-ref bg-step">6</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def Auth = call read(&#39;../../basic-auth.js&#39;) { username: &#39;admin&#39;, password: &#39;password&#39; }</span>
+      </div>
+    </div>
+    <div class="time-cell passed">1</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div data-parent="[5:120]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.7">
+      <div class="step-ref bg-step">7</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>configure headers = ({Authorization: &#39;&#39;+Auth})</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div data-parent="[5:120]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.8">
+      <div class="step-ref bg-step">8</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>url envurl</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.122">
+      <div class="step-ref passed">122</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def catalog =</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  <div class="preformatted" data-parent="0.122">{
+    &quot;title&quot;: &quot;catalog_title&quot;,
+    &quot;description&quot;: &quot;catalog_description&quot;
+}</div>
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.129">
+      <div class="step-ref passed">129</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def offer =</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  <div class="preformatted" data-parent="0.129">{
+    &quot;title&quot;: &quot;offer_title&quot;,
+    &quot;description&quot;: &quot;offer_description&quot;,
+    &quot;keywords&quot;: [
+        &quot;keyword1&quot;,
+        &quot;keyword2&quot;
+    ],
+    &quot;publisher&quot;: &quot;offer_publisher&quot;,
+    &quot;language&quot;: &quot;offer_language&quot;,
+    &quot;licence&quot;: &quot;offer_licence&quot;,
+    &quot;sovereign&quot;: &quot;offer_sovereign&quot;,
+    &quot;endpointDocumentation&quot;: &quot;offer_endpoint&quot;
+}</div>
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.146">
+      <div class="step-ref passed">146</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>path &#39;api/catalogs&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.147">
+      <div class="step-ref passed">147</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>request catalog</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.148">
+      <div class="step-ref passed">148</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method post</span>
+      </div>
+    </div>
+    <div class="time-cell passed">989</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.148">16:28:11.934 request:
+1 &gt; POST https://localhost:8080/api/catalogs
+1 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+1 &gt; Content-Type: application/json; charset=UTF-8
+1 &gt; Content-Length: 61
+1 &gt; Host: localhost:8080
+1 &gt; Connection: Keep-Alive
+1 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+1 &gt; Accept-Encoding: gzip,deflate
+{&quot;description&quot;:&quot;catalog_description&quot;,&quot;title&quot;:&quot;catalog_title&quot;}
+
+16:28:12.896 response time in milliseconds: 962
+1 &lt; 201
+1 &lt; Location: https://localhost:8080/api/catalogs/47f3e83e-c3a0-4462-ada5-3c5e70eafc6d
+1 &lt; X-Content-Type-Options: nosniff
+1 &lt; X-XSS-Protection: 1; mode=block
+1 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+1 &lt; Pragma: no-cache
+1 &lt; Expires: 0
+1 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+1 &lt; X-Frame-Options: DENY
+1 &lt; Content-Type: application/hal+json
+1 &lt; Transfer-Encoding: chunked
+1 &lt; Date: Tue, 06 Jul 2021 14:28:12 GMT
+1 &lt; Keep-Alive: timeout=60
+1 &lt; Connection: keep-alive
+{&quot;modificationDate&quot;:&quot;2021-07-06T16:28:12.886+0200&quot;,&quot;_links&quot;:{&quot;offers&quot;:{&quot;templated&quot;:true,&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/catalogs\/47f3e83e-c3a0-4462-ada5-3c5e70eafc6d\/offers{?page,size}&quot;},&quot;self&quot;:{&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/catalogs\/47f3e83e-c3a0-4462-ada5-3c5e70eafc6d&quot;}},&quot;additional&quot;:{},&quot;description&quot;:&quot;catalog_description&quot;,&quot;creationDate&quot;:&quot;2021-07-06T16:28:12.886+0200&quot;,&quot;title&quot;:&quot;catalog_title&quot;}
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.149">
+      <div class="step-ref passed">149</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 201</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.150">
+      <div class="step-ref passed">150</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>match response contains catalog</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.152">
+      <div class="step-ref passed">152</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def cat_id = response._links.self.href</span>
+      </div>
+    </div>
+    <div class="time-cell passed">51</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.154">
+      <div class="step-ref passed">154</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>path &#39;api/offers&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.155">
+      <div class="step-ref passed">155</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>request offer</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.156">
+      <div class="step-ref passed">156</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method post</span>
+      </div>
+    </div>
+    <div class="time-cell passed">355</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.156">16:28:13.018 request:
+2 &gt; POST https://localhost:8080/api/offers
+2 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+2 &gt; Content-Type: application/json; charset=UTF-8
+2 &gt; Content-Length: 247
+2 &gt; Host: localhost:8080
+2 &gt; Connection: Keep-Alive
+2 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+2 &gt; Accept-Encoding: gzip,deflate
+{&quot;licence&quot;:&quot;offer_licence&quot;,&quot;keywords&quot;:[&quot;keyword1&quot;,&quot;keyword2&quot;],&quot;endpointDocumentation&quot;:&quot;offer_endpoint&quot;,&quot;description&quot;:&quot;offer_description&quot;,&quot;publisher&quot;:&quot;offer_publisher&quot;,&quot;language&quot;:&quot;offer_language&quot;,&quot;title&quot;:&quot;offer_title&quot;,&quot;sovereign&quot;:&quot;offer_sovereign&quot;}
+
+16:28:13.304 response time in milliseconds: 285
+2 &lt; 201
+2 &lt; Location: https://localhost:8080/api/offers/38eb85a7-b1cd-4618-b821-aba0e9993ec0
+2 &lt; X-Content-Type-Options: nosniff
+2 &lt; X-XSS-Protection: 1; mode=block
+2 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+2 &lt; Pragma: no-cache
+2 &lt; Expires: 0
+2 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+2 &lt; X-Frame-Options: DENY
+2 &lt; Content-Type: application/hal+json
+2 &lt; Transfer-Encoding: chunked
+2 &lt; Date: Tue, 06 Jul 2021 14:28:12 GMT
+2 &lt; Keep-Alive: timeout=60
+2 &lt; Connection: keep-alive
+{&quot;licence&quot;:&quot;offer_licence&quot;,&quot;keywords&quot;:[&quot;keyword1&quot;,&quot;keyword2&quot;],&quot;_links&quot;:{&quot;catalogs&quot;:{&quot;templated&quot;:true,&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/offers\/38eb85a7-b1cd-4618-b821-aba0e9993ec0\/catalogs{?page,size}&quot;},&quot;self&quot;:{&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/offers\/38eb85a7-b1cd-4618-b821-aba0e9993ec0&quot;},&quot;contracts&quot;:{&quot;templated&quot;:true,&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/offers\/38eb85a7-b1cd-4618-b821-aba0e9993ec0\/contracts{?page,size}&quot;},&quot;representations&quot;:{&quot;templated&quot;:true,&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/offers\/38eb85a7-b1cd-4618-b821-aba0e9993ec0\/representations{?page,size}&quot;}},&quot;endpointDocumentation&quot;:&quot;offer_endpoint&quot;,&quot;additional&quot;:{},&quot;description&quot;:&quot;offer_description&quot;,&quot;language&quot;:&quot;offer_language&quot;,&quot;creationDate&quot;:&quot;2021-07-06T16:28:13.246+0200&quot;,&quot;title&quot;:&quot;offer_title&quot;,&quot;version&quot;:1,&quot;modificationDate&quot;:&quot;2021-07-06T16:28:13.246+0200&quot;,&quot;publisher&quot;:&quot;offer_publisher&quot;,&quot;sovereign&quot;:&quot;offer_sovereign&quot;}
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.157">
+      <div class="step-ref passed">157</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 201</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.158">
+      <div class="step-ref passed">158</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>match response contains offer</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.160">
+      <div class="step-ref passed">160</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def off_id = response._links.self.href</span>
+      </div>
+    </div>
+    <div class="time-cell passed">10</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.161">
+      <div class="step-ref passed">161</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def req = []</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.162">
+      <div class="step-ref passed">162</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>set req[0] = off_id</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.167">
+      <div class="step-ref passed">167</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>url cat_id</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.168">
+      <div class="step-ref passed">168</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>path &#39;/offers&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">1</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.169">
+      <div class="step-ref passed">169</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>request req</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.170">
+      <div class="step-ref passed">170</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method post</span>
+      </div>
+    </div>
+    <div class="time-cell passed">623</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.170">16:28:13.334 request:
+3 &gt; POST https://localhost:8080/api/catalogs/47f3e83e-c3a0-4462-ada5-3c5e70eafc6d/offers
+3 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+3 &gt; Content-Type: application/json; charset=UTF-8
+3 &gt; Content-Length: 79
+3 &gt; Host: localhost:8080
+3 &gt; Connection: Keep-Alive
+3 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+3 &gt; Accept-Encoding: gzip,deflate
+[&quot;https:\/\/localhost:8080\/api\/offers\/38eb85a7-b1cd-4618-b821-aba0e9993ec0&quot;]
+
+16:28:13.938 response time in milliseconds: 600
+3 &lt; 200
+3 &lt; X-Content-Type-Options: nosniff
+3 &lt; X-XSS-Protection: 1; mode=block
+3 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+3 &lt; Pragma: no-cache
+3 &lt; Expires: 0
+3 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+3 &lt; X-Frame-Options: DENY
+3 &lt; Content-Type: application/hal+json
+3 &lt; Transfer-Encoding: chunked
+3 &lt; Date: Tue, 06 Jul 2021 14:28:13 GMT
+3 &lt; Keep-Alive: timeout=60
+3 &lt; Connection: keep-alive
+{&quot;_embedded&quot;:{&quot;resources&quot;:[{&quot;licence&quot;:&quot;offer_licence&quot;,&quot;keywords&quot;:[&quot;keyword1&quot;,&quot;keyword2&quot;],&quot;_links&quot;:{&quot;catalogs&quot;:{&quot;templated&quot;:true,&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/offers\/38eb85a7-b1cd-4618-b821-aba0e9993ec0\/catalogs{?page,size}&quot;},&quot;self&quot;:{&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/offers\/38eb85a7-b1cd-4618-b821-aba0e9993ec0&quot;},&quot;contracts&quot;:{&quot;templated&quot;:true,&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/offers\/38eb85a7-b1cd-4618-b821-aba0e9993ec0\/contracts{?page,size}&quot;},&quot;representations&quot;:{&quot;templated&quot;:true,&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/offers\/38eb85a7-b1cd-4618-b821-aba0e9993ec0\/representations{?page,size}&quot;}},&quot;endpointDocumentation&quot;:&quot;offer_endpoint&quot;,&quot;additional&quot;:{},&quot;description&quot;:&quot;offer_description&quot;,&quot;language&quot;:&quot;offer_language&quot;,&quot;creationDate&quot;:&quot;2021-07-06T16:28:13.246+0200&quot;,&quot;title&quot;:&quot;offer_title&quot;,&quot;version&quot;:1,&quot;modificationDate&quot;:&quot;2021-07-06T16:28:13.246+0200&quot;,&quot;publisher&quot;:&quot;offer_publisher&quot;,&quot;sovereign&quot;:&quot;offer_sovereign&quot;}]},&quot;_links&quot;:{&quot;self&quot;:{&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/catalogs\/47f3e83e-c3a0-4462-ada5-3c5e70eafc6d\/offers?page=0&amp;size=30&quot;}},&quot;page&quot;:{&quot;number&quot;:0,&quot;size&quot;:30,&quot;totalPages&quot;:1,&quot;totalElements&quot;:1}}
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.171">
+      <div class="step-ref passed">171</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 200</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.172">
+      <div class="step-ref passed">172</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>match response._embedded.resources contains deep offer</span>
+      </div>
+    </div>
+    <div class="time-cell passed">1</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+        </div>
+        <div class="scenario">
+          <div class="scenario-heading" id="[6:174]">
+            <div class="heading-container">
+              <div class="scenario-tags">
+                
+              </div>
+              <div class="scenario-keyword">
+                Scenario: <span>[6:174]</span>
+                <span class="scenario-name">PUT &#39;/api/catalogs/{id}/offers&#39; create two offers, create a  catalog and link the offer to a catalog, then change the link to the second offer</span>
+                <span></span>
+              </div>
+            </div>
+            <div class="scenario-time passed">
+              <span>ms:</span>&nbsp;<span>5972</span>
+            </div>
+          </div>
+          <div class="step-row">
+            <div class="step-container" id="[6:174]bg">
+              <div class="step-ref bg-step">&gt;&gt;</div>
+              <div class="step-cell passed">Background:</div>
+            </div>
+            <div class="time-cell passed"></div>
+          </div>
+          <div data-parent="[6:174]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.5">
+      <div class="step-ref bg-step">5</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>configure ssl = true</span>
+      </div>
+    </div>
+    <div class="time-cell passed">1</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.5">16:28:12.239 karate.env system property was: null 
+</div>   
+
+  
+
+</div>
+</div>
+          <div data-parent="[6:174]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.6">
+      <div class="step-ref bg-step">6</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def Auth = call read(&#39;../../basic-auth.js&#39;) { username: &#39;admin&#39;, password: &#39;password&#39; }</span>
+      </div>
+    </div>
+    <div class="time-cell passed">3</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div data-parent="[6:174]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.7">
+      <div class="step-ref bg-step">7</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>configure headers = ({Authorization: &#39;&#39;+Auth})</span>
+      </div>
+    </div>
+    <div class="time-cell passed">1</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div data-parent="[6:174]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.8">
+      <div class="step-ref bg-step">8</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>url envurl</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.176">
+      <div class="step-ref passed">176</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def catalog =</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  <div class="preformatted" data-parent="0.176">{
+    &quot;title&quot;: &quot;catalog_title&quot;,
+    &quot;description&quot;: &quot;catalog_description&quot;
+}</div>
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.183">
+      <div class="step-ref passed">183</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def offer1 =</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  <div class="preformatted" data-parent="0.183">{
+    &quot;title&quot;: &quot;offer1_title&quot;,
+    &quot;description&quot;: &quot;offer1_description&quot;,
+    &quot;keywords&quot;: [
+        &quot;keyword1&quot;,
+        &quot;keyword2&quot;
+    ],
+    &quot;publisher&quot;: &quot;offer1_publisher&quot;,
+    &quot;language&quot;: &quot;offer1_language&quot;,
+    &quot;licence&quot;: &quot;offer1_licence&quot;,
+    &quot;sovereign&quot;: &quot;offer1_sovereign&quot;,
+    &quot;endpointDocumentation&quot;: &quot;offer1_endpoint&quot;
+}</div>
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.199">
+      <div class="step-ref passed">199</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def offer2 =</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  <div class="preformatted" data-parent="0.199">{
+    &quot;title&quot;: &quot;offer2_title&quot;,
+    &quot;description&quot;: &quot;offer2_description&quot;,
+    &quot;keywords&quot;: [
+        &quot;keyword1&quot;,
+        &quot;keyword2&quot;
+    ],
+    &quot;publisher&quot;: &quot;offer2_publisher&quot;,
+    &quot;language&quot;: &quot;offer2_language&quot;,
+    &quot;licence&quot;: &quot;offer2_licence&quot;,
+    &quot;sovereign&quot;: &quot;offer2_sovereign&quot;,
+    &quot;endpointDocumentation&quot;: &quot;offer2_endpoint&quot;
+}</div>
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.217">
+      <div class="step-ref passed">217</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>path &#39;api/catalogs&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.218">
+      <div class="step-ref passed">218</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>request catalog</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.219">
+      <div class="step-ref passed">219</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method post</span>
+      </div>
+    </div>
+    <div class="time-cell passed">609</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.219">16:28:12.261 request:
+1 &gt; POST https://localhost:8080/api/catalogs
+1 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+1 &gt; Content-Type: application/json; charset=UTF-8
+1 &gt; Content-Length: 61
+1 &gt; Host: localhost:8080
+1 &gt; Connection: Keep-Alive
+1 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+1 &gt; Accept-Encoding: gzip,deflate
+{&quot;description&quot;:&quot;catalog_description&quot;,&quot;title&quot;:&quot;catalog_title&quot;}
+
+16:28:12.854 response time in milliseconds: 592
+1 &lt; 201
+1 &lt; Location: https://localhost:8080/api/catalogs/4cdc7161-4383-4549-ae73-f6982630c49e
+1 &lt; X-Content-Type-Options: nosniff
+1 &lt; X-XSS-Protection: 1; mode=block
+1 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+1 &lt; Pragma: no-cache
+1 &lt; Expires: 0
+1 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+1 &lt; X-Frame-Options: DENY
+1 &lt; Content-Type: application/hal+json
+1 &lt; Transfer-Encoding: chunked
+1 &lt; Date: Tue, 06 Jul 2021 14:28:11 GMT
+1 &lt; Keep-Alive: timeout=60
+1 &lt; Connection: keep-alive
+{&quot;modificationDate&quot;:&quot;2021-07-06T16:28:12.759+0200&quot;,&quot;_links&quot;:{&quot;offers&quot;:{&quot;templated&quot;:true,&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/catalogs\/4cdc7161-4383-4549-ae73-f6982630c49e\/offers{?page,size}&quot;},&quot;self&quot;:{&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/catalogs\/4cdc7161-4383-4549-ae73-f6982630c49e&quot;}},&quot;additional&quot;:{},&quot;description&quot;:&quot;catalog_description&quot;,&quot;creationDate&quot;:&quot;2021-07-06T16:28:12.759+0200&quot;,&quot;title&quot;:&quot;catalog_title&quot;}
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.220">
+      <div class="step-ref passed">220</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 201</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.221">
+      <div class="step-ref passed">221</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>match response contains catalog</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.223">
+      <div class="step-ref passed">223</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def cat_id = response._links.self.href</span>
+      </div>
+    </div>
+    <div class="time-cell passed">1</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.225">
+      <div class="step-ref passed">225</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>path &#39;api/offers&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.226">
+      <div class="step-ref passed">226</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>request offer1</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.227">
+      <div class="step-ref passed">227</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method post</span>
+      </div>
+    </div>
+    <div class="time-cell passed">1240</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.227">16:28:12.857 request:
+2 &gt; POST https://localhost:8080/api/offers
+2 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+2 &gt; Content-Type: application/json; charset=UTF-8
+2 &gt; Content-Length: 254
+2 &gt; Host: localhost:8080
+2 &gt; Connection: Keep-Alive
+2 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+2 &gt; Accept-Encoding: gzip,deflate
+{&quot;licence&quot;:&quot;offer1_licence&quot;,&quot;keywords&quot;:[&quot;keyword1&quot;,&quot;keyword2&quot;],&quot;endpointDocumentation&quot;:&quot;offer1_endpoint&quot;,&quot;description&quot;:&quot;offer1_description&quot;,&quot;publisher&quot;:&quot;offer1_publisher&quot;,&quot;language&quot;:&quot;offer1_language&quot;,&quot;title&quot;:&quot;offer1_title&quot;,&quot;sovereign&quot;:&quot;offer1_sovereign&quot;}
+
+16:28:14.096 response time in milliseconds: 1238
+2 &lt; 201
+2 &lt; Location: https://localhost:8080/api/offers/26b000dd-2772-470b-ba4a-cb16aac92a53
+2 &lt; X-Content-Type-Options: nosniff
+2 &lt; X-XSS-Protection: 1; mode=block
+2 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+2 &lt; Pragma: no-cache
+2 &lt; Expires: 0
+2 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+2 &lt; X-Frame-Options: DENY
+2 &lt; Content-Type: application/hal+json
+2 &lt; Transfer-Encoding: chunked
+2 &lt; Date: Tue, 06 Jul 2021 14:28:13 GMT
+2 &lt; Keep-Alive: timeout=60
+2 &lt; Connection: keep-alive
+{&quot;licence&quot;:&quot;offer1_licence&quot;,&quot;keywords&quot;:[&quot;keyword1&quot;,&quot;keyword2&quot;],&quot;_links&quot;:{&quot;catalogs&quot;:{&quot;templated&quot;:true,&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/offers\/26b000dd-2772-470b-ba4a-cb16aac92a53\/catalogs{?page,size}&quot;},&quot;self&quot;:{&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/offers\/26b000dd-2772-470b-ba4a-cb16aac92a53&quot;},&quot;contracts&quot;:{&quot;templated&quot;:true,&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/offers\/26b000dd-2772-470b-ba4a-cb16aac92a53\/contracts{?page,size}&quot;},&quot;representations&quot;:{&quot;templated&quot;:true,&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/offers\/26b000dd-2772-470b-ba4a-cb16aac92a53\/representations{?page,size}&quot;}},&quot;endpointDocumentation&quot;:&quot;offer1_endpoint&quot;,&quot;additional&quot;:{},&quot;description&quot;:&quot;offer1_description&quot;,&quot;language&quot;:&quot;offer1_language&quot;,&quot;creationDate&quot;:&quot;2021-07-06T16:28:13.747+0200&quot;,&quot;title&quot;:&quot;offer1_title&quot;,&quot;version&quot;:1,&quot;modificationDate&quot;:&quot;2021-07-06T16:28:13.747+0200&quot;,&quot;publisher&quot;:&quot;offer1_publisher&quot;,&quot;sovereign&quot;:&quot;offer1_sovereign&quot;}
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.228">
+      <div class="step-ref passed">228</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 201</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.229">
+      <div class="step-ref passed">229</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>match response contains offer1</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.231">
+      <div class="step-ref passed">231</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def off1_id = response._links.self.href</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.233">
+      <div class="step-ref passed">233</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>path &#39;api/offers&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">6</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.234">
+      <div class="step-ref passed">234</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>request offer2</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.235">
+      <div class="step-ref passed">235</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method post</span>
+      </div>
+    </div>
+    <div class="time-cell passed">1197</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.235">16:28:14.116 request:
+3 &gt; POST https://localhost:8080/api/offers
+3 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+3 &gt; Content-Type: application/json; charset=UTF-8
+3 &gt; Content-Length: 254
+3 &gt; Host: localhost:8080
+3 &gt; Connection: Keep-Alive
+3 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+3 &gt; Accept-Encoding: gzip,deflate
+{&quot;licence&quot;:&quot;offer2_licence&quot;,&quot;keywords&quot;:[&quot;keyword1&quot;,&quot;keyword2&quot;],&quot;endpointDocumentation&quot;:&quot;offer2_endpoint&quot;,&quot;description&quot;:&quot;offer2_description&quot;,&quot;publisher&quot;:&quot;offer2_publisher&quot;,&quot;language&quot;:&quot;offer2_language&quot;,&quot;title&quot;:&quot;offer2_title&quot;,&quot;sovereign&quot;:&quot;offer2_sovereign&quot;}
+
+16:28:15.300 response time in milliseconds: 1176
+3 &lt; 201
+3 &lt; Location: https://localhost:8080/api/offers/53f99414-12dc-4deb-a090-5b85fe367039
+3 &lt; X-Content-Type-Options: nosniff
+3 &lt; X-XSS-Protection: 1; mode=block
+3 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+3 &lt; Pragma: no-cache
+3 &lt; Expires: 0
+3 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+3 &lt; X-Frame-Options: DENY
+3 &lt; Content-Type: application/hal+json
+3 &lt; Transfer-Encoding: chunked
+3 &lt; Date: Tue, 06 Jul 2021 14:28:15 GMT
+3 &lt; Keep-Alive: timeout=60
+3 &lt; Connection: keep-alive
+{&quot;licence&quot;:&quot;offer2_licence&quot;,&quot;keywords&quot;:[&quot;keyword1&quot;,&quot;keyword2&quot;],&quot;_links&quot;:{&quot;catalogs&quot;:{&quot;templated&quot;:true,&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/offers\/53f99414-12dc-4deb-a090-5b85fe367039\/catalogs{?page,size}&quot;},&quot;self&quot;:{&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/offers\/53f99414-12dc-4deb-a090-5b85fe367039&quot;},&quot;contracts&quot;:{&quot;templated&quot;:true,&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/offers\/53f99414-12dc-4deb-a090-5b85fe367039\/contracts{?page,size}&quot;},&quot;representations&quot;:{&quot;templated&quot;:true,&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/offers\/53f99414-12dc-4deb-a090-5b85fe367039\/representations{?page,size}&quot;}},&quot;endpointDocumentation&quot;:&quot;offer2_endpoint&quot;,&quot;additional&quot;:{},&quot;description&quot;:&quot;offer2_description&quot;,&quot;language&quot;:&quot;offer2_language&quot;,&quot;creationDate&quot;:&quot;2021-07-06T16:28:15.161+0200&quot;,&quot;title&quot;:&quot;offer2_title&quot;,&quot;version&quot;:1,&quot;modificationDate&quot;:&quot;2021-07-06T16:28:15.161+0200&quot;,&quot;publisher&quot;:&quot;offer2_publisher&quot;,&quot;sovereign&quot;:&quot;offer2_sovereign&quot;}
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.236">
+      <div class="step-ref passed">236</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 201</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.237">
+      <div class="step-ref passed">237</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>match response contains offer2</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.239">
+      <div class="step-ref passed">239</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def off2_id = response._links.self.href</span>
+      </div>
+    </div>
+    <div class="time-cell passed">7</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.240">
+      <div class="step-ref passed">240</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def req = []</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.241">
+      <div class="step-ref passed">241</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>set req[0] = off1_id</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.243">
+      <div class="step-ref passed">243</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>url cat_id</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.244">
+      <div class="step-ref passed">244</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>path &#39;/offers&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">1</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.245">
+      <div class="step-ref passed">245</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>request req</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.246">
+      <div class="step-ref passed">246</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method post</span>
+      </div>
+    </div>
+    <div class="time-cell passed">1190</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.246">16:28:15.328 request:
+4 &gt; POST https://localhost:8080/api/catalogs/4cdc7161-4383-4549-ae73-f6982630c49e/offers
+4 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+4 &gt; Content-Type: application/json; charset=UTF-8
+4 &gt; Content-Length: 79
+4 &gt; Host: localhost:8080
+4 &gt; Connection: Keep-Alive
+4 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+4 &gt; Accept-Encoding: gzip,deflate
+[&quot;https:\/\/localhost:8080\/api\/offers\/26b000dd-2772-470b-ba4a-cb16aac92a53&quot;]
+
+16:28:16.500 response time in milliseconds: 1168
+4 &lt; 200
+4 &lt; X-Content-Type-Options: nosniff
+4 &lt; X-XSS-Protection: 1; mode=block
+4 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+4 &lt; Pragma: no-cache
+4 &lt; Expires: 0
+4 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+4 &lt; X-Frame-Options: DENY
+4 &lt; Content-Type: application/hal+json
+4 &lt; Transfer-Encoding: chunked
+4 &lt; Date: Tue, 06 Jul 2021 14:28:16 GMT
+4 &lt; Keep-Alive: timeout=60
+4 &lt; Connection: keep-alive
+{&quot;_embedded&quot;:{&quot;resources&quot;:[{&quot;licence&quot;:&quot;offer1_licence&quot;,&quot;keywords&quot;:[&quot;keyword1&quot;,&quot;keyword2&quot;],&quot;_links&quot;:{&quot;catalogs&quot;:{&quot;templated&quot;:true,&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/offers\/26b000dd-2772-470b-ba4a-cb16aac92a53\/catalogs{?page,size}&quot;},&quot;self&quot;:{&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/offers\/26b000dd-2772-470b-ba4a-cb16aac92a53&quot;},&quot;contracts&quot;:{&quot;templated&quot;:true,&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/offers\/26b000dd-2772-470b-ba4a-cb16aac92a53\/contracts{?page,size}&quot;},&quot;representations&quot;:{&quot;templated&quot;:true,&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/offers\/26b000dd-2772-470b-ba4a-cb16aac92a53\/representations{?page,size}&quot;}},&quot;endpointDocumentation&quot;:&quot;offer1_endpoint&quot;,&quot;additional&quot;:{},&quot;description&quot;:&quot;offer1_description&quot;,&quot;language&quot;:&quot;offer1_language&quot;,&quot;creationDate&quot;:&quot;2021-07-06T16:28:13.747+0200&quot;,&quot;title&quot;:&quot;offer1_title&quot;,&quot;version&quot;:1,&quot;modificationDate&quot;:&quot;2021-07-06T16:28:13.747+0200&quot;,&quot;publisher&quot;:&quot;offer1_publisher&quot;,&quot;sovereign&quot;:&quot;offer1_sovereign&quot;}]},&quot;_links&quot;:{&quot;self&quot;:{&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/catalogs\/4cdc7161-4383-4549-ae73-f6982630c49e\/offers?page=0&amp;size=30&quot;}},&quot;page&quot;:{&quot;number&quot;:0,&quot;size&quot;:30,&quot;totalPages&quot;:1,&quot;totalElements&quot;:1}}
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.247">
+      <div class="step-ref passed">247</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 200</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.248">
+      <div class="step-ref passed">248</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>match response._embedded.resources contains deep offer1</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.250">
+      <div class="step-ref passed">250</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def req = []</span>
+      </div>
+    </div>
+    <div class="time-cell passed">10</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.250">16:28:16.501 over-writing existing variable &#39;req&#39; with new value: []
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.251">
+      <div class="step-ref passed">251</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>set req[0] = off2_id</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.253">
+      <div class="step-ref passed">253</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>url cat_id</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.254">
+      <div class="step-ref passed">254</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>path &#39;/offers&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.255">
+      <div class="step-ref passed">255</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>request req</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.256">
+      <div class="step-ref passed">256</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method put</span>
+      </div>
+    </div>
+    <div class="time-cell passed">1054</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.256">16:28:16.542 request:
+5 &gt; PUT https://localhost:8080/api/catalogs/4cdc7161-4383-4549-ae73-f6982630c49e/offers
+5 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+5 &gt; Content-Type: application/json; charset=UTF-8
+5 &gt; Content-Length: 79
+5 &gt; Host: localhost:8080
+5 &gt; Connection: Keep-Alive
+5 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+5 &gt; Accept-Encoding: gzip,deflate
+[&quot;https:\/\/localhost:8080\/api\/offers\/53f99414-12dc-4deb-a090-5b85fe367039&quot;]
+
+16:28:17.566 response time in milliseconds: 999
+5 &lt; 204
+5 &lt; X-Content-Type-Options: nosniff
+5 &lt; X-XSS-Protection: 1; mode=block
+5 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+5 &lt; Pragma: no-cache
+5 &lt; Expires: 0
+5 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+5 &lt; X-Frame-Options: DENY
+5 &lt; Date: Tue, 06 Jul 2021 14:28:16 GMT
+5 &lt; Keep-Alive: timeout=60
+5 &lt; Connection: keep-alive
+
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.257">
+      <div class="step-ref passed">257</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 204</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  <div class="step-row">
+    <div class="step-container">
+      <div class="step-ref passed"></div>
+      
+      <div class="step-cell comment">#And match response._embedded.catalogs contains deep catalog2</div>
+    </div>
+    <div class="time-cell comment"></div>            
+  </div>
+
+  <div class="step-row">
+    <div class="step-container" id="0.260">
+      <div class="step-ref passed">260</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>url cat_id</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.261">
+      <div class="step-ref passed">261</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>path &#39;/offers&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">21</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.262">
+      <div class="step-ref passed">262</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method get</span>
+      </div>
+    </div>
+    <div class="time-cell passed">626</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.262">16:28:17.722 request:
+6 &gt; GET https://localhost:8080/api/catalogs/4cdc7161-4383-4549-ae73-f6982630c49e/offers
+6 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+6 &gt; Host: localhost:8080
+6 &gt; Connection: Keep-Alive
+6 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+6 &gt; Accept-Encoding: gzip,deflate
+
+
+16:28:18.346 response time in milliseconds: 624
+6 &lt; 200
+6 &lt; X-Content-Type-Options: nosniff
+6 &lt; X-XSS-Protection: 1; mode=block
+6 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+6 &lt; Pragma: no-cache
+6 &lt; Expires: 0
+6 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+6 &lt; X-Frame-Options: DENY
+6 &lt; Content-Type: application/hal+json
+6 &lt; Transfer-Encoding: chunked
+6 &lt; Date: Tue, 06 Jul 2021 14:28:17 GMT
+6 &lt; Keep-Alive: timeout=60
+6 &lt; Connection: keep-alive
+{&quot;_embedded&quot;:{&quot;resources&quot;:[{&quot;licence&quot;:&quot;offer2_licence&quot;,&quot;keywords&quot;:[&quot;keyword1&quot;,&quot;keyword2&quot;],&quot;_links&quot;:{&quot;catalogs&quot;:{&quot;templated&quot;:true,&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/offers\/53f99414-12dc-4deb-a090-5b85fe367039\/catalogs{?page,size}&quot;},&quot;self&quot;:{&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/offers\/53f99414-12dc-4deb-a090-5b85fe367039&quot;},&quot;contracts&quot;:{&quot;templated&quot;:true,&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/offers\/53f99414-12dc-4deb-a090-5b85fe367039\/contracts{?page,size}&quot;},&quot;representations&quot;:{&quot;templated&quot;:true,&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/offers\/53f99414-12dc-4deb-a090-5b85fe367039\/representations{?page,size}&quot;}},&quot;endpointDocumentation&quot;:&quot;offer2_endpoint&quot;,&quot;additional&quot;:{},&quot;description&quot;:&quot;offer2_description&quot;,&quot;language&quot;:&quot;offer2_language&quot;,&quot;creationDate&quot;:&quot;2021-07-06T16:28:15.161+0200&quot;,&quot;title&quot;:&quot;offer2_title&quot;,&quot;version&quot;:1,&quot;modificationDate&quot;:&quot;2021-07-06T16:28:15.161+0200&quot;,&quot;publisher&quot;:&quot;offer2_publisher&quot;,&quot;sovereign&quot;:&quot;offer2_sovereign&quot;}]},&quot;_links&quot;:{&quot;self&quot;:{&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/catalogs\/4cdc7161-4383-4549-ae73-f6982630c49e\/offers?page=0&amp;size=30&quot;}},&quot;page&quot;:{&quot;number&quot;:0,&quot;size&quot;:30,&quot;totalPages&quot;:1,&quot;totalElements&quot;:1}}
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.263">
+      <div class="step-ref passed">263</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 200</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.264">
+      <div class="step-ref passed">264</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>match response._embedded.resources contains deep offer2</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+        </div>
+        <div class="scenario">
+          <div class="scenario-heading" id="[7:265]">
+            <div class="heading-container">
+              <div class="scenario-tags">
+                
+              </div>
+              <div class="scenario-keyword">
+                Scenario: <span>[7:265]</span>
+                <span class="scenario-name">DELETE &#39;/api/offers/{id}/catalogs&#39; create a catalog, create an offer and link the offer to a catalog, then errase the offer from the catalog</span>
+                <span></span>
+              </div>
+            </div>
+            <div class="scenario-time passed">
+              <span>ms:</span>&nbsp;<span>7615</span>
+            </div>
+          </div>
+          <div class="step-row">
+            <div class="step-container" id="[7:265]bg">
+              <div class="step-ref bg-step">&gt;&gt;</div>
+              <div class="step-cell passed">Background:</div>
+            </div>
+            <div class="time-cell passed"></div>
+          </div>
+          <div data-parent="[7:265]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.5">
+      <div class="step-ref bg-step">5</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>configure ssl = true</span>
+      </div>
+    </div>
+    <div class="time-cell passed">1</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.5">16:28:12.575 karate.env system property was: null 
+</div>   
+
+  
+
+</div>
+</div>
+          <div data-parent="[7:265]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.6">
+      <div class="step-ref bg-step">6</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def Auth = call read(&#39;../../basic-auth.js&#39;) { username: &#39;admin&#39;, password: &#39;password&#39; }</span>
+      </div>
+    </div>
+    <div class="time-cell passed">3</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div data-parent="[7:265]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.7">
+      <div class="step-ref bg-step">7</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>configure headers = ({Authorization: &#39;&#39;+Auth})</span>
+      </div>
+    </div>
+    <div class="time-cell passed">1</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div data-parent="[7:265]bg"><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.8">
+      <div class="step-ref bg-step">8</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>url envurl</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.266">
+      <div class="step-ref passed">266</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def catalog =</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  <div class="preformatted" data-parent="0.266">{
+    &quot;title&quot;: &quot;catalog_title&quot;,
+    &quot;description&quot;: &quot;catalog_description&quot;
+}</div>
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.273">
+      <div class="step-ref passed">273</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def offer =</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  <div class="preformatted" data-parent="0.273">{
+    &quot;title&quot;: &quot;offer_title&quot;,
+    &quot;description&quot;: &quot;offer_description&quot;,
+    &quot;keywords&quot;: [
+        &quot;keyword1&quot;,
+        &quot;keyword2&quot;
+    ],
+    &quot;publisher&quot;: &quot;offer_publisher&quot;,
+    &quot;language&quot;: &quot;offer_language&quot;,
+    &quot;licence&quot;: &quot;offer_licence&quot;,
+    &quot;sovereign&quot;: &quot;offer_sovereign&quot;,
+    &quot;endpointDocumentation&quot;: &quot;offer_endpoint&quot;
+}</div>
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.290">
+      <div class="step-ref passed">290</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>path &#39;api/catalogs&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">1</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.291">
+      <div class="step-ref passed">291</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>request catalog</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.292">
+      <div class="step-ref passed">292</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method post</span>
+      </div>
+    </div>
+    <div class="time-cell passed">1060</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.292">16:28:12.583 request:
+1 &gt; POST https://localhost:8080/api/catalogs
+1 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+1 &gt; Content-Type: application/json; charset=UTF-8
+1 &gt; Content-Length: 61
+1 &gt; Host: localhost:8080
+1 &gt; Connection: Keep-Alive
+1 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+1 &gt; Accept-Encoding: gzip,deflate
+{&quot;description&quot;:&quot;catalog_description&quot;,&quot;title&quot;:&quot;catalog_title&quot;}
+
+16:28:13.641 response time in milliseconds: 1057
+1 &lt; 201
+1 &lt; Location: https://localhost:8080/api/catalogs/b398b1a7-8d6d-4277-8e87-4abc0fad839a
+1 &lt; X-Content-Type-Options: nosniff
+1 &lt; X-XSS-Protection: 1; mode=block
+1 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+1 &lt; Pragma: no-cache
+1 &lt; Expires: 0
+1 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+1 &lt; X-Frame-Options: DENY
+1 &lt; Content-Type: application/hal+json
+1 &lt; Transfer-Encoding: chunked
+1 &lt; Date: Tue, 06 Jul 2021 14:28:12 GMT
+1 &lt; Keep-Alive: timeout=60
+1 &lt; Connection: keep-alive
+{&quot;modificationDate&quot;:&quot;2021-07-06T16:28:13.623+0200&quot;,&quot;_links&quot;:{&quot;offers&quot;:{&quot;templated&quot;:true,&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/catalogs\/b398b1a7-8d6d-4277-8e87-4abc0fad839a\/offers{?page,size}&quot;},&quot;self&quot;:{&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/catalogs\/b398b1a7-8d6d-4277-8e87-4abc0fad839a&quot;}},&quot;additional&quot;:{},&quot;description&quot;:&quot;catalog_description&quot;,&quot;creationDate&quot;:&quot;2021-07-06T16:28:13.623+0200&quot;,&quot;title&quot;:&quot;catalog_title&quot;}
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.293">
+      <div class="step-ref passed">293</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 201</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.294">
+      <div class="step-ref passed">294</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>match response contains catalog</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.296">
+      <div class="step-ref passed">296</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def cat_id = response._links.self.href</span>
+      </div>
+    </div>
+    <div class="time-cell passed">2</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.298">
+      <div class="step-ref passed">298</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>path &#39;api/offers&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.299">
+      <div class="step-ref passed">299</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>request offer</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.300">
+      <div class="step-ref passed">300</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method post</span>
+      </div>
+    </div>
+    <div class="time-cell passed">2345</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.300">16:28:13.646 request:
+2 &gt; POST https://localhost:8080/api/offers
+2 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+2 &gt; Content-Type: application/json; charset=UTF-8
+2 &gt; Content-Length: 247
+2 &gt; Host: localhost:8080
+2 &gt; Connection: Keep-Alive
+2 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+2 &gt; Accept-Encoding: gzip,deflate
+{&quot;licence&quot;:&quot;offer_licence&quot;,&quot;keywords&quot;:[&quot;keyword1&quot;,&quot;keyword2&quot;],&quot;endpointDocumentation&quot;:&quot;offer_endpoint&quot;,&quot;description&quot;:&quot;offer_description&quot;,&quot;publisher&quot;:&quot;offer_publisher&quot;,&quot;language&quot;:&quot;offer_language&quot;,&quot;title&quot;:&quot;offer_title&quot;,&quot;sovereign&quot;:&quot;offer_sovereign&quot;}
+
+16:28:15.939 response time in milliseconds: 2290
+2 &lt; 201
+2 &lt; Location: https://localhost:8080/api/offers/e0c7b325-6110-4679-9f23-bd521c181728
+2 &lt; X-Content-Type-Options: nosniff
+2 &lt; X-XSS-Protection: 1; mode=block
+2 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+2 &lt; Pragma: no-cache
+2 &lt; Expires: 0
+2 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+2 &lt; X-Frame-Options: DENY
+2 &lt; Content-Type: application/hal+json
+2 &lt; Transfer-Encoding: chunked
+2 &lt; Date: Tue, 06 Jul 2021 14:28:15 GMT
+2 &lt; Keep-Alive: timeout=60
+2 &lt; Connection: keep-alive
+{&quot;licence&quot;:&quot;offer_licence&quot;,&quot;keywords&quot;:[&quot;keyword1&quot;,&quot;keyword2&quot;],&quot;_links&quot;:{&quot;catalogs&quot;:{&quot;templated&quot;:true,&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/offers\/e0c7b325-6110-4679-9f23-bd521c181728\/catalogs{?page,size}&quot;},&quot;self&quot;:{&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/offers\/e0c7b325-6110-4679-9f23-bd521c181728&quot;},&quot;contracts&quot;:{&quot;templated&quot;:true,&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/offers\/e0c7b325-6110-4679-9f23-bd521c181728\/contracts{?page,size}&quot;},&quot;representations&quot;:{&quot;templated&quot;:true,&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/offers\/e0c7b325-6110-4679-9f23-bd521c181728\/representations{?page,size}&quot;}},&quot;endpointDocumentation&quot;:&quot;offer_endpoint&quot;,&quot;additional&quot;:{},&quot;description&quot;:&quot;offer_description&quot;,&quot;language&quot;:&quot;offer_language&quot;,&quot;creationDate&quot;:&quot;2021-07-06T16:28:15.757+0200&quot;,&quot;title&quot;:&quot;offer_title&quot;,&quot;version&quot;:1,&quot;modificationDate&quot;:&quot;2021-07-06T16:28:15.757+0200&quot;,&quot;publisher&quot;:&quot;offer_publisher&quot;,&quot;sovereign&quot;:&quot;offer_sovereign&quot;}
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.301">
+      <div class="step-ref passed">301</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 201</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.302">
+      <div class="step-ref passed">302</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>match response contains offer</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.304">
+      <div class="step-ref passed">304</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def off_id = response._links.self.href</span>
+      </div>
+    </div>
+    <div class="time-cell passed">6</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.305">
+      <div class="step-ref passed">305</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>def req = []</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.306">
+      <div class="step-ref passed">306</div>
+      
+      <div class="step-cell passed">
+        <span>*</span>&nbsp;<span>set req[0] = off_id</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.311">
+      <div class="step-ref passed">311</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>url cat_id</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.312">
+      <div class="step-ref passed">312</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>path &#39;/offers&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">1</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.313">
+      <div class="step-ref passed">313</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>request req</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.314">
+      <div class="step-ref passed">314</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method post</span>
+      </div>
+    </div>
+    <div class="time-cell passed">1530</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.314">16:28:16.059 request:
+3 &gt; POST https://localhost:8080/api/catalogs/b398b1a7-8d6d-4277-8e87-4abc0fad839a/offers
+3 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+3 &gt; Content-Type: application/json; charset=UTF-8
+3 &gt; Content-Length: 79
+3 &gt; Host: localhost:8080
+3 &gt; Connection: Keep-Alive
+3 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+3 &gt; Accept-Encoding: gzip,deflate
+[&quot;https:\/\/localhost:8080\/api\/offers\/e0c7b325-6110-4679-9f23-bd521c181728&quot;]
+
+16:28:17.529 response time in milliseconds: 1469
+3 &lt; 200
+3 &lt; X-Content-Type-Options: nosniff
+3 &lt; X-XSS-Protection: 1; mode=block
+3 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+3 &lt; Pragma: no-cache
+3 &lt; Expires: 0
+3 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+3 &lt; X-Frame-Options: DENY
+3 &lt; Content-Type: application/hal+json
+3 &lt; Transfer-Encoding: chunked
+3 &lt; Date: Tue, 06 Jul 2021 14:28:16 GMT
+3 &lt; Keep-Alive: timeout=60
+3 &lt; Connection: keep-alive
+{&quot;_embedded&quot;:{&quot;resources&quot;:[{&quot;licence&quot;:&quot;offer_licence&quot;,&quot;keywords&quot;:[&quot;keyword1&quot;,&quot;keyword2&quot;],&quot;_links&quot;:{&quot;catalogs&quot;:{&quot;templated&quot;:true,&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/offers\/e0c7b325-6110-4679-9f23-bd521c181728\/catalogs{?page,size}&quot;},&quot;self&quot;:{&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/offers\/e0c7b325-6110-4679-9f23-bd521c181728&quot;},&quot;contracts&quot;:{&quot;templated&quot;:true,&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/offers\/e0c7b325-6110-4679-9f23-bd521c181728\/contracts{?page,size}&quot;},&quot;representations&quot;:{&quot;templated&quot;:true,&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/offers\/e0c7b325-6110-4679-9f23-bd521c181728\/representations{?page,size}&quot;}},&quot;endpointDocumentation&quot;:&quot;offer_endpoint&quot;,&quot;additional&quot;:{},&quot;description&quot;:&quot;offer_description&quot;,&quot;language&quot;:&quot;offer_language&quot;,&quot;creationDate&quot;:&quot;2021-07-06T16:28:15.757+0200&quot;,&quot;title&quot;:&quot;offer_title&quot;,&quot;version&quot;:1,&quot;modificationDate&quot;:&quot;2021-07-06T16:28:15.757+0200&quot;,&quot;publisher&quot;:&quot;offer_publisher&quot;,&quot;sovereign&quot;:&quot;offer_sovereign&quot;}]},&quot;_links&quot;:{&quot;self&quot;:{&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/catalogs\/b398b1a7-8d6d-4277-8e87-4abc0fad839a\/offers?page=0&amp;size=30&quot;}},&quot;page&quot;:{&quot;number&quot;:0,&quot;size&quot;:30,&quot;totalPages&quot;:1,&quot;totalElements&quot;:1}}
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.315">
+      <div class="step-ref passed">315</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 200</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.316">
+      <div class="step-ref passed">316</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>match response._embedded.resources contains deep offer</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.318">
+      <div class="step-ref passed">318</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>url cat_id</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.319">
+      <div class="step-ref passed">319</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>path &#39;/offers&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.320">
+      <div class="step-ref passed">320</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>request req</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.321">
+      <div class="step-ref passed">321</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method delete</span>
+      </div>
+    </div>
+    <div class="time-cell passed">1348</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.321">16:28:17.531 request:
+4 &gt; DELETE https://localhost:8080/api/catalogs/b398b1a7-8d6d-4277-8e87-4abc0fad839a/offers
+4 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+4 &gt; Content-Type: application/json; charset=UTF-8
+4 &gt; Content-Length: 79
+4 &gt; Host: localhost:8080
+4 &gt; Connection: Keep-Alive
+4 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+4 &gt; Accept-Encoding: gzip,deflate
+[&quot;https:\/\/localhost:8080\/api\/offers\/e0c7b325-6110-4679-9f23-bd521c181728&quot;]
+
+16:28:18.878 response time in milliseconds: 1335
+4 &lt; 204
+4 &lt; X-Content-Type-Options: nosniff
+4 &lt; X-XSS-Protection: 1; mode=block
+4 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+4 &lt; Pragma: no-cache
+4 &lt; Expires: 0
+4 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+4 &lt; X-Frame-Options: DENY
+4 &lt; Date: Tue, 06 Jul 2021 14:28:18 GMT
+4 &lt; Keep-Alive: timeout=60
+4 &lt; Connection: keep-alive
+
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.322">
+      <div class="step-ref passed">322</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 204</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.324">
+      <div class="step-ref passed">324</div>
+      
+      <div class="step-cell passed">
+        <span>Given</span>&nbsp;<span>url cat_id</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.325">
+      <div class="step-ref passed">325</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>path &#39;/offers&#39;</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.326">
+      <div class="step-ref passed">326</div>
+      
+      <div class="step-cell passed">
+        <span>When</span>&nbsp;<span>method get</span>
+      </div>
+    </div>
+    <div class="time-cell passed">1314</div>
+  </div>
+
+   
+  
+  
+
+  
+
+  <div class="preformatted" data-parent="0.326">16:28:18.879 request:
+5 &gt; GET https://localhost:8080/api/catalogs/b398b1a7-8d6d-4277-8e87-4abc0fad839a/offers
+5 &gt; Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+5 &gt; Host: localhost:8080
+5 &gt; Connection: Keep-Alive
+5 &gt; User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.11)
+5 &gt; Accept-Encoding: gzip,deflate
+
+
+16:28:20.193 response time in milliseconds: 1313
+5 &lt; 200
+5 &lt; X-Content-Type-Options: nosniff
+5 &lt; X-XSS-Protection: 1; mode=block
+5 &lt; Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+5 &lt; Pragma: no-cache
+5 &lt; Expires: 0
+5 &lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+5 &lt; X-Frame-Options: DENY
+5 &lt; Content-Type: application/hal+json
+5 &lt; Transfer-Encoding: chunked
+5 &lt; Date: Tue, 06 Jul 2021 14:28:19 GMT
+5 &lt; Keep-Alive: timeout=60
+5 &lt; Connection: keep-alive
+{&quot;_embedded&quot;:{&quot;resources&quot;:[]},&quot;_links&quot;:{&quot;self&quot;:{&quot;href&quot;:&quot;https:\/\/localhost:8080\/api\/catalogs\/b398b1a7-8d6d-4277-8e87-4abc0fad839a\/offers?page=0&amp;size=30&quot;}},&quot;page&quot;:{&quot;number&quot;:0,&quot;size&quot;:30,&quot;totalPages&quot;:0,&quot;totalElements&quot;:0}}
+</div>   
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.327">
+      <div class="step-ref passed">327</div>
+      
+      <div class="step-cell passed">
+        <span>Then</span>&nbsp;<span>status 200</span>
+      </div>
+    </div>
+    <div class="time-cell passed">0</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+          <div><div>
+  
+
+  
+
+  <div class="step-row">
+    <div class="step-container" id="0.328">
+      <div class="step-ref passed">328</div>
+      
+      <div class="step-cell passed">
+        <span>And</span>&nbsp;<span>match response._embedded.resources !contains offer</span>
+      </div>
+    </div>
+    <div class="time-cell passed">1</div>
+  </div>
+
+   
+  
+  
+
+  
+
+     
+
+  
+
+</div>
+</div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
