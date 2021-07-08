@@ -14,3 +14,11 @@ Minimal viable data space with all intended components
 
 On the long run, the testbed should be equipped with a test suite and testing components replacing the  open source reference implementations of the components.
 ![vision](./pictures/Testbed_vision.png)
+
+## Feedback
+First version of the testbed:
+* Change connector B's text for clarity: Connector B (acting as Data Consumer)
+* How does the OSCP Server implementation look? Is this something new to be installed for this current testbed?
+
+Final vision for the testbed:
+* We should add the AppStore to the final vision of the testbed as part of the IDSA infrastructure 
