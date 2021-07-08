@@ -119,7 +119,7 @@ In addition to the multipart endpoint, the IDS Metadata Broker also serves a pro
 
 #### 6 Updating the IDS Metadata Broker
 
-To update an existing installation of the IDS Metadata Broker, first repeat the steps explained in section “Downloading the Docker Containers”. Containers can be either hot updated or restarted to apply the changes. To hot update a container, run the following command:
+To update an existing installation of the IDS Metadata Broker, first repeat the steps explained in section “Downloading the Docker Images”. Containers can be either hot updated or restarted to apply the changes. To hot update a container, run the following command:
 
 		docker-compose up -d --no-deps --build <container name>
 
