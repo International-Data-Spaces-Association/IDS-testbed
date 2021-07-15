@@ -20,6 +20,14 @@ The software supports secp256r1, secp384r1, secp521r1 as well as RSA with differ
 
 The software requires Python 3 and the Python OpenSSL library to be present. On Ubuntu this can be achieved by installing the package `python3-openssl`.
 
+## Installation
+
+```bash
+$ git clone https://github.com/International-Data-Spaces-Association/IDS-testbed.git
+$ cd CA
+$ sudo apt install python3-openssl
+```
+
 ## Usage
 
 ### Initialization
