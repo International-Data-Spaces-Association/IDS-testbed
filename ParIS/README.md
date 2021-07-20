@@ -1,7 +1,7 @@
 # ParIS
 
 ## Link to the current specification
-Official  
+https://github.com/International-Data-Spaces-Association/IDS-G-pre/tree/ParIS-Documentation/Components/IdentityProvider/ParIS 
 
 Internal Preparation  
 https://github.com/International-Data-Spaces-Association/IDS-G-pre/tree/ParIS-Documentation/Components/MetaDataBroker
@@ -13,3 +13,4 @@ https://github.com/International-Data-Spaces-Association/ParIS-open-core
 
 
 ### Other interesting Documents
+https://github.com/International-Data-Spaces-Association/IDS-G-pre/pull/43
