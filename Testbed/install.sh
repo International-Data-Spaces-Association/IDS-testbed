@@ -6,12 +6,23 @@ sudo apt install curl
 sudo apt install ruby
 sudo gem install jwt
 
+
+## Create FileSystem Folder Structur
+cd /home
+mkdir ids
+cd ids
+
 ## DataspaceConnector
 
+# Download
+wget https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/Testbed/DataspaceConnector/DataspaceConnector-main.zip
+
 # Unzip the folder
+mkdir DataspaceConnector
 cd DataspaceConnector
-unzip DataspaceConnector-main.zip
+unzip ../DataspaceConnector-main.zip
 cd ..
+
 # Copy the certificates to the correct folders
 cp certs/dsc/testidsa1.p12 DataspaceConnector/DataspaceConnector-main/src/main/resources/conf
 
