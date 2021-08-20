@@ -1,23 +1,46 @@
 #!/bin/bash
-# Software dependencies
-sudo apt-get install maven
-sudo apt install openjdk-11-jdk
-sudo apt install curl
-sudo apt install ruby
-sudo gem install jwt
-
 
 ## Create FileSystem Folder Structur
+
 cd /home
 mkdir ids
-cd ids
+cd /home/ids
+
+## Software dependencies
+
+sudo apt install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release \
+    docker-ce \
+    docker-ce-cli \
+    containerd.io \
+    docker-compose \
+    maven \
+    openjdk-11-jdk \
+    ruby 
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+echo \
+  "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+sudo gem install jwt
+
+## Create Certificate Folder Structur
+
+sudo mkdir -p /etc/idscert/localhost
 
 ## DataspaceConnector
 
-# Download
+## Download
+cd /home/ids
 wget https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/Testbed/DataspaceConnector/DataspaceConnector-main.zip
 
-# Unzip the folder
+## Unzip the folder
 mkdir DataspaceConnector
 cd DataspaceConnector
 unzip ../DataspaceConnector-main.zip
@@ -36,26 +59,36 @@ gnome-terminal -- java -jar dataspaceconnector-5.1.2.jar
 cd ../../..
 
 ## Broker
-sudo mkdir -p /etc/idscert/localhost
+
+cd /home/ids
+## Download
+wget https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/Testbed/MetadataBroker/metadata-broker-open-core.zip
+mkdir MetadataBroker
+cd MetadataBroker
+unzip ../metadata-broker-open-core.zip
+
 sudo cp -n certs/broker/server.key /etc/idscert/localhost
 sudo cp -n certs/broker/server.crt /etc/idscert/localhost
 
-cd MetadataBroker
-unzip metadata-broker-open-core.zip
-cd metadata-broker-open-core-master/docker/composefiles/broker-localhost
-
+cd /home/ids/MetadataBroker/metadata-broker-open-core-master/docker/composefiles/broker-localhost
 docker-compose pull
 
 ## Uncomment the following line if issue appears regarding port 80 already in use
+
 sed -i "10s/80:80/81:80/" docker-compose.yml
 
 gnome-terminal -- docker-compose up
 
-cd ../../../../..
 ## DAPS
+
+cd /home/ids
+## Download
+wget https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/Testbed/OmejdnDAPS/omejdn-daps.zip
+mkdir OmejdnDAPS
 cd OmejdnDAPS
-unzip omejdn-daps.zip
+unzip ../omejdn-daps.zip
 cd ..
+
 cp certs/daps/testidsa1.cert OmejdnDAPS/omejdn-daps-master/keys
 cp certs/daps/testidsa1.key OmejdnDAPS/omejdn-daps-master/scripts
 cd OmejdnDAPS/omejdn-daps-master
