@@ -56,8 +56,6 @@ It is important to know that this setup is for test environments and requires so
 In DataspaceConnector/src/main/resources/conf/config.json
 -	Line 12, replace
 “@id” : “idsc:TEST_DEPLOYMENT” with “@id” : “idsc:PRODUCTIVE_DEPLOYMENT”
--	Line 16, replace
-“@id” : https://w3id.org/idsa/autogen/baseConnector/7b934432-a85e-41c5-9f65-669219dde4ea with “@id” :  “CONNECTOR_URL” (your connector URL)
 -	Line 60, replace
 “@id” : “file:///conf/keystore-localhost.12” with “@id” : “file:///conf/{yourKeyStore.p12}
 
