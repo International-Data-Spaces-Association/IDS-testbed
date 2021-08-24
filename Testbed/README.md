@@ -33,7 +33,7 @@ We will make use of the docker images provided by the developers.
 If reverseproxy gives an error with the proxy, "listen tcp 0.0.0.0:80 bind: address already in use" head to the docker-compose.yml in /metadata-broker-open-core/docker/composefiles/broker-localhost/docker-compose.yml line 10 and replace the first port. Example, from “80:80” to “81:80”.
 
 3.	Run the services.
--	Docker-compose up
+- docker-compose up
 
 If everything is setup correctly, you can find the Broker’s self-description with https://localhost
 
