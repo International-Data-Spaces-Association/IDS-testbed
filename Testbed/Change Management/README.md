@@ -40,3 +40,9 @@ The TestBed environment and the validated components will have an identifier ass
 When significant changes in the IDS Information Model occur, they will be clearly reflected in the Information Model’s Github repository.  
 
 The release process will always be aligned with the IDSA architecture, and the new validated Information Model for the TestBed will be indicated in the corresponding release of the TestBed.
+
+## Software Updates
+
+The components must keep up with software dependencies as updates come out. The component must not force the user to skip updates to be able to keep utilizing the hardware/software. In case of changes affecting the functionality of the component, the developers must provide new installation and/or configuration steps.
+
+
