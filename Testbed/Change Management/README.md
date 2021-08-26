@@ -31,7 +31,7 @@ If a new component and/or component version demands changes in the installation 
 
 Components affected by the changes directly (affects component’s funcionality/security) or indirectly (require extra features to accept new funcionality/security from other components) should be notified. The components will have to upgrade their components to meet the new requirements and go through the “Including a new component or an existing component’s new version into the Testbed” section of this document.
 
-Important: If major criterion changes were to occur that may cause those non-updated components to disrupt the expected behavior of the IDSA architecture, the Testbed maintainers may be able to disable/remove such components temporarily.
+**Important:** If major criterion changes were to occur that may cause those non-updated components to disrupt the expected behavior of the IDSA architecture, the Testbed maintainers may be able to disable/remove such components temporarily.
 
 ## Changes in the Information Model
 
