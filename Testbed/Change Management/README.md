@@ -16,7 +16,7 @@ The list of points that are checked:
 
 •	Installation must work (installation manual, user manual, etc.)
 
-•	Documatation must exists
+•	Documentation must exists
 
 •	~~Security profile requirements of the component are fulfilled~~
 
