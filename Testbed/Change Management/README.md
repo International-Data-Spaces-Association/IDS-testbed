@@ -14,24 +14,40 @@ Once the modification and/or new feature(s) have been verified, interoperability
 
 The list of points that are checked:
 
-•	Documentation must be complete (installation manual, user manual, etc.)
+•	Installation must work (installation manual, user manual, etc.)
 
-•	Security profile requirements of the component are fulfilled
+•	Documatation must exists
 
-•	Code quality
+•	~~Security profile requirements of the component are fulfilled~~
 
-•	Operational procedures
+•	~~Code quality~~
 
-•	Interoperability functionality
+•	~~Operational procedures~~
 
+•	~~Interoperability functionality~~
 
-Basic example: New Dataspace Connector version. The connector will be placed in a new isolation directory. This directory will be the trial Testbed area for the new component versions. The connector’s code, documentation and functionality will be checked. The Dataspace Connector will act as both provider and consumer while isolated. Once the functionality works as intended, the connector will be connected to DAPS. Once these connect as expected, the Broker will be added to the environment and verify that the connection is possible.
+@SQS: *How do you want to do that? Example, Code quality When it comes to code quality, there are an infinite number of evaluation options.*
 
-If the new component and/or component version successfully interacts with the trial Testbed, it is ready to be moved into the Testbed.
+**Testing a component** 
+
+1. Testbed is up and running
+2. The existing testbed is expanded to include a component to be tested.
+3. The new component will be placed in a new isolation directory (VM).  This directory will be the trial Testbed area for the new component versions.
+4. Documentation of the new component will be checked
+5. Functionality of the new component will be checked, like described in the documentation 
+6. If the new component and/or component version successfully interacts with the trial Testbed, it is ready to be moved into the Testbed.
+
+**Testbed Updates** 
 
 The updates that occur in the Testbed must be included in an update log where the changes, dates, and team in charge of validation will be detailed.
 
 If a new component and/or component version demands changes in the installation and/or interoperability document of the Testbed, the new documents must be available and reference the Testbed version they apply to.
+
+Operating system updates are always carried out (VM).
+
+Before new components are inserted into the IDS testbed and thus used as the basis for all further tests, central communication must take place with all test facilities.
+
+@WHO will do this? :D
 
 ## Criterion changes/updates
 
