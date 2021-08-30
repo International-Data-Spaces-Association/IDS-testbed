@@ -13,11 +13,17 @@ The new component and/or component version will be isolated with respect to the 
 Once the modification and/or new feature(s) have been verified, interoperability will be tested in a trial Testbed. Here, the component will be slowly connected to the other components to ensure that functionality remains as expected until the trial Testbed includes every previously included component. 
 
 The list of points that are checked:
+
 •	Documentation must be complete (installation manual, user manual, etc.)
+
 •	Security profile requirements of the component are fulfilled
+
 •	Code quality
+
 •	Operational procedures
+
 •	Interoperability functionality
+
 
 Basic example: New Dataspace Connector version. The connector will be placed in a new isolation directory. This directory will be the trial Testbed area for the new component versions. The connector’s code, documentation and functionality will be checked. The Dataspace Connector will act as both provider and consumer while isolated. Once the functionality works as intended, the connector will be connected to DAPS. Once these connect as expected, the Broker will be added to the environment and verify that the connection is possible.
 
