@@ -8,7 +8,8 @@ For the time being, these certificates will be the ones provided by Fraunhoder A
 Once the CA has the proper aki/ski extensions, the certificates used in the Testbed will be provided by the Testbed CA.
 
 ## Installation steps
-> cd OmejdnDAPS
+From the IDS-testbed directory,
+> cd Testbed/OmejdnDAPS
 >
 > unzip omejdnDAPS.zip
 >
