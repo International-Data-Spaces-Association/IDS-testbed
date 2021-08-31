@@ -71,11 +71,14 @@ In the command line, go to the IDS-testbed directory. Then:
 * /IDS-testbed-Testbed-OmejdnDAPS/omejdnDAPS/scripts
 Copy the .key from IDS-testbed/Testbed/certs/daps/testidsa1.key into this directory.
 
-In the command line, go to the IDS-testbed directory. Then:
+In the command line, go to the IDS-testbed directory. Then copy the private key into the script directory:
 > cp Testbed/certs/daps/testidsa1.key Testbed/OmejdnDAPS/omejdnDAPS/scripts
 
+Replace the CLIENDID value with the {file} value {file}.key. In our case, from testidsa1.key we get testidsa1
 > CLIENDID = 'testidsa1'
 
+It is important to note that 'iss' and 'sub' must have the same value. Also, the 'iss' and 'sub' values should be the same as client_id in /IDS-testbed/Testbed/OmejdnDAPS/omejdnDAPS/config/clients.yml
 > 'iss' => '4A:C3:0A:F2:CD:17:34:1A:FB:D7:28:FF:8F:B9:F7:B1:17:28:1D:71:keyid:CB:8C:C7:B6:85:79:A8:23:A6:CB:15:AB:17:50:2F:E6:65:43:5D:E8'
 > 'sub' => '4A:C3:0A:F2:CD:17:34:1A:FB:D7:28:FF:8F:B9:F7:B1:17:28:1D:71:keyid:CB:8C:C7:B6:85:79:A8:23:A6:CB:15:AB:17:50:2F:E6:65:43:5D:E8'
+The 'aud' value should be changed to 'idsc:IDS_CONNECTORS_ALL'. That is what the implementation of IDS connectors use in the 'aud' field.
 > 'aud' => 'idsc:IDS_CONNECTORS_ALL'
