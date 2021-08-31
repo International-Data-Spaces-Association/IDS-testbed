@@ -25,7 +25,7 @@ From the IDS-testbed directory,
 2. audience: idsc:IDS_CONNECTORS_ALL
 
 * /IDS-testbed/Testbed/OmejdnDAPS/omejdnDAPS/keys
-1. Copy the .cert certificate from the "cert" directory in /IDS-testbed/Testbed/daps here.
+1. Copy the .cert certificate from the "cert" directory in /IDS-testbed/Testbed/certs/daps here.
 
 OR
 
