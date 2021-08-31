@@ -86,6 +86,6 @@ It is important to note that 'iss' and 'sub' must have the same value. Also, the
 The 'aud' value must be changed to 'idsc:IDS_CONNECTORS_ALL'. That is what the implementation of IDS connectors use in the 'aud' field.
 > 'aud' => 'idsc:IDS_CONNECTORS_ALL'
 
-Time to run the script:
+#### Time to run the script:
 In terminal, go to the 'scripts' directory and run the script:
 > ruby create_test_token.rb
