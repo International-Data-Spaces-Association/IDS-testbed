@@ -1,9 +1,28 @@
-DAPS
+# DAPS
 
-cd OmejdnDAPS
-unzip omejdnDAPS.zip
-cd omejdnDAPS
+## Quick information regarding the current state of the component
+The DAPS server requires the public keys (.cert) from those components that wish to obtain a DAT from it. This .cert file should be placed in the "keys" directory within the DAPS directory.
 
-## The DAPS server requires the public keys (.cert) from those components that wish to obtain a DAT from it.
-## This .cert file should be placed in the "keys" directory within the DAPS directory
-## For the time being, these certificates will be the ones provided by Fraunhoder AISEC. For the time being, you can use a certificate located in the "certs" folder in the "Testbed" folder. If you wanna get your own certificate and use it in the Testbed, request one in: https://industrialdataspace.jiveon.com/docs/DOC-2002 (Requires Jive access).
+For the time being, these certificates will be the ones provided by Fraunhoder AISEC. For the time being, you can use a certificate located in the "certs" folder in the "Testbed" folder. If you wanna get your own certificate and use it in the Testbed, request one in: https://industrialdataspace.jiveon.com/docs/DOC-2002 (Requires Jive access).
+
+Once the CA has the proper aki/ski extensions, the certificates used in the Testbed will be provided by it making the Testbed a closed environment.
+
+## Installation steps
+> cd OmejdnDAPS
+>
+> unzip omejdnDAPS.zip
+>
+> cd omejdnDAPS
+
+## Configuration steps (WITH A FRAUNHOFER AISEC CERTIFICATE)
+* /omejdnDAPS/config/clients.yml
+1. client_id: testClient1 (Change this into the aki/ski extensions from the certificate used in the component to interact with the DAPS)
+2. **add** under "attributes": certificate: {your_cert}.cert
+
+* /omejdnDAPS/config/omejdn.yml
+1. host: idsc:IDS_CONNECTORS_ALL
+2. audience: idsc:IDS_CONNECTORS_ALL
+
+
+
+
