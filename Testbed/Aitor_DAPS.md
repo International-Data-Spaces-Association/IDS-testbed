@@ -35,7 +35,7 @@ OR
 
 3. Copy the .cert certificate you obtained from the CA here. (This will be the only/recommended option in the future)
 
-## Testing Interoperability
+## Testing interoperability
 
 ### With the script within OmejdnDAPS
 
@@ -65,6 +65,8 @@ Copy the .cert from IDS-testbed/Testbed/certs/daps/testidsa1.cert into this dire
 
 In the command line, go to the IDS-testbed directory. Then:
 > cp Testbed/certs/daps/testidsa1.cert Testbed/OmejdnDAPS/omejdnDAPS/keys
+
+### Testing Interoperab
 
 
 
