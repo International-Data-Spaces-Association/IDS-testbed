@@ -86,6 +86,11 @@ It is important to note that 'iss' and 'sub' must have the same value. Also, the
 The 'aud' value must be changed to 'idsc:IDS_CONNECTORS_ALL'. That is what the implementation of IDS connectors use in the 'aud' field.
 > 'aud' => 'idsc:IDS_CONNECTORS_ALL'
 
+#### Launch the DAPS:
+Build an image. In our example, we will call it "daps". 
+> docker build . -t 
+docker run -d –name=omejdn -p 4567:4567 -v $PWD/config:/opt/config -v $PWD/keys:/opt/keys dockerimage
+
 #### Run the script:
 In the terminal, go to the 'scripts' directory and run the script:
 > ruby create_test_token.rb
