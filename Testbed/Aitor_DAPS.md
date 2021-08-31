@@ -17,7 +17,7 @@ From the IDS-testbed directory,
 
 ## Interoperability configuration steps (WITH A FRAUNHOFER AISEC CERTIFICATE)
 * /IDS-testbed/Testbed/OmejdnDAPS/omejdnDAPS/config/clients.yml
-1. client_id: testClient1 (Change this into the aki/ski extensions from the certificate used in the component to interact with the DAPS, explained towards the end)
+1. client_id: Change this into the aki/ski extensions from the certificate used in the component to interact with the DAPS, further detailed in the example
 2. **add** under "attributes": certfile: {your_cert}.cert
 
 * /IDS-testbed/Testbed/OmejdnDAPS/omejdnDAPS/config/omejdn.yml
