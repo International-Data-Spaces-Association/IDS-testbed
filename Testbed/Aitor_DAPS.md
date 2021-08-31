@@ -93,7 +93,7 @@ Build an image with the following command. Feel free to replace "daps" with anot
 Build the container with the image created.
 > docker run -d –name=omejdn -p 4567:4567 -v $PWD/config:/opt/config -v $PWD/keys:/opt/keys daps
 
-Ensure the DAPS server is running by going to: http://localhost:4567
+Ensure the DAPS server is running: http://localhost:4567
 #### Run the script:
 In the terminal, go to the 'scripts' directory and run the script:
 > ruby create_test_token.rb
