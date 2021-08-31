@@ -25,15 +25,15 @@ From the IDS-testbed directory,
 2. audience: idsc:IDS_CONNECTORS_ALL
 
 * /IDS-testbed/Testbed/OmejdnDAPS/omejdnDAPS/keys
-1. Drop the .cert certificate from the "cert" directory in /IDS-testbed/Testbed/daps here.
+1. Copy the .cert certificate from the "cert" directory in /IDS-testbed/Testbed/daps here.
 
 OR
 
-2. Drop the .cert certificate you have obtained directly from Fraunhofer AISEC.
+2. Copy the .cert certificate you have obtained directly from Fraunhofer AISEC.
 
 OR
 
-3. Drop the .cert certificate you obtained from the CA here. (This will be the only/recommended option in the future)
+3. Copy the .cert certificate you obtained from the CA here. (This will be the only/recommended option in the future)
 
 ## Testing Interoperability
 
