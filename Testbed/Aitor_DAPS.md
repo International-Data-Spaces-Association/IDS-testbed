@@ -5,7 +5,7 @@ The DAPS server requires the public keys (.cert) from those components that wish
 
 For the time being, these certificates will be the ones provided by Fraunhoder AISEC. Feel free to use the certificate located in the "certs" folder in the "Testbed" folder. If you want to get your own certificate and use it in the Testbed, request one in: https://industrialdataspace.jiveon.com/docs/DOC-2002 (Requires Jive access).
 
-Once the CA has the proper aki/ski extensions, the certificates used in the Testbed will be provided by the CA.
+Once the CA has the proper aki/ski extensions, the certificates used in the Testbed will be provided by the Testbed CA.
 
 ## Installation steps
 > cd OmejdnDAPS
