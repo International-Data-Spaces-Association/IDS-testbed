@@ -17,7 +17,7 @@ Once the CA has the proper aki/ski extensions, the certificates used in the Test
 ## Interoperability configuration steps (WITH A FRAUNHOFER AISEC CERTIFICATE)
 * /IDS-testbed/Testbed/OmejdnDAPS/omejdnDAPS/config/clients.yml
 1. client_id: testClient1 (Change this into the aki/ski extensions from the certificate used in the component to interact with the DAPS)
-2. **add** under "attributes": certificate: {your_cert}.cert
+2. **add** under "attributes": certfile: {your_cert}.cert
 
 * /IDS-testbed/Testbed/OmejdnDAPS/omejdnDAPS/config/omejdn.yml
 1. host: idsc:IDS_CONNECTORS_ALL
@@ -42,6 +42,7 @@ OR
 1. Drop your certificate's private key here {file}.key
 2. Edit CLIENTID to have the same information as the {file}.key in step 1
 3. Edit the 'iss' and 'sub' in the second part of the script to have the same information added to client_id in /IDS-testbed/Testbed/OmejdnDAPS/omejdnDAPS/config/clients.yml
+4. Edit the 'aud': idsc:IDS_CONNECTORS_ALL
 
 ### With the Dataspace Connector
 
