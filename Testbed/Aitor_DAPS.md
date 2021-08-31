@@ -46,7 +46,7 @@ OR
 
 Notice: The content in steps 3 and 4 must be inside single quotes.
 
-
+By making config/client_id, 'iss' and 'sub' in the script equals to the certificate's aki/ski extensions, we have already configured the DAPS to give DATs to the certificate.
 
 
 
