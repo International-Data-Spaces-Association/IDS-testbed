@@ -14,7 +14,7 @@ Once the CA has the proper aki/ski extensions, the certificates used in the Test
 >
 > cd omejdnDAPS
 
-## Configuration steps (WITH A FRAUNHOFER AISEC CERTIFICATE)
+## Interoperability configuration steps (WITH A FRAUNHOFER AISEC CERTIFICATE)
 * /IDS-testbed/Testbed/OmejdnDAPS/omejdnDAPS/config/clients.yml
 1. client_id: testClient1 (Change this into the aki/ski extensions from the certificate used in the component to interact with the DAPS)
 2. **add** under "attributes": certificate: {your_cert}.cert
