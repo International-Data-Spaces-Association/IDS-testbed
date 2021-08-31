@@ -87,5 +87,5 @@ The 'aud' value must be changed to 'idsc:IDS_CONNECTORS_ALL'. That is what the i
 > 'aud' => 'idsc:IDS_CONNECTORS_ALL'
 
 #### Run the script:
-In terminal, go to the 'scripts' directory and run the script:
+In the terminal, go to the 'scripts' directory and run the script:
 > ruby create_test_token.rb
