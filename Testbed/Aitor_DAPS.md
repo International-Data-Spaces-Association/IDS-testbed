@@ -41,10 +41,13 @@ OR
 * /IDS-testbed/Testbed/OmejdnDAPS/omedjdnDAPS/scripts
 1. Drop your certificate's private key here {file}.key
 2. Edit CLIENTID to have the same information as the {file}.key in step 1
-3. Edit the 'iss' and 'sub' in the second part of the script to have the same information added to client_id in /IDS-testbed/Testbed/OmejdnDAPS/omejdnDAPS/config/clients.yml
+3. Edit the 'iss' and 'sub' in the second part of the script to have the same information added to client_id in /IDS-testbed/Testbed/OmejdnDAPS/omejdnDAPS/config/clients.yml.
 4. Edit the 'aud': idsc:IDS_CONNECTORS_ALL
 
-### With the Dataspace Connector
+Notice: The content in steps 3 and 4 must be inside single quotes.
+
+
+
 
 
 
