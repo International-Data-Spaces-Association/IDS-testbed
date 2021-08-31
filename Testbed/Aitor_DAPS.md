@@ -74,3 +74,8 @@ Copy the .key from IDS-testbed/Testbed/certs/daps/testidsa1.key into this direct
 In the command line, go to the IDS-testbed directory. Then:
 > cp Testbed/certs/daps/testidsa1.key Testbed/OmejdnDAPS/omejdnDAPS/scripts
 
+> CLIENDID = 'testidsa1'
+
+> 'iss' => '4A:C3:0A:F2:CD:17:34:1A:FB:D7:28:FF:8F:B9:F7:B1:17:28:1D:71:keyid:CB:8C:C7:B6:85:79:A8:23:A6:CB:15:AB:17:50:2F:E6:65:43:5D:E8'
+> 'sub' => '4A:C3:0A:F2:CD:17:34:1A:FB:D7:28:FF:8F:B9:F7:B1:17:28:1D:71:keyid:CB:8C:C7:B6:85:79:A8:23:A6:CB:15:AB:17:50:2F:E6:65:43:5D:E8'
+> 'aud' => 'idsc:IDS_CONNECTORS_ALL'
