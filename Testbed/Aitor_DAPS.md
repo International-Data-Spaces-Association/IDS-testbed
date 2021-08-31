@@ -60,6 +60,11 @@ By making config/client_id, 'iss' and 'sub' in the script equals to the certific
 host: idsc:IDS_CONNECTORS_ALL
 audience: idsc:IDS_CONNECTORS_ALL
 
+* /IDS-testbed/Testbed/OmejdnDAPS/omejdnDAPS/keys
+Copy the .cert from IDS-testbed/Testbed/certs/daps/testidsa1.cert into this directory.
+
+In the command line, go to the IDS-testbed directory. Then:
+> cp Testbed/certs/daps/testidsa1.cert Testbed/OmejdnDAPS/omejdnDAPS/keys
 
 
 
