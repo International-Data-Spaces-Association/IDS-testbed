@@ -69,6 +69,7 @@ In the command line, go to the IDS-testbed directory. Then:
 ### Testing Interoperability (WITH THE INCLUDED CERTIFICATE)
 
 * /IDS-testbed-Testbed-OmejdnDAPS/omejdnDAPS/scripts
+
 Copy the .key from IDS-testbed/Testbed/certs/daps/testidsa1.key into this directory.
 
 In the command line, go to the IDS-testbed directory. Then copy the private key into the script directory:
