@@ -34,6 +34,16 @@ OR
 
 3. Drop the .cert certificate you obtained from the CA here. (This will be the only/recommended option in the future)
 
+## Testing Interoperability
+
+### With the script within OmejdnDAPS
+
+* /IDS-testbed/Testbed/OmejdnDAPS/omedjdnDAPS/scripts
+1. Drop your certificate's private key here {file}.key
+2. Edit CLIENTID to have the same information as the {file}.key in step 1
+3. Edit the 'iss' and 'sub' in the second part of the script to have the same information added to client_id in /IDS-testbed/Testbed/OmejdnDAPS/omejdnDAPS/config/clients.yml
+
+### With the Dataspace Connector
 
 
 
