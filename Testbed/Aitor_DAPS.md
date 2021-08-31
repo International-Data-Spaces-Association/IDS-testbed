@@ -54,7 +54,7 @@ By making config/client_id, 'iss' and 'sub' in the script equals to the certific
 ### Interoperability configuration steps (WITH THE INCLUDED CERTFICATE)
 * /IDS-testbed/Testbed/OmejdnDAPS/omejdnDAPS/config/clients.yml
 1. client_id: 4A:C3:0A:F2:CD:17:34:1A:FB:D7:28:FF:8F:B9:F7:B1:17:28:1D:71:keyid:CB:8C:C7:B6:85:79:A8:23:A6:CB:15:AB:17:50:2F:E6:65:43:5D:E8
-2. **add** certfile: testidsa1.cert
+2. **add** under attributes: certfile: testidsa1.cert
 
 * /IDS-testbed/Testbed/OmejdnDAPS/omejdnDAPS/config/omejdn.yml
 host: idsc:IDS_CONNECTORS_ALL
