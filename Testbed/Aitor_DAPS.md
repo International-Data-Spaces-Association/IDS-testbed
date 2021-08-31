@@ -41,15 +41,19 @@ OR
 
 * /IDS-testbed/Testbed/OmejdnDAPS/omedjdnDAPS/scripts
 1. Drop your certificate's private key here {file}.key
-2. Edit CLIENTID to have the same information as the {file}.key in step 1
-3. Edit the 'iss' and 'sub' in the second part of the script to have the same information added to client_id in /IDS-testbed/Testbed/OmejdnDAPS/omejdnDAPS/config/clients.yml.
+2. Edit CLIENTID to have the same information as {file} in the {file}.key in step 1
+3. Edit the 'iss' and 'sub' in the second half of the script to have the same information added to client_id in /IDS-testbed/Testbed/OmejdnDAPS/omejdnDAPS/config/clients.yml.
 4. Edit the 'aud': idsc:IDS_CONNECTORS_ALL
 
 Notice: The content in steps 3 and 4 must be inside single quotes.
 
-
-
 By making config/client_id, 'iss' and 'sub' in the script equals to the certificate's aki/ski extensions, we have already configured the DAPS to give DATs to the certificate.
+
+## The step by step process using the certificate provided
+
+### Interoperability configuration steps (WITH THE CERTFICATE INCLUDED)
+/IDS-testbed/Testbed/OmejdnDAPS/omejdnDAPS/config/clients.yml
+client_id: 
 
 
 
