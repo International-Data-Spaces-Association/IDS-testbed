@@ -89,6 +89,7 @@ The 'aud' value must be changed to 'idsc:IDS_CONNECTORS_ALL'. That is what the i
 #### Launch the DAPS:
 Build an image with the following command. Feel free to replace "daps" with another name. 
 > docker build . -t daps
+
 Build the container with the image create.
 > docker run -d –name=omejdn -p 4567:4567 -v $PWD/config:/opt/config -v $PWD/keys:/opt/keys daps
 
