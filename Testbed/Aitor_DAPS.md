@@ -51,10 +51,10 @@ By making config/client_id, 'iss' and 'sub' in the script equals to the certific
 
 ## The step by step process using the certificate provided
 
-### Interoperability configuration steps (WITH THE CERTFICATE INCLUDED)
+### Interoperability configuration steps (WITH THE INCLUDED CERTFICATE)
 * /IDS-testbed/Testbed/OmejdnDAPS/omejdnDAPS/config/clients.yml
 1. client_id: 4A:C3:0A:F2:CD:17:34:1A:FB:D7:28:FF:8F:B9:F7:B1:17:28:1D:71:keyid:CB:8C:C7:B6:85:79:A8:23:A6:CB:15:AB:17:50:2F:E6:65:43:5D:E8
-2. certfile: testidsa1.cert
+2. **add** certfile: testidsa1.cert
 
 * /IDS-testbed/Testbed/OmejdnDAPS/omejdnDAPS/config/omejdn.yml
 host: idsc:IDS_CONNECTORS_ALL
@@ -66,7 +66,11 @@ Copy the .cert from IDS-testbed/Testbed/certs/daps/testidsa1.cert into this dire
 In the command line, go to the IDS-testbed directory. Then:
 > cp Testbed/certs/daps/testidsa1.cert Testbed/OmejdnDAPS/omejdnDAPS/keys
 
-### Testing Interoperab
+### Testing Interoperability (WITH THE INCLUDED CERTIFICATE)
 
+* /IDS-testbed-Testbed-OmejdnDAPS/omejdnDAPS/scripts
+Copy the .key from IDS-testbed/Testbed/certs/daps/testidsa1.key into this directory.
 
+In the command line, go to the IDS-testbed directory. Then:
+> cp Testbed/certs/daps/testidsa1.key Testbed/OmejdnDAPS/omejdnDAPS/scripts
 
