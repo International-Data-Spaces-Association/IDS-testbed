@@ -95,6 +95,6 @@ Build the container with the image created.
 
 Ensure the DAPS server is running: http://localhost:4567
 #### Run the script:
-In the terminal, go to the 'scripts' directory and run the script:
+In the terminal, go to /IDS-testbed/Testbed/OmejdnDAPS/omedjdnDAPS/scripts and run the script:
 > ruby create_test_token.rb
 A token is received.
