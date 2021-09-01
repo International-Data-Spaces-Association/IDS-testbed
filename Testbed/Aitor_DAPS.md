@@ -75,7 +75,7 @@ Copy the .key from IDS-testbed/Testbed/certs/daps/testidsa1.key into this direct
 In the command line, go to the IDS-testbed directory. Then copy the private key into the script directory:
 > cp Testbed/certs/daps/testidsa1.key Testbed/OmejdnDAPS/omejdnDAPS/scripts
 
-Replace the CLIENTID value with the {file} value {file}.key. In our case, from testidsa1.key we get testidsa1
+Go to the folder scripts/create_test_token.rb and replace the CLIENTID value with the {file} value {file}.key. In our case, from testidsa1.key we get testidsa1
 > CLIENTID = 'testidsa1'
 
 It is important to note that 'iss' and 'sub' must have the same value. Also, the 'iss' and 'sub' values should be the same as client_id in /IDS-testbed/Testbed/OmejdnDAPS/omejdnDAPS/config/clients.yml
