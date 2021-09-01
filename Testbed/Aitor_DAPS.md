@@ -102,10 +102,10 @@ In the terminal, go to /IDS-testbed/Testbed/OmejdnDAPS/omedjdnDAPS/scripts and r
 A token is received.
 
 #### Requesting an access token
-Use the JWT bearer token just received to request a DAT frtom the DAPS. Insert the token received in {INSERT_TOKEN_HERE} and run the following script
+Use the JWT bearer token just received to request a DAT from the DAPS. Insert the token received in {INSERT_TOKEN_HERE} and run the following script
 > curl localhost:4567/token --data "grant_type=client_credentials
 >      &client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer
 >      &client_assertion={INSERT_TOKEN_HERE}
 >      &scope=ids_connector security_level"
 
-If everything was setup correctly, it is received an access token response with a DAT with specific expiration.
+If everything is setup correctly, a Dynamid Attribute Token (DAT) is received with a specific expiration date.
