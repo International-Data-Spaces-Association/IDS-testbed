@@ -41,7 +41,7 @@ OR
 
 * /IDS-testbed/Testbed/OmejdnDAPS/omedjdnDAPS/scripts
 1. Drop your certificate's private key here {file}.key
-2. In the folder create_test_token.rb edit CLIENTID to have the same information as {file} in the {file}.key in step 1
+2. In the folder, create_test_token.rb edit CLIENTID to have the same information as {file} in the {file}.key in step 1
 3. Edit the 'iss' and 'sub' in the second half of the script to have the same information added to client_id in /IDS-testbed/Testbed/OmejdnDAPS/omejdnDAPS/config/clients.yml.
 4. Edit the 'aud': idsc:IDS_CONNECTORS_ALL
 
