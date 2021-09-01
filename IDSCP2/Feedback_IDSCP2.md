@@ -37,5 +37,5 @@ https://github.com/industrial-data-space/idscp2-java#build
 
 Please add a Section for installage necessary Software dependencies.
 For example, the "gradlew" script uses Java, but it does not describe how to install it.
-![image](https://user-images.githubusercontent.com/83353235/131628481-1fb159de-f151-4772-a333-fb8229778226.png)
+
 
