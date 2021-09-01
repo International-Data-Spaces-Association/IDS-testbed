@@ -41,7 +41,7 @@ OR
 
 * /IDS-testbed/Testbed/OmejdnDAPS/omedjdnDAPS/scripts
 1. Drop your certificate's private key here {file}.key
-2. Edit CLIENTID to have the same information as {file} in the {file}.key in step 1
+2. In the folder create_test_token.rb edit CLIENTID to have the same information as {file} in the {file}.key in step 1
 3. Edit the 'iss' and 'sub' in the second half of the script to have the same information added to client_id in /IDS-testbed/Testbed/OmejdnDAPS/omejdnDAPS/config/clients.yml.
 4. Edit the 'aud': idsc:IDS_CONNECTORS_ALL
 
@@ -51,7 +51,7 @@ By making config/client_id, 'iss' and 'sub' in the script equals to the certific
 
 ## The step by step process using the certificate provided
 
-### Interoperability configuration steps (WITH THE INCLUDED CERTFICATE)
+### Interoperability configuration steps (WITH THE INCLUDED CERTIFICATE)
 * /IDS-testbed/Testbed/OmejdnDAPS/omejdnDAPS/config/clients.yml
 1. The client_id value can be extracted from the .cert file: 4A:C3:0A:F2:CD:17:34:1A:FB:D7:28:FF:8F:B9:F7:B1:17:28:1D:71:keyid:CB:8C:C7:B6:85:79:A8:23:A6:CB:15:AB:17:50:2F:E6:65:43:5D:E8
 2. **add** under attributes: certfile: testidsa1.cert
