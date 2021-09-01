@@ -92,7 +92,7 @@ Build an image with the following command. Feel free to replace "daps" with anot
 > docker build . -t daps
 
 Build the container with the image created.
-> docker run -d –name=omejdn -p 4567:4567 -v $PWD/config:/opt/config -v $PWD/keys:/opt/keys daps
+> docker run -d --name=omejdn -p 4567:4567 -v $PWD/config:/opt/config -v $PWD/keys:/opt/keys daps
 
 Ensure the DAPS server is running: http://localhost:4567
 #### Run the script:
