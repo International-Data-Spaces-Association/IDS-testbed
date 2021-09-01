@@ -100,3 +100,11 @@ In the terminal, go to /IDS-testbed/Testbed/OmejdnDAPS/omedjdnDAPS/scripts and r
 > ruby create_test_token.rb
 
 A token is received.
+
+### Requesting an access token
+Use the JWT bearer token just received to request a DAT frtom the DAPS. Insert the token received in {INSERT_TOKEN_HERE} and run the following script
+> curl localhost:4567/token --data "grant_type=client_credentials
+>      &client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer
+>      &client_assertion={INSERT_TOKEN_HERE}
+>      &scope=ids_connector security_level"
+If everything was setup correctly, it is received an access token response with a DAT with specific expiration.
