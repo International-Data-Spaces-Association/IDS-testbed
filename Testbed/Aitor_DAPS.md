@@ -107,4 +107,5 @@ Use the JWT bearer token just received to request a DAT frtom the DAPS. Insert t
 >      &client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer
 >      &client_assertion={INSERT_TOKEN_HERE}
 >      &scope=ids_connector security_level"
+
 If everything was setup correctly, it is received an access token response with a DAT with specific expiration.
