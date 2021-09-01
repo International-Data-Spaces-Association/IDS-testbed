@@ -70,7 +70,9 @@ def create(args):
     cert.add_extensions([
             crypto.X509Extension(b'basicConstraints', True, b'CA:FALSE'),
             crypto.X509Extension(b'extendedKeyUsage', True, ','.join(eku).encode('utf-8')),
-            crypto.X509Extension(b'keyUsage', True, b'digitalSignature,keyEncipherment,keyAgreement')
+            crypto.X509Extension(b'keyUsage', True, b'digitalSignature,keyEncipherment,keyAgreement'),
+            crypto.X509Extension(b'subjectKeyIdentifier', True, b'hash', subject=cert),
+            crypto.X509Extension(b'authorityKeyIdentifier', True, b'keyid, issuer', issuer=ca_crt)
         ])
 
     cert.sign(ca_key, args.hash)
