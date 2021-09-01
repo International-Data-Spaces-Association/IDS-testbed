@@ -18,7 +18,7 @@ There are two installation instructions. The current distinction is the programm
 
 The command "cargo build" is not running, we get a error.
 
-
+![alt text](https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/IDSCP2/001.png "Error 1")![image](https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/IDSCP2/001.png?raw=true)
 
 
 3. Topic
