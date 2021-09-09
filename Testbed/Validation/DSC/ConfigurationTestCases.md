@@ -136,7 +136,9 @@ ids:connectorDeployMode : TEST_DEPLOYMENT
 ids:keyStore : keystore-localhost.p12
 
 /src/main/resources/application.properties > 
+
 daps.token.url=https://daps.aisec.fraunhofer.de
+
 daps.key.url=https://daps.aisec.fraunhofer.de/v2/.well-known/jwks.json
 #### trigger
 Execute the "POST /api/ids/connector/update" call in the Dataspace Connector API with url: https://broker.badenpoint/test
