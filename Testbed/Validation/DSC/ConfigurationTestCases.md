@@ -153,6 +153,7 @@ ERROR - Certificate of the Connector is missing aki/ski extensions!
 Referencia TS 000
 #### testConfig
 /src/main/resources/conf/config.json > 
+
 ids:connectorDeployMode : TEST_DEPLOYMENT
 ids:keyStore : keystore-localhost.p12
 
