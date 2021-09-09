@@ -155,10 +155,13 @@ Referencia TS 000
 /src/main/resources/conf/config.json > 
 
 ids:connectorDeployMode : TEST_DEPLOYMENT
+
 ids:keyStore : keystore-localhost.p12
 
 /src/main/resources/application.properties > 
+
 daps.token.url=https://daps.badenpoint/test
+
 daps.key.url=https://daps.badenpoint/test/v2/.well-known/jwks.json
 
 #### trigger
