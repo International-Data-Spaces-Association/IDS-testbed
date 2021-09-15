@@ -23,11 +23,11 @@ Official documentation: https://github.com/International-Data-Spaces-Association
 
 1. Installation
 - Download the .zip from this repo and unzip the file
-2. Usage
+2. Initialization
 - Sudo apt install python3-openssl
 - ./pki.py init
-
-
+3. Usage
+Can be extracted from the link above.
 ### BROKER
 Waiting on the fix for the Broker. Will this be a new version or a config change?
 
