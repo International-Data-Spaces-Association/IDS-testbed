@@ -17,6 +17,16 @@ Software and versions used for the testbed:
 
 ## Installation of the components
 
+### Certification Authority
+
+Official documentation: https://github.com/International-Data-Spaces-Association/IDS-testbed/tree/master/CA
+
+1. Installation
+- Download the .zip from this repo and unzip the file
+2. Usage
+- Sudo apt install python3-openssl
+- ./pki.py init
+
 
 ### BROKER
 Waiting on the fix for the Broker. Will this be a new version or a config change?
