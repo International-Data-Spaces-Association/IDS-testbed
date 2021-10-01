@@ -47,7 +47,7 @@ Operating system updates are always carried out (VM).
 
 Before new components are inserted into the IDS testbed and thus used as the basis for all further tests, central communication must take place with all test facilities.
 
-@WHO will do this? :D
+@WHO will do this?
 
 ## Criterion changes/updates
 
