@@ -78,5 +78,21 @@ Required modifications:
 
 > curl localhost:4567/token --data "grant_type=client_credentials&client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer&client_assertion={INSERT_TOKEN_HERE}&scope=ids_connector security_level"
 
+## Interconnectivity of the components (upcoming)
 
+The following steps will show how to deploy the following:
 
+CA -> DSC -> DAPS 
+ 
+#### Testbed setup
+Download all the components from the .zip files in this repository. The current versions DSC (v5.1.2) and DAPS (v0.0.2).
+
+Unzip all the components and go into the Certification Authority folder in the terminal. 
+
+#### Certification Authority
+Go into the component folder and enter the following commands in the terminal one by one:
+> chmod +x pki.py
+> ./pki.py init
+> ./pki.py ca create --common-name "Testbed CA" --algo "rsa" --bits "2048" --country-name "ES" --organization-name "SQS"
+> ./pki.py subca create --CA "Testbed CA" --common-name "Testbed SubCA" --algo "rsa" --bits "2048" --country-name "ES" --organization-name "SQS"
+> ./pki.py cert create --subCA "Testbed SubCA" --common-name "TestbedCert1" --algo "rsa" --bits "2048" --country-name "ES" --organization-name "SQS" --client --server
