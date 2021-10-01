@@ -17,32 +17,29 @@ Software and versions used for the testbed:
 
 ## Installation of the components
 
-### Certification Authority
+### CERTIFICATION AUTHORITY
 
 Official documentation: https://github.com/International-Data-Spaces-Association/IDS-testbed/tree/master/CA
 
 1. Installation
 - Download the .zip from this repo and unzip the file
 2. Initialization
-- Sudo apt install python3-openssl
+- sudo apt install python3-openssl
 - ./pki.py init
 3. Usage
 
-Can be extracted from the link above.
-### BROKER
-Waiting on the fix for the Broker. Will this be a new version or a config change?
-
+- Please refer to the official documentation link above. It covers the creation of the CA, Sub CA and Device Certificate.
 
 ### DATASPACE CONNECTOR:
 
-Official documentation: https://international-data-spaces-association.github.io/DataspaceConnector/GettingStarted
+Official documentation: https://international-data-spaces-association.github.io/DataspaceConnector
 
 1.	Quick start
-- Download the .zip from this repo and unzip the file
--	cd DataspaceConnector
--	mvn clean package
--	cd target
--	java -jar dataspaceconnector-{VERSION}.jar (Version = 5.1.2 at the moment)
+- Download the .zip from this repo and unzip the file (v5.1.2, v6 coming soon)
+- cd DataspaceConnector
+- mvn clean package
+- cd target
+- java -jar dataspaceconnector-{VERSION}.jar (Version = 5.1.2 at the moment)
 
 If everything is working correctly, the connector can be found in https://localhost:8080. The API can be accessed at https://localhost:8080/api/docs, which requires the following authentication:
 
@@ -55,12 +52,8 @@ It is important to know that this setup is for test environments and requires so
 Official documentation: https://international-data-spaces-association.github.io/DataspaceConnector/Deployment/Configuration
 
 In DataspaceConnector/src/main/resources/conf/config.json
--	Line 12, replace
-“@id” : “idsc:TEST_DEPLOYMENT” with “@id” : “idsc:PRODUCTIVE_DEPLOYMENT”
--	Line 60, replace
-“@id” : “file:///conf/keystore-localhost.12” with “@id” : “file:///conf/{yourKeyStore.p12}
-
-Save the {yourKeyStore.p12} file in /src/main/resources/conf.
+- Make sure to update the Connector to PRODUCTIVE_DEPLOYMENT
+- Make sure to update the Connector with your own cert in "ids:keyStore" 
 
 3.	Repeat steps in the Quick Start with your newly updated configuration
 -	cd DataspaceConnector
