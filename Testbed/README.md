@@ -92,7 +92,11 @@ Unzip all the components and go into the Certification Authority folder in the t
 #### Certification Authority
 Go into the component folder and enter the following commands in the terminal one by one:
 > chmod +x pki.py
+
 > ./pki.py init
+
 > ./pki.py ca create --common-name "Testbed CA" --algo "rsa" --bits "2048" --country-name "ES" --organization-name "SQS"
+
 > ./pki.py subca create --CA "Testbed CA" --common-name "Testbed SubCA" --algo "rsa" --bits "2048" --country-name "ES" --organization-name "SQS"
+
 > ./pki.py cert create --subCA "Testbed SubCA" --common-name "TestbedCert1" --algo "rsa" --bits "2048" --country-name "ES" --organization-name "SQS" --client --server
