@@ -68,7 +68,15 @@ Official documentation: https://github.com/International-Data-Spaces-Association
 
 SQS step by step guide, extracted from https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/Testbed/SQS_DAPS.md
 
- 
+The Omejdn DAPS server can be launched with docker as explained in the official documentation above.
+
+Required modifications:
+- Add the public keys from the certificates that will be used in the components requesting DATs
+- Add the clients (DAPS users) in clients.yml
+- Change the host and audience in omejdn.yml
+- To use the script, place the private keys from the certificates in the scripts directory. Furthermore, ensure that "iss" and "sub" in the second portion of the script (create_test_token.rb) have the same values.
+
+> curl localhost:4567/token --data "grant_type=client_credentials&client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer&client_assertion={INSERT_TOKEN_HERE}&scope=ids_connector security_level"
 
 
 
