@@ -65,7 +65,7 @@ In DataspaceConnector/src/main/resources/conf/config.json
 Official documentation: https://github.com/International-Data-Spaces-Association/omejdn-daps
 
 1. Installation
-SQS step by step guide, extracted from https://github.com/aitorce/SQS/blob/main/SQS_DAPS.md
+SQS step by step guide, extracted from https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/Testbed/SQS_DAPS.md
 The Omejdn DAPS server can be launched with docker as explained in the official documentation above.
 
 2. Configuration
@@ -171,7 +171,7 @@ The parameters above:
 
 Ensure the DAPS server is running: http://localhost:4567
 
-A detailed interoperability guide has been developed by SQS in https://github.com/aitorce/SQS/blob/main/SQS_DAPS.md. This guide makes use of the {Testbed} certificate. 
+A detailed interoperability guide has been developed by SQS in https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/Testbed/SQS_DAPS.md. This guide makes use of the {Testbed} certificate. 
 
 The guide above ensures interoperability with the help of the script within the DAPS. By giving the TestbedCert certificate to the Dataspace Connector, we ensure the interoperability between the two components. 
 
