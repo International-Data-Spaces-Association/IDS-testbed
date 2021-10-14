@@ -28,4 +28,6 @@ TODO: Define required actions and expected outcome
 ### 8. Utilize available base connector to request data from your connector
 TODO: Define required actions and expected outcome
 
+## In addition: Execute Test suite
+TODO: reference to the Connector test suite
 
