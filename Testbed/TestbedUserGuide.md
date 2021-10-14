@@ -10,22 +10,25 @@ TODO: Define required actions and expected outcome
 ### 2. Generate a certificate for your connector
 TODO: Define required actions and expected outcome
 
-### 3. Register your connector at the DAPS
+### 3. Configure your connector 
+TODO: Define required actions - Configure support for Root CA (cert), DAPS (URL), Broker (URL)
+
+### 4. Register your connector at the DAPS
 TODO: Define required actions and expected outcome
 
-### 4. Query the Broker for available data in the testbed
+### 5. Query the Broker for available data in the testbed
 TODO: Define required actions and expected outcome
 
-### 5. Contact available base connector to ask for self-description
+### 6. Contact available base connector to ask for self-description
 TODO: Define required actions and expected outcome
 
-### 6. Contact available base connector and request data
+### 7. Contact available base connector and request data
 TODO: Define required actions and expected outcome
 
-### 7. Register your connector at the IDS MetaDataBroker with the following data set
+### 8. Register your connector at the IDS MetaDataBroker with the following data set
 TODO: Define required actions and expected outcome
 
-### 8. Utilize available base connector to request data from your connector
+### 9. Utilize available base connector to request data from your connector
 TODO: Define required actions and expected outcome
 
 ## In addition: Execute Test suite
