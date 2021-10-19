@@ -5,10 +5,12 @@ This user guide is meant to explain to each testbed user what they should do wit
 
 ## Steps for testing a connector
 ### 1. Download the testbed and install it
-TODO: Define required actions and expected outcome
+Follow the instructions in the [installation and configuration guide](./README.md) to install and configure the testbed as required.
 
 ### 2. Generate a certificate for your connector
-TODO: Define required actions and expected outcome
+Use the following command to generate a certificate for your connector:
+TODO: add command
+Ensure that your connector always utilizes this IDS certificate to prove their identity with respect to the other components.
 
 ### 3. Configure your connector 
 TODO: Define required actions - Configure support for Root CA (cert), DAPS (URL), Broker (URL)
