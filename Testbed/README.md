@@ -11,31 +11,31 @@ Software and versions used for the testbed:
 - Maven: 3.6.3
 - Ruby: 2.7.0
 
+## Execution modes
+You may either run the preconfigured testbed offered in this repo or follow the instructions for the manual setup below to set it up on your own and possibly adjust it to your needs.
+
 ## Preconfigured testbed
 Preconfigured setup that can be directly launched
 
-DAPS:
-can be reached at http://localhost:4567
-needs to be preconfigured to know connector A, B and the Broker
-+ explain how to add your own connector
+DAPS:  
+* can be reached at http://localhost:4567
+* needs to be preconfigured to know connector A, B and the Broker
 
 Connectors:
 * connector A
-can be reached at https://localhost:8080
--> with self-description
--> data set offered: hello world
+  * can be reached at https://localhost:8080
+  * needs to be preconfigured with a self-description and offering a dataset ("hallo world")
 
 * connector B
-can be reached at https://localhost:8081?
--> with self-description
--> data set offered: goodbye world
-
+  * can be reached at https://localhost:8081
+  * needs to be preconfigured with a self-description and offering a dataset ("goodbye world")
+  
 Broker:
-can be reached at https://localhost:8082?
-needs to be aware of connector A, connector B and store their delf-descriptions
+* can be reached at https://localhost:8082
+* needs to be aware of connector A, connector B and store their self-descriptions
 
 ## Manual installation
-The installation of the testbed will be structured as follows:
+The installation of the testbed executed the following steps:
 * Installation of the components
 * Interconnectivity of the components
 
