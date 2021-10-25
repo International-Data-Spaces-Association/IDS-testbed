@@ -14,7 +14,7 @@ Software and versions used for the testbed:
 ## Execution modes
 You may either run the preconfigured testbed offered in this repo or follow the instructions for the manual setup below to set it up on your own and possibly adjust it to your needs.
 
-## Preconfigured testbed
+## Target View: Preconfigured testbed (not available yet)
 Preconfigured setup that can be directly launched
 
 DAPS:  
