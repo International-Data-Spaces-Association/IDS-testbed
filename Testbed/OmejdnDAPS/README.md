@@ -1,7 +1,7 @@
 # Omejdn DAPS
 
 ## Software version
-Version used in the current testbed: - (Last downloaded June 11th)
+Waiting on V1.1.0 to be fixed
 
 ## Requirements for the testbed
 * Java 11
