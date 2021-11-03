@@ -6,7 +6,7 @@
 
 2. Connect the components to one another following the instructions of the "Interconnectivity of the components", the last section of the [installation and configuration guide](./README.md)
 
-3. Test the compatibility of your own developed component following the steps of the [Testbed User Guide.](./TestbedUserGuide.md)
+3. Test the compatibility of your own developed component following the steps of the [Testbed User Guide.](https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/Testbed/TestbedUserGuide.md)
 
 ## [TODO](./TODO.md)
 
