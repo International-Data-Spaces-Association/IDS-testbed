@@ -15,9 +15,9 @@ Set up with Open Source IDS components which can be used to verify that a com
 
 ## How to get started?
 
-1. Install the reference testbed following the [installation and configuration guide](https://github.com/International-Data-Spaces-Association/IDS-testbed/tree/master/Testbed) in the Testbed Folder . You can either use the Preconfigured set up or install every component manually. Current available components are: Dataspace connector, DAPS, CA, Metadata Broker.
+1. Install the reference testbed following the [installation and configuration guide](https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/Testbed/README.md) in the Testbed Folder . You can either use the Preconfigured set up or install every component manually. Current available components are: Dataspace connector, DAPS, CA, Metadata Broker.
 
-2. Connect the components to one another following the instructions of the "Interconnectivity of the components", the last section of the [installation and configuration guide](https://github.com/International-Data-Spaces-Association/IDS-testbed/tree/master/Testbed)
+2. Connect the components to one another following the instructions of the "Interconnectivity of the components", the last section of the [installation and configuration guide](https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/Testbed/README.md)
 
 3. Test the compatibility of your own developed component following the steps of the [Testbed User Guide.](https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/Testbed/TestbedUserGuide.md)
 
