@@ -9,7 +9,10 @@
 3. Test the compatibility of your own developed component following the steps of the [Testbed User Guide.](https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/Testbed/TestbedUserGuide.md)
 
 
-What is it for?
+## What is it for?
+
+![image](https://user-images.githubusercontent.com/77682996/140496334-8e96dbdc-9785-45f9-9c28-ec433ca13dc5.png)
+
 
 ## [TODO](./TODO.md)
 
