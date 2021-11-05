@@ -8,6 +8,9 @@
 
 3. Test the compatibility of your own developed component following the steps of the [Testbed User Guide.](https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/Testbed/TestbedUserGuide.md)
 
+
+What is it for?
+
 ## [TODO](./TODO.md)
 
 ```
