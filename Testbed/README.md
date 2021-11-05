@@ -46,7 +46,7 @@ The installation of the testbed executed the following steps:
 Official documentation: https://github.com/International-Data-Spaces-Association/IDS-testbed/tree/master/CA
 
 1. Installation
-- Download the .zip from this repo and unzip the file
+- Download the .zip from the Certification Authority file and unzip the file
 2. Initialization
 - sudo apt install python3-openssl
 - ./pki.py init
