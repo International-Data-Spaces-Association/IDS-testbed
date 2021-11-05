@@ -1,15 +1,27 @@
 # IDS-testbed
 
+## What is it?
+
+Set up with Open Source IDS components which can be used to verify that a component:​
+- implements the IDS specifications for establishing connections and communication.​
+- and, thus, can work interoperable with all IDS components in the testbed setup.
+
+## What is it for?
+
+- Component behaviour testing
+- Interoperability testing against IDS components (Connector, DAPS, CA, Metadata Broker)
+- Preparation for IDS certification
+- Starting point for creation of data spaces
+
 ## How to get started?
 
-1. Install the reference testbed following the [installation and configuration guide](./README.md) in the Testbed Folder . You can either use the Preconfigured set up or install every component manually. Current available components are: Dataspace connector, DAPS, CA, Metadata Broker.
+1. Install the reference testbed following the [installation and configuration guide](https://github.com/International-Data-Spaces-Association/IDS-testbed/tree/master/Testbed) in the Testbed Folder . You can either use the Preconfigured set up or install every component manually. Current available components are: Dataspace connector, DAPS, CA, Metadata Broker.
 
-2. Connect the components to one another following the instructions of the "Interconnectivity of the components", the last section of the [installation and configuration guide](./README.md)
+2. Connect the components to one another following the instructions of the "Interconnectivity of the components", the last section of the [installation and configuration guide](https://github.com/International-Data-Spaces-Association/IDS-testbed/tree/master/Testbed)
 
 3. Test the compatibility of your own developed component following the steps of the [Testbed User Guide.](https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/Testbed/TestbedUserGuide.md)
 
-
-## What is it for?
+## Current version
 
 ![image](https://user-images.githubusercontent.com/77682996/140496334-8e96dbdc-9785-45f9-9c28-ec433ca13dc5.png)
 
