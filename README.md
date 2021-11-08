@@ -21,6 +21,8 @@ Set up with Open Source IDS components which can be used to verify that a com
 
 3. Test the compatibility of your own developed component following the steps of the [Testbed User Guide.](https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/Testbed/TestbedUserGuide.md)
 
+4. Download the [Test Suite](https://gitlab.cc-asp.fraunhofer.de/ksa/ids-certification-testing) and follow the instructions to conduct automated tests for your own developed connector
+
 ## Current version
 
 ![image](https://user-images.githubusercontent.com/77682996/140496334-8e96dbdc-9785-45f9-9c28-ec433ca13dc5.png)
