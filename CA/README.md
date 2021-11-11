@@ -72,11 +72,19 @@ All sub CAs created can be listed with the following command:
 
 ### Creation of a Device Certificate
 
-A device certificate can then be created with the following command:
+**Creation of key pair and certificate in one step**  
+A device private key with the respective certificate can be created with the following command:
 ```bash
 ./pki.py cert create --subCA [Sub CA name] --common-name "example.com" --client
 ```
 The Sub CA used for signing the certificate is a required parameter.
+
+**Creation of a certificate for an existing key pair**  
+If a private-public key pair is already available on the device, the public key can be signed to gain a device certificate with the following command:
+```bash
+./pki.py cert sign --key-file [path to public key file] --subCA [Sub CA name] --common-name "example.com" --client
+```
+The path to the (public) key file and the Sub CA used for signing the certificate are required parameters. The public key file must be provided in PEM format.
 
 A list of available parameters with their defaults can be obtained by:
 ```bash

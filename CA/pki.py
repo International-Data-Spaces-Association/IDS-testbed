@@ -27,5 +27,7 @@ if __name__ == '__main__':
     elif args.command == 'cert':
         if args.subcommand == 'create':
             cert.create(args)
+        elif args.subcommand == 'sign':
+            cert.sign(args)
         elif args.subcommand == 'list':
             cert.list_certs()
