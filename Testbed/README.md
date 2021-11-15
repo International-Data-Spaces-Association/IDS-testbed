@@ -61,6 +61,7 @@ Official documentation: https://international-data-spaces-association.github.io/
 
 1.	Quick start
 - Download the .zip from this repo and unzip the file (v5.1.2, v6 coming soon)
+- set JAVA_HOME environment variable according to your setup
 - cd DataspaceConnector
 - mvn clean package
 - cd target
