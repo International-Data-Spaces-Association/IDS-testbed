@@ -197,7 +197,7 @@ sudo gem install jwt
 
 ###
 
-First let us set up the network with
+First, let us set up the network with
 
 ```
 docker network create testbed
@@ -417,7 +417,22 @@ Then we are ready to build the connector to docker.
 
 ```
 
-> docker run --publish 8080:8080 --detach --name dsccontainer dsc
+This might take a while when you run it for the first time, as docker has to download some dependencies, build and run some tests.
+
+The result should end with something similar to this:
+
+```
+Successfully built 2b6d927a3433
+Successfully tagged dsc:latest
+```
+
+Now we can run the DataSpace Connector in docker.
+```
+docker run --publish 8080:8080 --detach --name dsccontainer dsc
+
+```
+> DSC will not fly without a daps token now. Make sure the DAPS runs first.
+
 
 ### DAPS
 
