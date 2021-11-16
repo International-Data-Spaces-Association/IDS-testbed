@@ -320,6 +320,103 @@ cp TestbedCert1.cert ../../../../OmejdnDAPS/OmejdnDAPS/keys
 Now you should have successfully set up the certicate chain for the testbed including one connector. 
 
 
+
+### DAPS
+
+The official documentation of the Omejdn DAPS is here: https://github.com/International-Data-Spaces-Association/omejdn-daps
+
+#### 1. Installation
+The SQS step by step guide, extracted from https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/Testbed/SQS_DAPS.md
+The Omejdn DAPS server can be launched with docker as explained in the official documentation above.
+
+2. Configuration
+Required modifications:
+- Add the public keys from the certificates that will be used in the components requesting DATs
+- Add the client's information (DAPS user) in config/clients.yml
+- Change the host and audience in config/omejdn.yml
+- To use the script, place the private keys from the certificates in the scripts directory. Furthermore, ensure that "iss" and "sub" in the second portion of the script (scripts/create_test_token.rb) have the same values.
+
+
+If you use the OmejdnDAPS from the testbed repo you can follow the steps below. Otherwise you can git clone the [OmejdnDAPS from its repository](https://github.com/International-Data-Spaces-Association/omejdn-daps) .
+
+Go to the OmejdnDAPS folder and unzip it with:
+
+```
+cd ../../OmejdnDAPS
+unzip OmejdnDAPS.zip
+cd OmejdnDAPS
+```
+
+Change the configuration with your favorite editor, e.g. `nano`.
+```
+nano config/clients.yml
+```
+update the information on the certificates
+- change `testClient` to `87:B9:0A:10:F3:82:97:AF:DA:1E:05:47:5F:8B:AD:46:23:8B:47:6F:keyid:54:07:82:AE:07:B1:BA:9A:00:67:10:95:C8:EC:10:3C:88:0E:53:02`
+- change `testClient` to `TestbedCert.cert`
+
+and your config file shoult look like this
+
+```
+---
+- client_id:87:B9:0A:10:F3:82:97:AF:DA:1E:05:47:5F:8B:AD:46:23:8B:47:6F:keyid:54:07:82:AE:07:B1:BA:9A:00:67:10:95:C8:EC:1>  name: omejdn admin ui
+  allowed_scopes:
+  - omejdn:api
+  redirect_uri: http://localhost:4200
+  attributes: []
+  certfile: TestbedCert.cert
+- client_id: testClient2
+  name: omejdn admin ui
+  allowed_scopes:
+  - omejdn:api
+  redirect_uri: http://localhost:4200
+  attributes: []
+  certfile: testClient2
+```
+
+Then edit the `config/omejdn.yml` and change the mode to `idsc:IDS_Connectors_ALL` from `http://localhost:4567,idsc` and `TestServer`
+
+Then your omejdn.yml should look like this
+```
+---
+host: idsc:IDS_CONNECTORS_ALL
+openid: true
+token:
+  expiration: 3600
+  signing_key: keys/signing_key.pem
+  algorithm: RS256
+  audience: IDSC:IDS_CONNECTORS_ALL
+  issuer: http://localhost:4567
+id_token:
+  expiration: 360000
+  signing_key: keys/signing_key.pem
+  algorithm: RS256
+  issuer: http://localhost:4567
+user_backend:
+- yaml
+
+```
+
+Now you can docker build your DAPS with
+
+```
+docker build -t daps .
+```
+
+and then launch the OmejdnDAPS with
+
+```
+    docker run -d --name omejdn -p 4567:4567 -v $PWD/config:/opt/config -v $PWD/keys:/opt/keys --network=testbed daps
+```
+
+Verify if it runs on `http://localhost:4567`
+
+And with
+
+> curl localhost:4567/token --data "grant_type=client_credentials&client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer&client_assertion={INSERT_TOKEN_HERE}&scope=ids_connector security_level"
+
+
+
 ### DATASPACE CONNECTOR:
 
 Official documentation: https://international-data-spaces-association.github.io/DataspaceConnector
@@ -434,22 +531,7 @@ docker run --publish 8080:8080 --detach --name dsccontainer dsc
 > DSC will not fly without a daps token now. Make sure the DAPS runs first.
 
 
-### DAPS
 
-Official documentation: https://github.com/International-Data-Spaces-Association/omejdn-daps
-
-1. Installation
-SQS step by step guide, extracted from https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/Testbed/SQS_DAPS.md
-The Omejdn DAPS server can be launched with docker as explained in the official documentation above.
-
-2. Configuration
-Required modifications:
-- Add the public keys from the certificates that will be used in the components requesting DATs
-- Add the client's information (DAPS user) in config/clients.yml
-- Change the host and audience in config/omejdn.yml
-- To use the script, place the private keys from the certificates in the scripts directory. Furthermore, ensure that "iss" and "sub" in the second portion of the script (scripts/create_test_token.rb) have the same values.
-
-> curl localhost:4567/token --data "grant_type=client_credentials&client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer&client_assertion={INSERT_TOKEN_HERE}&scope=ids_connector security_level"
 
 ## Interconnectivity of the components
 
