@@ -36,60 +36,297 @@ Broker:
 
 ## Manual installation
 The installation of the testbed executed the following steps:
-* Installation of the components
-* Interconnectivity of the components
+1 setting up requirements
+2 Installation of the components
+3 Interconnectivity of the components
+
+### Setting up requirements
+
+Software and versions used for the testbed:
+- OS: Ubuntu 20.04.1 LTS
+- Docker: 19.03.8+
+- Docker-compose: 1.25
+- Java: 11
+- Maven: 3.6.3
+- Ruby: 2.7.0
+- Python3
+
+First, verify your ubuntu version
+
+```
+$lsb_release -a
+```
+
+the output should be similar to this
+
+```
+No LSB modules are available.
+Distributor ID: Ubuntu
+Description:    Ubuntu 20.04 LTS
+Release:        20.04
+Codename:       focal
+```
+
+Then update your system with
+
+```
+sudo apt-get update
+sudo apt-get upgrade
+```
+
+#### docker and docker-compose
+
+As we need to run different components at the same time, install docker and docker-compose
+```
+sudo apt-get install docker
+sudo apt-get install docker-compose
+```
+
+verify install with
+
+```
+docker version
+```
+
+The output should look similar to
+
+```
+Client:
+ Version:           20.10.7
+ API version:       1.41
+ Go version:        go1.13.8
+ Git commit:        20.10.7-0ubuntu5~20.04.2
+ Built:             Mon Nov  1 00:34:17 2021
+ OS/Arch:           linux/amd64
+ Context:           default
+ Experimental:      true
+```
+
+> In some environments, e.g. WSL2, you might have to start the docker daemon manually by calling `dockered` .
+
+
+```
+docker-compose version
+```
+
+The output should look similar to
+
+```
+Cdocker-compose version 1.27.4, build 40524192
+docker-py version: 4.3.1
+CPython version: 3.7.7
+OpenSSL version: OpenSSL 1.1.0l  10 Sep 2019
+```
+
+#### Java and maven
+
+Some components like the Data Space Connector require Java 11. Install it with
+
+```
+sudo apt install openjdk-11-jdk
+```
+verify install with
+
+```
+java -version
+```
+
+The output should look similar to
+
+```
+openjdk version "11.0.11" 2021-04-20
+OpenJDK Runtime Environment (build 11.0.11+9-Ubuntu-0ubuntu2.20.04)
+OpenJDK 64-Bit Server VM (build 11.0.11+9-Ubuntu-0ubuntu2.20.04, mixed mode, sharing)
+```
+> To avoid problems while building components you should set the `JAVA_HOME`environment variable on your system.
+> 
+> HINT: you might want to check with ``jrunscript -e 'java.lang.System.out.println(java.lang.System.getProperty("java.home"));'``
+
+
+To enable the build process of the Data Space connector we insall [maven](https://maven.apache.org/)
+
+```
+sudo apt-get install maven
+```
+
+verify install with
+
+```
+mvn -version
+```
+
+The output should look similar to
+
+```
+Apache Maven 3.6.3
+Maven home: /usr/share/maven
+Java version: 11.0.11, vendor: Ubuntu, runtime: /usr/lib/jvm/java-11-openjdk-amd64
+Default locale: en, platform encoding: UTF-8
+OS name: "linux", version: "5.10.60.1-microsoft-standard-wsl2", arch: "amd64", family: "unix"
+```
+
+
+#### Python
+
+The CA scipt provided with the IDS testbed requires python. Install it with
+
+```
+sudo apt install python3
+sudo apt install python3-openssl
+```
+
+#### Ruby
+
+The Omejdn Daps runs on Ruby. Setup Ruby by calling
+
+```
+sudo apt install ruby
+```
+
+#### Other tools
+
+Some additional tools that might be useful 
+
+```
+sudo apt install curl
+
+sudo gem install jwt
+```
 
 ## Installation of the components
+
+###
+
+First, let us set up the network with
+
+```
+docker network create testbed
+```
 
 ### CERTIFICATION AUTHORITY
 
 Official documentation: https://github.com/International-Data-Spaces-Association/IDS-testbed/tree/master/CA
 
 1. Installation
-- Download the .zip from the Certification Authority file and unzip the file
+
+You can download the .zip from the Certification Authority file and unzip the file or clone the testbed repository.
+
+```
+git clone https://github.com/International-Data-Spaces-Association/IDS-testbed.git
+
+```
+
+Move to right directory, unzip the file and make it executable:
+
+```
+cd Testbed/CertificationAuthority/
+unzip CertificationAuthority.zip
+cd CertificationAuthority
+chmod a+x *.py 
+```
+
 2. Initialization
-- sudo apt install python3-openssl
-- ./pki.py init
+
+If not already done, please install pyhton3-openssl with `sudo apt install python3-openssl`
+
+Then init the script by calling the init command. This will only initialize the data folder.
+
+```
+ ./pki.py init
+```
+
+The data folder will contain three empty folders `ca` `cert` `subca`.
+
 3. Usage
-- Please refer to the official documentation link above. It covers the creation of the CA, Sub CA and Device Certificate.
 
-The CA provides {cert}.crt and {cert}.key. Keep in mind that other formats will be required for the different components.
+Please refer to the [official documentation](https://github.com/International-Data-Spaces-Association/IDS-testbed/tree/master/CA). It covers the creation of the CA, Sub CA and Device Certificate.
 
-### DATASPACE CONNECTOR:
+**CA**
 
-Official documentation: https://international-data-spaces-association.github.io/DataspaceConnector
+The CA provides {cert}.crt and {cert}.key. Keep in mind that other formats will be required for the different components. Those have to be created.
 
-1.	Quick start
-- Download the .zip from this repo and unzip the file (v5.1.2, v6 coming soon)
-- cd DataspaceConnector
-- mvn clean package
-- cd target
-- java -jar dataspaceconnector-{VERSION}.jar (Version = 5.1.2)
+You start to setup your CA with some basic information. Replace the parameters with suitable parameters for your use.
 
-If everything is working correctly, the connector can be found in https://localhost:8080. The API can be accessed at https://localhost:8080/api/docs, which requires the following authentication:
+```
+./pki.py ca create --common-name "Testbed CA" --algo "rsa" --bits "2048" --country-name "ES" --organization-name "SQS"
 
-Username: admin	/	Password: password
+```
 
-It is important to know that this setup is for test environments and requires some changes to operate in the IDSA ecosystem. These will be explained in steps 2 and 3 below.
+In the data/ca folder you should find now the follwing files:
 
-2.	Deployment
+```
+'Testbed CA.crt'  'Testbed CA.key'  'Testbed CA.serial'
+```
 
-Official documentation: https://international-data-spaces-association.github.io/DataspaceConnector/Deployment/Configuration
+**SubCA**
 
-In DataspaceConnector/src/main/resources/conf/config.json
-- Make sure to update the Connector to PRODUCTIVE_DEPLOYMENT
-- Make sure to update the Connector with your own cert in "ids:keyStore" 
+The CA provides {cert}.crt and {cert}.key. Keep in mind that other formats will be required for the different components. Those have to be created.
 
-> docker build -t dsc .
+You start to setup your CA with some basic information. Replace the parameters with suitable parameters for your use.
 
-> docker run --publish 8080:8080 --detach --name dsccontainer dsc
+```
+./pki.py subca create --CA "Testbed CA" --common-name "Testbed SubCA" --algo "rsa" --bits "2048" --country-name "ES" --organization-name "SQS"
+```
+
+
+In the data/subca folder you should find now the follwing files:
+
+```
+'Testbed SubCA.crt'  'Testbed SubCA.key'  'Testbed SubCA.serial'
+```
+
+**Certificates**
+
+The CA provides {cert}.crt and {cert}.key. Keep in mind that other formats will be required for the different components. Those have to be created.
+
+You start to setup your CA with some basic information. Replace the parameters with suitable parameters for your use.
+
+```
+./pki.py cert create --subCA "Testbed SubCA" --common-name "TestbedCert1" --algo "rsa" --bits "2048" --country-name "ES" --organization-name "SQS" --client --server
+```
+
+
+In the data folder you should find now the follwing files:
+
+```
+TestbedCert1.crt  TestbedCert1.key
+```
+
+Now we have to convert the generated certificates in `data/cert` to use them later in the Connector and DAPS using openssl.
+
+```
+## navigate to the folder data/cert
+cd data/cert
+openssl pkcs12 -export -out TestbedCert1.p12 -inkey TestbedCert1.key -in TestbedCert1.crt -passout pass:password
+openssl pkcs12 -in TestbedCert1.p12 -out TestbedCert1.cert -nokeys -nodes -passin pass:password
+
+```
+
+You should now have two additional files in data/cert
+
+```
+TestbedCert1.cert  TestbedCert1.crt  TestbedCert1.key  TestbedCert1.p12
+```
+
+In case you work on the testbed repository you may directly copy the certificates to the DataSpace Connector and the DAPS. Otherwise let's do this later on.
+
+```
+## optinal for now 
+cp TestbedCert1.p12 ../../../../DataspaceConnector/DataspaceConnector/src/main/resources/conf
+cp TestbedCert1.cert ../../../../OmejdnDAPS/OmejdnDAPS/keys
+
+```
+
+Now you should have successfully set up the certicate chain for the testbed including one connector. 
+
+
 
 ### DAPS
 
-Official documentation: https://github.com/International-Data-Spaces-Association/omejdn-daps
+The official documentation of the Omejdn DAPS is here: https://github.com/International-Data-Spaces-Association/omejdn-daps
 
-1. Installation
-SQS step by step guide, extracted from https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/Testbed/SQS_DAPS.md
+#### 1. Installation
+The SQS step by step guide, extracted from https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/Testbed/SQS_DAPS.md
 The Omejdn DAPS server can be launched with docker as explained in the official documentation above.
 
 2. Configuration
@@ -99,7 +336,202 @@ Required modifications:
 - Change the host and audience in config/omejdn.yml
 - To use the script, place the private keys from the certificates in the scripts directory. Furthermore, ensure that "iss" and "sub" in the second portion of the script (scripts/create_test_token.rb) have the same values.
 
+
+If you use the OmejdnDAPS from the testbed repo you can follow the steps below. Otherwise you can git clone the [OmejdnDAPS from its repository](https://github.com/International-Data-Spaces-Association/omejdn-daps) .
+
+Go to the OmejdnDAPS folder and unzip it with:
+
+```
+cd ../../OmejdnDAPS
+unzip OmejdnDAPS.zip
+cd OmejdnDAPS
+```
+
+Change the configuration with your favorite editor, e.g. `nano`.
+```
+nano config/clients.yml
+```
+update the information on the certificates
+- change `testClient` to `87:B9:0A:10:F3:82:97:AF:DA:1E:05:47:5F:8B:AD:46:23:8B:47:6F:keyid:54:07:82:AE:07:B1:BA:9A:00:67:10:95:C8:EC:10:3C:88:0E:53:02`
+- change `testClient` to `TestbedCert.cert`
+
+and your config file shoult look like this
+
+```
+---
+- client_id:87:B9:0A:10:F3:82:97:AF:DA:1E:05:47:5F:8B:AD:46:23:8B:47:6F:keyid:54:07:82:AE:07:B1:BA:9A:00:67:10:95:C8:EC:1>  name: omejdn admin ui
+  allowed_scopes:
+  - omejdn:api
+  redirect_uri: http://localhost:4200
+  attributes: []
+  certfile: TestbedCert.cert
+- client_id: testClient2
+  name: omejdn admin ui
+  allowed_scopes:
+  - omejdn:api
+  redirect_uri: http://localhost:4200
+  attributes: []
+  certfile: testClient2
+```
+
+Then edit the `config/omejdn.yml` and change the mode to `idsc:IDS_Connectors_ALL` from `http://localhost:4567,idsc` and `TestServer`
+
+Then your omejdn.yml should look like this
+```
+---
+host: idsc:IDS_CONNECTORS_ALL
+openid: true
+token:
+  expiration: 3600
+  signing_key: keys/signing_key.pem
+  algorithm: RS256
+  audience: IDSC:IDS_CONNECTORS_ALL
+  issuer: http://localhost:4567
+id_token:
+  expiration: 360000
+  signing_key: keys/signing_key.pem
+  algorithm: RS256
+  issuer: http://localhost:4567
+user_backend:
+- yaml
+
+```
+
+Now you can docker build your DAPS with
+
+```
+docker build -t daps .
+```
+
+and then launch the OmejdnDAPS with
+
+```
+    docker run -d --name omejdn -p 4567:4567 -v $PWD/config:/opt/config -v $PWD/keys:/opt/keys --network=testbed daps
+```
+
+Verify if it runs on `http://localhost:4567`
+
+And with
+
 > curl localhost:4567/token --data "grant_type=client_credentials&client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer&client_assertion={INSERT_TOKEN_HERE}&scope=ids_connector security_level"
+
+
+
+### DATASPACE CONNECTOR:
+
+Official documentation: https://international-data-spaces-association.github.io/DataspaceConnector
+
+#### 1.	Quick start
+
+You may download the .zip from this repo and unzip the file (v5.1.2, v6 coming soon) or get it directly from the DataSpace connector repository
+
+If you chose to use the .zip file from this repository direcly and you have cloned the repo, just navigate to the folder
+
+```
+cd IDS-testbed/Testbed/DataspaceConnector/  
+```
+or refer to the [DataSpace Connector Repository](https://github.com/International-Data-Spaces-Association/DataspaceConnector/). [Version 5.1.2 is tagged](https://github.com/International-Data-Spaces-Association/DataspaceConnector/releases/tag/v5.1.2)
+
+This instruction is based on a cloned IDS-testbed repository.
+
+> Don't forget to set `JAVA_HOME` according to your system!
+
+The following steps are optional. They show how to build and execute the DataSpace Connector.
+
+```
+unzip DataspaceConnector.zip
+cd DataspaceConnector
+mvn clean package
+```
+
+This might take a while as the DataSpace Connector has to download some dependencies and runs some test. 
+
+Afterwards you can start the DataSpace Connector with
+```
+cd target
+java -jar dataspaceconnector-{VERSION}.jar (Version = 5.1.2)
+```
+
+The result should look like this:
+```
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  01:17 min
+[INFO] Finished at: 2021-11-15T22:40:47+01:00
+[INFO] ------------------------------------------------------------------------
+```
+
+If everything is working correctly, the connector can be found in https://localhost:8080. The API can be accessed at https://localhost:8080/api/docs, which requires the following authentication:
+
+Username: admin	/	Password: password
+
+It is important to know that this setup is for test environments and requires some changes to operate in the IDSA ecosystem. These will be explained in teh follwoing steps below.
+
+#### 2.	Deployment
+
+Official documentation: https://international-data-spaces-association.github.io/DataspaceConnector/Deployment/Configuration
+
+We have to edit the configuration of the DataSpace Connector according to our setup. Open the application.properties, e.g. with `nano`or your most favorite editor
+
+``
+nano src/main/resources/application.properties 
+``
+
+and edit the DAPS configuration. Replace `localhost` with `omejdn`
+
+```
+## DAPS
+##daps.token.url=https://daps.aisec.fraunhofer.de
+##daps.key.url=https://daps.aisec.fraunhofer.de/v2/.well-known/jwks.json
+daps.token.url=http://omejdn:4567/token
+daps.key.url=http://omejdn:4567/.well-known/jwks.json
+```
+
+Then change the config.json file. We have to set the connector to PRODUCTVE_DEPLOYMENT and add our generated certificate here. Do not forget to provide your certificate, if you did not in the step above. 
+
+```
+nano src/main/resources/conf/config.json
+```
+Change to
+
+```
+  "ids:connectorDeployMode" : {
+    "@id" : "idsc:PRODUCTIVE_DEPLOYMENT"
+```
+
+and 
+
+```
+  "ids:keyStore" : {
+    "@id" : "file:///conf/keystore-localhost.p12,TestbedCert.p12"
+```
+
+Then we are ready to build the connector to docker.
+
+```
+ docker build -t dsc .
+
+```
+
+This might take a while when you run it for the first time, as docker has to download some dependencies, build and run some tests.
+
+The result should end with something similar to this:
+
+```
+Successfully built 2b6d927a3433
+Successfully tagged dsc:latest
+```
+
+Now we can run the DataSpace Connector in docker.
+```
+docker run --publish 8080:8080 --detach --name dsccontainer dsc
+
+```
+> DSC will not fly without a daps token now. Make sure the DAPS runs first.
+
+
+
 
 ## Interconnectivity of the components
 
