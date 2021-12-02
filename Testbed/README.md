@@ -168,7 +168,7 @@ OS name: "linux", version: "5.10.60.1-microsoft-standard-wsl2", arch: "amd64", f
 
 #### Python
 
-The CA scipt provided with the IDS testbed requires python. Install it with
+The CA script provided with the IDS testbed requires python. Install it with
 
 ```
 sudo apt install python3
