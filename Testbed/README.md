@@ -203,122 +203,62 @@ First, let us set up the network with
 docker network create testbed
 ```
 
-### CERTIFICATION AUTHORITY
-
-Official documentation: https://github.com/International-Data-Spaces-Association/IDS-testbed/tree/master/CA
-
-1. Installation
-
-You can download the .zip from the Certification Authority file and unzip the file or clone the testbed repository.
-
+## Download the Testbed
 ```
 git clone https://github.com/International-Data-Spaces-Association/IDS-testbed.git
-
 ```
 
-Move to right directory, unzip the file and make it executable:
+## CERTIFICATION AUTHORITY
+Move to right directory, and make the files executable:
 
 ```
 cd Testbed/CertificationAuthority/
-unzip CertificationAuthority.zip
-cd CertificationAuthority
 chmod a+x *.py 
 ```
 
-2. Initialization
+The official documentation will cover the scope, dependencies and usage of the component.
 
-If not already done, please install pyhton3-openssl with `sudo apt install python3-openssl`
+Official documentation: https://github.com/International-Data-Spaces-Association/IDS-testbed/tree/master/CA
 
-Then init the script by calling the init command. This will only initialize the data folder.
+## Continue here after the official documentation has been followed
 
-```
- ./pki.py init
-```
+The Certification Authority provides {CERT_FILENAME}.crt and {CERT_FILENAME}.key formats. Keep in mind that other formats will be required for the different components. Those have to be created.
 
-The data folder will contain three empty folders `ca` `cert` `subca`.
-
-3. Usage
-
-Please refer to the [official documentation](https://github.com/International-Data-Spaces-Association/IDS-testbed/tree/master/CA). It covers the creation of the CA, Sub CA and Device Certificate.
-
-**CA**
-
-The CA provides {cert}.crt and {cert}.key. Keep in mind that other formats will be required for the different components. Those have to be created.
-
-You start to setup your CA with some basic information. Replace the parameters with suitable parameters for your use.
+Now convert the generated certificates in `data/cert` using openssl to then use in the Connector and DAPS.
 
 ```
-./pki.py ca create --common-name "Testbed CA" --algo "rsa" --bits "2048" --country-name "ES" --organization-name "SQS"
-
-```
-
-In the data/ca folder you should find now the follwing files:
-
-```
-'Testbed CA.crt'  'Testbed CA.key'  'Testbed CA.serial'
-```
-
-**SubCA**
-
-The CA provides {cert}.crt and {cert}.key. Keep in mind that other formats will be required for the different components. Those have to be created.
-
-You start to setup your CA with some basic information. Replace the parameters with suitable parameters for your use.
-
-```
-./pki.py subca create --CA "Testbed CA" --common-name "Testbed SubCA" --algo "rsa" --bits "2048" --country-name "ES" --organization-name "SQS"
-```
-
-
-In the data/subca folder you should find now the follwing files:
-
-```
-'Testbed SubCA.crt'  'Testbed SubCA.key'  'Testbed SubCA.serial'
-```
-
-**Certificates**
-
-The CA provides {cert}.crt and {cert}.key. Keep in mind that other formats will be required for the different components. Those have to be created.
-
-You start to setup your CA with some basic information. Replace the parameters with suitable parameters for your use.
-
-```
-./pki.py cert create --subCA "Testbed SubCA" --common-name "TestbedCert1" --algo "rsa" --bits "2048" --country-name "ES" --organization-name "SQS" --client --server
-```
-
-
-In the data folder you should find now the follwing files:
-
-```
-TestbedCert1.crt  TestbedCert1.key
-```
-
-Now we have to convert the generated certificates in `data/cert` to use them later in the Connector and DAPS using openssl.
-
-```
-## navigate to the folder data/cert
+## navigate to the following directory data/cert
 cd data/cert
-openssl pkcs12 -export -out TestbedCert1.p12 -inkey TestbedCert1.key -in TestbedCert1.crt -passout pass:password
-openssl pkcs12 -in TestbedCert1.p12 -out TestbedCert1.cert -nokeys -nodes -passin pass:password
+ls
+```
+The output should look similar to
+```
+{CERT_FILENAME}.crt  {CERT_FILENAME}.key
+```
+Obtain a `.p12` file format from the current `.crt` and `.key` formats:
+```
+## .crt + .key -> .p12
+openssl pkcs12 -export -out {CERT_FILENAME}.p12 -inkey {CERT_FILENAME}.key -in {CERT_FILENAME}.crt -passout pass:password
+## .p12 -> .cert
+openssl pkcs12 -in {CERT_FILENAME}.p12 -out {CERT_FILENAME}.cert -nokeys -nodes -passin pass:password
 
 ```
 
 You should now have two additional files in data/cert
 
 ```
-TestbedCert1.cert  TestbedCert1.crt  TestbedCert1.key  TestbedCert1.p12
+{CERT_FILENAME}.cert  {CERT_FILENAME}.crt  {CERT_FILENAME}.key  {CERT_FILENAME}.p12
 ```
 
-In case you work on the testbed repository you may directly copy the certificates to the DataSpace Connector and the DAPS. Otherwise let's do this later on.
+Move the certificates to their respective components and directories. **TO BE MODIFIED WHEN ALL COMPONENTS ARE UPDATED**
+```
+## WAIT UNTIL THE REST OF THE COMPONENTS ARE OUT OF ZIP FILES TO CONFIRM
+cp {CERT_FILENAME}.p12 ../../../DataspaceConnector/src/main/resources/conf
+cp {CERT_FILENAME}.cert ../../../OmejdnDAPS/keys
 
 ```
-## optinal for now 
-cp TestbedCert1.p12 ../../../../DataspaceConnector/DataspaceConnector/src/main/resources/conf
-cp TestbedCert1.cert ../../../../OmejdnDAPS/OmejdnDAPS/keys
 
-```
-
-Now you should have successfully set up the certicate chain for the testbed including one connector. 
-
+The certificate chain (CA, SubCA, Certs) has been created and the user should be able to create as many certificates as they need for their environment.
 
 
 ### DAPS
