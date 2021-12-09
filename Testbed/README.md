@@ -357,119 +357,245 @@ And with
 
 
 
-### DATASPACE CONNECTOR:
+# DATASPACE CONNECTOR:
+The Testbed will have two built-in Connectors. They will be referred to as ConnectorA and ConnectorB. They will have different configurations, so they will each have their own directory. These directories are going to be referred to as `DataspaceConnectorA` and `DataspaceConnectorB`.
+
+It is recommended to follow the guide with one Connector at a time to avoid configuration issues.
+
+Make sure you are in the right directory: 
+```
+cd Testbed/DataspaceConnectorA/ 
+```
+or
+```
+cd Testbed/DataspaceConnectorB/ 
+```
+
+## Component Documentation
+The official documentation will cover the introductions, deployment, documentation and communication guide of the component.
 
 Official documentation: https://international-data-spaces-association.github.io/DataspaceConnector
 
-#### 1.	Quick start
+## Continue here after reading the official documentation 
+Official configuration documentation: https://international-data-spaces-association.github.io/DataspaceConnector/Deployment/Configuration#configuration
 
-You may download the .zip from this repo and unzip the file (v5.1.2, v6 coming soon) or get it directly from the DataSpace connector repository
+The Dataspace Connector must be configured to work in this environemnt.
 
-If you chose to use the .zip file from this repository direcly and you have cloned the repo, just navigate to the folder
-
+## Changes to the application.properties file
+Use nano or your most favourite editor. 
 ```
-cd IDS-testbed/Testbed/DataspaceConnector/  
-```
-or refer to the [DataSpace Connector Repository](https://github.com/International-Data-Spaces-Association/DataspaceConnector/). [Version 5.1.2 is tagged](https://github.com/International-Data-Spaces-Association/DataspaceConnector/releases/tag/v5.1.2)
-
-This instruction is based on a cloned IDS-testbed repository.
-
-> Don't forget to set `JAVA_HOME` according to your system!
-
-The following steps are optional. They show how to build and execute the DataSpace Connector.
-
-```
-unzip DataspaceConnector.zip
-cd DataspaceConnector
-mvn clean package
-```
-
-This might take a while as the DataSpace Connector has to download some dependencies and runs some test. 
-
-Afterwards you can start the DataSpace Connector with
-```
-cd target
-java -jar dataspaceconnector-{VERSION}.jar (Version = 5.1.2)
-```
-
-The result should look like this:
-```
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  01:17 min
-[INFO] Finished at: 2021-11-15T22:40:47+01:00
-[INFO] ------------------------------------------------------------------------
-```
-
-If everything is working correctly, the connector can be found in https://localhost:8080. The API can be accessed at https://localhost:8080/api/docs, which requires the following authentication:
-
-Username: admin	/	Password: password
-
-It is important to know that this setup is for test environments and requires some changes to operate in the IDSA ecosystem. These will be explained in teh follwoing steps below.
-
-#### 2.	Deployment
-
-Official documentation: https://international-data-spaces-association.github.io/DataspaceConnector/Deployment/Configuration
-
-We have to edit the configuration of the DataSpace Connector according to our setup. Open the application.properties, e.g. with `nano`or your most favorite editor
-
-``
 nano src/main/resources/application.properties 
-``
+```
+### Spring Tomcat
 
-and edit the DAPS configuration. Replace `localhost` with `omejdn`
+**ConnectorA** is deployed in port `8080`
+```
+## Spring Tomcat
+server.port=8080
+```
+**ConnectorB** is deployed in port `8081`
+```
+## Spring Tomcat
+server.port=8081
+```
 
+### DAPS 
+Edit the DAPS configuration on both **ConnectorA** and **Connector B**. This will make use of the locally installed DAPS.
 ```
 ## DAPS
-##daps.token.url=https://daps.aisec.fraunhofer.de
-##daps.key.url=https://daps.aisec.fraunhofer.de/v2/.well-known/jwks.json
+## daps.url=https://daps.aisec.fraunhofer.de
+## daps.token.url=https://daps.aisec.fraunhofer.de/token
+## daps.key.url=https://daps.aisec.fraunhofer.de/.well-known/jwks.json
+## daps.key.url.kid={'https://daps.aisec.fraunhofer.de/.well-known/jwks.json':'default'}
+daps.url=http://omejdn:4567
 daps.token.url=http://omejdn:4567/token
 daps.key.url=http://omejdn:4567/.well-known/jwks.json
+daps.key.url.kid={'http://omejdn:4567/.well-known/jwks.json':'default'}
 ```
 
-Then change the config.json file. We have to set the connector to PRODUCTVE_DEPLOYMENT and add our generated certificate here. Do not forget to provide your certificate, if you did not in the step above. 
+### TLS
+Create a certificate with a specific DNS to use TLS and establish `https` connection. As a Docker network is used in the Testbed, the container name is used as DNS.
 
+```
+openssl req -x509 -newkey rsa:4096 -sha256 -days 2650 -nodes -keyout {NAME.key} -out {NAME.crt} -subj "/C={COUNTRY}/ST={STATE}/L={LOCALITY}/O={ORGANIZATION}/CN={COMMON_NAME}" -addext "subjectAltName=DNS:localhost,DNS:{CONTAINER_NAME}"
+```
+
+It could look something like this (**ConnectorA**)
+
+```
+openssl req -x509 -newkey rsa:4096 -sha256 -days 2650 -nodes -keyout connectorA.key -out connectorA.crt -subj "/C=ES/ST=Bizkaia/L=Bilbao/O=SQS/CN=connectorA" -addext "subjectAltName=DNS:localhost,DNS:connectora"
+```
+
+It could look something like this (**ConnectorB**)
+
+```
+openssl req -x509 -newkey rsa:4096 -sha256 -days 2650 -nodes -keyout connectorB.key -out connectorB.crt -subj "/C=ES/ST=Bizkaia/L=Bilbao/O=SQS/CN=connectorB" -addext "subjectAltName=DNS:localhost,DNS:connectorb"
+```
+
+The Dataspace Connector expects the TLS certificate in `.p12` format. Here is the command required:
+
+```
+openssl pkcs12 -export -out {NAME.p12) -inkey {NAME.key} -in {NAME.crt} -passout pass:password
+```
+
+It could look something like this (**ConnectorA**)
+```
+openssl pkcs12 -export -out connectora.p12 -inkey connectora.key -in connectora.crt -passout pass:password
+```
+It could look something like this (**ConnectorB**)
+```
+openssl pkcs12 -export -out connectorb.p12 -inkey connectorb.key -in connectorb.crt -passout pass:password
+```
+
+The main line of interest is `server.ssl.key-store=classpath:conf/{TLS_FILENAME}.p12`, where `{TLS_FILENAME}` is to be replaced with the TLS cert that was created above:
+
+It could look something like this (**ConnectorA**)
+```
+## TLS
+server.ssl.enabled=true
+server.ssl.key-store-type=PKCS12
+server.ssl.key-store=classpath:conf/connectora.p12
+server.ssl.key-store-password=password
+server.ssl.key-alias=1
+#security.require-ssl=true
+```
+It could look something like this (**ConnectorB**)
+```
+## TLS
+server.ssl.enabled=true
+server.ssl.key-store-type=PKCS12
+server.ssl.key-store=classpath:conf/connectorb.p12
+server.ssl.key-store-password=password
+server.ssl.key-alias=1
+#security.require-ssl=true
+```
+
+## Changes to the config.json file
+Use nano or your most favourite editor
 ```
 nano src/main/resources/conf/config.json
 ```
-Change to
+### Deployment Mode
+Edit `connectorDeployMode` from `TEST_DEPLOYMENT` to `PRODUCTIVE_DEPLOYMENT` for the connector to request and validate incoming DATs
 
 ```
   "ids:connectorDeployMode" : {
     "@id" : "idsc:PRODUCTIVE_DEPLOYMENT"
 ```
 
-and 
-
+### Dataspace Connector KeyStore
 ```
   "ids:keyStore" : {
-    "@id" : "file:///conf/keystore-localhost.p12,TestbedCert.p12"
+    "@id" : "file:///conf/{CERT_FILENAME}.p12"
+```
+{CERT_FILENAME} will be a certificate from the local CA or external to this testbed, provided by Fraunhofer AISEC (Contact Gerd Brost)
+
+Ensure {CERT_FILENAME} are different for **ConnectorA** and **ConnectorB**
+
+**Note:** Local CA certs will be available. Users can use those, create new ones or bring their own FH cert to replace {CERT_FILENAME}
+
+### Open the `conf` directory
+```
+src/main/resources/conf/
 ```
 
-Then we are ready to build the connector to docker.
+Ensure the {CERT_FILENAME}.p12 file used for `ids:keyStore` is placed in this directory for the `config.json` to access it
+
+Modify the `truststore.p12` for the Connector to accept these new TLS certificates. Make sure the {TLS_FILENAME}.crt is in this directory and then
+```
+keytool -import -alias {NAME} -file {NAME.crt} -storetype PKCS12 -keystore {truststore.p12}
+```
+
+It could look something like this (**ConnectorA**)
+```
+keytool -import -alias connectorA -file connectorA.crt -storetype PKCS12 -keystore truststore.p12
+```
+
+It could look something like this (**ConnectorB**)
+```
+keytool -import -alias connectorB -file connectorB.crt -storetype PKCS12 -keystore truststore.p12
+```
+It could look something like this (**Omejdn DAPS**)
+```
+keytool -import -alias omejdn -file omejdn.crt -storetype PKCS12 -keystore truststore.p12
+```
+
+You will be asked the following in the terminal:
+* `Enter keystore password: `, type `password`
+* `Trust this certificate? [no]: `, type `yes`
+
+It should return:
+```
+Certificate was added to keystore
+```
+
+Ensure both connectorA.crt and connectorB.crt are imported into the truststore.p12
+
+### When using the DSC for clarity reasons modify the following lines
+Put a meaningful description to your connector
+```
+"ids:connectorDescription" : {
+    "@type" : "ids:BaseConnector",
+    "@id" : "https://w3id.org/idsa/autogen/baseConnector/7b934432-a85e-41c5-9f65-669219dde4ea"
+```
+Put a meaningful URL that uniquely identifies your connector towards the IDS Metadata Broker.
+```
+"ids:accessURL" : {
+        "@id" : "https://localhost:8080/api/ids/data"
+```
+It could look something like this (**ConnectorA**)
+```
+"ids:connectorDescription" : {
+    "@type" : "ids:BaseConnector",
+    "@id" : "https://connector_A"
+```
+```
+"ids:accessURL" : {
+        "@id" : "https://connectora:8080/api/ids/data"
+```
+It could look something like this (**ConnectorB**)
+```
+"ids:connectorDescription" : {
+    "@type" : "ids:BaseConnector",
+    "@id" : "https://connector_B"
+```
+```
+"ids:accessURL" : {
+        "@id" : "https://connectorb:8081/api/ids/data"
+```
+
+### Additional Changes
+
+For the use of this testbed, the Dataspace Connector must be built via docker.
+
+Official build documentation: https://international-data-spaces-association.github.io/DataspaceConnector/Deployment/Build#docker
+
+The testbed is run in a docker network defined earlier in this document called `broker-localhost_default`. 
+
+Before running your images as a container, add `--network=testbed` to the `docker run` command
 
 ```
- docker build -t dsc .
+docker build -t <IMAGE_NAME:TAG> .
+docker run --publish 8080:8080 --detach --name {CONTAINER_NAME} --network=broker-localhost_default <IMAGE_NAME:TAG>
+```
 
+It could look something like this (**ConnectorA**)
+
+```
+docker build -t dscA .
+docker run --publish 8080:8080 --detach --name connectora --network=broker-localhost_default dscA
+```
+
+It could look something like this (**ConnectorB**)
+
+```
+docker build -t dscB .
+docker run --publish 8081:8081 --detach --name connectorb --network=broker-localhost_default dscB
 ```
 
 This might take a while when you run it for the first time, as docker has to download some dependencies, build and run some tests.
 
-The result should end with something similar to this:
-
-```
-Successfully built 2b6d927a3433
-Successfully tagged dsc:latest
-```
-
-Now we can run the DataSpace Connector in docker.
-```
-docker run --publish 8080:8080 --detach --name dsccontainer dsc
-
-```
 > DSC will not fly without a daps token now. Make sure the DAPS runs first.
-
 
 
 
