@@ -582,15 +582,15 @@ docker run --publish 8080:8080 --detach --name {CONTAINER_NAME} --network=broker
 It could look something like this (**ConnectorA**)
 
 ```
-docker build -t dscA .
-docker run --publish 8080:8080 --detach --name connectora --network=broker-localhost_default dscA
+docker build -t dsca .
+docker run --publish 8080:8080 --detach --name connectora --network=broker-localhost_default dsca
 ```
 
 It could look something like this (**ConnectorB**)
 
 ```
-docker build -t dscB .
-docker run --publish 8081:8081 --detach --name connectorb --network=broker-localhost_default dscB
+docker build -t dscb .
+docker run --publish 8081:8081 --detach --name connectorb --network=broker-localhost_default dscb
 ```
 
 This might take a while when you run it for the first time, as docker has to download some dependencies, build and run some tests.
