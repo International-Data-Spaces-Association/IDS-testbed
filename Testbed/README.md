@@ -1,4 +1,4 @@
-# IDSA Reference Testbed Installation (CA-DAPS-DSC)
+# IDSA Reference Testbed Installation (CA-DAPS-DSC-MDB)
 
 Download the .zip files in this repository. The installation and configuration process is explained below for each of the components. To further support this document, the links to the official installation guides will be linked.
 
