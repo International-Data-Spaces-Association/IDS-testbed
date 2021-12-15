@@ -208,7 +208,7 @@ docker network create testbed
 git clone https://github.com/International-Data-Spaces-Association/IDS-testbed.git
 ```
 
-## CERTIFICATE AUTHORITY
+# CERTIFICATE AUTHORITY
 Move to right directory, and make the files executable:
 
 ```
@@ -261,7 +261,7 @@ cp {CERT_FILENAME}.cert ../../../OmejdnDAPS/keys
 The certificate chain (CA, SubCA, Certs) has been created and the user should be able to create as many certificates as they need for their environment.
 
 
-### DAPS
+# DAPS
 
 The official documentation of the Omejdn DAPS is here: https://github.com/International-Data-Spaces-Association/omejdn-daps
 
@@ -599,114 +599,160 @@ This might take a while when you run it for the first time, as docker has to dow
 
 
 
-## Interconnectivity of the components
+# METADATA BROKER
 
-The following steps will show how to deploy the following:
+## Component Documentation
+The official documentation will cover the pre-requisites, installation and deployment of the component.
 
-CA -> DSC -> DAPS 
- 
-#### Testbed setup
-Download all the components from the .zip files in this repository. The current versions DSC (v5.1.2) and DAPS (v0.0.2).
+Official documentation: https://github.com/International-Data-Spaces-Association/metadata-broker-open-core
 
-Unzip all the components and go into the Certificate Authority folder in the terminal. 
+## Continue here after reading the official documentation
 
-#### Create a docker network
-This will ensure that the components will be available to each other.
+## Changes to the application.properties file
+Use nano or your most favourite editor. 
+```
+nano broker-core/src/main/resources/application.properties 
+```
 
-> docker network create testbed
+This will make use of the locally installed DAPS.
 
-This creates a docker network called "testbed"
+```
+# DAPS
+# daps.url=https://daps.aisec.fraunhofer.de
+daps.url=http://omejdn:4567
+daps.validateIncoming=true
+```
 
-#### Certificate Authority
+and add the local DAPS
 
-**Note:** The following example was performed by the SQS lab for the user's convenience and the certificates have already had their aki/ski extensions extracted. This allows the user to boot up a working Testbed. 
+```
+# Securiy-related
+...
+jwks.trustedHosts=daps.aisec.fraunhofer.de,omejdn
+ssl.certificatePath=/etc/cert/server.crt
+```
 
-Inside the component´s folder, enter the following commands in the terminal one by one:
+## Changes to the component's keystore
+Use nano or your most favourite editor. 
+```
+nano broker-core/src/main/resources/application.properties 
+```
 
-> chmod +x pki.py
+Add the certificate provided by the local CA, newly created by the local CA or provided by Fraunhofer AISEC. If it is NOT provided by the local CA, make sure it is correctly added to the local DAPS.
 
-> ./pki.py init
+```
+keytool -importkeystore -srckeystore {SRCKEYSTORE} -srcstoretype {STORETYPE} -srcstorepass {SRCSTOREPASS} -destkeystore {DESTKEYSTORE} -deststoretype {DESTSTORETYPE} -deststorepass {DESTSTOREPASS}
+```
+It could look something like this
 
-> ./pki.py ca create --common-name "Testbed CA" --algo "rsa" --bits "2048" --country-name "ES" --organization-name "SQS"
+```
+keytool -importkeystore -srckeystore testidsa10.p12 -srcstoretype pkcs12 -srcstorepass password -destkeystore isstbroker-keystore.jks -deststoretype jks -deststorepass password
+```
 
-> ./pki.py subca create --CA "Testbed CA" --common-name "Testbed SubCA" --algo "rsa" --bits "2048" --country-name "ES" --organization-name "SQS"
+Expected outcome:
+```
+"Import command completed:  1 entries successfully imported, 0 entries failed or cancelled"
+```
 
-> ./pki.py cert create --subCA "Testbed SubCA" --common-name "TestbedCert" --algo "rsa" --bits "2048" --country-name "ES" --organization-name "SQS" --client --server
+To check the content of the created keystore, use the following command:
 
-> cd data/cert
+```
+keytool -v -list -keystore .{KEYSTORE}
+```
 
-> openssl pkcs12 -export -out TestbedCert.p12 -inkey TestbedCert.key -in TestbedCert.crt -passout pass:password
+It could look something like this
 
-> openssl pkcs12 -in TestbedCert.p12 -out TestbedCert.cert -nokeys -nodes -passin pass:password
+```
+keytool -v -list -keystore isstbroker-keystore.jks
+```
 
-The command lines above create the CA, the Sub CA and the Device Certificate. Then, we go into the Device Certificate folder and use openssl to get .p12 and .cert formats. The .p12 is used for the Dataspace Connector and the .cert and .key are used in the Omejdn DAPS.
+## Adding the TLS certificates
 
-The cert directory in the CA now has the following:
-- TestbedCert.crt (by default)
-- TestbedCert.key (by default)
-- TestbedCert.p12 (from the openssl command)
-- TestbedCert.cert (from the openssl command)
+Create the following directory path:
 
-#### Dataspace Connector
+```
+sudo mkdir /etc/idscert/localhost 
+```
 
-When the Dataspace Connector is unzipped, go into DataspaceConnector/DataspaceConnector/src/main/resources/conf and drop the {cert.p12} here. In this case, TesbedCert.p12.
+Copy the following files into this new path
+* `server.crt`
+* `server.key`
 
-Go into DataspaceConnector/DataspaceConnector/src/main/resources/conf/config.json. Two changes here:
- 1. Change the connector deploy mode to PRODUCTIVE_DEPLOYMENT
- 2. Change the connector keyStore to the new cert, TestbedCert.p12
+## Changes in the `docker-compose` file
 
-Go into DataspaceConnector/DataspaceConnector/src/main/resources/application.properties. Change the following parameters to the DAPS involved in the Testbed. In this case, Omejdn.
- 1. daps.token.url=http://omejdn:4567/token
- 2. daps.key.url=http://omejdn:4567/.well-known/jwks.json
+Use nano or your most favourite editor. 
+```
+nano docker/composefiles/broker-localhost 
+```
 
-Launch the Dataspace Connector:
+Ensure the container names are consistent with other dependencies by adding `container_name:`.
 
-Use Docker:
-> docker build -t dsc .
+If port 80 is already in use, the `reverseproxy` container will exit with code 1. Follow the steps in the next block to get around this:
 
-> docker run --publish 8080:8080 --detach --name dsccontainer --network=testbed dsc
+```
+services:
+  broker-reverseproxy:
+    ...
+    container_name: broker-localhost_broker-reverseproxy_1
+    ...
+    ports:
+    - "443:443" # IDS-HTTP API
+    - "80:80" # Change to a port of your choosing if taken: "{PORT}:80"
+```
 
-The parameters above:
-- publish: open port 8080
-- detach: do not have the component running in the terminal
-- name: name of the container
-- network: docker network created for the different components in the Testbed
+Make sure to edit the following lines to have the Metadata Broker in productive mode:
 
-Check the Connector's self-description can be found at https://localhost:8080 and the API accessed at https://localhost:8080/api/docs (Authorization: username/password)
+```
+services:
+  ...
+  broker-core:
+    ...
+    environment:
+    ...
+    DAPS_VALIDATE_INCOMING=true
+    ...
+    DAPS_URL=http://omejdn:4567/token  
+```
 
-#### DAPS
+## Usage
 
-When the Dataspace Connector is unzipped, go into OmejdnDAPS/OmejdnDAPS/keys and drop the {cert.cert} here. In this case, TesbedCert.cert.
+Go to the directory with the `docker-compose` file and pull the images required
+```
+cd docker/composefiles/broker-localhost
+docker-compose pull
+```
 
-Launch the Omejdn DAPS:
+The pulled `core` image contains pre-loaded important information, such as the component's keystore and the Fraunhofer DAPS. This pulled `core` image will not have the configuration required for this testbed and it will be re-created locally.
 
-Use Docker:
-> docker build -t daps .
+Delete the pulled `core` image
 
-> docker run -d --name=omejdn -p 4567:4567 -v $PWD/config:/opt/config -v $PWD/keys:/opt/keys --network=testbed daps
+```
+docker rmi registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker-open/core
+```
 
-The parameters above:
-- d (detach): do not have the component running in the terminal
-- name: name of the container
-- p (publish): open port 4567
-- network: docker network created for the different components in the Testbed
+Go back to the main directory and build the project with `maven`:
 
-Ensure the DAPS server is running: http://localhost:4567
+```
+cd ../../..
+mvn clean package
+```
 
-A detailed interoperability guide has been developed by SQS in https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/Testbed/SQS_DAPS.md. This guide makes use of the {Testbed} certificate. 
+This will create a `.jar` file in `broker-core/target` that will have to be copied into `docker/broker-core`.
 
-The guide above ensures interoperability with the help of the script within the DAPS. By giving the TestbedCert certificate to the Dataspace Connector, we ensure the interoperability between the two components. 
+```
+cp broker-core/target/broker-core-4.2.8-SNAPSHOT.jar docker/broker-core
+```
 
-Interoperability can also be achieved without the use of the script. Point the Dataspace Connector to the Testbed DAPS as shown earlier. Go into the Dataspace Connector API (https://localhost:8080/api/docs) and perform:
+Once the file is copied, move to the `docker/broker-core` directory and build the `core` image locally. The `core` image name will be maintaned from the previously pulled `core` image. This will avoid dependency issues later on.
 
-> IDS Messages
-> 
-> POST 
-> 
-> /api/ids/connector/update (recipient url: https://brokerurl.es)
+```
+cd docker/broker-core
+docker build -t registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker-open/core .
+```
 
-Check the obtained Dynamic Attribute Token by looking in the terminal:
+Go to the compose file and build the Metadata Broker
 
-> docker logs dsccontainer
-
-
+```
+cd ../../docker/composefiles/broker-localhost/
+docker-compose up
+```
