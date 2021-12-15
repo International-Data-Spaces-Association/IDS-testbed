@@ -613,7 +613,7 @@ Use nano or your most favourite editor.
 ```
 nano broker-core/src/main/resources/application.properties 
 ```
-
+### DAPS
 This will make use of the locally installed DAPS.
 
 ```
@@ -623,7 +623,8 @@ daps.url=http://omejdn:4567
 daps.validateIncoming=true
 ```
 
-and add the local DAPS
+### Security-related
+Add the local DAPS to the trusted hosts
 
 ```
 # Securiy-related
