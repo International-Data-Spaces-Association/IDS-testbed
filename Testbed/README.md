@@ -208,11 +208,11 @@ docker network create testbed
 git clone https://github.com/International-Data-Spaces-Association/IDS-testbed.git
 ```
 
-## CERTIFICATION AUTHORITY
+## CERTIFICATE AUTHORITY
 Move to right directory, and make the files executable:
 
 ```
-cd Testbed/CertificationAuthority/
+cd Testbed/CertificateAuthority/
 chmod a+x *.py 
 ```
 
@@ -222,7 +222,7 @@ Official documentation: https://github.com/International-Data-Spaces-Association
 
 ## Continue here after the official documentation has been followed
 
-The Certification Authority provides {CERT_FILENAME}.crt and {CERT_FILENAME}.key formats. Keep in mind that other formats will be required for the different components. Those have to be created.
+The Certificate Authority provides {CERT_FILENAME}.crt and {CERT_FILENAME}.key formats. Keep in mind that other formats will be required for the different components. Those have to be created.
 
 Now convert the generated certificates in `data/cert` using openssl to then use in the Connector and DAPS.
 
@@ -608,7 +608,7 @@ CA -> DSC -> DAPS
 #### Testbed setup
 Download all the components from the .zip files in this repository. The current versions DSC (v5.1.2) and DAPS (v0.0.2).
 
-Unzip all the components and go into the Certification Authority folder in the terminal. 
+Unzip all the components and go into the Certificate Authority folder in the terminal. 
 
 #### Create a docker network
 This will ensure that the components will be available to each other.
@@ -617,7 +617,7 @@ This will ensure that the components will be available to each other.
 
 This creates a docker network called "testbed"
 
-#### Certification Authority
+#### Certificate Authority
 
 **Note:** The following example was performed by the SQS lab for the user's convenience and the certificates have already had their aki/ski extensions extracted. This allows the user to boot up a working Testbed. 
 
