@@ -658,7 +658,7 @@ Expected outcome:
 To check the content of the created keystore, use the following command:
 
 ```
-keytool -v -list -keystore .{KEYSTORE}
+keytool -v -list -keystore {KEYSTORE}
 ```
 
 It could look something like this
