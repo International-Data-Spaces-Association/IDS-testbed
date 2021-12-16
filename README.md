@@ -23,38 +23,25 @@ Set up with Open Source IDS components which can be used to verify that a com
 
 4. Download the [Test Suite](https://gitlab.cc-asp.fraunhofer.de/ksa/ids-certification-testing) and follow the instructions to conduct automated tests for your own developed connector
 
-## Current version
+## Current version (V1.0)
 
 ![image](https://user-images.githubusercontent.com/77682996/140496334-8e96dbdc-9785-45f9-9c28-ec433ca13dc5.png)
 
+Minimal setup with essential and already available components
+![first_version](./pictures/Testbed_1.0.png)
 
-## [TODO](./TODO.md)
+## Roadmap
+### Version 1.1 of the test bed
 
-```
-testbed -
-         |
-          - CA
-         |
-          - DAPS
-         |
-          - Clearing House          
-         |
-          - ParIS
-         |
-          - Meta Data Broker 'basic'
-         |
-          - Meta Data Broker 'advanced information'
-         |
-          - Meta Data Broker 'usage control'          
-         |
-          - Facility 'Base' Connector
-         |
-          - Facility 'Trusted' Connector 
-         |
-          - Facility 'Trusted Plus' Connector
-         |
-          - Applicant          
-          
-```
+Minimal viable data space with all essential components and first test cases
+![next_version](./pictures/Testbed_1.1.png)
 
----
+### Version 1.X of the test bed
+
+Integration of all intended components into the setup
+![next_version](./pictures/Testbed_1.X.png)
+
+### Final vision for the testbed
+
+On the long run, the testbed should be equipped with a test suite and testing components replacing the  open source reference implementations of the components.
+![vision](./pictures/Testbed_vision.png)

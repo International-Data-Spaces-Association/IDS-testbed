@@ -16,6 +16,7 @@ You may either run the preconfigured testbed offered in this repo or follow the 
 
 ## Target View: Preconfigured testbed (not available yet)
 Preconfigured setup that can be directly launched
+[TODO SQS: explain how to start the preconfigured setup]
 
 DAPS:  
 * can be reached at http://localhost:4567
@@ -29,9 +30,9 @@ Connectors:
 * connector B
   * can be reached at https://localhost:8081
   * needs to be preconfigured with a self-description and offering a dataset ("goodbye world")
-  
+
 Broker:
-* can be reached at https://localhost:8082
+* can be reached at https://localhost[:443]
 * needs to be aware of connector A, connector B and store their self-descriptions
 
 ## Manual installation
@@ -139,7 +140,7 @@ OpenJDK Runtime Environment (build 11.0.11+9-Ubuntu-0ubuntu2.20.04)
 OpenJDK 64-Bit Server VM (build 11.0.11+9-Ubuntu-0ubuntu2.20.04, mixed mode, sharing)
 ```
 > To avoid problems while building components you should set the `JAVA_HOME`environment variable on your system.
-> 
+>
 > HINT: you might want to check with ``jrunscript -e 'java.lang.System.out.println(java.lang.System.getProperty("java.home"));'``
 
 
@@ -185,7 +186,7 @@ sudo apt install ruby
 
 #### Other tools
 
-Some additional tools that might be useful 
+Some additional tools that might be useful
 
 ```
 sudo apt install curl
@@ -213,7 +214,7 @@ Move to right directory, and make the files executable:
 
 ```
 cd Testbed/CertificateAuthority/
-chmod a+x *.py 
+chmod a+x *.py
 ```
 
 The official documentation will cover the scope, dependencies and usage of the component.
@@ -362,13 +363,13 @@ The Testbed will have two built-in Connectors. They will be referred to as Conne
 
 It is recommended to follow the guide with one Connector at a time to avoid configuration issues.
 
-Make sure you are in the right directory: 
+Make sure you are in the right directory:
 ```
-cd Testbed/DataspaceConnectorA/ 
+cd Testbed/DataspaceConnectorA/
 ```
 or
 ```
-cd Testbed/DataspaceConnectorB/ 
+cd Testbed/DataspaceConnectorB/
 ```
 
 ## Component Documentation
@@ -376,15 +377,15 @@ The official documentation will cover the introductions, deployment, documentati
 
 Official documentation: https://international-data-spaces-association.github.io/DataspaceConnector
 
-## Continue here after reading the official documentation 
+## Continue here after reading the official documentation
 Official configuration documentation: https://international-data-spaces-association.github.io/DataspaceConnector/Deployment/Configuration#configuration
 
 The Dataspace Connector must be configured to work in this environemnt.
 
 ## Changes to the application.properties file
-Use nano or your most favourite editor. 
+Use nano or your most favourite editor.
 ```
-nano src/main/resources/application.properties 
+nano src/main/resources/application.properties
 ```
 ### Spring Tomcat
 
@@ -399,7 +400,7 @@ server.port=8080
 server.port=8081
 ```
 
-### DAPS 
+### DAPS
 Edit the DAPS configuration on both **ConnectorA** and **Connector B**. This will make use of the locally installed DAPS.
 ```
 ## DAPS
@@ -570,7 +571,7 @@ For the use of this testbed, the Dataspace Connector must be built via docker.
 
 Official build documentation: https://international-data-spaces-association.github.io/DataspaceConnector/Deployment/Build#docker
 
-The testbed is run in a docker network defined earlier in this document called `broker-localhost_default`. 
+The testbed is run in a docker network defined earlier in this document called `broker-localhost_default`.
 
 Before running your images as a container, add `--network=testbed` to the `docker run` command
 
@@ -598,7 +599,6 @@ This might take a while when you run it for the first time, as docker has to dow
 > DSC will not fly without a daps token now. Make sure the DAPS runs first.
 
 
-
 # METADATA BROKER
 
 ## Component Documentation
@@ -609,9 +609,9 @@ Official documentation: https://github.com/International-Data-Spaces-Association
 ## Continue here after reading the official documentation
 
 ## Changes to the application.properties file
-Use nano or your most favourite editor. 
+Use nano or your most favourite editor.
 ```
-nano broker-core/src/main/resources/application.properties 
+nano broker-core/src/main/resources/application.properties
 ```
 ### DAPS
 This will make use of the locally installed DAPS.
@@ -634,9 +634,9 @@ ssl.certificatePath=/etc/cert/server.crt
 ```
 
 ## Changes to the component's keystore
-Use nano or your most favourite editor. 
+Use nano or your most favourite editor.
 ```
-nano broker-core/src/main/resources/application.properties 
+nano broker-core/src/main/resources/application.properties
 ```
 
 Add the certificate provided by the local CA, newly created by the local CA or provided by Fraunhofer AISEC. If it is NOT provided by the local CA, make sure it is correctly added to the local DAPS.
@@ -672,7 +672,7 @@ keytool -v -list -keystore isstbroker-keystore.jks
 Create the following directory path:
 
 ```
-sudo mkdir /etc/idscert/localhost 
+sudo mkdir /etc/idscert/localhost
 ```
 
 Copy the following files into this new path
@@ -681,9 +681,9 @@ Copy the following files into this new path
 
 ## Changes in the `docker-compose` file
 
-Use nano or your most favourite editor. 
+Use nano or your most favourite editor.
 ```
-nano docker/composefiles/broker-localhost 
+nano docker/composefiles/broker-localhost
 ```
 
 Ensure the container names are consistent with other dependencies by adding `container_name:`.
@@ -744,7 +744,7 @@ This will create a `.jar` file in `broker-core/target` that will have to be copi
 cp broker-core/target/broker-core-4.2.8-SNAPSHOT.jar docker/broker-core
 ```
 
-Once the file is copied, move to the `docker/broker-core` directory and build the `core` image locally. The `core` image name will be maintaned from the previously pulled `core` image. This will avoid dependency issues later on.
+Once the file is copied, move to the `docker/broker-core` directory and build the `core` image locally. The `core` image name will be maintained from the previously pulled `core` image. This will avoid dependency issues later on.
 
 ```
 cd docker/broker-core
