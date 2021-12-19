@@ -1,6 +1,6 @@
 # IDSA Reference Testbed Installation (CA-DAPS-DSC-MDB)
 
-Download the .zip files in this repository. The installation and configuration process is explained below for each of the components. To further support this document, the links to the official installation guides will be linked.
+The installation and configuration process is explained below for each of the components. To further support this document, the links to the official installation guides will be linked.
 
 The software required for the successful deployment of the testbed will also be mentioned.
 Software and versions used for the testbed:
@@ -34,12 +34,6 @@ Connectors:
 Broker:
 * can be reached at https://localhost[:443]
 * needs to be aware of connector A, connector B and store their self-descriptions
-
-## Manual installation
-The installation of the testbed executed the following steps:
-1 setting up requirements
-2 Installation of the components
-3 Interconnectivity of the components
 
 ### Setting up requirements
 
@@ -261,102 +255,104 @@ cp {CERT_FILENAME}.cert ../../../OmejdnDAPS/keys
 
 The certificate chain (CA, SubCA, Certs) has been created and the user should be able to create as many certificates as they need for their environment.
 
-
 # DAPS
 
 The official documentation of the Omejdn DAPS is here: https://github.com/International-Data-Spaces-Association/omejdn-daps
 
-#### 1. Installation
-The SQS step by step guide, extracted from https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/Testbed/SQS_DAPS.md
-The Omejdn DAPS server can be launched with docker as explained in the official documentation above.
+## Adding the keys to the DAPS
 
-2. Configuration
-Required modifications:
-- Add the public keys from the certificates that will be used in the components requesting DATs
-- Add the client's information (DAPS user) in config/clients.yml
-- Change the host and audience in config/omejdn.yml
-- To use the script, place the private keys from the certificates in the scripts directory. Furthermore, ensure that "iss" and "sub" in the second portion of the script (scripts/create_test_token.rb) have the same values.
+Every client that wants to use the local Omejdn DAPS must place their `{CERTFILE}.cert` file in the `keys` directory.
 
-
-If you use the OmejdnDAPS from the testbed repo you can follow the steps below. Otherwise you can git clone the [OmejdnDAPS from its repository](https://github.com/International-Data-Spaces-Association/omejdn-daps) .
-
-Go to the OmejdnDAPS folder and unzip it with:
+The directory can be found in
 
 ```
-cd ../../OmejdnDAPS
-unzip OmejdnDAPS.zip
-cd OmejdnDAPS
+OmejdnDAPS/keys
+```
+
+## Adding the clients to the DAPS
+
+**Note:** The user must extract the aki/ski extensions from the client's certificate to add the client to the Omejdn DAPS.  If you are not certain on how to do this,  the `keys` directory will have a script called `extensions.sh`. Once executed, input the certificate's filename and it will return the required aki/ski extensions.
+
+To execute the script
+
+```
+chmod +x extensions.sh
+./extensions.sh
+```
+
+It could look something like this
+
+```
+chmod +x extensions.sh
+./extensions.sh
+> Input your certificate filename:
+testbed1.cert
+> The aki/ski extension for testbed1.cert is:
+66:07:ED:E5:80:E4:29:6D:1E:DD:F7:43:CA:0E:EB:38:32:C8:3A:43:keyid:07:FC:95:17:C4:95:B9:E4:AD:09:5F:07:1E:D2:20:75:2D:89:66:85
 ```
 
 Change the configuration with your favorite editor, e.g. `nano`.
+
 ```
 nano config/clients.yml
 ```
-update the information on the certificates
-- change `testClient` to `87:B9:0A:10:F3:82:97:AF:DA:1E:05:47:5F:8B:AD:46:23:8B:47:6F:keyid:54:07:82:AE:07:B1:BA:9A:00:67:10:95:C8:EC:10:3C:88:0E:53:02`
-- change `testClient` to `TestbedCert.cert`
 
-and your config file shoult look like this
+Add the aki/ski extension from the client's certificate in `client_id`
+
+It could look something like this 
 
 ```
----
-- client_id:87:B9:0A:10:F3:82:97:AF:DA:1E:05:47:5F:8B:AD:46:23:8B:47:6F:keyid:54:07:82:AE:07:B1:BA:9A:00:67:10:95:C8:EC:1>  name: omejdn admin ui
-  allowed_scopes:
-  - omejdn:api
-  redirect_uri: http://localhost:4200
-  attributes: []
-  certfile: TestbedCert.cert
-- client_id: testClient2
-  name: omejdn admin ui
-  allowed_scopes:
-  - omejdn:api
-  redirect_uri: http://localhost:4200
-  attributes: []
-  certfile: testClient2
+client_id: 66:07:ED:E5:80:E4:29:6D:1E:DD:F7:43:CA:0E:EB:38:32:C8:3A:43:keyid:07:FC:95:17:C4:95:B9:E4:AD:09:5F:07:1E:D2:20:75:2D:89:66:85`
+```
+and change the `certfile` to the {CERTFILE}.cert file dropped earlier in the `keys` directory
+
+It could look something like this 
+
+```
+certile: testbed1.cert
 ```
 
-Then edit the `config/omejdn.yml` and change the mode to `idsc:IDS_Connectors_ALL` from `http://localhost:4567,idsc` and `TestServer`
+## Required changes in the configuration
 
-Then your omejdn.yml should look like this
+Change the configuration with your favorite editor, e.g. `nano`.
+
 ```
----
+nano config/omejdn.yml
+```
+
+Replace `host` and `audience` with `idsc:IDS_CONNECTORS_ALL`
+
+Replace `issuer` in `token` and `id_token` with `http://omejdn:4567`
+
+```
 host: idsc:IDS_CONNECTORS_ALL
 openid: true
 token:
   expiration: 3600
-  signing_key: keys/signing_key.pem
+  signing_key: signing_key.pem
   algorithm: RS256
-  audience: IDSC:IDS_CONNECTORS_ALL
-  issuer: http://localhost:4567
+  audience: idsc:IDS_CONNECTORS_ALL
+  issuer: http://omejdn:4567
 id_token:
   expiration: 360000
-  signing_key: keys/signing_key.pem
+  signing_key: signing_key.pem
   algorithm: RS256
-  issuer: http://localhost:4567
-user_backend:
+  issuer: http://omejdn:4567
+user_background:
 - yaml
-
 ```
 
-Now you can docker build your DAPS with
+Build the Omejdn DAPS image
 
 ```
 docker build -t daps .
 ```
 
-and then launch the OmejdnDAPS with
+Run the Omejdn DAPS server
 
 ```
-    docker run -d --name omejdn -p 4567:4567 -v $PWD/config:/opt/config -v $PWD/keys:/opt/keys --network=testbed daps
+docker run -d --name omejdn -p 4567:4567 -v $PWD/config:/opt/config -v $PWD/keys:/opt/keys --network=broker-localhost_default daps
 ```
-
-Verify if it runs on `http://localhost:4567`
-
-And with
-
-> curl localhost:4567/token --data "grant_type=client_credentials&client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer&client_assertion={INSERT_TOKEN_HERE}&scope=ids_connector security_level"
-
-
 
 # DATASPACE CONNECTOR:
 The Testbed will have two built-in Connectors. They will be referred to as ConnectorA and ConnectorB. They will have different configurations, so they will each have their own directory. These directories are going to be referred to as `DataspaceConnectorA` and `DataspaceConnectorB`.
