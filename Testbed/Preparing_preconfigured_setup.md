@@ -116,6 +116,7 @@ Use the offer as the Request body
 
 The response body should give code 200 and should have this structure:
 ```json
+{
   "_embedded": {
     "resources": [
       {
@@ -220,7 +221,7 @@ The response body should give code 200 and should have this structure:
 ### Rules POST /api/rules
 Create a rule for provide access usage policy with the following Request body (it is used the provide access usage policy obtained from the previous call).
 ```json
-
+{
    "title": "[\"Example Usage Policy\"^^http://www.w3.org/2001/XMLSchema#string]",
    "description": "",
    "value": "{\n  \"@context\" : {\n    \"ids\" : \"https://w3id.org/idsa/core/\",\n    \"idsc\" : \"https://w3id.org/idsa/code/\"\n  },\n  \"@type\" : \"ids:Permission\",\n  \"@id\" : \"https://w3id.org/idsa/autogen/permission/51f5f7e4-f97f-4f91-bc57-b243714642be\",\n  \"ids:description\" : [ {\n    \"@value\" : \"provide-access\",\n    \"@type\" : \"http://www.w3.org/2001/XMLSchema#string\"\n  } ],\n  \"ids:title\" : [ {\n    \"@value\" : \"Example Usage Policy\",\n    \"@type\" : \"http://www.w3.org/2001/XMLSchema#string\"\n  } ],\n  \"ids:postDuty\" : [ ],\n  \"ids:assignee\" : [ ],\n  \"ids:assigner\" : [ ],\n  \"ids:action\" : [ {\n    \"@id\" : \"https://w3id.org/idsa/code/USE\"\n  } ],\n  \"ids:constraint\" : [ ],\n  \"ids:preDuty\" : [ ]\n}"
@@ -386,6 +387,7 @@ The response body should give code 201 and should have this structure:
 Create a representation with the following Request body
 ```json
 {"title": "Example Representation","description": "", "mediaType": "json", "language": "https://w3id.org/idsa/code/EN"}
+```
 
 The response body should give code 201 and should have this structure:
 ```json
