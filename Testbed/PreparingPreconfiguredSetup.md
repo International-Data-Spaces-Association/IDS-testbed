@@ -2,6 +2,8 @@
 
 This file explains how to configure connector A and B for the preconfigured setup expected in the user guide. Additionally, it contains instructions how to ensure the correct configuration of those connectors.
 
+All the steps included in this document are automated in a postman collection called "TestBed_Guide.postman_collection.json" available at the IDS_testbed repository.
+
 ## Preconfiguration
 ### Registering Data at connector A
 
