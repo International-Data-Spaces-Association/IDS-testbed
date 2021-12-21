@@ -49,15 +49,14 @@ Validate that you receive the following self-description:
   "@context" : {
     "ids" : "https://w3id.org/idsa/core/",
     "idsc" : "https://w3id.org/idsa/code/"
-  }
-{
+  },
   "@type" : "ids:BaseConnector",
   "@id" : "https://connector_A",
-  "ids:version" : "6.2.0",
   "ids:description" : [ {
     "@value" : "IDS Connector A with static example resources",
     "@type" : "http://www.w3.org/2001/XMLSchema#string"
   } ],
+  "ids:version" : "6.2.0",
   "ids:title" : [ {
     "@value" : "Dataspace Connector",
     "@type" : "http://www.w3.org/2001/XMLSchema#string"
@@ -74,10 +73,10 @@ Validate that you receive the following self-description:
   },
   "ids:resourceCatalog" : [ {
     "@type" : "ids:ResourceCatalog",
-    "@id" : "https://connectora:8080/api/catalogs/2cd59c94-54e4-4979-9842-36ee45dd354f",
+    "@id" : "https://localhost:8080/api/catalogs/2cd59c94-54e4-4979-9842-36ee45dd354f",
     "ids:offeredResource" : [ ],
     "ids:requestedResource" : [ ]
-  } ],
+  }],
   "ids:hasAgent" : [ ],
   "ids:securityProfile" : {
     "@id" : "https://w3id.org/idsa/code/BASE_SECURITY_PROFILE"
@@ -98,7 +97,6 @@ Validate that you receive the following self-description:
       "@id" : "https://w3id.org/idsa/code/RSA"
     },
     "ids:keyValue" : "VFVsSlFrbHFRVTVDWjJ0eGFHdHBSemwzTUVKQlVVVkdRVUZQUTBGUk9FRk5TVWxDUTJkTFEwRlJSVUYxZHpadFJuSmtabXhZV2xSS1owWlBRVFZ6YlVSWVF6QTVVMjF3U2xkdlIzQjVSVkphVGtWNU16RndTMlJ6VWtkb1ZHbHdVakkzYWpscGNtMXRjV2xvZGpkblNXZDZRMjU0Tm10SlVrNUhTVEoxTUc5R1VUVkdaM1pQTVhoNFozcGphV2hrY0VZd1EyaGxUMlk1U1U1bmFYTlFhM0UxYUdvNFFXVXZSRmxZYTNacWFGRTJZelpoYXk5YVdXWnFNRTV3Y1hsRlVHTktOVTFNVW0xWlIyVjRUV0ZOV20xVVluRkVTblpLYkRWS1J6TXJZa1V6V1dFeU1XaFVXbGxQZUdsVGFXTndaa1puU2pNd2EyNDFZVlZKUVhSa01EVkpXbmszZWpGelJHbFdUSFJVV0d4TVptVXZXbEZETkhCdWFrWjBjeXQwWXpFeWMxZzVhV2hKYlc1RGEyUXdWM1o2TTBOVVdtOTVRbE56WXpGVVpFSnJZamx0TUVNMWRIWm5NR1pSVURSUlowWXZla2d5VVc5YWJtNXlTVFV5ZFVGYU9FMXZiVmQwV1RKc2RETkVNR3RyY0ZJMk9YQm1Wa1JLTjNremRrNHZaWGRKUkVGUlFVST0="
-    }
   }
 }
 ```
@@ -112,7 +110,57 @@ Request the Self-Description from Connector B using those of the following proto
   * IDS-REST: not yet supported by connector B
 
 Validate that you receive the following self-description:
-[TODO SQS: add self-description]
+```json
+{
+  "@context" : {
+    "ids" : "https://w3id.org/idsa/core/",
+    "idsc" : "https://w3id.org/idsa/code/"
+  },
+  "@type" : "ids:BaseConnector",
+  "@id" : "https://connector_B",
+  "ids:version" : "6.2.0",
+  "ids:description" : [ {
+    "@value" : "IDS Connector B with static example resources",
+    "@type" : "http://www.w3.org/2001/XMLSchema#string"
+  } ],
+  "ids:resourceCatalog" : [ ],
+  "ids:hasAgent" : [ ],
+  "ids:securityProfile" : {
+    "@id" : "https://w3id.org/idsa/code/BASE_SECURITY_PROFILE"
+  },
+  "ids:extendedGuarantee" : [ ],
+  "ids:maintainer" : {
+    "@id" : "https://www.isst.fraunhofer.de/"
+  },
+  "ids:curator" : {
+    "@id" : "https://www.isst.fraunhofer.de/"
+  },
+  "ids:inboundModelVersion" : [ "4.2.0", "4.1.2", "4.0.0", "4.1.0" ],
+  "ids:outboundModelVersion" : "4.2.0",
+  "ids:publicKey" : {
+    "@type" : "ids:PublicKey",
+    "@id" : "https://w3id.org/idsa/autogen/publicKey/78eb73a3-3a2a-4626-a0ff-631ab50a00f9",
+    "ids:keyType" : {
+      "@id" : "https://w3id.org/idsa/code/RSA"
+    },
+    "ids:keyValue" : "VFVsSlFrbHFRVTVDWjJ0eGFHdHBSemwzTUVKQlVVVkdRVUZQUTBGUk9FRk5TVWxDUTJkTFEwRlJSVUYxZHpadFJuSmtabXhZV2xSS1owWlBRVFZ6YlVSWVF6QTVVMjF3U2xkdlIzQjVSVkphVGtWNU16RndTMlJ6VWtkb1ZHbHdVakkzYWpscGNtMXRjV2xvZGpkblNXZDZRMjU0Tm10SlVrNUhTVEoxTUc5R1VUVkdaM1pQTVhoNFozcGphV2hrY0VZd1EyaGxUMlk1U1U1bmFYTlFhM0UxYUdvNFFXVXZSRmxZYTNacWFGRTJZelpoYXk5YVdXWnFNRTV3Y1hsRlVHTktOVTFNVW0xWlIyVjRUV0ZOV20xVVluRkVTblpLYkRWS1J6TXJZa1V6V1dFeU1XaFVXbGxQZUdsVGFXTndaa1puU2pNd2EyNDFZVlZKUVhSa01EVkpXbmszZWpGelJHbFdUSFJVV0d4TVptVXZXbEZETkhCdWFrWjBjeXQwWXpFeWMxZzVhV2hKYlc1RGEyUXdWM1o2TTBOVVdtOTVRbE56WXpGVVpFSnJZamx0TUVNMWRIWm5NR1pSVURSUlowWXZla2d5VVc5YWJtNXlTVFV5ZFVGYU9FMXZiVmQwV1RKc2RETkVNR3RyY0ZJMk9YQm1Wa1JLTjNremRrNHZaWGRKUkVGUlFVST0="
+  },
+  "ids:title" : [ {
+    "@value" : "Dataspace Connector",
+    "@type" : "http://www.w3.org/2001/XMLSchema#string"
+  } ],
+  "ids:hasDefaultEndpoint" : {
+    "@type" : "ids:ConnectorEndpoint",
+    "@id" : "https://w3id.org/idsa/autogen/connectorEndpoint/e5e2ab04-633a-44b9-87d9-a097ae6da3cf",
+    "ids:accessURL" : {
+      "@id" : "https://connectorb:8081/api/ids/data"
+    },
+    "ids:endpointDocumentation" : [ ],
+    "ids:endpointInformation" : [ ]
+  },
+  "ids:hasEndpoint" : [ ]
+}
+```
 
 ### 4.2. Request Data from Available Connectors
 ***Connector A***  
@@ -124,7 +172,7 @@ Request the data sets from connector A using those of the following protocols yo
   * IDSCP2: currently supported by connector A - still work in progress TODO: remove as soon as it works
   * IDS-REST: not yet supported by connector A
 
-Validate that you receive as data the following URL which can be used to obtained the corresponding DWD weather data:
+Validate that you receive as data the following URL which can be used to obtain the corresponding DWD weather data:
 https://maps.dwd.de/geoserver/dwd/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=dwd%3AAutowarn_Analyse&maxFeatures=50&outputFormat=application%2Fjson
 
 ***Connector B***
