@@ -1,7 +1,6 @@
 # Guide for Preparing and Validating the Preconfigured Setup
 
 This file explains how to configure connector A and B for the preconfigured setup expected in the user guide. Additionally, it contains instructions how to ensure the correct configuration of those connectors.
-Those steps
 
 ## Preconfiguration
 ### Registering Data at connector A
