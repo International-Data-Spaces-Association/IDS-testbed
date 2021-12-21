@@ -338,12 +338,12 @@ The response body should give code 200 and should have this structure:
 ```
 
 ### Artifacts POST /api/artifacts
-Create an artifact that contains value "Hello World" with the following Request body
+Create an artifact that contains the accesss URL for DWD weather data with the following Request body
 ```json
 {
     "title": "Artifact",
     "description": "This is an example artifact",
-    "value": "Hello World",
+    "accessUrl": "https://maps.dwd.de/geoserver/dwd/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=dwd%3AAutowarn_Analyse&maxFeatures=50&outputFormat=application%2Fjson",
     "automatedDownload": true
 }
 ```
@@ -357,8 +357,8 @@ The response body should give code 201 and should have this structure:
   "title": "Artifact",
   "description": "This is an example artifact",
   "numAccessed": 0,
-  "byteSize": 24,
-  "checkSum": 2302133775,
+  "byteSize": 0,
+  "checkSum": 0,
   "additional": {},
   "_links": {
     "self": {
@@ -443,8 +443,8 @@ The response body should give code 200 and should have this structure:
         "title": "Artifact",
         "description": "This is an example artifact",
         "numAccessed": 0,
-        "byteSize": 24,
-        "checkSum": 2302133775,
+        "byteSize": 0,
+        "checkSum": 0,
         "additional": {},
         "_links": {
           "self": {
