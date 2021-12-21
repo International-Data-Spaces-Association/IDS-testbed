@@ -268,12 +268,12 @@ The response body should give code 200 and should have this structure:
         "title": "Artifact",
         "description": "",
         "numAccessed": 1,
-        "byteSize": 24,
-        "checkSum": 2302133775,
+        "byteSize": 2347,
+        "checkSum": 0,
         "additional": {
-          "ids:byteSize": "24",
+          "ids:byteSize": "0",
           "ids:creationDate": "2021-12-16T10:35:37.850Z",
-          "ids:checkSum": "2302133775"
+          "ids:checkSum": "0"
         },
         "_links": {
           "self": {
@@ -315,7 +315,7 @@ The response body should give code 200 and should have this structure:
 From this response body it is obtained the url to obtain the data
 > https://localhost:8081/api/artifacts/1d06f1c0-8b64-465a-b5f0-3e185914a67d/data
 
-If you paste it in a browser and download it is obtained the "Hello World" data.
+If you paste it in a browser and download it is obtained the corresponding DWD weather data.
 
 ## 5. Interacting with the MetaData Broker
 In this section it will be explained how to interact with the broker and update the connector A and B to the broker.
