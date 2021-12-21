@@ -340,8 +340,8 @@ The response body should give code 200 and should have this structure:
 }
 ```
 
-#### Artifacts POST /api/artifacts
-Create an artifact that contains value "Hello World" with the following Request body
+#### Artifacts: POST /api/artifacts
+Create an artifact that contains DWD weather data with the following Request body
 ```json
 {
     "title": "Artifact",
@@ -386,7 +386,7 @@ The response body should give code 201 and should have this structure:
 }
 ```
 
-#### Representations POST /api/representations
+#### Representations: POST /api/representations
 Create a representation with the following Request body
 ```json
 {
@@ -428,7 +428,7 @@ The response body should give code 201 and should have this structure:
 }
 ```
 
-#### Add Artifact to Representation POST /api/representations/{id}/artifacts
+#### Add Artifact to Representation: POST /api/representations/{id}/artifacts
 Link the created representation to the created artifact
 
 Insert the representation id
@@ -628,7 +628,7 @@ Request the self-description of Connector A utilizing POST /api/ids/description.
 Insert the recipient url of Connector A
 > https://connectora:8080/api/ids/data
 
-Left the elementId remains empty because the id of the requested resource is not known .
+Left the elementId remains empty because the id of the requested resource is not known.
 
 The response body should give code 200 and be euqivalent to the following:
 ```json
