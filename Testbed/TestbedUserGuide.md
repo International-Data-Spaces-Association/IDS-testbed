@@ -1,17 +1,12 @@
 # Testbed User Guide
 
-## Purpose
 This user guide is meant to explain to each testbed user what they should do with the testbed in order to assess the compatibility of their own developed component.
 
-## Steps for testing your connector
+## 1. Download and Install the Testbed
+Follow the instructions in the [installation and configuration guide](./README.md) to install and configure the testbed as required. Utilize the preconfigured setup described as basis for the this user guide.
 
-### 1. Initial preparation
-#### 1.1. Download the testbed and install it
-Follow the instructions in the [installation and configuration guide](./README.md) to install and configure the testbed as required.
-The easiest way for the checklist approach would be to use the preconfigured setup described or get in tough with someone who already has such a testbed up and running.
-
-### 2. Integrating your connector into the ecosystem
-#### 2.1. Generate a certificate for your connector
+## 2. Integrating your Connector into the Ecosystem
+### 2.1. Generate a Certificate for your Connector
 Generate a private-public key pair for your connector.
 Issue a certificate for the public key in this key pair signed by the private key of the utilized testbed CA:
 ```bash
@@ -20,27 +15,27 @@ Issue a certificate for the public key in this key pair signed by the private ke
 (TODO Monika: add sub CA name utilized in preconfigured setup as soon as its available, define in which folder the command needs to be utilized)
 Ensure that your connector always utilizes this IDS certificate to prove their identity with respect to the other components.
 
-#### 2.2. Configure your connector
+### 2.2. Configure your Connector
 * Configure the usage of the Root CA (cert) to be found in (TODO Monika: add path utilized in preconfigured setup once available as soon as its available)
 * Configure your connector to use the DAPS available under http://localhost:4567 (endpoints: /token, /.well-known/jwks.json)
 * Provide a self-description for your connector
 
-### 3. Interacting with the DAPS
-#### 3.1. Register your connector at the DAPS
+## 3. Interacting with the DAPS
+### 3.1. Register your connector at the DAPS
 Register your connector following
 a) the instructions provided here:
 https://github.com/International-Data-Spaces-Association/omejdn-daps#registering-connectors
 or b) the manual steps described below:
 TODO SQS: explain what to do
 
-#### 3.2. Request your DAT
+### 3.2. Request your DAT
 * Use your connector to request a DAT from the DAPS
 * Validate that you received a valid DAT corresponding to the specification:
 https://github.com/International-Data-Spaces-Association/IDS-G/blob/main/Components/IdentityProvider/DAPS/README.md#dynamic-attribute-token-dat
 
-### 4. Interacting with connectors
-#### 4.1. Request self-descriptions from available connectors
-***Connector A***
+## 4. Interacting with Connectors
+### 4.1. Request Self-descriptions from Available Connectors
+***Connector A***  
 Connector A is available at the following URL: https://localhost:8080
 
 Request the Self-Description from Connector A using those of the following protocols you support:
@@ -48,7 +43,8 @@ Request the Self-Description from Connector A using those of the following proto
   * IDSCP2: currently supported by connector A - still work in progress TODO: remove as soon as it works
   * IDS-REST: not yet supported by connector A
 
-Validate that you receive the following self-description: ```json
+Validate that you receive the following self-description:
+```json
 {
   "@context" : {
     "ids" : "https://w3id.org/idsa/core/",
@@ -107,41 +103,35 @@ Validate that you receive the following self-description: ```json
 }
 ```
 
-***Connector B***
+***Connector B***  
 Connector B is available at the following URL: https://localhost:8081
 
-Request the Self-Description from Connector B using those of the following protocols that you support::
+Request the Self-Description from Connector B using those of the following protocols that you support:
   * Multipart: currently supported by connector B
   * IDSCP2: currently supported by connector B - still work in progress TODO: remove as soon as it works
   * IDS-REST: not yet supported by connector B
 
 Validate that you receive the following self-description:
-[TODO SQS: add link to the self-description]
+[TODO SQS: add self-description]
 
-#### 4.2. Request data sets from available connectors
-***Connector A***
-Connector A offers a data artifact "Hello world". Obtain the resource catalog @id from the Self-Description requested in 4.1
+### 4.2. Request Data from Available Connectors
+***Connector A***  
+Connector A offers an exemplary data artifact with weather warnings from the DWD. Obtain the resource catalog @id from the Self-Description requested in 4.1
 > https://connectora:8080/api/catalogs/2cd59c94-54e4-4979-9842-36ee45dd354f
 
-Request the "hello world" data sets from connector A using those of the following protocols you support:
+Request the data sets from connector A using those of the following protocols you support:
   * Multipart: currently supported by connector A
   * IDSCP2: currently supported by connector A - still work in progress TODO: remove as soon as it works
   * IDS-REST: not yet supported by connector A
 
-Validate that you receive the data set containing the "Hello world" data.
+Validate that you receive as data the following URL which can be used to obtained the corresponding DWD weather data:
+https://maps.dwd.de/geoserver/dwd/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=dwd%3AAutowarn_Analyse&maxFeatures=50&outputFormat=application%2Fjson
 
 ***Connector B***
-Connector B offers a data artifact "Goodbye world". Obtain the resource catalog @id from the Self-Description requested in 4.1
-> https://connectorb:8080/api/catalogs/TODO
+Connector B is currently not offering any data sets but only helping with validating the correct testbed setup as described in the [Guide for Preparing and Validating the Preconfigured Setup](./PreparingPreconfiguredSetup.md).
 
-* Request the Self-Description from Connector B using those of the following protocols that you support::
-  * Multipart: currently supported by connector B
-  * IDSCP2: currently supported by connector B - still work in progress TODO: remove as soon as it works
-  * IDS-REST: not yet supported by connector B
-* Validate that you receive the following data set: [TODO SQS: add link to the goodbye world dataset]
-
-### 5. Interacting with the MetaData Broker
-### 5.1. Query the self-description of the MetaData Broker
+## 5. Interacting with the MetaData Broker
+## 5.1. Query the Self-description of the MetaData Broker
 Request the self-description of the Broker.
 
 The response body should give code 200 and should be comparable to the following:
@@ -244,28 +234,142 @@ The response body should give code 200 and should be comparable to the following
 }
 ```
 
-#### 5.2. Query the MetaData Broker for available data in the testbed
+### 5.2. Query the MetaData Broker for Available Connectors in the Testbed
 The MetaData Broker can be reached at https://localhost[:443] and is aware of the self-descriptions of connector A and B.
 
-* Query the MetaData Broker for all available datasets using those of the following protocols you support:
+Query the MetaData Broker for all available datasets using those of the following protocols you support:
   * Multipart: currently supported by the MetaData Broker
   * IDSCP2: not yet supported by the MetaData Broker
   * IDS-REST: not yet supported by the MetaData Broker
-* Validate that you received the following response:
-[TODO SQS: add (link to) the expected output]
 
-#### 5.3. Register your connector at the IDS MetaDataBroker with an exemplary data set
-* Register your connector at the MetaData Broker using those of the following protocols you support:
+Validate that you received the following list of connectors:
+```json
+{
+  "@graph" : [ {
+    "@id" : "https://localhost/connectors/",
+    "@type" : "ids:ConnectorCatalog",
+    "listedConnector" : [ "https://localhost/connectors/2129657531", "https://localhost/connectors/2129657530" ]
+  }, {
+    "@id" : "https://localhost/connectors/2129657530",
+    "@type" : "ids:BaseConnector",
+    "sameAs" : "https://connector_A",
+    "curator" : "https://www.isst.fraunhofer.de/",
+    "description" : "IDS Connector A with static example resources",
+    "hasDefaultEndpoint" : "https://w3id.org/idsa/autogen/connectorEndpoint/e5e2ab04-633a-44b9-87d9-a097ae6da3cf",
+    "inboundModelVersion" : [ "4.2.0", "4.0.0", "4.1.0", "4.1.2" ],
+    "maintainer" : "https://www.isst.fraunhofer.de/",
+    "outboundModelVersion" : "4.2.0",
+    "publicKey" : "https://w3id.org/idsa/autogen/publicKey/78eb73a3-3a2a-4626-a0ff-631ab50a00f9",
+    "resourceCatalog" : "https://localhost/connectors/2129657530/-733289566",
+    "securityProfile" : "https://w3id.org/idsa/code/BASE_SECURITY_PROFILE",
+    "title" : "Dataspace Connector",
+    "version" : "6.2.0"
+  }, {
+    "@id" : "https://localhost/connectors/2129657530/-733289566",
+    "@type" : "ids:ResourceCatalog",
+    "sameAs" : "https://localhost:8080/api/catalogs/2cd59c94-54e4-4979-9842-36ee45dd354f"
+  }, {
+    "@id" : "https://localhost/connectors/2129657531",
+    "@type" : "ids:BaseConnector",
+    "sameAs" : "https://connector_B",
+    "curator" : "https://www.isst.fraunhofer.de/",
+    "description" : "IDS Connector B with static example resources",
+    "hasDefaultEndpoint" : "https://w3id.org/idsa/autogen/connectorEndpoint/e5e2ab04-633a-44b9-87d9-a097ae6da3cf",
+    "inboundModelVersion" : [ "4.2.0", "4.1.0", "4.1.2", "4.0.0" ],
+    "maintainer" : "https://www.isst.fraunhofer.de/",
+    "outboundModelVersion" : "4.2.0",
+    "publicKey" : "https://w3id.org/idsa/autogen/publicKey/78eb73a3-3a2a-4626-a0ff-631ab50a00f9",
+    "securityProfile" : "https://w3id.org/idsa/code/BASE_SECURITY_PROFILE",
+    "title" : "Dataspace Connector",
+    "version" : "6.2.0"
+  }, {
+    "@id" : "https://w3id.org/idsa/autogen/connectorEndpoint/e5e2ab04-633a-44b9-87d9-a097ae6da3cf",
+    "@type" : "ids:ConnectorEndpoint",
+    "accessURL" : [ "https://connectorb:8081/api/ids/data", "https://connectora:8080/api/ids/data" ]
+  }, {
+    "@id" : "https://w3id.org/idsa/autogen/publicKey/78eb73a3-3a2a-4626-a0ff-631ab50a00f9",
+    "@type" : "ids:PublicKey",
+    "keyType" : "https://w3id.org/idsa/code/RSA",
+    "keyValue" : "VkZWc1NsRnJiSEZSVlRWRFdqSjBlR0ZIZEhCU2Vtd3pUVVZLUWxWVlZrZFJWVVpRVVRCR1VrOUZSazVUVld4RFVUSmtURkV3UmxKU1ZVWXhaSHBhZEZKdVNtdGFiWGhaVjJ4U1Mxb3dXbEJSVkZaNllsVlNXVkY2UVRWVk1qRjNVMnhrZGxJelFqVlNWa3BoVkd0V05VMTZSbmRUTWxKNlZXdGtiMVpIYkhkVmFra3pZV3BzY0dOdE1YUmpWMnh2Wkdwa2JsTlhaRFpSTWpVMFRtMTBTbFZyTlVoVFZFb3hUVWM1UjFWVVZrZGFNMXBRVFZob05Gb3pjR3BoVjJoclkwVlpkMUV5YUd4VU1sazFVMVUxYm1GWVRsRmhNMFV4WVVkdk5GRlhWWFpTUm14WllUTmFjV0ZHUlRKWmVscG9ZWGs1WVZkWFduRk5SVFYzWTFoc1JsVkhUa3RPVlRGTlZXMHhXbEl5VmpSVVYwWk9WMjB4VlZsdVJrVlRibHBMWWtSV1MxSjZUWEpaYTFWNlYxZEZlVTFYYUZWWGJHeFFaVWRzVkdGWFRuZGFhMXB1VTJwTmQyRXlOREZaVmxaS1VWaFNhMDFFVmtwWGJtc3paV3BHZWxKSGJGZFVTRkpWVjBkNFRWcHRWWFpYYkVaRVRraENkV0ZyV2pCamVYUXdXWHBGZVdNeFp6VmhWMmhLWWxjMVJHRXlVWGRXTTFvMlRUQk9WVmR0T1RWUmJFNTZXWHBHVlZwRlNuSlphbXgwVFVWTk1XUklXbTVOUjFwU1ZVUlNVbG93V1habGEyZDVWVmM1WVdKdE5YbFRWRlY1WkZWR1lVOUZNWFppVm1Rd1YxUktjMlJFVGtWTlIzUnlZMFpKTWs5WVFtMVdhMUpMVGpOcmVtUnJOSFphV0dSS1VrVkdVbEZWU1QwPQ=="
+  } ],
+  "@context" : {
+    "accessURL" : {
+      "@id" : "https://w3id.org/idsa/core/accessURL",
+      "@type" : "@id"
+    },
+    "sameAs" : {
+      "@id" : "http://www.w3.org/2002/07/owl#sameAs",
+      "@type" : "@id"
+    },
+    "description" : {
+      "@id" : "https://w3id.org/idsa/core/description"
+    },
+    "hasDefaultEndpoint" : {
+      "@id" : "https://w3id.org/idsa/core/hasDefaultEndpoint",
+      "@type" : "@id"
+    },
+    "publicKey" : {
+      "@id" : "https://w3id.org/idsa/core/publicKey",
+      "@type" : "@id"
+    },
+    "curator" : {
+      "@id" : "https://w3id.org/idsa/core/curator",
+      "@type" : "@id"
+    },
+    "inboundModelVersion" : {
+      "@id" : "https://w3id.org/idsa/core/inboundModelVersion"
+    },
+    "title" : {
+      "@id" : "https://w3id.org/idsa/core/title"
+    },
+    "outboundModelVersion" : {
+      "@id" : "https://w3id.org/idsa/core/outboundModelVersion"
+    },
+    "securityProfile" : {
+      "@id" : "https://w3id.org/idsa/core/securityProfile",
+      "@type" : "@id"
+    },
+    "maintainer" : {
+      "@id" : "https://w3id.org/idsa/core/maintainer",
+      "@type" : "@id"
+    },
+    "resourceCatalog" : {
+      "@id" : "https://w3id.org/idsa/core/resourceCatalog",
+      "@type" : "@id"
+    },
+    "version" : {
+      "@id" : "https://w3id.org/idsa/core/version"
+    },
+    "listedConnector" : {
+      "@id" : "https://w3id.org/idsa/core/listedConnector",
+      "@type" : "@id"
+    },
+    "keyValue" : {
+      "@id" : "https://w3id.org/idsa/core/keyValue"
+    },
+    "keyType" : {
+      "@id" : "https://w3id.org/idsa/core/keyType",
+      "@type" : "@id"
+    },
+    "owl" : "http://www.w3.org/2002/07/owl#",
+    "ids" : "https://w3id.org/idsa/core/"
+  }
+}
+```
+
+### 5.3. Register your connector at the IDS MetaDataBroker with an exemplary data set
+Register your connector at the MetaData Broker using those of the following protocols you support:
   * Multipart: currently supported by the MetaData Broker
   * IDSCP2: not yet supported by the MetaData Broker
   * IDS-REST: not yet supported by the MetaData Broker
-* Query the MetaData Broker for all available datasets using those of the following protocols you support:
+
+Query the MetaData Broker for all available datasets using those of the following protocols you support:
   * Multipart: currently supported by the MetaData Broker
   * IDSCP2: not yet supported by the MetaData Broker
   * IDS-REST: not yet supported by the MetaData Broker
-* Validate that you received the following response:
-[TODO SQS: add the expected output + your own entered information]
 
-### In addition: Execute Test suite
+Validate that the received list of connectors represents the list retreived in 5.2, but extended for your own provided information.
 
-Please execute the automated (interoperability) test suite provided at https://gitlab.cc-asp.fraunhofer.de/ksa/ids-certification-testing by following the installation and exection instructions in that repository.
+## In Addition: Execute Automated Test Suite
+
+Please execute the automated (interoperability) test suite provided at https://gitlab.cc-asp.fraunhofer.de/ksa/ids-certification-testing by following the installation and execution instructions in that repository.
