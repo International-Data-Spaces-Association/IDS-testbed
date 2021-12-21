@@ -1,86 +1,33 @@
-# Example Reference Testbed User Guide
+# Example for Executing Testbed User Guide with a Dataspace Connector
 
 ## Purpose
 This user guide is meant to explain to each testbed user the structure of the different calls and the response body they should obtain from these calls when they generate a resource in their connector, upload their connector to the broker, negotiate between connectors or search for a connector in the broker, in order to assess the compatibility of their own developed component.
 
-## Steps from Connector B to negotiate data from Connector A
-This section will explain the necessary steps that need to be follow in order to request data from Dataspace Connector A using Dataspace Connector B.
+## 4.1. Request self-description from Connector A
+
+
+## 4.2. Request data from Connector A
+This section will explain the necessary steps that need to be follow in order to request data from Dataspace Connector A using a Dataspace Connector C.
 The following steps have been extracted from the official documentation guide (https://international-data-spaces-association.github.io/DataspaceConnector/CommunicationGuide/v6/Consumer) and have been modified in order to work for the reference Testbed deployment setup.
 
-With the Reference TestBed setup, follow the next steps on Dataspace Connector B to obtain data from Dataspace Connector A. Access in a browser https://localhost:8081 and enter in the Swagger UI of connector B.
-### Messages POST /api/ids/description
-Request the self-description of Connector A.
+With the Reference TestBed setup, follow the next steps on Dataspace Connector C to obtain data from Dataspace Connector A. Access in a browser https://localhost:8081 and enter in the Swagger UI of connector C.
+
+### 4.2. Request self-description from Connector A
+Request the self-description of Connector A utilizing POST /api/ids/description.
 
 Insert the recipient url of Connector A
 > https://connectora:8080/api/ids/data
 
-Left the elementId empty because it is not known the id of the requested resource.
+Left the elementId remains empty because the id of the requested resource is not known .
 
-The response body should give code 200 and should have this structure:
-```json
-{
-  "@context" : {
-    "ids" : "https://w3id.org/idsa/core/",
-    "idsc" : "https://w3id.org/idsa/code/"
-  }
-{
-  "@type" : "ids:BaseConnector",
-  "@id" : "https://connector_A",
-  "ids:version" : "6.2.0",
-  "ids:description" : [ {
-    "@value" : "IDS Connector A with static example resources",
-    "@type" : "http://www.w3.org/2001/XMLSchema#string"
-  } ],
-  "ids:title" : [ {
-    "@value" : "Dataspace Connector",
-    "@type" : "http://www.w3.org/2001/XMLSchema#string"
-  } ],
-  "ids:hasEndpoint" : [ ],
-  "ids:hasDefaultEndpoint" : {
-    "@type" : "ids:ConnectorEndpoint",
-    "@id" : "https://w3id.org/idsa/autogen/connectorEndpoint/e5e2ab04-633a-44b9-87d9-a097ae6da3cf",
-    "ids:accessURL" : {
-      "@id" : "https://connectora:8080/api/ids/data"
-    },
-    "ids:endpointDocumentation" : [ ],
-    "ids:endpointInformation" : [ ]
-  },
-  "ids:resourceCatalog" : [ {
-    "@type" : "ids:ResourceCatalog",
-    "@id" : "https://connectora:8080/api/catalogs/2cd59c94-54e4-4979-9842-36ee45dd354f",
-    "ids:offeredResource" : [ ],
-    "ids:requestedResource" : [ ]
-  } ],
-  "ids:hasAgent" : [ ],
-  "ids:securityProfile" : {
-    "@id" : "https://w3id.org/idsa/code/BASE_SECURITY_PROFILE"
-  },
-  "ids:extendedGuarantee" : [ ],
-  "ids:maintainer" : {
-    "@id" : "https://www.isst.fraunhofer.de/"
-  },
-  "ids:curator" : {
-    "@id" : "https://www.isst.fraunhofer.de/"
-  },
-  "ids:inboundModelVersion" : [ "4.2.0", "4.1.2", "4.0.0", "4.1.0" ],
-  "ids:outboundModelVersion" : "4.2.0",
-  "ids:publicKey" : {
-    "@type" : "ids:PublicKey",
-    "@id" : "https://w3id.org/idsa/autogen/publicKey/78eb73a3-3a2a-4626-a0ff-631ab50a00f9",
-    "ids:keyType" : {
-      "@id" : "https://w3id.org/idsa/code/RSA"
-    },
-    "ids:keyValue" : "VFVsSlFrbHFRVTVDWjJ0eGFHdHBSemwzTUVKQlVVVkdRVUZQUTBGUk9FRk5TVWxDUTJkTFEwRlJSVUYxZHpadFJuSmtabXhZV2xSS1owWlBRVFZ6YlVSWVF6QTVVMjF3U2xkdlIzQjVSVkphVGtWNU16RndTMlJ6VWtkb1ZHbHdVakkzYWpscGNtMXRjV2xvZGpkblNXZDZRMjU0Tm10SlVrNUhTVEoxTUc5R1VUVkdaM1pQTVhoNFozcGphV2hrY0VZd1EyaGxUMlk1U1U1bmFYTlFhM0UxYUdvNFFXVXZSRmxZYTNacWFGRTJZelpoYXk5YVdXWnFNRTV3Y1hsRlVHTktOVTFNVW0xWlIyVjRUV0ZOV20xVVluRkVTblpLYkRWS1J6TXJZa1V6V1dFeU1XaFVXbGxQZUdsVGFXTndaa1puU2pNd2EyNDFZVlZKUVhSa01EVkpXbmszZWpGelJHbFdUSFJVV0d4TVptVXZXbEZETkhCdWFrWjBjeXQwWXpFeWMxZzVhV2hKYlc1RGEyUXdWM1o2TTBOVVdtOTVRbE56WXpGVVpFSnJZamx0TUVNMWRIWm5NR1pSVURSUlowWXZla2d5VVc5YWJtNXlTVFV5ZFVGYU9FMXZiVmQwV1RKc2RETkVNR3RyY0ZJMk9YQm1Wa1JLTjNremRrNHZaWGRKUkVGUlFVST0="
-    }
-  }
-}
-```
+The response body should give code 200 and should be comparable to the one provided in the [Testbed User Guide](./TestbedUserGuide.md).
 
 From this Response body obtain the resource catalog @id
 > https://connectora:8080/api/catalogs/2cd59c94-54e4-4979-9842-36ee45dd354f
 
-  ### Messages POST /api/ids/description
-Request the specific resource catalog of Connector A.
+### 4.2. Request data set from Connector A
+#### Request Information regarding the desired resource
+Request the specific resource catalog of Connector A using POST /api/ids/description
 
 Insert the recipient url of Connector A (recipient)
 > https://connectora:8080/api/ids/data
@@ -243,8 +190,8 @@ From this response body it is obtained the necessary information in order to neg
 >
 > https://connectora:8080/api/artifacts/d5eb7f14-b99b-4bbf-94e7-4e612a4ccac6
 
-### Messages POST /api/ids/contract
-Send IDS contract request message.
+#### Start negotiation
+Send IDS contract request message POST /api/ids/contract.
 
 Insert the recipient url of Connector A (recipient)
 > https://connectora:8080/api/ids/data
@@ -303,8 +250,8 @@ The response body should give code 201 and should have this structure:
 From this response body it is obtained the Connector B agreement
 > https://localhost:8081/api/agreements/3a638d21-07fb-40a0-be14-bea6d353825e
 
-### Agreements POST /api/agreements/{id}/artifacts
-To get the artifact and their data link, make the following request.
+#### Request the artifact based on the existing agreement
+To get the artifact and their data link, make the following request: POST /api/agreements/{id}/artifacts
 
 Insert the agreement id
 > 3a638d21-07fb-40a0-be14-bea6d353825e
@@ -369,132 +316,17 @@ From this response body it is obtained the url to obtain the data
 > https://localhost:8081/api/artifacts/1d06f1c0-8b64-465a-b5f0-3e185914a67d/data
 
 If you paste it in a browser and download it is obtained the "Hello World" data.
-## Interacting with the Broker
+
+## 5. Interacting with the MetaData Broker
 In this section it will be explained how to interact with the broker and update the connector A and B to the broker.
 
-It will also be explained how using the broker it is possible to obtain Connector A data without knowing Connecotr A reaching point.
-### Messages POST /api/ids/description
-Obtain broker self-description.
+### 5.1. Query the self-description of the MetaData broker
+Obtain broker self-description utilizing Message POST /api/ids/description.
 
 Insert the recipient url
 > https://broker-localhost_broker-reverseproxy_1/infrastructure
 
-The response body should give code 200 and should have this structure:
-```json
-{
-  "@context" : {
-    "ids" : "https://w3id.org/idsa/core/",
-    "idsc" : "https://w3id.org/idsa/code/"
-  },
-  "@type" : "ids:Broker",
-  "@id" : "https://localhost/",
-  "ids:description" : [ {
-    "@value" : "A Broker with a graph persistence layer",
-    "@language" : "en"
-  } ],
-  "ids:title" : [ {
-    "@value" : "IDS Metadata Broker",
-    "@language" : "en"
-  } ],
-  "ids:maintainer" : {
-    "@id" : "https://www.iais.fraunhofer.de"
-  },
-  "ids:curator" : {
-    "@id" : "https://www.iais.fraunhofer.de"
-  },
-  "ids:inboundModelVersion" : [ "4.0.3" ],
-  "ids:outboundModelVersion" : "4.0.3",
-  "ids:resourceCatalog" : [ {
-    "@type" : "ids:ResourceCatalog",
-    "@id" : "https://w3id.org/idsa/autogen/resourceCatalog/b76c559b-359d-4e2f-bb2e-cd2692ed985e",
-    "ids:offeredResource" : [ {
-      "@type" : "ids:DataResource",
-      "@id" : "https://w3id.org/idsa/autogen/dataResource/41ea3278-89ed-4e5a-800c-836f01731dbd",
-      "ids:description" : [ ],
-      "ids:language" : [ ],
-      "ids:title" : [ ],
-      "ids:resourceEndpoint" : [ ],
-      "ids:contractOffer" : [ ],
-      "ids:sample" : [ ],
-      "ids:contentPart" : [ ],
-      "ids:representation" : [ {
-        "@type" : "ids:DataRepresentation",
-        "@id" : "https://w3id.org/idsa/autogen/dataRepresentation/44c079d3-0e53-40d3-8634-0a15f424e459",
-        "ids:description" : [ ],
-        "ids:title" : [ ],
-        "ids:instance" : [ {
-          "@type" : "ids:Artifact",
-          "@id" : "https://localhost/connectors/"
-        } ]
-      } ],
-      "ids:defaultRepresentation" : [ ],
-      "ids:resourcePart" : [ ],
-      "ids:theme" : [ ],
-      "ids:keyword" : [ ],
-      "ids:temporalCoverage" : [ ],
-      "ids:spatialCoverage" : [ ]
-    } ],
-    "ids:requestedResource" : [ ]
-  } ],
-  "ids:hasAgent" : [ ],
-  "ids:securityProfile" : {
-    "@id" : "https://w3id.org/idsa/code/BASE_SECURITY_PROFILE"
-  },
-  "ids:extendedGuarantee" : [ ],
-  "ids:hasEndpoint" : [ {
-    "@type" : "ids:ConnectorEndpoint",
-    "@id" : "https://w3id.org/idsa/autogen/connectorEndpoint/2d4cf2c8-2023-4e5e-8f3e-0906ba278295",
-    "ids:path" : "/infrastructure",
-    "ids:accessURL" : {
-      "@id" : "https://localhost/infrastructure"
-    },
-    "ids:endpointDocumentation" : [ {
-      "@id" : "https://app.swaggerhub.com/apis/idsa/IDS-Broker/1.3.1#/Multipart%20Interactions/post_infrastructure"
-    } ],
-    "ids:endpointInformation" : [ {
-      "@value" : "This endpoint provides IDS Connector and IDS Resource registration and search capabilities at the IDS Metadata Broker.",
-      "@language" : "en"
-    }, {
-      "@value" : "Dieser Endpunkt ermÃ¶glicht die Registrierung von und das Suchen nach IDS Connectoren und IDS Ressourcen am IDS Metadata Broker.",
-      "@language" : "de"
-    } ]
-  } ],
-  "ids:hasDefaultEndpoint" : {
-    "@type" : "ids:ConnectorEndpoint",
-    "@id" : "https://w3id.org/idsa/autogen/connectorEndpoint/ac1ce4c6-6e8a-490d-bf7d-2ae560fd7ba5",
-    "ids:path" : "/",
-    "ids:accessURL" : {
-      "@id" : "https://localhost/"
-    },
-    "ids:endpointDocumentation" : [ ],
-    "ids:endpointInformation" : [ {
-      "@value" : "Dieser Endpunkt liefert eine Selbstbeschreibung dieses IDS Connectors",
-      "@language" : "de"
-    }, {
-      "@value" : "Endpoint providing a self-description of this connector",
-      "@language" : "en"
-    } ]
-  },
-  "ids:connectorCatalog" : [ ]
-}
-```
-
-### Messages POST /api/ids/connector/update
-Update Connector A at the broker.
-
-At the Swagger UI of the Connector A insert the following recipient url.
-> https://broker-localhost_broker-reverseproxy_1/infrastructure
-
-The server response should give code 200.
-
-Update Connector B at the broker.
-
-At the Swagger UI of the Connector B insert the following recipient url.
-> https://broker-localhost_broker-reverseproxy_1/infrastructure
-
-The server response should give code 200.
-
-Check that the Broker has both connectors in the list of connectors.
+### 5.2 Query the MetaData Broker for available data in the Testbed
 ### Messages POST /api/ids/description
 Obtain the list of connectors at the broker.
 
@@ -728,3 +560,21 @@ From here it is obtained the accessURL of Connector A
 > "accessURL" : "https://connectora:8080/api/ids/data"
 
 From this point it can be followed the section "Steps from Connector B to negotiate data from Connector A" and proceed with all the steps included in that section.
+
+#### 5.3. Register your connector at the IDS MetaDataBroker
+Register  connector at the Broker with the message POST /api/ids/connector/update
+#### Update Connector A at the broker.
+
+At the Swagger UI of the Connector A insert the following recipient url.
+> https://broker-localhost_broker-reverseproxy_1/infrastructure
+
+The server response should give code 200.
+
+#### Update Connector B at the broker.
+
+At the Swagger UI of the Connector B insert the following recipient url.
+> https://broker-localhost_broker-reverseproxy_1/infrastructure
+
+The server response should give code 200.
+
+Check that the Broker has both connectors in the list of connectors.

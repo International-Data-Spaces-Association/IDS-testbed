@@ -600,3 +600,30 @@ The response body should give code 200 and should have this structure:
 
 ## Registering resources at connector B
 TODO
+
+## Register connector A and B at the MetaData Broker
+### Connector A
+
+At the Swagger UI of the Connector A insert the following recipient url for message POST /api/ids/connector/update:
+> https://broker-localhost_broker-reverseproxy_1/infrastructure
+
+The server response should give code 200.
+
+### Connector B
+
+At the Swagger UI of the Connector B insert the following recipient url for message POST /api/ids/connector/update:
+> https://broker-localhost_broker-reverseproxy_1/infrastructure
+
+The server response should give code 200.
+
+## Checking successful registration
+Query the MetaData Broker for available data in the Testbed
+using messages POST /api/ids/description via one of the connectors' Swagger UIs.
+
+Insert the recipient url
+> https://broker-localhost_broker-reverseproxy_1/infrastructure
+
+Insert the element id of the requested resource
+> https://localhost/connectors/
+
+The response body should give code 200 and should include both connectors in the list of connectors.
