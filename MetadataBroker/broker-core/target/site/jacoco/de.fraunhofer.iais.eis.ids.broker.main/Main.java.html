@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Main.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">broker-core</a> &gt; <a href="index.source.html" class="el_package">de.fraunhofer.iais.eis.ids.broker.main</a> &gt; <span class="el_source">Main.java</span></div><h1>Main.java</h1><pre class="source lang-java linenums">package de.fraunhofer.iais.eis.ids.broker.main;
+
+
+import de.fraunhofer.iais.eis.ids.component.core.InfomodelFormalException;
+import de.fraunhofer.iais.eis.ids.component.protocol.http.server.ComponentInteractorProvider;
+import de.fraunhofer.iais.eis.ids.index.common.main.MainTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.solr.SolrAutoConfiguration;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Collection;
+import java.util.Objects;
+
+/**
+ * Entry point to the Broker
+ */
+@Configuration
+@EnableAutoConfiguration(exclude = SolrAutoConfiguration.class)
+@ComponentScan(basePackages = { &quot;de.fraunhofer.iais.eis.ids.component.protocol.http.server&quot;} )
+<span class="nc" id="L32">public class Main extends MainTemplate implements ComponentInteractorProvider {</span>
+
+<span class="nc" id="L34">    Logger logger = LoggerFactory.getLogger(Main.class);</span>
+
+    //Initializing properties which are not inherited from MainTemplate
+    @Value(&quot;${sparql.url}&quot;)
+    private String sparqlEndpointUrl;
+
+    @Value(&quot;${infomodel.contextUrl}&quot;)
+    private String contextDocumentUrl;
+
+    @Value(&quot;${jwks.trustedHosts}&quot;)
+    private Collection&lt;String&gt; trustedJwksHosts;
+
+    @Value(&quot;${daps.validateIncoming}&quot;)
+    private boolean dapsValidateIncoming;
+
+    @Value(&quot;${component.responseSenderAgent}&quot;)
+    private String responseSenderAgent;
+
+    @Value(&quot;${infomodel.validateWithShacl}&quot;)
+    private boolean validateShacl;
+
+    //Environment allows us to access application.properties
+    @Autowired
+    private Environment env;
+
+    /**
+     * This function is called during startup and takes care of the initialization
+     */
+    @PostConstruct
+    @Override
+    public void setUp() {
+        //Assigning variables which are inherited from MainTemplate
+<span class="nc" id="L66">        componentUri = env.getProperty(&quot;component.uri&quot;);</span>
+<span class="nc" id="L67">        componentMaintainer = env.getProperty(&quot;component.maintainer&quot;);</span>
+<span class="nc" id="L68">        componentCatalogUri = env.getProperty(&quot;component.catalogUri&quot;);</span>
+<span class="nc" id="L69">        componentModelVersion = env.getProperty(&quot;component.modelversion&quot;);</span>
+<span class="nc" id="L70">        sslCertificatePath = env.getProperty(&quot;ssl.certificatePath&quot;);</span>
+<span class="nc" id="L71">        elasticsearchHostname = env.getProperty(&quot;elasticsearch.hostname&quot;);</span>
+<span class="nc" id="L72">        elasticsearchPort = Integer.parseInt(Objects.requireNonNull(env.getProperty(&quot;elasticsearch.port&quot;)));</span>
+<span class="nc" id="L73">        keystorePassword = env.getProperty(&quot;keystore.password&quot;);</span>
+<span class="nc" id="L74">        keystoreAlias = env.getProperty(&quot;keystore.alias&quot;);</span>
+//        componentIdsId = env.getProperty(&quot;component.idsid&quot;);
+<span class="nc" id="L76">        dapsUrl = env.getProperty(&quot;daps.url&quot;);</span>
+<span class="nc" id="L77">        trustAllCerts = Boolean.parseBoolean(env.getProperty(&quot;ssl.trustAllCerts&quot;));</span>
+<span class="nc" id="L78">        ignoreHostName = Boolean.parseBoolean(env.getProperty(&quot;ssl.ignoreHostName&quot;));</span>
+
+        try {
+<span class="nc" id="L81">            multipartComponentInteractor = new AppConfig(createSelfDescriptionProvider())</span>
+<span class="nc" id="L82">                    .sparqlEndpointUrl(sparqlEndpointUrl)</span>
+<span class="nc" id="L83">                    .contextDocumentUrl(contextDocumentUrl)</span>
+<span class="nc" id="L84">                    .catalogUri(new URI(componentCatalogUri))</span>
+<span class="nc" id="L85">                    .securityTokenProvider(createSecurityTokenProvider())</span>
+<span class="nc" id="L86">                    .trustedJwksHosts(trustedJwksHosts)</span>
+<span class="nc" id="L87">                    .dapsValidateIncoming(dapsValidateIncoming)</span>
+<span class="nc" id="L88">                    .responseSenderAgent(new URI(responseSenderAgent))</span>
+<span class="nc" id="L89">                    .performShaclValidation(validateShacl)</span>
+<span class="nc" id="L90">                    .build();</span>
+        }
+<span class="nc" id="L92">        catch (URISyntaxException e) {</span>
+<span class="nc" id="L93">            throw new InfomodelFormalException(e);</span>
+<span class="nc" id="L94">        }</span>
+<span class="nc" id="L95">    }</span>
+
+    @Override @PreDestroy
+    public void shutDown() throws IOException {
+
+<span class="nc" id="L100">    }</span>
+
+
+    public static void main(String[] args) {
+<span class="nc" id="L104">        SpringApplication.run(Main.class, args);</span>
+<span class="nc" id="L105">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -1,0 +1,43 @@
+<!--
+
+    Copyright 2020 Fraunhofer Institute for Software and Systems Engineering
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<FindBugsFilter>
+    <Match>
+        <!-- TODO: Enable later. At the moment there are to many endpoint reported and the documentation on what finsecbugs expects is lacking -->
+        <Bug pattern="SPRING_ENDPOINT"/>
+    </Match>
+    <Match>
+        <!-- Way too many false positives and no easy way to satisfy spotbugs without modifing the code -->
+        <Bug pattern="BC_UNCONFIRMED_CAST_OF_RETURN_VALUE"/>
+    </Match>
+    <Match>
+        <!-- Fixed in java 8, project requires java 11, thus disabled -->
+        <Bug pattern="WEAK_FILENAMEUTILS"/>
+    </Match>
+    <Match>
+        <!-- Too many warnings, needs too be evaluated some time. -->
+        <Bug pattern="EI_EXPOSE_REP"/>
+    </Match>
+    <Match>
+        <!-- Too many warnings, needs too be evaluated some time. -->
+        <Bug pattern="EI_EXPOSE_REP2"/>
+    </Match>
+    <Match>
+        <!-- Does not work with IDS Messaging Service, too many false positives -->
+        <Bug pattern="DLS_DEAD_LOCAL_STORE"/>
+    </Match>
+</FindBugsFilter>

@@ -1,0 +1,10 @@
+/home/kali/Desktop/today/IDS-Testbed/MetadataBroker/open-broker-common/src/main/java/de/fraunhofer/iais/eis/ids/broker/core/common/persistence/ConnectorModelCreator.java
+/home/kali/Desktop/today/IDS-Testbed/MetadataBroker/open-broker-common/src/main/java/de/fraunhofer/iais/eis/ids/broker/core/common/persistence/ResourceStatusHandler.java
+/home/kali/Desktop/today/IDS-Testbed/MetadataBroker/open-broker-common/src/main/java/de/fraunhofer/iais/eis/ids/broker/core/common/persistence/RegistrationHandler.java
+/home/kali/Desktop/today/IDS-Testbed/MetadataBroker/open-broker-common/src/main/java/de/fraunhofer/iais/eis/ids/broker/core/common/impl/SelfDescriptionPersistenceAdapter.java
+/home/kali/Desktop/today/IDS-Testbed/MetadataBroker/open-broker-common/src/main/java/de/fraunhofer/iais/eis/ids/broker/core/common/persistence/ResourceModelCreator.java
+/home/kali/Desktop/today/IDS-Testbed/MetadataBroker/open-broker-common/src/main/java/de/fraunhofer/iais/eis/ids/broker/core/common/impl/ResourcePersistenceAdapter.java
+/home/kali/Desktop/today/IDS-Testbed/MetadataBroker/open-broker-common/src/main/java/de/fraunhofer/iais/eis/ids/broker/core/common/persistence/SelfDescriptionPersistenceAndIndexing.java
+/home/kali/Desktop/today/IDS-Testbed/MetadataBroker/open-broker-common/src/main/java/de/fraunhofer/iais/eis/ids/broker/core/common/persistence/ResourceMessageHandler.java
+/home/kali/Desktop/today/IDS-Testbed/MetadataBroker/open-broker-common/src/main/java/de/fraunhofer/iais/eis/ids/broker/core/common/persistence/ConnectorUnavailableValidationStrategy.java
+/home/kali/Desktop/today/IDS-Testbed/MetadataBroker/open-broker-common/src/main/java/de/fraunhofer/iais/eis/ids/broker/core/common/persistence/ResourcePersistenceAndIndexing.java

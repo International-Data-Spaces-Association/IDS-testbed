@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ResourcePersistenceAdapter.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">open-broker-common</a> &gt; <a href="index.source.html" class="el_package">de.fraunhofer.iais.eis.ids.broker.core.common.impl</a> &gt; <span class="el_source">ResourcePersistenceAdapter.java</span></div><h1>ResourcePersistenceAdapter.java</h1><pre class="source lang-java linenums">package de.fraunhofer.iais.eis.ids.broker.core.common.impl;
+
+import de.fraunhofer.iais.eis.Resource;
+import de.fraunhofer.iais.eis.ids.broker.core.common.persistence.ResourceStatusHandler;
+import de.fraunhofer.iais.eis.ids.component.core.RejectMessageException;
+import de.fraunhofer.iais.eis.ids.connector.commons.broker.QueryResultsProvider;
+
+import java.io.IOException;
+import java.net.URI;
+
+/**
+ * Abstract class which provides the required functions for building a persistence adapter for IDS Resources
+ */
+<span class="nc" id="L14">public abstract class ResourcePersistenceAdapter implements ResourceStatusHandler, QueryResultsProvider {</span>
+
+    /**
+     * This function updates an existing resource or inserts a new resource into the triple store and updates the index correspondingly
+     * It should be called when a ResourceUpdateMessage was received
+     * @param resource The new / updated resource which was announced to the broker
+     * @param connectorUri The connector which is offering the resource
+     * @return The new URI of the resource, which may have been rewritten by the broker
+     * @throws IOException may be thrown if the connection to the triple store or index fails
+     * @throws RejectMessageException may be thrown if, for example, the resource doesn't exist yet or some internal error occurs
+     */
+    @Override
+    public abstract URI updated(Resource resource, URI connectorUri) throws IOException, RejectMessageException;
+
+    /**
+     * This function removes an existing resource from the triple store and updates the index correspondingly
+     * It should be called when a ResourceUnavailableMessage was received
+     * @param resourceUri A URI reference to the resource which is now unavailable
+     * @param connectorUri The connector which used to offer the resource
+     * @throws IOException may be thrown if the connection to the triple store or index fails
+     * @throws RejectMessageException may be thrown if, for example, the resource doesn't exist yet or some internal error occurs
+     */
+    @Override
+    public abstract void unavailable(URI resourceUri, URI connectorUri) throws IOException, RejectMessageException;
+
+    /**
+     * This function provides the possibility to fire a general query at the triple store persisting the resources
+     * @param query Query to be evaluated
+     * @return Query result as String
+     */
+    @Override
+    public abstract String getResults(String query) throws RejectMessageException;
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
