@@ -371,7 +371,7 @@ cd Testbed/DataspaceConnectorB/
 ## Component Documentation
 The official documentation will cover the introductions, deployment, documentation and communication guide of the component.
 
-Official documentation: https://international-data-spaces-association.github.io/DataspaceConnector
+Official documentation: https://github.com/International-Data-Spaces-Association/DataspaceConnector/tree/v6.2.0
 
 ## Continue here after reading the official documentation
 Official configuration documentation: https://international-data-spaces-association.github.io/DataspaceConnector/Deployment/Configuration#configuration
