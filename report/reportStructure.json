@@ -1,0 +1,99 @@
+{
+  "Document": {
+    "Version": "1.0",
+    "CreateDate": "2021-12-16",
+    "Name": "Certification Report"
+  },
+  "Authors": [
+    {
+      "Name": "John Doe"
+    },
+    {
+      "Name": "Marry Doe"
+    },
+    {
+      "Name": "Jar Jar Binks"
+    }
+  ],
+  "TestFacility": {
+    "Name": "IDS Connector",
+    "address": {
+      "street": "....",
+      "postalCode": "12345",
+      "city": "Berlin",
+      "countryCode": "DEU",
+      "country": "Germany"
+    }
+  },
+  "Validation": {
+    "Profile": "Trust profile",
+    "Type": "XXX",
+    "Date": "2022-10-15"
+  },
+  "Component": {
+    "Name": "IDS Connector",
+    "Version": "1.2.3"
+  },
+  "Chapters": [
+    {
+      "Headline": "Introduction",
+      "Content": [
+        {
+          "Headline": "Information from the technical evaluation report",
+          "Content": "Quick introdution where the basic information of the report is shown."
+        },
+        {
+          "Headline": "Developer and TOE information",
+          "Content": "Quick introdution where the basic information of the component and its developer is shown. This includes: Component under test + version + Developer of the component "
+        }
+      ]
+    },
+    {
+      "Headline": "Management summary",
+      "Content": "Summary of the result."
+    },
+    {
+      "Headline": "Description of the TOE",
+      "Content": "Functional description of the TOE. Inventory of security functions identified in the security statement"
+    },
+    {
+      "Headline": "Execution environment",
+      "Content": "Description of the execution environment for the tests including the tools used for it, the operating system in wich it was tested, etc"
+    },
+    {
+      "Headline": "Review and test results",
+      "Content": "Quick summary of the results of the main aspects of the evaluation where it is clear wether these tests passed or fail.  This chapter will be divided in the different aspects that the validation tested, this includes documentation review, security review, functional review, etc. All of this parts of the validation will be structured in a way that can easily be understood the type of testing done for each of them and the result of that validation. As a last division of this chapter, it will be included a traceability matrix that link all the test cases done with the trust profile criteria that it validates. It also would be interesting to have a link of each of the TC ponting to the TC report in the annex section."
+    },
+    {
+      "Headline": "Evaluation Verdict",
+      "Content": "In this chapter, the final verdict of the validation is stated. This chapter is divided in the same categories as the previous (documentation, security, functional, etc) and appart from a pass or fail and an evaluation of the tests done against the component."
+    },
+    {
+      "Headline": "Annex",
+      "Content": "In the annex section it will be added the full reports of all the test cases done for each of the different parts of the validation process."
+    }
+  ],
+  "Criteria": [
+    {
+      "Crit_group": "Communication Integrity",
+      "Crit_id": "COM_03",
+      "Name": "State of the art cryptography",
+      "Result": "Pass",
+      "Remediation": ""
+    },
+    {
+      "Crit_group": "Communication Integrity",
+      "Crit_id": "COM_04",
+      "Name": "lipsum",
+      "Result": "Fail",
+      "Remediation": "Description why failed"
+    },
+    {
+      "Crit_group": "lipsum lipsum",
+      "Crit_id": "COM_05",
+      "Name": "lipsum",
+      "Result": "Pass",
+      "Remediation": ""
+    }
+  ]
+}
