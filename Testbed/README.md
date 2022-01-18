@@ -208,12 +208,16 @@ Move to right directory, and make the files executable:
 
 ```
 cd Testbed/CertificateAuthority/
-chmod a+x *.py
 ```
 
 The official documentation will cover the scope, dependencies and usage of the component.
 
 Official documentation: https://github.com/International-Data-Spaces-Association/IDS-testbed/tree/master/CA
+
+The preconfigured setup includes certificates for:
+* a root CA called "ReferenceTestbedCA"
+* a subCA called "ReferenceTestbedSubCA" and
+* certificates for devices called "testbed1", ..., "testbed10"
 
 ## Continue here after the official documentation has been followed
 
@@ -299,14 +303,14 @@ nano config/clients.yml
 
 Add the aki/ski extension from the client's certificate in `client_id`
 
-It could look something like this 
+It could look something like this
 
 ```
 client_id: 66:07:ED:E5:80:E4:29:6D:1E:DD:F7:43:CA:0E:EB:38:32:C8:3A:43:keyid:07:FC:95:17:C4:95:B9:E4:AD:09:5F:07:1E:D2:20:75:2D:89:66:85`
 ```
 and change the `certfile` to the {CERTFILE}.cert file dropped earlier in the `keys` directory
 
-It could look something like this 
+It could look something like this
 
 ```
 certile: testbed1.cert
