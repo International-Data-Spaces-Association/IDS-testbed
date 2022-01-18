@@ -11,10 +11,8 @@ def init():
     os.mkdir('data/ca')
     os.mkdir('data/subca')
     os.mkdir('data/cert')
-    open('data/.5660383bb674636060c3e2279e5a2139', 'w').close()
-
 
 def check_init():
-    if not os.path.isfile('data/.5660383bb674636060c3e2279e5a2139'):
+    if not os.path.isdir('data/') or not os.path.isdir('data/ca') or not os.path.isdir('data/subca') or not os.path.isdir('data/cert'):
         print("PKI structure is not initialized")
         exit(1)
