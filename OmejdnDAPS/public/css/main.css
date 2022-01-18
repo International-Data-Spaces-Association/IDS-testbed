@@ -1,0 +1,75 @@
+fieldset {
+  /*width: 40em;*/
+  border: none;
+  /*border-radius: 1em;*/
+  /*box-shadow: 0 1px 2px -1px rgba(0,0,0,.5);*/
+}
+
+form input {
+  border: 1px solid #555;
+  border-radius: 2em;
+  font-size: 1em;
+  padding: 0.3em;
+}
+
+.logo {
+  width: 12em;
+}
+
+.button {
+  background-color: #fff;
+  border-color: #ddd;
+  border: 1px solid #eee;
+  box-shadow: none;
+  border-radius: 0em;
+  /*box-shadow: 0 1px 2px -1px rgba(0,0,0,.5);*/
+  font-size: 1em;
+  padding: 1em;
+  text-decoration: none;
+  color: #000;
+  min-width: 6em;
+}
+
+.button:hover {
+  border-color: #000;
+}
+
+.idplist a {
+  display: inline-block;
+  margin-bottom: 1em;
+  width: 40em;
+}
+
+.idplist a img {
+  width: 10em;
+}
+
+.idplist a span {
+  width: 10em;
+  font-size: 2em;
+}
+
+h2 {
+  display: inline-block;
+  text-align: center;
+  margin-bottom: 1em;
+  font-size: 1.5em;
+}
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+  padding: 0;
+}
+
+ul.scopes {
+  display: inline-block;
+  text-align: left;
+}
+
+div.parent {
+  text-align: center;
+}

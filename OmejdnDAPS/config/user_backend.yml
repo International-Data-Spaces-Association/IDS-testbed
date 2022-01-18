@@ -1,0 +1,16 @@
+---
+yaml:
+  location: config/users.yml
+sqlite:
+  location: config/users.db
+ldap:
+  host: whitepages.bfh.ch
+  port: 636
+  baseDN: dc=bfh,dc=ch
+  uidKey: mail
+  userAttributes:
+    - givenname
+    - fullname
+    - telephonenumber
+    - ou
+

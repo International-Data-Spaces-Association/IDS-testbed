@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ResourceModelCreator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">open-broker-common</a> &gt; <a href="index.source.html" class="el_package">de.fraunhofer.iais.eis.ids.broker.core.common.persistence</a> &gt; <span class="el_source">ResourceModelCreator.java</span></div><h1>ResourceModelCreator.java</h1><pre class="source lang-java linenums">package de.fraunhofer.iais.eis.ids.broker.core.common.persistence;
+
+import de.fraunhofer.iais.eis.RejectionReason;
+import de.fraunhofer.iais.eis.ids.component.core.RejectMessageException;
+import de.fraunhofer.iais.eis.ids.index.common.persistence.INFOMODEL;
+import de.fraunhofer.iais.eis.ids.index.common.persistence.ModelCreator;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.ResourceFactory;
+import org.apache.jena.rdf.model.Statement;
+import org.apache.jena.vocabulary.RDF;
+
+import java.net.URI;
+import java.util.Optional;
+
+/**
+ * This class is an extension to the ModelCreator class, providing functionality to determine whether an RDF triple defines a Resource
+ */
+<span class="nc" id="L19">public class ResourceModelCreator extends ModelCreator {</span>
+
+    private URI connectorUri;
+
+    /**
+     * Setter method for the URI of the connector holding this resource
+     * @param connectorUri URI of the connector holding this resource
+     * @return The updated ResourceModelCreator
+     */
+    public ResourceModelCreator setConnectorUri(URI connectorUri)
+    {
+<span class="nc" id="L30">        this.connectorUri = connectorUri;</span>
+<span class="nc" id="L31">        return this;</span>
+    }
+
+    /**
+     * This function determines whether a statement defines a Resource
+     * @param statement The statement to be tested
+     * @return true, if it defines a Resource, otherwise false
+     */
+    @Override
+    public boolean subjectIsInstanceInnerModel(Statement statement) {
+<span class="nc bnc" id="L41" title="All 2 branches missed.">        return statement.getPredicate().equals(RDF.type) &amp;&amp;</span>
+<span class="nc bnc" id="L42" title="All 2 branches missed.">                        statement.getObject().equals(INFOMODEL.RESOURCE);</span>
+    }
+
+    /**
+     * For resources, the named graph is NOT the resource URI, but the URI of the connector holding the resource, hence we need to override this function
+     * @param model Model for which the named graph should be determined
+     * @return URI, wrapped in an RDF4J Resource, of the connector holding this resource
+     * @throws RejectMessageException thrown, if the named graph could not be determined, e.g. if the connector is not known
+     */
+    //Resources are stored in the same named graph as the connector offering them
+    @Override
+    public Optional&lt;Resource&gt; determineNamedGraph(Model model) throws RejectMessageException {
+<span class="nc bnc" id="L54" title="All 2 branches missed.">        if(connectorUri == null)</span>
+        {
+<span class="nc" id="L56">            throw new RejectMessageException(RejectionReason.INTERNAL_RECIPIENT_ERROR, new NullPointerException(&quot;Could not determine the named graph of the resource&quot;));</span>
+        }
+<span class="nc" id="L58">        return Optional.of(ResourceFactory.createResource(connectorUri.toString()));</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

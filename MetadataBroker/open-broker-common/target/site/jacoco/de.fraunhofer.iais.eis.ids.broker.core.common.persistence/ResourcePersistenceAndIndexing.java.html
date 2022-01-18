@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ResourcePersistenceAndIndexing.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">open-broker-common</a> &gt; <a href="index.source.html" class="el_package">de.fraunhofer.iais.eis.ids.broker.core.common.persistence</a> &gt; <span class="el_source">ResourcePersistenceAndIndexing.java</span></div><h1>ResourcePersistenceAndIndexing.java</h1><pre class="source lang-java linenums">package de.fraunhofer.iais.eis.ids.broker.core.common.persistence;
+
+import de.fraunhofer.iais.eis.Connector;
+import de.fraunhofer.iais.eis.InfrastructureComponent;
+import de.fraunhofer.iais.eis.RejectionReason;
+import de.fraunhofer.iais.eis.Resource;
+import de.fraunhofer.iais.eis.ids.broker.core.common.impl.ResourcePersistenceAdapter;
+import de.fraunhofer.iais.eis.ids.component.core.RejectMessageException;
+import de.fraunhofer.iais.eis.ids.index.common.persistence.*;
+import de.fraunhofer.iais.eis.ids.index.common.persistence.spi.Indexing;
+import de.fraunhofer.iais.eis.ids.jsonld.Serializer;
+import org.apache.jena.query.ParameterizedSparqlString;
+import org.apache.jena.query.QuerySolution;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ResourceFactory;
+import org.apache.jena.rdf.model.Statement;
+import org.apache.jena.rdf.model.StmtIterator;
+import org.apache.jena.sparql.ARQException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
+import java.io.IOException;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+/**
+ * This class takes care of persisting and indexing any changes to resources that are announced to the broker
+ */
+public class ResourcePersistenceAndIndexing extends ResourcePersistenceAdapter {
+<span class="nc" id="L35">    private final ResourceModelCreator resourceModelCreator = new ResourceModelCreator();</span>
+
+    private static RepositoryFacade repositoryFacade;
+
+    //Note that adding a resource is done as follows:
+    //1) Find the connector containing the resource
+    //2) Add the resource to the catalog of this connector
+    //3) Re-index the connector. While doing so, also update resource index
+    //For this reason, this indexing is not of type Resource, but InfrastructureComponent (i.e. Connector + X)
+<span class="nc" id="L44">    private Indexing&lt;InfrastructureComponent&gt; indexing = new NullIndexing&lt;&gt;();</span>
+
+    private final URI componentCatalogUri;
+
+<span class="nc" id="L48">    private final Logger logger = LoggerFactory.getLogger(getClass());</span>
+
+
+    /**
+     * Constructor
+     * @param repositoryFacade repository (triple store) to which the modifications should be stored
+     */
+<span class="nc" id="L55">    public ResourcePersistenceAndIndexing(RepositoryFacade repositoryFacade, URI componentCatalogUri) {</span>
+<span class="nc" id="L56">        ResourcePersistenceAndIndexing.repositoryFacade = repositoryFacade;</span>
+<span class="nc" id="L57">        this.componentCatalogUri = componentCatalogUri;</span>
+<span class="nc" id="L58">        Serializer.addKnownNamespace(&quot;owl&quot;, &quot;http://www.w3.org/2002/07/owl#&quot;);</span>
+<span class="nc" id="L59">    }</span>
+
+    /**
+     * Setter for the indexing method
+     * @param indexing indexing to be used
+     */
+    public void setIndexing(Indexing&lt;InfrastructureComponent&gt; indexing) {
+<span class="nc" id="L66">        this.indexing = indexing;</span>
+<span class="nc" id="L67">    }</span>
+
+    /**
+     * Setter for the context document URL. Typically extracted from the application.properties
+     * @param contextDocumentUrl the context document URL to be used
+     */
+    public void setContextDocumentUrl(String contextDocumentUrl) {
+<span class="nc" id="L74">        resourceModelCreator.setContextFetchStrategy(JsonLdContextFetchStrategy.FROM_URL, contextDocumentUrl);</span>
+<span class="nc" id="L75">    }</span>
+
+    /**
+     * Function to obtain the catalog URI of a given connector. This is required when the connector makes new resources available or modifies existing ones
+     * @param connectorUri The URI of the connector
+     * @return The URI of the IDS Catalog of the connector in question
+     * @throws RejectMessageException if the URI could not be retrieved, e.g. because the connector is not known, is inactive or has been deleted
+     * @throws URISyntaxException if the URI of the catalog is malformed
+     */
+    private URI getConnectorCatalog(URI connectorUri) throws RejectMessageException, URISyntaxException {
+
+        //Launch query
+<span class="nc" id="L87">        String queryString = &quot;PREFIX ids: &lt;https://w3id.org/idsa/core/&gt; &quot; +</span>
+                //Grab URI of catalog containing the resource
+                &quot;SELECT DISTINCT ?catalog &quot; +
+                //Search is restricted to active graphs by default. This is done within the getResults function (calling SparqlQueryRewriter)
+//        repositoryFacade.getActiveGraphs().forEach(graphName -&gt; queryString.append(&quot;FROM NAMED &lt;&quot;).append(graphName).append(&quot;&gt; &quot;));
+                //Bind named graph to restrict search to single named graph, which must be, due to the FROM NAMED section above, active
+<span class="nc" id="L93">                &quot;WHERE { BIND(&lt;&quot; + connectorUri.toString() + &quot;&gt; AS ?connector) . &quot; +</span>
+                //Only interested in the catalog part. The connector is contained in a named graph, which has the connector's ID as name
+                &quot;GRAPH ?connector { ?connector ids:resourceCatalog ?catalog . } }&quot;;
+<span class="nc" id="L96">        String catalogString = getResults(queryString);</span>
+        //Are the results equal to the binding name &quot;?catalog&quot; ? If so, no such catalog was found
+<span class="nc bnc" id="L98" title="All 2 branches missed.">        if(catalogString.equals(&quot;?catalog\n&quot;))</span>
+        {
+<span class="nc" id="L100">            throw new RejectMessageException(RejectionReason.NOT_FOUND, new NullPointerException(&quot;Catalog of connector &quot; + connectorUri + &quot; not found. Did you send a ConnectorUpdateMessage yet?&quot;));</span>
+        }
+        //TODO: What about multiple catalogs?
+<span class="nc" id="L103">        return new URI(catalogString.substring(catalogString.indexOf(&quot;&lt;&quot;) + 1, catalogString.indexOf(&quot;&gt;&quot;)));</span>
+    }
+
+    /**
+     * Function to query the repository whether a resource with a given URI is known to the broker
+     * @param resourceUri The URI of the resource to be tested
+     * @return true, if the resource is known to the broker AND the connector holding the resource is non-passivated and non-deleted
+     * @throws RejectMessageException if an internal error occurs
+     */
+    @Override
+    public boolean resourceExists(URI resourceUri) throws RejectMessageException {
+        try {
+<span class="nc" id="L115">            List&lt;String&gt; activeGraphs = repositoryFacade.getActiveGraphs();</span>
+<span class="nc bnc" id="L116" title="All 2 branches missed.">            if(activeGraphs.isEmpty()) return false;</span>
+
+
+<span class="nc" id="L119">            StringBuilder queryString = new StringBuilder();</span>
+<span class="nc" id="L120">            queryString.append(&quot;PREFIX ids: &lt;https://w3id.org/idsa/core/&gt; &quot;);</span>
+<span class="nc" id="L121">            queryString.append(&quot;ASK &quot;);</span>
+<span class="nc" id="L122">            activeGraphs.forEach(graphName -&gt; queryString.append(&quot;FROM NAMED &lt;&quot;).append(graphName).append(&quot;&gt; &quot;));</span>
+<span class="nc" id="L123">            queryString.append(&quot;WHERE { GRAPH ?g { &quot;)</span>
+                    //Instead of binding the value here, use the more secure parameter binding of parameterized sparql strings
+                    //.append(&quot;BIND(&lt;&quot;).append(resourceUri.toString()).append(&quot;&gt; AS ?res) . &quot;)
+<span class="nc" id="L126">                       .append(&quot;{ ?res a ids:Resource . }&quot;</span>
+                               + &quot; UNION { ?res a ids:TextResource . }&quot;
+                               + &quot; UNION { ?res a ids:AppResource . }&quot;
+                               + &quot; UNION { ?res a ids:DataResource . } \n&quot;
+                               + &quot;  UNION { ?res a ids:AudioResource . } \n&quot;
+                               + &quot;  UNION { ?res a ids:ImageResource . } \n&quot;
+                               + &quot;  UNION { ?res a ids:VideoResource . } \n&quot;
+<span class="nc" id="L133">                               + &quot;  UNION { ?res a ids:SoftwareResource . }&quot;).append(&quot;?res ?p ?o . } }&quot;);</span>
+
+
+<span class="nc" id="L136">            ParameterizedSparqlString parameterizedSparqlString = new ParameterizedSparqlString(queryString.toString());</span>
+            //Replace variable securely
+<span class="nc" id="L138">            parameterizedSparqlString.setIri(&quot;res&quot;, resourceUri.toString());</span>
+
+<span class="nc" id="L140">            return repositoryFacade.booleanQuery(parameterizedSparqlString.toString());</span>
+        }
+<span class="nc" id="L142">        catch (Exception e)</span>
+        {
+            //If an injection attack is detected, an ARQException will be thrown, see:
+            // https://jena.apache.org/documentation/query/parameterized-sparql-strings.html
+<span class="nc bnc" id="L146" title="All 2 branches missed.">            if(e instanceof ARQException)</span>
+            {
+<span class="nc" id="L148">                logger.warn(&quot;Possible injection attack detected&quot;, e);</span>
+                //Do not provide any further information to the attacker
+<span class="nc" id="L150">                throw new RejectMessageException(RejectionReason.MALFORMED_MESSAGE);</span>
+            }
+<span class="nc" id="L152">            throw new RejectMessageException(RejectionReason.INTERNAL_RECIPIENT_ERROR, e);</span>
+        }
+    }
+
+
+    /**
+     * Function to persist and index modifications to an existing resource
+     * @param resource The updated resource which was announced to the broker
+     * @param connectorUri The connector which is offering the resource
+     * @throws IOException thrown, if the connection to the repository could not be established
+     * @throws RejectMessageException thrown, if the update is not permitted, e.g. because the resource of an inactive connector is modified, or if an internal error occurs
+     */
+    @Override
+    public URI updated(Resource resource, URI connectorUri) throws IOException, RejectMessageException {
+        URI catalogUri;
+<span class="nc" id="L167">        logger.info(&quot;Update request received. Connector URI: &quot; + connectorUri + &quot; with resource &quot; + resource.getId());</span>
+        try {
+            //Check if the connectorURI is rewritten already. If not, rewrite now
+<span class="nc bnc" id="L170" title="All 2 branches missed.">            if(!connectorUri.toString().startsWith(componentCatalogUri.toString())) {</span>
+<span class="nc" id="L171">                connectorUri = SelfDescriptionPersistenceAndIndexing.rewriteConnectorUri(connectorUri);</span>
+<span class="nc" id="L172">                logger.info(&quot;Rewrote connectorUri to &quot; + connectorUri);</span>
+<span class="nc" id="L173">                logger.info(&quot;Connector URI did not start with our component catalog URI: &quot; + componentCatalogUri);</span>
+            }
+<span class="nc" id="L175">            logger.info(&quot;Fetching catalog of connector&quot;);</span>
+<span class="nc" id="L176">            catalogUri = getConnectorCatalog(connectorUri);</span>
+<span class="nc" id="L177">            logger.info(&quot;Catalog found. URI: &quot; + catalogUri);</span>
+
+            //Rewrite resource
+<span class="nc" id="L180">            SelfDescriptionPersistenceAndIndexing.replacedIds = new HashMap&lt;&gt;(); //Clear the map tracking all URIs that were replaced</span>
+<span class="nc" id="L181">            resource = new Serializer().deserialize( //Parse to Java Class</span>
+<span class="nc" id="L182">                    SelfDescriptionPersistenceAndIndexing.addSameAsStatements( //Add owl:sameAs statements for all URIs we are replacing</span>
+<span class="nc" id="L183">                            SelfDescriptionPersistenceAndIndexing.rewriteResource(resource.toRdf(), resource, catalogUri)), //Replace URIs</span>
+                    Resource.class); //Result of parsing should be a Resource
+<span class="nc" id="L185">        } catch (URISyntaxException e) {</span>
+<span class="nc" id="L186">            throw new RejectMessageException(RejectionReason.INTERNAL_RECIPIENT_ERROR, e);</span>
+<span class="nc" id="L187">        }</span>
+
+<span class="nc" id="L189">        logger.info(&quot;Checking if connector is active in triple store. ID: &quot; + connectorUri);</span>
+<span class="nc bnc" id="L190" title="All 2 branches missed.">        if (!repositoryFacade.graphIsActive(connectorUri.toString())) {</span>
+<span class="nc" id="L191">            connectorUri = URI.create(componentCatalogUri.toString() + connectorUri.hashCode());</span>
+<span class="nc bnc" id="L192" title="All 2 branches missed.">            if (!repositoryFacade.graphIsActive(connectorUri.toString())) {</span>
+<span class="nc" id="L193">                logger.info(&quot;Found that connector is not active. Must be registered first&quot;);</span>
+<span class="nc" id="L194">                throw new RejectMessageException(RejectionReason.NOT_FOUND, new NullPointerException(&quot;The connector with URI &quot; + connectorUri + &quot; is not actively registered at this broker. Cannot update resource for this connector.&quot;));</span>
+            }
+        }
+
+<span class="nc" id="L198">        logger.info(&quot;Rewrote resource. New URI: &quot; + resource.getId().toString());</span>
+
+        //Try to remove the resource from Triple Store if it exists, so that it is updated properly.
+<span class="nc bnc" id="L201" title="All 2 branches missed.">        if (resourceExists(resource.getId())) {</span>
+<span class="nc" id="L202">            logger.info(&quot;Resource already exists. Removing&quot;);</span>
+<span class="nc" id="L203">            removeFromTriplestore(resource.getId(), connectorUri);</span>
+        }
+
+        try {
+<span class="nc" id="L207">            addToTriplestore(resource, connectorUri, catalogUri);</span>
+<span class="nc" id="L208">        } catch (URISyntaxException e) {</span>
+<span class="nc" id="L209">            throw new RejectMessageException(RejectionReason.INTERNAL_RECIPIENT_ERROR, e);</span>
+<span class="nc" id="L210">        }</span>
+        Connector
+<span class="nc" id="L212">                connector = repositoryFacade.getReducedConnector(connectorUri);</span>
+<span class="nc" id="L213">        indexing.updateResource(connector, resource);</span>
+<span class="nc" id="L214">        indexing.update(connector);</span>
+
+        //Return the updated resource URI
+<span class="nc" id="L217">        return resource.getId();</span>
+    }
+
+    static URI tryGetRewrittenResourceUri(URI connectorUri, URI resourceUri) throws RejectMessageException {
+        //Cannot do this as parameterised SPARQL query, as the connector URI is not  bound to a variable, but to the FROM clause instead
+<span class="nc" id="L222">        ParameterizedSparqlString pss = new ParameterizedSparqlString();</span>
+<span class="nc" id="L223">        String queryString = &quot;PREFIX ids: &lt;https://w3id.org/idsa/core/&gt; SELECT ?uri FROM NAMED &lt;&quot; + connectorUri.toString() + &quot;&gt; WHERE { GRAPH ?g { ?uri a ids:Resource . FILTER regex( str(?uri), \&quot;&quot; + resourceUri.hashCode() + &quot;\&quot; ) } } &quot;;</span>
+<span class="nc" id="L224">        ArrayList&lt;QuerySolution&gt; solution = repositoryFacade.selectQuery(queryString);</span>
+<span class="nc bnc" id="L225" title="All 4 branches missed.">        if(solution != null &amp;&amp; !solution.isEmpty())</span>
+        {
+<span class="nc" id="L227">            return URI.create(solution.get(0).get(&quot;uri&quot;).asResource().getURI());</span>
+        }
+<span class="nc" id="L229">        throw new RejectMessageException(RejectionReason.NOT_FOUND, new NullPointerException(&quot;The requested Resource could not be found&quot;));</span>
+    }
+
+    /**
+     * Function to remove a given Resource from the indexing and the triple store
+     * @param resourceUri A URI reference to the resource which is now unavailable
+     * @param connectorUri The connector which used to offer the resource
+     * @throws IOException if the connection to the triple store could not be established
+     * @throws RejectMessageException if the operation is not permitted, e.g. because one is trying to delete the resource from another connector, the resource is not known or due to an internal error
+     */
+    //TODO: ResourceUnavailableValidationStrategy? Need to make sure that one cannot delete another connector's resources
+    @Override
+    public void unavailable(URI resourceUri, URI connectorUri) throws IOException, RejectMessageException {
+<span class="nc bnc" id="L242" title="All 2 branches missed.">        if(!repositoryFacade.graphIsActive(connectorUri.toString()))</span>
+        {
+<span class="nc" id="L244">            connectorUri = URI.create(componentCatalogUri.toString() + connectorUri.hashCode());</span>
+        }
+<span class="nc bnc" id="L246" title="All 2 branches missed.">        if(!repositoryFacade.graphIsActive(connectorUri.toString()))</span>
+        {
+<span class="nc" id="L248">            throw new RejectMessageException(RejectionReason.NOT_FOUND, new NullPointerException(&quot;The connector from which you are trying to sign off a resource was not found or is not active.&quot;));</span>
+        }
+<span class="nc bnc" id="L250" title="All 2 branches missed.">        if(!resourceExists(resourceUri)) {</span>
+<span class="nc" id="L251">            resourceUri = tryGetRewrittenResourceUri(connectorUri, resourceUri);</span>
+        }
+<span class="nc" id="L253">        removeFromTriplestore(resourceUri, connectorUri);</span>
+<span class="nc" id="L254">        indexing.update(repositoryFacade.getConnectorFromTripleStore(connectorUri));</span>
+<span class="nc" id="L255">        indexing.delete(resourceUri);</span>
+<span class="nc" id="L256">    }</span>
+
+    /**
+     * Utility function to evaluate a given query (in a re-formulated way, respecting passivation and hiding underlying structure of named graphs)
+     * @param queryString Query to be evaluated
+     * @return Query result in String format
+     * @throws RejectMessageException, if the query is illegal, e.g. because it accesses a graph which is not active
+     */
+    @Override
+    public String getResults(String queryString) throws RejectMessageException {
+<span class="nc" id="L266">        return new GenericQueryEvaluator(repositoryFacade).getResults(queryString);</span>
+    }
+
+    /**
+     * Internal function which should only be called from the available function. It applies the changes to the triple store
+     * @param resource Resource to be added to triple store
+     * @param connectorUri Connector to which the resource should be added
+     * @param catalogUri The URI of the catalog of the connector to which the resource should be added
+     * @throws IOException thrown, if the changes could not be applied to the triple store
+     * @throws RejectMessageException thrown, if the changes are illegal, or if an internal error has occurred
+     */
+    private void addToTriplestore(Resource resource, URI connectorUri, URI catalogUri) throws IOException, RejectMessageException, URISyntaxException {
+
+<span class="nc" id="L279">        ResourceModelCreator.InnerModel result = resourceModelCreator.setConnectorUri(connectorUri).toModel(SelfDescriptionPersistenceAndIndexing.rewriteResource(resource.toRdf(), resource, catalogUri));</span>
+
+        //Add a statement that this Resource is part of some catalog
+        //?catalog ids:offeredResource ?resource
+        //subject, predicate and object of the triple
+<span class="nc" id="L284">        Model m = result.getModel();</span>
+<span class="nc" id="L285">        m.add(ResourceFactory.createResource(catalogUri.toString()), ResourceFactory.createProperty(&quot;https://w3id.org/idsa/core/offeredResource&quot;), ResourceFactory.createResource(resource.getId().toString()));</span>
+<span class="nc" id="L286">        repositoryFacade.addStatements(result.getModel(), result.getNamedGraph().toString());</span>
+<span class="nc" id="L287">    }</span>
+
+
+    /**
+     * Internal function which should only be called from the unavailable function. It applies the changes to the triple store
+     * @param resourceUri Resource to be removed from triple store
+     * @param connectorUri Connector to which the resource should be added
+     * @throws RejectMessageException thrown, if the changes are illegal, or if an internal error has occurred
+     */
+    private void removeFromTriplestore(URI resourceUri, URI connectorUri) throws RejectMessageException {
+        //Make sure no passivated graph is updated via ResourceXXXMessage
+<span class="nc bnc" id="L298" title="All 2 branches missed.">        if(!repositoryFacade.graphIsActive(connectorUri.toString())) {</span>
+<span class="nc" id="L299">            connectorUri = URI.create(componentCatalogUri.toString() + connectorUri.hashCode());</span>
+<span class="nc bnc" id="L300" title="All 2 branches missed.">            if (!repositoryFacade.graphIsActive(connectorUri.toString())) {</span>
+<span class="nc" id="L301">                throw new RejectMessageException(RejectionReason.NOT_FOUND, new Exception(&quot;The resource you are trying to delete was not found, or the graph owning the resource is not active (i.e. unavailable).&quot;));</span>
+            }
+            //At this stage, we need to rewrite the URI of the resource to our REST-like scheme
+<span class="nc" id="L304">            resourceUri = tryGetRewrittenResourceUri(connectorUri, resourceUri);</span>
+        }
+        //Grab &quot;all&quot; information about a Resource. This includes everything pointing at a resource as well as all child objects of a resource, up to a (rather arbitrary) depth of 7
+<span class="nc" id="L307">        ParameterizedSparqlString queryString = new ParameterizedSparqlString(&quot;CONSTRUCT { ?res ?p ?o . ?o ?p2 ?o2 . ?o2 ?p3 ?o3 . ?o3 ?p4 ?o4 . ?o4 ?p5 ?o5 . ?o5 ?p6 ?o6 . ?o6 ?p7 ?o7 . ?s ?p ?res . } &quot; +</span>
+                    &quot;WHERE { &quot; +
+                        //We already ensured that this graph is active
+                        //&quot;BIND(&lt;&quot; + connectorUri.toString() + &quot;&gt; AS ?g) . &quot; +
+                        //&quot;BIND(&lt;&quot; + resourceUri.toString() + &quot;&gt; AS ?res) . &quot; +
+                        &quot;GRAPH ?g { &quot; +
+//                        &quot;{ ?res ?p ?o . &quot; +
+//                            &quot;OPTIONAL { ?o ?p2 ?o2 . &quot; +
+//                                &quot;&quot; +
+//                                &quot;OPTIONAL { ?o2 ?p3 ?o3 . &quot; +
+//                                    &quot;OPTIONAL { ?o3 ?p4 ?o4 . &quot; +
+//                                        &quot;OPTIONAL { ?o4 ?p5 ?o5 . &quot; +
+//                                            &quot;OPTIONAL { ?o5 ?p6 ?o6 . &quot; +
+//                                                &quot;OPTIONAL { ?o6 ?p7 ?o7 . &quot; +
+//                                                &quot;} &quot; +
+//                                            &quot;} &quot; +
+//                                        &quot;} &quot; +
+//                                    &quot;} &quot; +
+//                                &quot;} &quot; +
+//                            &quot;} &quot; +
+//                        &quot;} &quot; +
+//                        &quot;UNION &quot; +
+//                        &quot;{ ?s ?p ?res . }&quot; +
+
+
+                        &quot;{ ?res ?p ?o . &quot; +
+                            &quot;OPTIONAL { ?o ?p2 ?o2 . &quot; +
+                            &quot;FILTER(?count = 1) &quot;+ // more incoming triples means the respective entity ?o is used by other parts --&gt; do not delete it as the other entity needs it.
+                            &quot;{SELECT (COUNT(DISTINCT ?a) AS ?count) ?o WHERE {&quot; +
+                                &quot;?a ?p_other ?o .&quot;+
+                            &quot;} GROUP BY ?o&quot;+
+                            &quot;}&quot;+
+                            &quot;OPTIONAL { ?o2 ?p3 ?o3 .&quot;+
+                                &quot;FILTER(?count2 = 1)&quot;+
+                                &quot;{SELECT (COUNT(DISTINCT ?b) AS ?count2) ?o2 WHERE {&quot;+
+                                    &quot;?b ?p2_other ?o2 .&quot;+
+                                &quot;} GROUP BY ?o2&quot;+
+                                &quot;}&quot;+
+                                &quot;OPTIONAL { ?o3 ?p4 ?o4 .&quot;+
+                                    &quot;FILTER(?count3 = 1)&quot;+
+                                    &quot;{SELECT (COUNT(DISTINCT ?c) AS ?count3) ?o3 WHERE {&quot;+
+                                        &quot;?c ?p3_other ?o3 .&quot;+
+                                    &quot;} GROUP BY ?o3&quot;+
+                                    &quot;}&quot;+
+                                    &quot;OPTIONAL { ?o4 ?p5 ?o5 .&quot;+
+                                        &quot;FILTER(?count4 = 1)&quot;+
+                                        &quot;{SELECT (COUNT(DISTINCT ?d) AS ?count4) ?o4 WHERE {&quot;+
+                                          &quot;?d ?p4_other ?o4 .&quot;+
+                                        &quot;} GROUP BY ?o4&quot;+
+                                        &quot;}&quot;+
+                                    &quot;}&quot;+
+                                &quot;}&quot;+
+                        &quot;}&quot;+
+                    &quot;}&quot;+
+                &quot;}&quot;+
+                &quot;UNION { ?s ?p ?res . }&quot; +
+                &quot;}&quot;+
+            &quot;}&quot;);
+<span class="nc" id="L365">        queryString.setIri(&quot;g&quot;, connectorUri.toString());</span>
+<span class="nc" id="L366">        queryString.setIri(&quot;res&quot;, resourceUri.toString());</span>
+        try {
+<span class="nc" id="L368">            Model graphQueryResult = repositoryFacade.constructQuery(queryString.toString());</span>
+<span class="nc bnc" id="L369" title="All 2 branches missed.">            if(graphQueryResult.isEmpty())</span>
+            {
+<span class="nc" id="L371">                throw new RejectMessageException(RejectionReason.NOT_FOUND, new NullPointerException(&quot;The resource you are trying to update or remove was not found. Try sending a ResourceAvailableMessage instead.&quot;));</span>
+            }
+            //Dump the result into a format over which we can iterate multiple times
+<span class="nc" id="L374">            ArrayList&lt;Statement&gt; graphQueryResultAsList = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L375">            StmtIterator iterator = graphQueryResult.listStatements();</span>
+<span class="nc bnc" id="L376" title="All 2 branches missed.">            while(iterator.hasNext())</span>
+            {
+<span class="nc" id="L378">                graphQueryResultAsList.add(iterator.next());</span>
+            }
+<span class="nc" id="L380">            repositoryFacade.removeStatements(graphQueryResultAsList, connectorUri.toString());</span>
+        }
+        //Check if injection attack was detected
+<span class="nc" id="L383">        catch (ARQException e)</span>
+        {
+<span class="nc" id="L385">            logger.warn(&quot;Possible injection attack detected&quot;, e);</span>
+            //Do not provide any exception information to the potential attacker
+<span class="nc" id="L387">            throw new RejectMessageException(RejectionReason.MALFORMED_MESSAGE);</span>
+<span class="nc" id="L388">        }</span>
+
+<span class="nc" id="L390">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

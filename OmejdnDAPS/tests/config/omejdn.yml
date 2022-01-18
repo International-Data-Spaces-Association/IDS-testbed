@@ -1,0 +1,16 @@
+---
+host: http://localhost:4567
+openid: true
+token:
+  expiration: 3600
+  signing_key: omejdn_priv.pem
+  algorithm: RS256
+  audience: TestServer
+  issuer: http://localhost:4567
+id_token:
+  expiration: 360000
+  signing_key: omejdn_priv.pem
+  algorithm: RS256
+  issuer: http://localhost:4567
+user_backend:
+- yaml

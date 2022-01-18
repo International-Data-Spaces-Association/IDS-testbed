@@ -1,0 +1,11 @@
+de/fraunhofer/iais/eis/ids/broker/core/common/persistence/ResourceMessageHandler.class
+de/fraunhofer/iais/eis/ids/broker/core/common/persistence/SelfDescriptionPersistenceAndIndexing$1.class
+de/fraunhofer/iais/eis/ids/broker/core/common/persistence/ConnectorModelCreator.class
+de/fraunhofer/iais/eis/ids/broker/core/common/persistence/ResourceStatusHandler.class
+de/fraunhofer/iais/eis/ids/broker/core/common/persistence/ResourceModelCreator.class
+de/fraunhofer/iais/eis/ids/broker/core/common/persistence/ConnectorUnavailableValidationStrategy.class
+de/fraunhofer/iais/eis/ids/broker/core/common/impl/ResourcePersistenceAdapter.class
+de/fraunhofer/iais/eis/ids/broker/core/common/persistence/RegistrationHandler.class
+de/fraunhofer/iais/eis/ids/broker/core/common/impl/SelfDescriptionPersistenceAdapter.class
+de/fraunhofer/iais/eis/ids/broker/core/common/persistence/SelfDescriptionPersistenceAndIndexing.class
+de/fraunhofer/iais/eis/ids/broker/core/common/persistence/ResourcePersistenceAndIndexing.class

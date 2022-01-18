@@ -1,0 +1,15 @@
+/home/kali/Desktop/today/IDS-Testbed/MetadataBroker/open-index-common/src/main/java/de/fraunhofer/iais/eis/ids/index/common/util/SparqlQueryRewriter.java
+/home/kali/Desktop/today/IDS-Testbed/MetadataBroker/open-index-common/src/main/java/de/fraunhofer/iais/eis/ids/index/common/persistence/DescriptionProvider.java
+/home/kali/Desktop/today/IDS-Testbed/MetadataBroker/open-index-common/src/main/java/de/fraunhofer/iais/eis/ids/index/common/persistence/ModelCreator.java
+/home/kali/Desktop/today/IDS-Testbed/MetadataBroker/open-index-common/src/main/java/de/fraunhofer/iais/eis/ids/index/common/persistence/ConstructQueryResultHandler.java
+/home/kali/Desktop/today/IDS-Testbed/MetadataBroker/open-index-common/src/main/java/de/fraunhofer/iais/eis/ids/index/common/persistence/RepositoryFacade.java
+/home/kali/Desktop/today/IDS-Testbed/MetadataBroker/open-index-common/src/main/java/de/fraunhofer/iais/eis/ids/index/common/main/MainTemplate.java
+/home/kali/Desktop/today/IDS-Testbed/MetadataBroker/open-index-common/src/main/java/de/fraunhofer/iais/eis/ids/index/common/persistence/JsonLdContextFetchStrategy.java
+/home/kali/Desktop/today/IDS-Testbed/MetadataBroker/open-index-common/src/main/java/de/fraunhofer/iais/eis/ids/index/common/persistence/spi/Indexing.java
+/home/kali/Desktop/today/IDS-Testbed/MetadataBroker/open-index-common/src/main/java/de/fraunhofer/iais/eis/ids/index/common/persistence/DescriptionRequestHandler.java
+/home/kali/Desktop/today/IDS-Testbed/MetadataBroker/open-index-common/src/main/java/de/fraunhofer/iais/eis/ids/index/common/persistence/GenericQueryEvaluator.java
+/home/kali/Desktop/today/IDS-Testbed/MetadataBroker/open-index-common/src/main/java/de/fraunhofer/iais/eis/ids/index/common/main/AppConfigTemplate.java
+/home/kali/Desktop/today/IDS-Testbed/MetadataBroker/open-index-common/src/main/java/de/fraunhofer/iais/eis/ids/index/common/persistence/INFOMODEL.java
+/home/kali/Desktop/today/IDS-Testbed/MetadataBroker/open-index-common/src/main/java/de/fraunhofer/iais/eis/ids/index/common/impl/IndexSelfDescription.java
+/home/kali/Desktop/today/IDS-Testbed/MetadataBroker/open-index-common/src/main/java/de/fraunhofer/iais/eis/ids/index/common/persistence/NullIndexing.java
+/home/kali/Desktop/today/IDS-Testbed/MetadataBroker/open-index-common/src/main/java/de/fraunhofer/iais/eis/ids/index/common/persistence/CatalogProvider.java

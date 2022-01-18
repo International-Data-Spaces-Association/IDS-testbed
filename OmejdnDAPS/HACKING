@@ -1,0 +1,6 @@
+# Commit message format
+
+Please try to use meaningful commit messages.
+
+Think: "Would I understand what was changed when re-reading the commit message
+a few months in the future". If not, then maybe you want to be more verbose.

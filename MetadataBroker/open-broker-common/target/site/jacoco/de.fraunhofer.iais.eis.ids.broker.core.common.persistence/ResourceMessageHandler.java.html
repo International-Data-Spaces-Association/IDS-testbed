@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ResourceMessageHandler.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">open-broker-common</a> &gt; <a href="index.source.html" class="el_package">de.fraunhofer.iais.eis.ids.broker.core.common.persistence</a> &gt; <span class="el_source">ResourceMessageHandler.java</span></div><h1>ResourceMessageHandler.java</h1><pre class="source lang-java linenums">package de.fraunhofer.iais.eis.ids.broker.core.common.persistence;
+
+import de.fraunhofer.iais.eis.*;
+import de.fraunhofer.iais.eis.ids.component.core.RejectMessageException;
+import de.fraunhofer.iais.eis.ids.component.core.SecurityTokenProvider;
+import de.fraunhofer.iais.eis.ids.component.core.TokenRetrievalException;
+import de.fraunhofer.iais.eis.ids.component.core.logging.MessageLogger;
+import de.fraunhofer.iais.eis.ids.component.core.map.DefaultSuccessMAP;
+import de.fraunhofer.iais.eis.ids.connector.commons.broker.SameOriginResourceMapValidationStrategy;
+import de.fraunhofer.iais.eis.ids.connector.commons.messagevalidation.ValidatingMessageHandler;
+import de.fraunhofer.iais.eis.ids.connector.commons.resource.map.ResourceMAP;
+import de.fraunhofer.iais.eis.ids.index.common.persistence.RepositoryFacade;
+
+import java.net.URI;
+import java.util.Arrays;
+import java.util.Collection;
+
+/**
+ * This class is a message handler for messages about the status of resources,
+ * such as ResourceAvailableMessages, ResourceUpdateMessages, and ResourceUnavailableMessages
+ */
+public class ResourceMessageHandler extends ValidatingMessageHandler&lt;ResourceMAP, DefaultSuccessMAP&gt; {
+
+    private final ResourceStatusHandler resourceStatusHandler;
+    private final InfrastructureComponent infrastructureComponent;
+    private final SecurityTokenProvider securityTokenProvider;
+    private final URI responseSenderAgent;
+    private final RepositoryFacade repositoryFacade;
+
+    /**
+     * Constructor
+     * @param resourceStatusHandler The component which then takes care of persisting the changes
+     * @param infrastructureComponent The broker as infrastructure component, such that appropriate responses can be sent
+     * @param securityTokenProvider A security token provider for sending responses with a DAT
+     * @param responseSenderAgent The &quot;senderAgent&quot; which should show in automatic response messages
+     */
+    public ResourceMessageHandler(ResourceStatusHandler resourceStatusHandler, InfrastructureComponent infrastructureComponent, SecurityTokenProvider securityTokenProvider, RepositoryFacade repositoryFacade, URI responseSenderAgent)
+<span class="nc" id="L38">    {</span>
+<span class="nc" id="L39">        this.resourceStatusHandler = resourceStatusHandler;</span>
+<span class="nc" id="L40">        this.infrastructureComponent = infrastructureComponent;</span>
+<span class="nc" id="L41">        this.addMapValidationStrategy(new SameOriginResourceMapValidationStrategy());</span>
+<span class="nc" id="L42">        this.securityTokenProvider = securityTokenProvider;</span>
+<span class="nc" id="L43">        this.repositoryFacade = repositoryFacade;</span>
+<span class="nc" id="L44">        this.responseSenderAgent = responseSenderAgent;</span>
+<span class="nc" id="L45">    }</span>
+
+    /**
+     * This function takes care of an inbound message which can be handled by this class
+     * @param messageAndPayload The message to be handled
+     * @return MessageProcessedNotification wrapped in a DefaultSuccessMAP, if the message has been processed properly
+     * @throws RejectMessageException thrown, if the message could not be processed properly
+     */
+    @Override
+    public DefaultSuccessMAP handleValidated(ResourceMAP messageAndPayload) throws RejectMessageException {
+<span class="nc" id="L55">        ResourceNotificationMessage msg = (ResourceNotificationMessage) messageAndPayload.getMessage();</span>
+<span class="nc" id="L56">        MessageLogger.logMessage(messageAndPayload, true, &quot;affectedResource&quot;);</span>
+<span class="nc" id="L57">        URI rewrittenUri = null;</span>
+        try {
+<span class="nc bnc" id="L59" title="All 2 branches missed.">            if (msg instanceof ResourceUpdateMessage) {</span>
+                //ResourceUpdateMessages have the affected Resource in their payload
+<span class="nc bnc" id="L61" title="All 4 branches missed.">                if (msg.getAffectedResource() != null &amp;&amp; messageAndPayload.getPayload().isPresent()) {</span>
+
+                    //TODO: Check if method is POST and, if so, if Resource already exists
+<span class="nc bnc" id="L64" title="All 2 branches missed.">                    if(messageAndPayload.getMessage().getProperties() != null) {</span>
+                        //POST is not idempotent. Making sure that, in case POST is used, the connector does not exist yet
+<span class="nc bnc" id="L66" title="All 2 branches missed.">                        if (messageAndPayload.getMessage().getProperties().containsKey(&quot;https://w3id.org/idsa/core/method&quot;)) {</span>
+<span class="nc" id="L67">                            String method = messageAndPayload.getMessage().getProperties().get(&quot;https://w3id.org/idsa/core/method&quot;).toString().replace(&quot;\&quot;&quot;, &quot;&quot;).replace(&quot;^^http://www.w3.org/2001/XMLSchema#string&quot;, &quot;&quot;).toLowerCase();</span>
+<span class="nc bnc" id="L68" title="All 2 branches missed.">                            if (method.equals(&quot;post&quot;)) {</span>
+                                try {
+                                    //Check if resource exists yet
+<span class="nc bnc" id="L71" title="All 2 branches missed.">                                    if (resourceStatusHandler.resourceExists(((ResourceUpdateMessage) messageAndPayload.getMessage()).getAffectedResource())</span>
+<span class="nc bnc" id="L72" title="All 2 branches missed.">                                            || resourceStatusHandler.resourceExists(ResourcePersistenceAndIndexing.tryGetRewrittenResourceUri(messageAndPayload.getMessage().getIssuerConnector(), ((ResourceUpdateMessage) messageAndPayload.getMessage()).getAffectedResource()))) {</span>
+<span class="nc" id="L73">                                        throw new RejectMessageException(RejectionReason.TOO_MANY_RESULTS, new Exception(&quot;The resource you are trying to post already exists. To update it, use PUT instead.&quot;));</span>
+                                    }
+                                }
+<span class="nc" id="L76">                                catch (RejectMessageException ignored)</span>
+                                {
+                                    //RejectMessageException is thrown by ResourcePersistenceAndIndexing.tryGetRewrittenResourceUri, in case the resource does not exist
+                                    //This may very well happen here, particularly if the resources is posted correctly (i.e. didn't exist before)
+<span class="nc" id="L80">                                }</span>
+                            }
+                        }
+                    }
+<span class="nc" id="L84">                    rewrittenUri = resourceStatusHandler.updated(messageAndPayload.getPayload().get(), msg.getIssuerConnector());</span>
+                } else {
+                    //If no payload present, Resource cannot be updated
+<span class="nc" id="L87">                    throw new RejectMessageException(RejectionReason.BAD_PARAMETERS, new NullPointerException(&quot;Affected Resource is null or payload is missing&quot;));</span>
+                }
+<span class="nc bnc" id="L89" title="All 2 branches missed.">            } else if (msg instanceof ResourceUnavailableMessage) {</span>
+                //ResourceUnavailableMessages only contain a reference to the Resource which is now unavailable. Payload should be null
+<span class="nc bnc" id="L91" title="All 2 branches missed.">                if (msg.getAffectedResource() != null) {</span>
+<span class="nc" id="L92">                    resourceStatusHandler.unavailable(msg.getAffectedResource(), msg.getIssuerConnector());</span>
+                } else {
+<span class="nc" id="L94">                    throw new RejectMessageException(RejectionReason.BAD_PARAMETERS, new NullPointerException(&quot;Affected Resource is null&quot;));</span>
+                }
+            }
+
+
+<span class="nc" id="L99">        } catch (Exception e) {</span>
+            //Exception occurred. If it is already a RejectMessageException, throw that. If not, create a RejectMessageException with other RejectionReason
+<span class="nc bnc" id="L101" title="All 2 branches missed.">            if (e instanceof RejectMessageException) {</span>
+<span class="nc" id="L102">                throw (RejectMessageException) e;</span>
+            }
+            //For some reason, ConnectExceptions sometimes do not provide an exception message.
+            //This causes a NullPointerException and returns an HTTP 500
+<span class="nc" id="L106">            e.printStackTrace();</span>
+<span class="nc bnc" id="L107" title="All 2 branches missed.">            if (e.getMessage() == null) {</span>
+<span class="nc" id="L108">                e = new Exception(e.getClass().getName() + &quot; with empty message.&quot;);</span>
+            }
+<span class="nc" id="L110">            throw new RejectMessageException(RejectionReason.INTERNAL_RECIPIENT_ERROR, e);</span>
+<span class="nc" id="L111">        }</span>
+        try {
+            //No Exception occurred. Send MessageProcessedNotificationMessage
+<span class="nc" id="L114">            DefaultSuccessMAP returnValue = new DefaultSuccessMAP(infrastructureComponent.getId(), infrastructureComponent.getOutboundModelVersion(), messageAndPayload.getMessage().getId(), securityTokenProvider.getSecurityTokenAsDAT(), responseSenderAgent);</span>
+<span class="nc bnc" id="L115" title="All 2 branches missed.">            if(rewrittenUri != null)</span>
+            {
+                //Attach the rewritten URI to the response, so that the recipient knows under which address the resource can be found
+<span class="nc" id="L118">                returnValue.getMessage().setProperty(&quot;Location&quot;, &quot;&lt;&quot; + rewrittenUri.toString() + &quot;&gt;&quot;);</span>
+            }
+<span class="nc" id="L120">            return returnValue;</span>
+        }
+<span class="nc" id="L122">        catch (TokenRetrievalException e)</span>
+        {
+            //Could not retrieve own DAT. Outgoing message cannot be validated by other connector. Sending an error message
+<span class="nc" id="L125">            throw new RejectMessageException(RejectionReason.INTERNAL_RECIPIENT_ERROR, e);</span>
+        }
+    }
+
+    /**
+     * This function provides a list of message types which are supported by this class
+     * @return List of supported message types
+     */
+    @Override
+    public Collection&lt;Class&lt;? extends Message&gt;&gt; getSupportedMessageTypes() {
+<span class="nc" id="L135">        return Arrays.asList(ResourceUpdateMessage.class, ResourceUnavailableMessage.class);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
