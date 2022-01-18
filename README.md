@@ -15,13 +15,11 @@ Set up with Open Source IDS components which can be used to verify that a com
 
 ## How to get started?
 
-1. Install the reference testbed following the [installation and configuration guide](https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/Testbed/README.md) in the Testbed Folder . You can either use the Preconfigured set up or install every component manually. Current available components are: Dataspace connector, DAPS, CA, Metadata Broker.
+1. Install the reference testbed in the Testbed Folder. You can either use the Preconfigured set up using the [install script](./install.sh) and the [Postman collection](./Testbed_Preconfiguration.postman_collection.json) or install and configure every component manually following the [installation guide](./InstallationGuide.md) and the [instructions for preconfigurations](./PreparingPreconfiguredSetup.md). Current available components are: Dataspace connector, DAPS, CA, Metadata Broker.
 
-2. Connect the components to one another following the instructions of the "Interconnectivity of the components", the last section of the [installation and configuration guide](https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/Testbed/README.md)
+2. Test the compatibility of your own developed component following the steps of the [Testbed User Guide](./TestbedUserGuide.md).
 
-3. Test the compatibility of your own developed component following the steps of the [Testbed User Guide.](https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/Testbed/TestbedUserGuide.md)
-
-4. Download the [Test Suite](https://gitlab.cc-asp.fraunhofer.de/ksa/ids-certification-testing) and follow the instructions to conduct automated tests for your own developed connector
+3. Download the [Test Suite](https://gitlab.cc-asp.fraunhofer.de/ksa/ids-certification-testing) and follow the instructions to conduct automated tests for your own developed connector
 
 ## Current version (V1.0)
 
