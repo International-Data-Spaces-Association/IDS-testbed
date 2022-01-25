@@ -2,7 +2,7 @@
   "Document": {
     "Version": "1.0",
     "CreateDate": "2021-12-16",
-    "Name": "Certification Report"
+    "Name": "Evaluation Report"
   },
   "Authors": [
     {
@@ -15,21 +15,21 @@
       "Name": "Jar Jar Binks"
     }
   ],
-  "TestFacility": {
-    "Name": "IDS Connector",
+  "Evaluation Facility": {
+    "Name": "IDS Evaluation Facility 1",
     "address": {
       "street": "....",
       "postalCode": "12345",
       "city": "Berlin",
       "countryCode": "DEU",
-      "country": "Germany",
-      "Facility_ID":"1848654DW58Y"
-    }
+      "country": "Germany"
+         }
   },
-  "Validation": {
-    "Profile": "Trust profile",
-    "Type": "XXX",
-    "Date": "2022-10-15"
+  "Test profile": {
+    "Trust level": "1, 2 or 3",
+    "Assurance level": "2 or 3",
+    "Type": "Connector",
+    "Version criteria catalogue": "2.1.2"
   },
   "Component": {
     "Name": "IDS Connector",
