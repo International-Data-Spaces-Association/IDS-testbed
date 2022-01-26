@@ -212,7 +212,7 @@ cd Testbed/CertificateAuthority/
 
 The official documentation will cover the scope, dependencies and usage of the component.
 
-Official documentation: https://github.com/International-Data-Spaces-Association/IDS-testbed/tree/master/CA
+Official documentation: [CertificateAuthority/README.md](./CertificateAuthority/README.md)
 
 The preconfigured setup includes certificates for:
 * a root CA called "ReferenceTestbedCA"
