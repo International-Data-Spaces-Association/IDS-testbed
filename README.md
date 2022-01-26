@@ -23,8 +23,6 @@ Set up with Open Source IDS components which can be used to verify that a com
 
 ## Current version (V1.0)
 
-![image](https://user-images.githubusercontent.com/77682996/140496334-8e96dbdc-9785-45f9-9c28-ec433ca13dc5.png)
-
 Minimal setup with essential and already available components
 ![first_version](./pictures/Testbed_1.0.png)
 
