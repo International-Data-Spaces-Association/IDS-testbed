@@ -208,12 +208,16 @@ Move to right directory, and make the files executable:
 
 ```
 cd Testbed/CertificateAuthority/
-chmod a+x *.py
 ```
 
 The official documentation will cover the scope, dependencies and usage of the component.
 
-Official documentation: https://github.com/International-Data-Spaces-Association/IDS-testbed/tree/master/CA
+Official documentation: [CertificateAuthority/README.md](./CertificateAuthority/README.md)
+
+The preconfigured setup includes certificates for:
+* a root CA called "ReferenceTestbedCA"
+* a subCA called "ReferenceTestbedSubCA" and
+* certificates for devices called "testbed1", ..., "testbed10"
 
 ## Continue here after the official documentation has been followed
 
