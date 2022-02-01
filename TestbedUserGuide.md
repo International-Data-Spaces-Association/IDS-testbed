@@ -10,23 +10,33 @@ Follow the instructions in the [installation and configuration guide](./README.m
 Generate a private-public key pair for your connector.
 Issue a certificate for the public key in this key pair signed by the private key of the utilized testbed CA:
 ```bash
-./pki.py cert sign --key-file [path to public key file] --subCA [Sub CA name] --common-name "example.com" --client
+./pki.py cert sign --key-file [path to public key file] --subCA [Sub CA name] --common-name [common name] --client
 ```
-(TODO Monika: add sub CA name utilized in preconfigured setup as soon as its available, define in which folder the command needs to be utilized)
+For the preconfigured setup, the name of the subCA is "ReferenceTestbedSubCA" and the respective files are found in [CertificateAuthority/data/subca/](./CertificateAuthority/data/subca/).
+
 Ensure that your connector always utilizes this IDS certificate to prove their identity with respect to the other components.
 
 ### 2.2. Configure your Connector
-* Configure the usage of the Root CA (cert) to be found in (TODO Monika: add path utilized in preconfigured setup once available as soon as its available)
+* Configure your connector to use the common Root CA (cert). For the preconfigured setup, the file to be utilized is [CertificateAuthority/data/ca/ReferenceTestbedCA.crt](./CertificateAuthority/data/ca/ReferenceTestbedCA.crt)
 * Configure your connector to use the DAPS available under http://localhost:4567 (endpoints: /token, /.well-known/jwks.json)
 * Provide a self-description for your connector
 
 ## 3. Interacting with the DAPS
 ### 3.1. Register your connector at the DAPS
-Register your connector following
+Register your connector following  
 a) the instructions provided here:
-https://github.com/International-Data-Spaces-Association/omejdn-daps#registering-connectors
+https://github.com/International-Data-Spaces-Association/omejdn-daps#registering-connectors  
 or b) the manual steps described below:
-TODO SQS: explain what to do
+1. Convert your connector certificate {common name}.crt from step 2.1 into the format required by the DAPS:
+```
+## .crt + .key -> .p12
+openssl pkcs12 -export -out {common name}.p12 -inkey {common name}.key -in {common name}.crt -passout pass:password
+## .p12 -> .cert
+openssl pkcs12 -in {common name}.p12 -out {common name}.cert -nokeys -nodes -passin pass:password
+```
+2. Add the certificate {common name}.cert to the OmejdnDAPS/keys directory
+3. Add your client information identified by the unique identifier (client_id) in the OmejdnDAPS/config/clients.yml file following the given examples in this file.
+The provided script [OmejdnDAPS/keys/extensions.sh](./OmejdnDAPS/keys/extensions.sh) can extract the unique identifier from the certificate to help the users who are not familiar with AKI/SKI extensions.
 
 ### 3.2. Request your DAT
 * Use your connector to request a DAT from the DAPS
@@ -40,7 +50,7 @@ Connector A is available at the following URL: https://localhost:8080
 
 Request the Self-Description from Connector A using those of the following protocols you support:
   * Multipart: currently supported by connector A
-  * IDSCP2: currently supported by connector A - still work in progress TODO: remove as soon as it works
+  * IDSCP2: currently supported by connector A - still work in progress
   * IDS-REST: not yet supported by connector A
 
 Validate that you receive the following self-description:
@@ -106,7 +116,7 @@ Connector B is available at the following URL: https://localhost:8081
 
 Request the Self-Description from Connector B using those of the following protocols that you support:
   * Multipart: currently supported by connector B
-  * IDSCP2: currently supported by connector B - still work in progress TODO: remove as soon as it works
+  * IDSCP2: currently supported by connector B - still work in progress
   * IDS-REST: not yet supported by connector B
 
 Validate that you receive the following self-description:
@@ -169,7 +179,7 @@ Connector A offers an exemplary data artifact with weather warnings from the DWD
 
 Request the data sets from connector A using those of the following protocols you support:
   * Multipart: currently supported by connector A
-  * IDSCP2: currently supported by connector A - still work in progress TODO: remove as soon as it works
+  * IDSCP2: currently supported by connector A - still work in progress
   * IDS-REST: not yet supported by connector A
 
 Validate that you receive as data the following URL which can be used to obtain the corresponding DWD weather data:
