@@ -23,8 +23,6 @@ Set up with Open Source IDS components which can be used to verify that a com
 
 ## Current version (V1.0)
 
-![image](https://user-images.githubusercontent.com/77682996/140496334-8e96dbdc-9785-45f9-9c28-ec433ca13dc5.png)
-
 Minimal setup with essential and already available components
 ![first_version](./pictures/Testbed_1.0.png)
 
@@ -32,12 +30,12 @@ Minimal setup with essential and already available components
 ### Version 2.0 of the test bed
 
 Minimal viable data space with all essential components and first test cases
-![next_version](./pictures/Testbed_1.1.png)
+![next_version](./pictures/Testbed_2.0.png)
 
 ### Version X.Y of the test bed
 
 Integration of all intended components into the setup
-![next_version](./pictures/Testbed_1.X.png)
+![next_version](./pictures/Testbed_X.Y.png)
 
 ### Final vision for the testbed
 
