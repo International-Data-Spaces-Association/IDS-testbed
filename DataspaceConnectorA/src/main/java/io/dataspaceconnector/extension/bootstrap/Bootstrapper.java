@@ -29,18 +29,20 @@ import de.fraunhofer.ids.messaging.protocol.multipart.parser.MultipartParseExcep
 import de.fraunhofer.ids.messaging.requests.exceptions.NoTemplateProvidedException;
 import de.fraunhofer.ids.messaging.requests.exceptions.RejectionException;
 import de.fraunhofer.ids.messaging.requests.exceptions.UnexpectedPayloadException;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import io.dataspaceconnector.common.ids.ConnectorService;
 import io.dataspaceconnector.common.ids.DeserializationService;
 import io.dataspaceconnector.common.ids.model.TemplateUtils;
 import io.dataspaceconnector.extension.bootstrap.util.BootstrapUtils;
 import io.dataspaceconnector.model.artifact.ArtifactDesc;
 import io.dataspaceconnector.model.auth.AuthenticationDesc;
-import io.dataspaceconnector.model.resource.OfferedResource;
+import io.dataspaceconnector.model.broker.BrokerDesc;
 import io.dataspaceconnector.model.resource.OfferedResourceDesc;
 import io.dataspaceconnector.model.resource.RequestedResourceDesc;
 import io.dataspaceconnector.model.template.ResourceTemplate;
 import io.dataspaceconnector.service.message.GlobalMessageService;
-import io.dataspaceconnector.service.resource.TemplateBuilder;
+import io.dataspaceconnector.service.resource.templatebuilder.CatalogTemplateBuilder;
+import io.dataspaceconnector.service.resource.type.BrokerService;
 import io.dataspaceconnector.service.resource.type.CatalogService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -77,7 +79,7 @@ import static io.dataspaceconnector.extension.bootstrap.util.BootstrapUtils.find
 import static io.dataspaceconnector.extension.bootstrap.util.BootstrapUtils.retrieveBootstrapConfig;
 
 /**
- * This class allows to load JSON-LD files that contain IDS Infomodel representations of entities
+ * This class allows to load JSON-LD files that contain IDS representations of entities
  * which will be registered at the connector during start-up. Furthermore, an additional
  * configuration file can be loaded, that provides information on e.g. broker usage and the used
  * clearing house.
@@ -122,7 +124,7 @@ public class Bootstrapper {
     /**
      * The template builder.
      */
-    private final @NotNull TemplateBuilder<OfferedResource, OfferedResourceDesc> templateBuilder;
+    private final @NotNull CatalogTemplateBuilder templateBuilder;
 
     /**
      * The catalog service.
@@ -143,6 +145,11 @@ public class Bootstrapper {
      * Service for interacting with a broker.
      */
     private final @NonNull GlobalMessageService brokerSvc;
+
+    /**
+     * Service for the broker.
+     */
+    private final @NotNull BrokerService brokerService;
 
     /**
      * Bootstrap the connector. Will load JSON-LD files containing IDS catalog entities and register
@@ -201,8 +208,8 @@ public class Bootstrapper {
             if (properties.containsKey(propertyKey)) {
                 final var brokerUrl = BootstrapUtils.toUrl(properties.getProperty(propertyKey));
                 if (brokerUrl.isEmpty()) {
-                    if (log.isWarnEnabled()) {
-                        log.warn("Skipping broker due to invalid url. [broker=({})]",
+                    if (log.isDebugEnabled()) {
+                        log.debug("Skipping broker due to invalid url. [url=({})]",
                                 properties.getProperty(propertyKey));
                     }
                     return false;
@@ -213,6 +220,9 @@ public class Bootstrapper {
                 try {
                     if (!knownBrokers.contains(broker.toString())) {
                         knownBrokers.add(broker.toString());
+
+                        createBroker(broker);
+
                         var connectorResponse = brokerSvc
                                 .sendConnectorUpdateMessage(broker.toURI());
                         if (!brokerSvc.checkResponse(connectorResponse)) {
@@ -242,6 +252,16 @@ public class Bootstrapper {
         return true;
     }
 
+    private void createBroker(final URL broker) throws URISyntaxException {
+        if (brokerService.findByLocation(broker.toURI()).isEmpty()) {
+            final var brokerDesc = new BrokerDesc();
+            brokerDesc.setLocation(broker.toURI());
+            brokerDesc.setTitle(broker.toString());
+            brokerService.create(brokerDesc);
+        }
+    }
+
+    @SuppressFBWarnings("DCN_NULLPOINTER_EXCEPTION")
     private List<File> loadBootstrapData() {
         try {
             final var files = findFilesByExtension(bootstrapPath, FILE_EXT);
@@ -337,8 +357,8 @@ public class Bootstrapper {
                 catalogs.add(deserializationSvc.getResourceCatalog(
                         Files.readString(jsonFile.toPath())));
             } catch (IOException e) {
-                if (log.isWarnEnabled()) {
-                    log.warn("Could not deserialize ids catalog file. [path=({})]",
+                if (log.isDebugEnabled()) {
+                    log.debug("Could not deserialize ids catalog file. [path=({})]",
                             jsonFile.getPath(), e);
                 }
                 return Optional.empty();

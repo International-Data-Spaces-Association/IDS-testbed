@@ -20,12 +20,10 @@ import io.dataspaceconnector.model.route.Route;
 import io.dataspaceconnector.model.route.RouteDesc;
 import io.dataspaceconnector.model.route.RouteFactory;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SpringBootTest
 public class RouteViewAssemblerTest {
 
     @Test
@@ -40,7 +38,7 @@ public class RouteViewAssemblerTest {
         assertEquals(after.getDescription(), shouldLookLike.getDescription());
         assertEquals(after.getTitle(), shouldLookLike.getTitle());
         assertEquals(after.getDeploy(), shouldLookLike.getDeploy());
-        assertTrue(after.getLink("artifacts").isPresent());
+        assertTrue(after.getLink("output").isPresent());
         assertTrue(after.getLink("routes").isPresent());
     }
 

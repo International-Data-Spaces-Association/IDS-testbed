@@ -17,7 +17,7 @@ package io.dataspaceconnector.controller.resource.view.configuration;
 
 import io.dataspaceconnector.config.ConnectorConfig;
 import io.dataspaceconnector.controller.resource.type.ConfigurationController;
-import io.dataspaceconnector.controller.resource.view.util.ViewAssemblerHelper;
+import io.dataspaceconnector.controller.resource.view.util.SelfLinkHelper;
 import io.dataspaceconnector.model.configuration.Configuration;
 import io.dataspaceconnector.model.configuration.ConfigurationDesc;
 import io.dataspaceconnector.model.configuration.ConfigurationFactory;
@@ -46,7 +46,7 @@ public class ConfigurationViewAssemblerTest {
     public void create_ValidBroker_returnBrokerView() {
         /* ARRANGE */
         final var shouldLookLike = getConfiguration();
-        final var link = ViewAssemblerHelper.
+        final var link = new SelfLinkHelper().
                 getSelfLink(shouldLookLike.getId(), ConfigurationController.class);
 
         /* ACT */
@@ -103,17 +103,17 @@ public class ConfigurationViewAssemblerTest {
         final var trustStoreDesc = new TruststoreDesc();
         trustStoreDesc.setLocation(URI.create("https://truststore.com"));
         trustStoreDesc.setPassword("password");
-        desc.setTruststoreSettings(trustStoreDesc);
+        desc.setTruststore(trustStoreDesc);
 
         final var keyStoreDesc = new KeystoreDesc();
         keyStoreDesc.setLocation(URI.create("https://keystore.com"));
         keyStoreDesc.setPassword("password");
-        desc.setKeystoreSettings(keyStoreDesc);
+        desc.setKeystore(keyStoreDesc);
 
         final var proxyDesc = new ProxyDesc();
         proxyDesc.setLocation(URI.create("https://localhost:8081"));
         proxyDesc.setExclusions(new ArrayList<>());
-        desc.setProxySettings(proxyDesc);
+        desc.setProxy(proxyDesc);
 
         return desc;
     }

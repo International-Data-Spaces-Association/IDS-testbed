@@ -33,7 +33,6 @@ import io.dataspaceconnector.service.resource.type.EndpointServiceProxy;
 import io.dataspaceconnector.service.resource.type.GenericEndpointService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -58,8 +57,10 @@ import java.util.UUID;
  * Offers the endpoints for managing different endpoints.
  */
 @RestController
-@RequestMapping(BasePath.ENDPOINTS)
 @RequiredArgsConstructor
+@ApiResponse(responseCode = ResponseCode.UNAUTHORIZED,
+        description = ResponseDescription.UNAUTHORIZED)
+@RequestMapping(BasePath.ENDPOINTS)
 @Tag(name = ResourceName.ENDPOINTS, description = ResourceDescription.ENDPOINTS)
 @Getter(AccessLevel.PROTECTED)
 @Setter(AccessLevel.NONE)
@@ -86,8 +87,10 @@ public class EndpointController implements CRUDController<Endpoint, EndpointDesc
     private final @NonNull EndpointViewAssemblerProxy assemblerProxy;
 
     /**
+     * Respond with created endpoint.
+     *
      * @param obj The endpoint object.
-     * @return response entity
+     * @return response entity.
      */
     private ResponseEntity<Object> respondCreated(final Endpoint obj) {
         final RepresentationModel<?> entity = assemblerProxy.toModel(obj);
@@ -165,17 +168,16 @@ public class EndpointController implements CRUDController<Endpoint, EndpointDesc
     }
 
     /**
+     * Endpoints for creating a start endpoint for a route.
+     *
      * @param genericEndpointId The id of the generic endpoint.
      * @param dataSourceId      The id of the data source.
-     * @return response status OK, if data source is created at generic endpoint.
+     * @return response status OK if data source is created at generic endpoint.
      */
     @PutMapping("{id}/datasource/{dataSourceId}")
-    @Operation(summary = "Creates start endpoint for the route")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = ResponseCode.NO_CONTENT,
-                    description = ResponseDescription.NO_CONTENT),
-            @ApiResponse(responseCode = ResponseCode.UNAUTHORIZED,
-                    description = ResponseDescription.UNAUTHORIZED)})
+    @Operation(summary = "Creates start endpoint for a route.")
+    @ApiResponse(responseCode = ResponseCode.NO_CONTENT,
+            description = ResponseDescription.NO_CONTENT)
     public final ResponseEntity<Void> linkDataSource(
             @Valid @PathVariable(name = "id") final UUID genericEndpointId,
             @Valid @PathVariable(name = "dataSourceId") final UUID dataSourceId) {

@@ -167,6 +167,8 @@ A full configuration example may look like this:
 }
 ```
 
+### Configuration Persistence
+
 **New**: Since v6.0.0, the Dataspace Connector offers CRUD endpoints for managing multiple
 configurations. For a first start, the `config.json` will be loaded. All settings will then be
 persisted in the database, so the application does not "forget" them on a restart.
@@ -233,6 +235,32 @@ An example configuration could look like this:
 }
 ```
 
+### Force-load from file
+
+It is now possible to force the reloading of the configuration from the `config.json` when
+restarting the Connector. Thus, the configuration marked as active in the database is ignored on
+start-up. The data from the `config.json` and the `application.properties` (truststore/keystore
+password and alias) are then stored to the connector's database as new active config and can be
+changed via the REST API. Every new start of the connector with force reload will trigger the
+reloading of the config from the `config.json`. The force reload can be set in the
+`application.properties` and is thus needed as an environment variables depending on the setup:
+
+```properties
+configuration.force.reload=true/false
+```
+
+True will force reloading the config from `config.json` and `application.properties`. The default
+value is set to `false`.
+
+---
+
+**Note**: If a configuration is activated at runtime via the REST API that cannot be processed by
+the Messaging Services (which then throws a `ConfigUpdateException`), e.g. because values of the
+`KeyStore` or `TrustStore` settings are null, the system rolls back to the old working configuration
+and sets this as the active configuration.
+
+---
+
 
 ## Step 2: IDS Certificate
 
@@ -245,11 +273,11 @@ and for received messages, the sent [DAT](https://github.com/International-Data-
 will not be checked.
 
 To turn on the [DAT](https://github.com/International-Data-Spaces-Association/IDS-G/blob/master/core/DAPS/README.md#dynamic-attribute-token-content)
-checking, you need to set the `ids:connectorDeployMode` to`idsc:PRODUCTIVE_DEPLOYMENT`. For getting
-a trusted certificate, contact[Gerd Brost](mailto:gerd.brost@aisec.fraunhofer.de). Add the keystore
-with the IDS certificate inside to the `resources/conf` and change the filename at `ids:keyStore`
-accordingly. **In addition, set your connector id to a meaningful URL that uniquely identifies your
-connector towards e.g. the IDS Metadata Broker**:
+checking, you need to set the `ids:connectorDeployMode` to`idsc:PRODUCTIVE_DEPLOYMENT`. **For issuing
+a trusted IDS certificate, see [here](../communication/v6/ecosystem/identityProvider.md#aisec-daps-issuing-an-ids-certificate)**.
+Add the keystore with the IDS certificate inside to the `resources/conf` and change the filename at
+`ids:keyStore` accordingly. **In addition, set the connector id to the connector's URL (domain name),
+that uniquely identifies the connector towards e.g. the IDS Metadata Broker**:
 
 ```json
 "ids:connectorDescription" : {
@@ -263,7 +291,7 @@ connector towards e.g. the IDS Metadata Broker**:
 This mode is a **security risk** and cannot ensure that the connector is talking to a verified IDS
 participant. Furthermore, messages from the Dataspace Connector without a valid IDS certificate
 may not be accepted by other Connector implementations and will not be accepted by the IDS Metadata
-Broker running in the IDS lab.
+Broker running in the IDS lab and the public available IDS AppStore.
 
 ---
 
@@ -408,7 +436,7 @@ If you want to change the base path, which will be used to find properties and c
 bootstrapping, you can customize the following line:
 
 ```properties
-bootstrap.path=.
+bootstrap.path=./src/resources
 bootstrap.enabled=false
 ```
 
@@ -460,28 +488,65 @@ your backend applications technically enforce the usage policies instead.
 
 ---
 
-The Messaging Services dependency comes with some further settings. For example you can specify what
-DAPS you want to connect to and whether incoming messages should be, in addition, processed by a
-SHACL validator.
+The **IDS Messaging Services** dependency comes with some further settings. For example, you can
+specify what DAPS you want to connect to and whether incoming messages should be, in addition,
+processed by a SHACL validator.
 
 ```properties
 daps.mode=aisec
 shacl.validation=true
 ```
 
-As the Messaging Services provide the connector with the ability to communicate via IDS multipart
-messages, the IDSCPv2 dependency allows to send and receive the same messages via the IDSCP
-protocol. For this and the underlying Camel, some more settings need to be set and can be modified
-accordingly:
+---
+
+**Note**: For more configurations, see [here](https://github.com/International-Data-Spaces-Association/IDS-Messaging-Services/wiki/09.-Settings:-Connector-Configuration).
+
+---
+
+### IDSCP2 Usage and Remote Attestation
+
+As the IDS Messaging Services provide the connector with the ability to communicate via IDS multipart
+messages, the IDSCP2 dependency allows to send and receive the same messages via the IDSCP2
+protocol. For this and the underlying Apache Camel framework, some more settings need to be set
+and can be modified accordingly:
 
 ```properties
-## Camel
-camel.springboot.main-run-controller=true
-camel.truststore.path=classpath:conf/truststore.p12
-
-## IDSCP
-application.http.base-url=https://localhost:8080
+## IDSCP2
 idscp2.enabled=false
-idscp2.keystore=./src/main/resources/conf/keystore-localhost.p12
+idscp2.keystore=./src/main/resources/conf/cert.p12
 idscp2.truststore=./src/main/resources/conf/truststore.p12
+
+## IDSCP2 CMC RA
+## Expected and featured RA suites of server/client routes in the DSC
+idscp2.supported-ra-suites-server=Dummy|CMC
+idscp2.expected-ra-suites-server=Dummy
+idscp2.supported-ra-suites-client=Dummy|CMC
+idscp2.expected-ra-suites-client=CMC
+## Set this to the IP address or hostname the machine/container running the cmcd
+idscp2.cmc-host=172.22.0.1
 ```
+
+Setting `idscp2.enabled` to `true` will activate IDSCP2 support, using the default port 29292 as
+IDSCP2 server port.
+
+The `idscp2.[keystore/truststore]` properties define paths to the keystore and truststore in use.
+The provided example keystore (`cert.p12`) is issued for hostname `consumer-core`, which has to be
+set in `docker-compose.yml`, or elsewhere, accordingly.
+
+**Modifications to support remote attestation are only provided with DSC v7.0.1-ra!**
+
+The `idscp2.[supported/expected]-ra-suites-[client/server]` properties specify the supported and
+expected remote attestation mechanisms for client and server, respectively.
+The default configuration specifies both the "Dummy" remote "attestation" (which does nothing), and
+the remote attestation using the Container Measurement Component (CMC), whereas the client expects
+the server to supply CMC RA, and the server does not request RA from the client.
+If you want to use remote attestation via the CMC, please consult the
+[README in the CMC Repo](https://github.com/Fraunhofer-AISEC/cmc) for setup directions.
+
+In order for the IDSCP2 RA adapter to communicate with the CMC, the host (and optionally port)
+of the CMC server has to be specified via the `idscp2.cmc-host` property. This can be a little
+tricky in containerized environments, the example specifies a typical host IP address in a
+Docker (Compose) network, but _should **NOT** be expected to work out of the box!_
+Please use `docker inspect` or similar to check the actual subnet and modify the property
+accordingly! Another port but the default port 9955 can optionally be specified using the format
+`<host/ip>:<port>`.

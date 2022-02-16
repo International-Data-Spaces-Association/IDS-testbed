@@ -104,7 +104,7 @@ public final class FromIdsObjectMapper {
         final var catalogDesc = new CatalogDesc();
         catalogDesc.setAdditional(additional);
         catalogDesc.setTitle("IDS Catalog");
-        catalogDesc.setDescription("This catalog is created from an IDS infomodel catalog.");
+        catalogDesc.setDescription("This catalog is created from an IDS catalog.");
         catalogDesc.setBootstrapId(catalog.getId());
 
         return new CatalogTemplate(catalogDesc, null, null);
@@ -278,7 +278,8 @@ public final class FromIdsObjectMapper {
         }
 
         if (path != null && !path.equals("")) {
-            desc.setLocation(URI.create(path));
+            desc.setPath(path);
+            desc.setLocation(path);
         }
 
         final var additional = AdditionalUtils.buildAdditionalForAppEndpoint(endpoint);
@@ -570,15 +571,15 @@ public final class FromIdsObjectMapper {
         desc.setDefaultEndpoint(connector.getHasDefaultEndpoint().getAccessURL());
         desc.setInboundModelVersion(connector.getInboundModelVersion());
         desc.setOutboundModelVersion(connector.getOutboundModelVersion());
-        desc.setKeystoreSettings(new KeystoreDesc(
+        desc.setKeystore(new KeystoreDesc(
                 configModel.getKeyStore(),
                 configModel.getKeyStorePassword(),
                 configModel.getKeyStoreAlias()));
         desc.setLogLevel(fromIdsLogLevel(configModel.getConfigurationModelLogLevel()));
         desc.setMaintainer(connector.getMaintainer());
-        desc.setProxySettings(fromIdsProxy(configModel.getConnectorProxy()));
+        desc.setProxy(fromIdsProxy(configModel.getConnectorProxy()));
         desc.setSecurityProfile(fromIdsSecurityProfile(connector.getSecurityProfile()));
-        desc.setTruststoreSettings(new TruststoreDesc(
+        desc.setTruststore(new TruststoreDesc(
                 configModel.getTrustStore(),
                 configModel.getTrustStorePassword(),
                 configModel.getTrustStoreAlias()));
@@ -654,7 +655,13 @@ public final class FromIdsObjectMapper {
         }
     }
 
-    private static DeployMode fromIdsDeployMode(final ConnectorDeployMode deployMode) {
+    /**
+     * Get dsc deploy mode from ids deploy mode.
+     *
+     * @param deployMode The ids deploy mode.
+     * @return The internal deploy mode.
+     */
+    public static DeployMode fromIdsDeployMode(final ConnectorDeployMode deployMode) {
         return deployMode == ConnectorDeployMode.TEST_DEPLOYMENT
                 ? DeployMode.TEST : DeployMode.PRODUCTIVE;
     }
@@ -680,14 +687,16 @@ public final class FromIdsObjectMapper {
 
         try {
             switch ((PaymentModality) modality) {
+                case FREE:
+                    return PaymentMethod.FREE;
                 case FIXED_PRICE:
                     return PaymentMethod.FIXED_PRICE;
                 case NEGOTIATION_BASIS:
                     return PaymentMethod.NEGOTIATION_BASIS;
                 default:
-                    return PaymentMethod.FREE;
+                    return PaymentMethod.UNDEFINED;
             }
-        } catch (Exception exception) {
+        } catch (ClassCastException exception) {
             if (log.isDebugEnabled()) {
                 log.debug("Could not read payment modality from incoming resource. "
                         + "[resourceId=({}), modality=({})]", id, modality.toString());

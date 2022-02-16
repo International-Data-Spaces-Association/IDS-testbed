@@ -30,7 +30,7 @@ build/
 
 ### VS Code ###
 .vscode/
-#/src/main/resources/conf/
+/src/main/resources/conf/
 
 ### precommit ###
 .pre-commit-config.yaml

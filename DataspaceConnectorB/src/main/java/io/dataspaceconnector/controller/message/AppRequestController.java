@@ -22,6 +22,9 @@ import io.dataspaceconnector.common.exception.MessageException;
 import io.dataspaceconnector.common.exception.MessageResponseException;
 import io.dataspaceconnector.common.exception.RdfBuilderException;
 import io.dataspaceconnector.common.exception.UnexpectedResponseException;
+import io.dataspaceconnector.common.net.ContentType;
+import io.dataspaceconnector.controller.message.tag.MessageDescription;
+import io.dataspaceconnector.controller.message.tag.MessageName;
 import io.dataspaceconnector.controller.resource.view.app.AppViewAssembler;
 import io.dataspaceconnector.controller.util.ResponseUtils;
 import io.dataspaceconnector.service.ArtifactDataDownloader;
@@ -39,7 +42,6 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -58,7 +60,7 @@ import java.net.URI;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/ids")
-@Tag(name = "Messages", description = "Endpoints for invoke sending messages")
+@Tag(name = MessageName.MESSAGES, description = MessageDescription.MESSAGES)
 public class AppRequestController {
 
     /**
@@ -89,12 +91,12 @@ public class AppRequestController {
     /**
      * Add an apps metadata to an app object.
      *
-     * @param recipient The recipient url
+     * @param recipient The recipient url or app store id.
      * @param appId     The app Id.
      * @return Success, when app can be found and created from recipient response.
      */
-    @PostMapping("/app")
-    @Operation(summary = "Download IDS app from AppStore")
+    @PostMapping(value = "/app", produces = ContentType.JSON)
+    @Operation(summary = "Download an IDS app from an IDS AppStore.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Ok"),
             @ApiResponse(responseCode = "201", description = "Created"),
@@ -103,7 +105,6 @@ public class AppRequestController {
             @ApiResponse(responseCode = "417", description = "Expectation failed"),
             @ApiResponse(responseCode = "500", description = "Internal server error"),
             @ApiResponse(responseCode = "502", description = "Bad gateway")})
-    @PreAuthorize("hasPermission(#recipient, 'rw')")
     @ResponseBody
     @Transactional
     public ResponseEntity<Object> sendMessage(
@@ -130,10 +131,8 @@ public class AppRequestController {
                 // Remove app if no corresponding data could be downloaded.
                 final var app = appSvc.identifyByRemoteId(appId);
                 app.ifPresent(appSvc::delete);
-                if (log.isDebugEnabled()) {
-                    log.debug("Failed to download app data. Removed app. [remoteId=({})]", appId);
-                }
-                return ResponseEntity.internalServerError().body("Could not download app.");
+
+                return ResponseUtils.respondAppNotDownloaded(appId);
             }
 
             return respondWithCreatedApp(appId);

@@ -214,7 +214,19 @@ policies (`POST /api/examples/validation`). How these can be used, is explained
 By adding multiple rules to one contract offer, you are now able to add multiple usage policies to
 one resource (e.g. the data usage can be logged and the data should be deleted at a given date).
 
-### Step 2: Add Local Data
+---
+
+**Note**: If you preset the `consumer` attribute, the connector will compare this with the
+`issuerConnector` of an incoming contract request. If both values do not match, the contract request
+will be rejected. Make sure that these values are equal (e.g. `https://github.com`
+!= `https://github.com/`. On top of that, you have to predefine the start and end date. These values
+will also be checked on an incoming contract request.
+
+---
+
+### Step 2: Add data
+
+#### Option 1: Add Local Data
 
 After we created a contract offer and a resource offer and added the latter to a catalog, we
 have to create a representation and add it to the resource offer. Then, we have to create an
@@ -277,7 +289,7 @@ Another endpoint is provided to add data via PUT request.
 
 ---
 
-### Step 3: Add Remote Data
+#### Option 2: Add Remote Data
 
 For remote data, as in this example, it is possible to set the attributes `accessUrl`, `username`,
 and `password` to define details for the data providing connector on how to retrieve the data from
@@ -291,10 +303,12 @@ local data. The Dataspace Connector automatically classifies an artifact as `rem
 }
 ```
 
-Currently, the Dataspace Connector can natively establish a connection via http, https, and https
-with basicAuth or apiKey. To use one of the authentications, just add the appropriate object to the
-body of your request. To connect to other backends, take a look at how to integrate routing
-frameworks as explained [here](../../deployment/camel.md).
+Currently, the Dataspace Connector can natively establish a connection via http and https
+(optionally with basicAuth or apiKey). To use one of the authentications, just add the appropriate
+object to the body of your request.
+
+**Since version 7.x.x**: To connect to other backends, you can define and use Camel routes as
+explained [here](camel.md#create-a-route-for-fetching-data).
 
 ---
 

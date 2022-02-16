@@ -16,22 +16,30 @@
 package io.dataspaceconnector.controller.gui.util;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import de.fraunhofer.iais.eis.ConnectorStatus;
 import de.fraunhofer.iais.eis.Language;
-import de.fraunhofer.iais.eis.SecurityProfile;
+import io.dataspaceconnector.common.exception.ErrorMessage;
+import io.dataspaceconnector.common.ids.policy.PolicyPattern;
+import io.dataspaceconnector.common.ids.policy.UsageControlFramework;
+import io.dataspaceconnector.controller.util.ActionType;
+import io.dataspaceconnector.extension.monitoring.update.util.UpdateType;
 import io.dataspaceconnector.model.base.RegistrationStatus;
+import io.dataspaceconnector.model.configuration.ConnectorStatus;
 import io.dataspaceconnector.model.configuration.DeployMethod;
 import io.dataspaceconnector.model.configuration.DeployMode;
 import io.dataspaceconnector.model.configuration.LogLevel;
+import io.dataspaceconnector.model.configuration.SecurityProfile;
+import io.dataspaceconnector.model.datasource.DataSourceType;
+import io.dataspaceconnector.model.endpoint.EndpointType;
 import io.dataspaceconnector.model.resource.PaymentMethod;
+import io.dataspaceconnector.service.message.util.Event;
 import lombok.extern.log4j.Log4j2;
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
-import java.util.Locale;
 
 /**
  * The class can be used to define auxiliary methods that are needed again and again.
@@ -44,78 +52,89 @@ public final class GuiUtils {
     }
 
     /**
-     * The method returns for a given enum name all enum values.
+     * The method returns all enums and their values.
      *
-     * @param enumName name of the enum
-     * @return enums as string
+     * @return enums as json object.
      */
-    public static String getSpecificEnum(final String enumName) {
-        final var name = enumName.toLowerCase(Locale.ENGLISH);
-        JSONArray sortedJsonArray = null;
+    public static JSONObject getListOfEnums() {
+        return new JSONObject() {{
+            put("types", getTypes());
+            put(EnumType.LOG_LEVEL.toString(), getLogLevel());
+            put(EnumType.CONNECTOR_STATUS.toString(), getConnectorStatus());
+            put(EnumType.IDS_CONNECTOR_STATUS.toString(), getIdsConnectorStatus());
+            put(EnumType.CONNECTOR_DEPLOY_MODE.toString(), getConnectorDeployMode());
+            put(EnumType.LANGUAGE.toString(), getLanguage());
+            put(EnumType.DEPLOY_METHOD.toString(), getDeployMethod());
+            put(EnumType.BROKER_STATUS.toString(), getBrokerStatus());
+            put(EnumType.SECURITY_PROFILE.toString(), getSecurityProfile());
+            put(EnumType.IDS_SECURITY_PROFILE.toString(), getIdsSecurityProfile());
+            put(EnumType.PAYMENT_METHOD.toString(), getPaymentMethod());
+            put(EnumType.POLICY_PATTERN.toString(), getPolicyPattern());
+            put(EnumType.UPDATE_TYPE.toString(), getUpdateType());
+            put(EnumType.ENDPOINT_TYPE.toString(), getEndpointType());
+            put(EnumType.EVENT_TYPE.toString(), getEventType());
+            put(EnumType.ERROR_MESSAGE.toString(), getErrorMessage());
+            put(EnumType.USAGE_CONTROL_FRAMEWORK.toString(), getUsageControlFramework());
+            put(EnumType.ACTION_TYPE.toString(), getActionType());
+            put(EnumType.DATA_SOURCE_TYPE.toString(), getDataSourceType());
+        }};
+    }
 
-        switch (name) {
-            case "loglevel":
-                sortedJsonArray = getLogLevel();
-                break;
-            case "connectorstatus":
-                sortedJsonArray = getConnectorStatus();
-                break;
-            case "connectordeploymode":
-                sortedJsonArray = getConnectorDeployMode();
-                break;
-            case "language":
-                sortedJsonArray = getLanguage();
-                break;
-            case "deploymethod":
-                sortedJsonArray = getDeployMethod();
-                break;
-            case "brokerstatus":
-                sortedJsonArray = getBrokerStatus();
-                break;
-            case "securityprofile":
-                sortedJsonArray = getSecurityProfile();
-                break;
-            case "paymentmethod":
-                sortedJsonArray = getPaymentMethod();
-                break;
-            default:
-                break;
-        }
+    private static JSONArray getTypes() {
+        final var jsonArray = new JSONArray();
+        jsonArray.addAll(Arrays.asList(EnumType.values()));
 
-        return sortedJsonArray != null ? sortedJsonArray.toJSONString() : null;
+        return jsonArray;
     }
 
     private static JSONArray getPaymentMethod() {
         final var jsonArray = new JSONArray();
-        final var paymentmethods = PaymentMethod.values();
-
-        for (final var paymentmethod : paymentmethods) {
+        for (final var paymentMethod : PaymentMethod.values()) {
             try {
-                var jsonObject = new JSONObject();
-                jsonObject.put("originalName", paymentmethod.name());
-                jsonObject.put("displayName", PaymentMethod.class.getField(paymentmethod.name())
-                        .getAnnotation(JsonProperty.class).value());
-                jsonArray.add(jsonObject);
+                jsonArray.add(new JSONObject() {{
+                    put("originalName", paymentMethod.name());
+                    put("displayName", paymentMethod.toString());
+                    put("jsonInput", PaymentMethod.class.getField(paymentMethod.name())
+                            .getAnnotation(JsonProperty.class).value());
+                }});
             } catch (NoSuchFieldException e) {
-                if (log.isDebugEnabled()) {
-                    log.debug("Missing JsonProperty found for paymentmethod!");
+                if (log.isWarnEnabled()) {
+                    log.warn("Missing JsonProperty found for paymentMethod.");
                 }
             }
-        }
 
+        }
 
         return sortJsonArray(jsonArray);
     }
 
     private static JSONArray getSecurityProfile() {
         final var jsonArray = new JSONArray();
-        final var securityProfiles = SecurityProfile.values();
+        for (final var securityProfile : SecurityProfile.values()) {
+            try {
+                jsonArray.add(new JSONObject() {{
+                    put("originalName", securityProfile.name());
+                    put("displayName", SecurityProfile.class.getField(securityProfile.name())
+                            .getAnnotation(JsonProperty.class).value());
+                }});
+            } catch (NoSuchFieldException e) {
+                if (log.isWarnEnabled()) {
+                    log.warn("Missing JsonProperty found for securityProfile.");
+                }
+            }
+        }
 
-        for (final var securityProfile : securityProfiles) {
-            var jsonObject = new JSONObject();
-            jsonObject.put("originalName", securityProfile.name());
-            jsonObject.put("displayName", securityProfile.getLabel().get(0).getValue());
-            jsonArray.add(jsonObject);
+        return sortJsonArray(jsonArray);
+    }
+
+    private static JSONArray getIdsSecurityProfile() {
+        final var jsonArray = new JSONArray();
+        for (final var securityProfile : de.fraunhofer.iais.eis.SecurityProfile.values()) {
+            jsonArray.add(new JSONObject() {{
+                put("originalName", securityProfile.name());
+                put("displayName", securityProfile.getLabel().get(0).getValue());
+                put("jsonInput", securityProfile.getId());
+            }});
         }
 
         return sortJsonArray(jsonArray);
@@ -123,12 +142,19 @@ public final class GuiUtils {
 
     private static JSONArray getBrokerStatus() {
         final var jsonArray = new JSONArray();
-        final var brokerStatuses = RegistrationStatus.values();
-
-        for (final var brokerStatus : brokerStatuses) {
-            var jsonObject = new JSONObject();
-            jsonObject.put("displayName", brokerStatus.name());
-            jsonArray.add(jsonObject);
+        for (final var brokerStatus : RegistrationStatus.values()) {
+            try {
+                final var value = RegistrationStatus.class.getField(brokerStatus.name())
+                        .getAnnotation(JsonProperty.class).value();
+                jsonArray.add(new JSONObject() {{
+                    put("originalName", brokerStatus.name());
+                    put("displayName", value);
+                }});
+            } catch (NoSuchFieldException e) {
+                if (log.isWarnEnabled()) {
+                    log.warn("Missing JsonProperty found for registrationStatus.");
+                }
+            }
         }
 
         return sortJsonArray(jsonArray);
@@ -136,12 +162,20 @@ public final class GuiUtils {
 
     private static JSONArray getDeployMethod() {
         final var jsonArray = new JSONArray();
-        final var deployMethods = DeployMethod.values();
-
-        for (final var deployMethod : deployMethods) {
-            var jsonObject = new JSONObject();
-            jsonObject.put("displayName", deployMethod.name());
-            jsonArray.add(jsonObject);
+        for (final var deployMethod : DeployMethod.values()) {
+            try {
+                final var value = DeployMethod.class.getField(deployMethod.name())
+                        .getAnnotation(JsonProperty.class).value();
+                jsonArray.add(new JSONObject() {{
+                    put("originalName", deployMethod.name());
+                    put("displayName", value);
+                    put("jsonInput", value);
+                }});
+            } catch (NoSuchFieldException e) {
+                if (log.isWarnEnabled()) {
+                    log.warn("Missing JsonProperty found for deployMethod.");
+                }
+            }
         }
 
         return sortJsonArray(jsonArray);
@@ -149,19 +183,19 @@ public final class GuiUtils {
 
     private static JSONArray getLanguage() {
         final var jsonArray = new JSONArray();
-        final var languages = Language.values();
-
-        for (final var language : languages) {
-            var jsonObject = new JSONObject();
-            jsonObject.put("originalName", language.name());
-
-            //Workaround for infomodel issue LT = LessThan
+        for (final var language : Language.values()) {
+            // Workaround for Infomodel issue LT = LessThan
+            String value;
             if ("LT".equals(language.name())) {
-                jsonObject.put("displayName", language.getLabel().get(1).getValue());
+                value = language.getLabel().get(1).getValue();
             } else {
-                jsonObject.put("displayName", language.getLabel().get(0).getValue());
+                value = language.getLabel().get(0).getValue();
             }
-            jsonArray.add(jsonObject);
+            jsonArray.add(new JSONObject() {{
+                put("originalName", language.name());
+                put("displayName", value);
+                put("jsonInput", language.name());
+            }});
         }
 
         return sortJsonArray(jsonArray);
@@ -169,18 +203,17 @@ public final class GuiUtils {
 
     private static JSONArray getConnectorDeployMode() {
         final var jsonArray = new JSONArray();
-        final var connectorDeployModes = DeployMode.values();
-
-        for (final var connectorDeployMode : connectorDeployModes) {
+        for (final var connectorDeployMode : DeployMode.values()) {
             try {
-                var jsonObject = new JSONObject();
-                jsonObject.put("originalName", connectorDeployMode.name());
-                jsonObject.put("displayName", DeployMode.class.getField(connectorDeployMode.name())
-                        .getAnnotation(JsonProperty.class).value());
-                jsonArray.add(jsonObject);
+                final var value = DeployMode.class.getField(connectorDeployMode.name())
+                        .getAnnotation(JsonProperty.class).value();
+                jsonArray.add(new JSONObject() {{
+                    put("originalName", connectorDeployMode.name());
+                    put("displayName", value);
+                }});
             } catch (NoSuchFieldException e) {
                 if (log.isDebugEnabled()) {
-                    log.debug("Missing JsonProperty found for connectorDeployMode!");
+                    log.debug("Missing JsonProperty found for connectorDeployMode.");
                 }
             }
         }
@@ -190,13 +223,32 @@ public final class GuiUtils {
 
     private static JSONArray getConnectorStatus() {
         final var jsonArray = new JSONArray();
-        final var connectorStatuses = ConnectorStatus.values();
+        for (final var connectorStatus : ConnectorStatus.values()) {
+            try {
+                final var value = ConnectorStatus.class.getField(connectorStatus.name())
+                        .getAnnotation(JsonProperty.class).value();
+                jsonArray.add(new JSONObject() {{
+                    put("originalName", connectorStatus.name());
+                    put("displayName", value);
+                    put("jsonInput", value);
+                }});
+            } catch (NoSuchFieldException e) {
+                if (log.isDebugEnabled()) {
+                    log.debug("Missing JsonProperty found for connectorStatus.");
+                }
+            }
+        }
 
-        for (final var connectorStatus : connectorStatuses) {
-            var jsonObject = new JSONObject();
-            jsonObject.put("originalName", connectorStatus.name());
-            jsonObject.put("displayName", connectorStatus.getLabel().get(0).getValue());
-            jsonArray.add(jsonObject);
+        return sortJsonArray(jsonArray);
+    }
+
+    private static JSONArray getIdsConnectorStatus() {
+        final var jsonArray = new JSONArray();
+        for (final var connectorStatus : de.fraunhofer.iais.eis.ConnectorStatus.values()) {
+            jsonArray.add(new JSONObject() {{
+                put("originalName", connectorStatus.name());
+                put("displayName", connectorStatus.getLabel().get(0).getValue());
+            }});
         }
 
         return sortJsonArray(jsonArray);
@@ -204,18 +256,126 @@ public final class GuiUtils {
 
     private static JSONArray getLogLevel() {
         final var jsonArray = new JSONArray();
-        final var logLevels = LogLevel.values();
-
-        for (final var logLevel : logLevels) {
+        for (final var logLevel : LogLevel.values()) {
             try {
-                var jsonObject = new JSONObject();
-                jsonObject.put("originalName", logLevel.name());
-                jsonObject.put("displayName", LogLevel.class.getField(logLevel.name())
-                        .getAnnotation(JsonProperty.class).value());
-                jsonArray.add(jsonObject);
+                final var value = LogLevel.class.getField(logLevel.name())
+                        .getAnnotation(JsonProperty.class).value();
+                jsonArray.add(new JSONObject() {{
+                    put("originalName", logLevel.name());
+                    put("displayName", value);
+                    put("jsonInput", value);
+                }});
             } catch (NoSuchFieldException e) {
                 if (log.isDebugEnabled()) {
-                    log.debug("Missing JsonProperty found for logLevel!");
+                    log.debug("Missing JsonProperty found for logLevel.");
+                }
+            }
+        }
+
+        return sortJsonArray(jsonArray);
+    }
+
+    private static JSONArray getPolicyPattern() {
+        final var jsonArray = new JSONArray();
+        for (final var policyPattern : PolicyPattern.values()) {
+            jsonArray.add(new JSONObject() {{
+                put("originalName", policyPattern.name());
+                put("displayName", policyPattern.toString());
+                put("jsonInput", policyPattern.name());
+            }});
+        }
+
+        return sortJsonArray(jsonArray);
+    }
+
+    private static JSONArray getUpdateType() {
+        final var jsonArray = new JSONArray();
+        for (final var updateType : UpdateType.values()) {
+            jsonArray.add(new JSONObject() {{
+                put("originalName", updateType.name());
+                put("displayName", updateType.toString());
+            }});
+        }
+
+        return sortJsonArray(jsonArray);
+    }
+
+    private static JSONArray getEndpointType() {
+        final var jsonArray = new JSONArray();
+        for (final var endpointType : EndpointType.values()) {
+            jsonArray.add(new JSONObject() {{
+                put("originalName", endpointType.name());
+                put("displayName", endpointType.toString());
+                put("jsonInput", endpointType.name());
+            }});
+        }
+
+        return sortJsonArray(jsonArray);
+    }
+
+    private static JSONArray getEventType() {
+        final var jsonArray = new JSONArray();
+        for (final var eventType : Event.values()) {
+            jsonArray.add(new JSONObject() {{
+                put("originalName", eventType.name());
+                put("displayName", eventType.toString());
+            }});
+        }
+
+        return sortJsonArray(jsonArray);
+    }
+
+    private static JSONArray getErrorMessage() {
+        final var jsonArray = new JSONArray();
+        for (final var errorMessage : ErrorMessage.values()) {
+            jsonArray.add(new JSONObject() {{
+                put("originalName", errorMessage.name());
+                put("displayName", errorMessage.toString());
+            }});
+        }
+
+        return sortJsonArray(jsonArray);
+    }
+
+    private static JSONArray getUsageControlFramework() {
+        final var jsonArray = new JSONArray();
+        for (final var framework : UsageControlFramework.values()) {
+            jsonArray.add(new JSONObject() {{
+                put("originalName", framework.name());
+                put("displayName", framework.toString());
+            }});
+        }
+
+        return sortJsonArray(jsonArray);
+    }
+
+    private static JSONArray getActionType() {
+        final var jsonArray = new JSONArray();
+        for (final var actionType : ActionType.values()) {
+            jsonArray.add(new JSONObject() {{
+                put("originalName", actionType.name());
+                put("displayName", actionType.toString());
+                put("jsonInput", actionType.toString());
+            }});
+        }
+
+        return sortJsonArray(jsonArray);
+    }
+
+    private static JSONArray getDataSourceType() {
+        final var jsonArray = new JSONArray();
+        for (final var type : DataSourceType.values()) {
+            try {
+                final var value = DataSourceType.class.getField(type.name())
+                        .getAnnotation(JsonProperty.class).value();
+                jsonArray.add(new JSONObject() {{
+                    put("originalName", type.name());
+                    put("displayName", value);
+                    put("jsonInput", type.name());
+                }});
+            } catch (NoSuchFieldException e) {
+                if (log.isWarnEnabled()) {
+                    log.warn("Missing JsonProperty found for dataSourceType.");
                 }
             }
         }
@@ -224,8 +384,10 @@ public final class GuiUtils {
     }
 
     /**
-     * @param jsonArray json array to be sorted
-     * @return sorted json array
+     * Sort json array.
+     *
+     * @param jsonArray json array to be sorted.
+     * @return sorted json array.
      */
     private static JSONArray sortJsonArray(final JSONArray jsonArray) {
         final var jsonObjects = new ArrayList<JSONObject>();
@@ -246,7 +408,7 @@ public final class GuiUtils {
                     str2 = (String) b.get(KEY_NAME);
                 } catch (JSONException e) {
                     if (log.isErrorEnabled()) {
-                        log.error("Sorting contents of an array for the GUI failed.");
+                        log.error("Sorting contents of an array failed.");
                     }
                 }
                 return str1.compareTo(str2);

@@ -29,7 +29,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.annotation.DirtiesContext;
 
 import javax.xml.datatype.DatatypeFactory;
 import java.io.InputStream;
@@ -40,7 +39,6 @@ import java.util.GregorianCalendar;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 class ArtifactRequestHandlerTest {
 
     @MockBean
@@ -60,31 +58,6 @@ class ArtifactRequestHandlerTest {
 
         /* ASSERT */
         assertEquals(RejectionReason.BAD_PARAMETERS, result.getRejectionMessage().getRejectionReason());
-    }
-
-    @SneakyThrows
-    @Test
-    public void handleMessage_unsupportedMessage_returnUnsupportedVersionRejectionMessage() {
-        /* ARRANGE */
-        final var calendar = new GregorianCalendar();
-        calendar.setTime(new Date());
-        final var xmlCalendar = DatatypeFactory.newInstance().newXMLGregorianCalendar(calendar);
-
-        final var message = new ArtifactRequestMessageBuilder()
-                ._senderAgent_(URI.create("https://localhost:8080"))
-                ._issuerConnector_(URI.create("https://localhost:8080"))
-                ._securityToken_(new DynamicAttributeTokenBuilder()._tokenFormat_(TokenFormat.OTHER)._tokenValue_("").build())
-                ._modelVersion_("tetris")
-                ._issued_(xmlCalendar)
-                ._correlationMessage_(URI.create("https://somecorrelationMessage"))
-                ._requestedArtifact_(URI.create("https://someArtifact"))
-                .build();
-
-        /* ACT */
-        final var result = (ErrorResponse) handler.handleMessage((ArtifactRequestMessageImpl) message, null);
-
-        /* ASSERT */
-        assertEquals(RejectionReason.VERSION_NOT_SUPPORTED, result.getRejectionMessage().getRejectionReason());
     }
 
     @SneakyThrows

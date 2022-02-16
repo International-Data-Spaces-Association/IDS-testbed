@@ -22,7 +22,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.5.4</version>
+		<version>2.6.3</version>
 		<relativePath/>
 		<!-- lookup parent from repository -->
 	</parent>
@@ -85,51 +85,52 @@
 
 	<properties>
 		<!-- General -->
-		<revision>6.2.0</revision>
+		<revision>7.0.1</revision>
 		<email>info@dataspace-connector.de</email>
 
 		<!-- Build info -->
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 		<maven.compiler.release>${java.version}</maven.compiler.release>
 		<maven.minimum.version>3.3.9</maven.minimum.version>
 
 		<!-- Dependencies -->
-		<ids-messaging-services.version>4.2.2</ids-messaging-services.version>
+		<ids-messaging-services.version>6.0.1</ids-messaging-services.version>
 		<springframework.plugin>2.0.0.RELEASE</springframework.plugin>
-		<swagger-annotations.version>1.6.2</swagger-annotations.version>
-		<okhttp.version>4.9.1</okhttp.version>
-		<modelmapper.version>2.4.4</modelmapper.version>
-		<jackson.version>2.12.5</jackson.version>
-		<postgres.version>42.2.23</postgres.version>
-		<springdoc.version>1.5.10</springdoc.version>
-		<equalsverifier.version>3.7.1</equalsverifier.version>
-		<h2database.version>1.4.200</h2database.version>
+		<swagger-annotations.version>1.6.5</swagger-annotations.version>
+		<okhttp.version>4.9.3</okhttp.version>
+		<modelmapper.version>3.0.0</modelmapper.version>
+		<jackson.version>2.13.1</jackson.version>
+		<postgres.version>42.3.2</postgres.version>
+		<springdoc.version>1.6.6</springdoc.version>
+		<equalsverifier.version>3.9</equalsverifier.version>
 		<jaeger.version>3.3.1</jaeger.version>
-		<velocity.version>1.7</velocity.version>
-		<camel.version>3.11.1</camel.version>
-		<idscp2.version>0.5.0</idscp2.version>
+		<freemarker.version>2.3.31</freemarker.version>
+		<camel.version>3.15.0</camel.version>
+		<idscp2.version>0.6.0</idscp2.version>
+		<protobuf.version>3.19.4</protobuf.version>
 
 		<!-- Plugins -->
 		<maven-enforcer-plugin.version>3.0.0</maven-enforcer-plugin.version>
-		<maven-javadoc-plugin.version>3.3.0</maven-javadoc-plugin.version>
+		<maven-javadoc-plugin.version>3.3.1</maven-javadoc-plugin.version>
 		<maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
-		<pitest.version>1.6.9</pitest.version>
-		<pitest-junit5-plugin.version>0.14</pitest-junit5-plugin.version>
+		<pitest.version>1.7.4</pitest.version>
+		<pitest-junit5-plugin.version>0.15</pitest-junit5-plugin.version>
 		<tidy.version>1.1.0</tidy.version>
-		<maven-site-plugin.version>3.9.1</maven-site-plugin.version>
-		<maven-project-info-reports-plugin.version>3.1.2</maven-project-info-reports-plugin.version>
-		<spotbugs.version>4.3.0</spotbugs.version>
+		<maven-site-plugin.version>3.10.0</maven-site-plugin.version>
+		<maven-project-info-reports-plugin.version>3.2.1</maven-project-info-reports-plugin.version>
+		<spotbugs.version>4.5.3</spotbugs.version>
 		<findsecbugs-plugin.version>1.11.0</findsecbugs-plugin.version>
 		<checkstyle-plugin.version>3.1.2</checkstyle-plugin.version>
-		<checkstyle.version>8.45.1</checkstyle.version>
+		<checkstyle.version>9.3</checkstyle.version>
 		<jacoco.version>0.8.7</jacoco.version>
-		<pmd-plugin.version>3.14.0</pmd-plugin.version>
-		<pmd.version>6.37.0</pmd.version>
-		<versions-maven-plugin.version>2.8.1</versions-maven-plugin.version>
+		<pmd-plugin.version>3.15.0</pmd-plugin.version>
+		<pmd.version>6.42.0</pmd.version>
+		<versions-maven-plugin.version>2.9.0</versions-maven-plugin.version>
 		<license-plugin.version>4.1</license-plugin.version>
 		<dms.version>2.2.0</dms.version>
-		<taglist.version>2.4</taglist.version>
+		<taglist.version>3.0.0</taglist.version>
 		<jxr.version>3.1.1</jxr.version>
+		<dependency-check.version>6.5.3</dependency-check.version>
 
 		<!-- License -->
 		<license_name>Apache License, Version 2.0</license_name>
@@ -232,6 +233,13 @@
 					<artifactId>spring-boot-starter-logging</artifactId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.flywaydb/flyway-core -->
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+			<version>8.4.4</version>
 		</dependency>
 
 		<dependency>
@@ -400,22 +408,13 @@
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-			<version>${h2database.version}</version>
 			<scope>runtime</scope>
 		</dependency>
 
-
-		<!-- https://mvnrepository.com/artifact/org.apache.velocity/velocity -->
 		<dependency>
-			<groupId>org.apache.velocity</groupId>
-			<artifactId>velocity</artifactId>
-			<version>${velocity.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>commons-collections</groupId>
-					<artifactId>commons-collections</artifactId>
-				</exclusion>
-			</exclusions>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+			<version>${freemarker.version}</version>
 		</dependency>
 
 		<dependency>
@@ -425,14 +424,76 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-text</artifactId>
+			<version>1.9</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.apache.camel.springboot</groupId>
-			<artifactId>camel-spring-boot-starter</artifactId>
+			<artifactId>camel-spring-boot</artifactId>
+			<version>${camel.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.apache.camel</groupId>
+					<artifactId>camel-cloud</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.camel</groupId>
+					<artifactId>camel-cluster</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.camel.springboot</groupId>
+			<artifactId>camel-core-starter</artifactId>
+			<version>${camel.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.camel.springboot</groupId>
+			<artifactId>camel-bean-starter</artifactId>
+			<version>${camel.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.camel.springboot</groupId>
+			<artifactId>camel-direct-starter</artifactId>
+			<version>${camel.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.camel.springboot</groupId>
+			<artifactId>camel-log-starter</artifactId>
+			<version>${camel.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.camel.springboot</groupId>
+			<artifactId>camel-timer-starter</artifactId>
 			<version>${camel.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.camel.springboot</groupId>
 			<artifactId>camel-http-starter</artifactId>
+			<version>${camel.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.apache.camel</groupId>
+					<artifactId>camel-cloud</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.camel</groupId>
+					<artifactId>camel-cluster</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.camel.springboot</groupId>
+			<artifactId>camel-sql-starter</artifactId>
 			<version>${camel.version}</version>
 		</dependency>
 
@@ -441,6 +502,12 @@
 			<artifactId>spotbugs-annotations</artifactId>
 			<version>${spotbugs.version}</version>
 			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.protobuf</groupId>
+			<artifactId>protobuf-java</artifactId>
+			<version>${protobuf.version}</version>
 		</dependency>
 
 		<dependency>
@@ -518,17 +585,13 @@
 	</dependencyManagement>
 
 	<build>
+		<finalName>dataspaceconnector</finalName>
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
 				<filtering>true</filtering>
 				<includes>
-					<include>conf/**/*.*</include>
-					<include>camel-routes/**/*.xml</include>
-					<include>log4j2.xml</include>
-					<include>camel-templates/**/*.vm</include>
-					<include>application.properties</include>
-					<include>banner.txt</include>
+					<include>**</include>
 				</includes>
 				<excludes>
 					<!-- The key files are binary files, which the filtering destroys. -->
@@ -561,6 +624,7 @@
 						<encoding>UTF-8</encoding>
 						<consoleOutput>true</consoleOutput>
 						<failOnViolation>true</failOnViolation>
+						<excludes>db/migration/*.*</excludes>
 					</configuration>
 				</plugin>
 				<plugin>
@@ -601,7 +665,7 @@
 				<plugin>
 					<groupId>com.github.spotbugs</groupId>
 					<artifactId>spotbugs-maven-plugin</artifactId>
-					<version>${spotbugs.version}</version>
+					<version>${spotbugs.version}.0</version>
 					<configuration>
 						<effort>Max</effort>
 						<threshold>Low</threshold>
@@ -719,8 +783,11 @@
 								<exclude>**/*.env</exclude>
 								<exclude>**/lombok.config</exclude>
 								<exclude>**/.dockerignore</exclude>
-								<exclude>charts/dataspace-connector/Chart.lock</exclude>
-								<exlcude>charts/dataspace-connector/.helmignore</exlcude>
+								<exclude>charts/**/Chart.lock</exclude>
+								<exclude>charts/**/.helmignore</exclude>
+								<exclude>charts/**/**/*.yaml</exclude>
+								<exclude>charts/**/**/NOTES.txt</exclude>
+								<exclude>**/requirements.txt</exclude>
 								<exclude>**/*.tgz</exclude>
 								<exclude>charts/**/*.tpl</exclude>
 								<exclude>docs/**</exclude>
@@ -732,13 +799,6 @@
 						<year>${project.inceptionYear}</year>
 					</properties>
 				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>check</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.pitest</groupId>
@@ -757,20 +817,32 @@
 					</targetClasses>
 					<targetTests>
 						<param>io.dataspaceconnector.model*</param>
+						<param>io.dataspaceconnector.service.resource.templatebuilder*</param>
 					</targetTests>
 <!--					<excludedTestClasses>-->
 <!--						<param>**</param>-->
 <!--					</excludedTestClasses>-->
 					<mutators>
-						<mutator>ALL</mutator>
+						<mutator>STRONGER</mutator>
+						<!-- <mutator>INLINE_CONSTS</mutator>
+						<mutator>CONSTRUCTOR_CALLS</mutator>
+						<mutator>NON_VOID_METHOD_CALLS</mutator>
+						<mutator>REMOVE_INCREMENTS</mutator>
+						<mutator>ABS</mutator>
+						<mutator>AOR</mutator>
+						<mutator>AOD</mutator>
+						<mutator>CRCR</mutator>
+						<mutator>OBBN</mutator>
+						<mutator>ROR</mutator>
+						<mutator>UOI</mutator> -->
 					</mutators>
 					<historyInputFile>${project.build.directory}/pit-reports/history</historyInputFile>
 					<historyOutputFile>${project.build.directory}/pit-reports/history</historyOutputFile>
 					<verbose>false</verbose>
 					<threads>2</threads>
 					<timestampedReports>false</timestampedReports>
-					<coverageThreshold>98</coverageThreshold>
-					<mutationThreshold>74</mutationThreshold>
+					<coverageThreshold>90</coverageThreshold>
+					<mutationThreshold>90</mutationThreshold>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -787,6 +859,14 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-project-info-reports-plugin</artifactId>
 				<version>${maven-project-info-reports-plugin.version}</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>16</source>
+					<target>16</target>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
@@ -828,6 +908,11 @@
 						</reports>
 					</reportSet>
 				</reportSets>
+				<configuration>
+					<excludes>
+						<exclude>db/migration/**/*</exclude>
+					</excludes>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
@@ -914,6 +999,26 @@
 			</properties>
 		</profile>
 
+		<profile>
+			<id>dependency-audit</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.owasp</groupId>
+						<artifactId>dependency-check-maven</artifactId>
+						<version>${dependency-check.version}</version>
+						<executions>
+							<execution>
+								<goals>
+									<goal>check</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
 		<!--
 			 Release
 
@@ -950,6 +1055,7 @@
 						<configuration>
 							<excludes>
 								<exclude>io/dataspaceconnector/service/message/subscription/*</exclude>
+								<exclude>db/migration/**/*</exclude>
 							</excludes>
 						</configuration>
 						<executions>

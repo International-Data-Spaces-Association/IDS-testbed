@@ -17,8 +17,9 @@ package io.dataspaceconnector.controller.resource.view.datasource;
 
 import io.dataspaceconnector.controller.resource.type.DataSourceController;
 import io.dataspaceconnector.controller.resource.view.util.SelfLinking;
-import io.dataspaceconnector.controller.resource.view.util.ViewAssemblerHelper;
+import io.dataspaceconnector.controller.resource.view.util.SelfLinkHelper;
 import io.dataspaceconnector.model.datasource.DataSource;
+import io.dataspaceconnector.model.datasource.DatabaseDataSource;
 import org.modelmapper.ModelMapper;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
@@ -30,19 +31,24 @@ import java.util.UUID;
  * Assembles the REST resource for a data source.
  */
 @Component
-public class DataSourceViewAssembler
+public class DataSourceViewAssembler extends SelfLinkHelper
         implements RepresentationModelAssembler<DataSource, DataSourceView>, SelfLinking {
 
     @Override
     public final Link getSelfLink(final UUID entityId) {
-        return ViewAssemblerHelper.getSelfLink(entityId,
-                DataSourceController.class);
+        return getSelfLink(entityId, DataSourceController.class);
     }
 
     @Override
     public final DataSourceView toModel(final DataSource dataSource) {
         final var modelMapper = new ModelMapper();
-        final var view = modelMapper.map(dataSource, DataSourceView.class);
+        DataSourceView view;
+        if (dataSource instanceof DatabaseDataSource) {
+            view = modelMapper.map(dataSource, DatabaseDataSourceView.class);
+        } else {
+            view = modelMapper.map(dataSource, DataSourceView.class);
+        }
+
         view.add(getSelfLink(dataSource.getId()));
 
         return view;

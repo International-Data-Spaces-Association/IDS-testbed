@@ -26,7 +26,7 @@ In the following, the deployment with Maven, Docker, and Kubernetes will be expl
 
 ## Maven
 
-If you want to build and run locally, ensure that at least Java 11 is installed. Then, follow these
+If you want to build and run locally, ensure that at least Java 17 is installed. Then, follow these
 steps:
 
 1.  Execute `cd DataspaceConnector` and `mvn clean package`.
@@ -72,7 +72,7 @@ incoming IDS messages.**
 The `pom.xml` provides three Maven profiles: `no-documentation`, `no-tests`, and
 `release`. The first one skips the Javadocs generation, the second one skips the execution of
 tests. The `release` profile shows all warnings and errors. To run a profile, please have a look at
-[this guide](maven.apache.org/guides/introduction/introduction-to-profiles.html#details-on-profile-activation).
+[this guide](https://maven.apache.org/guides/introduction/introduction-to-profiles.html#details-on-profile-activation).
 
 ### Plugins
 

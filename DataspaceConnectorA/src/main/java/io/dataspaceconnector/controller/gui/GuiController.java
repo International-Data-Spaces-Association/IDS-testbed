@@ -15,17 +15,18 @@
  */
 package io.dataspaceconnector.controller.gui;
 
+import io.dataspaceconnector.common.net.ContentType;
 import io.dataspaceconnector.controller.gui.util.GuiUtils;
 import io.dataspaceconnector.controller.util.ResponseCode;
 import io.dataspaceconnector.controller.util.ResponseDescription;
-import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import net.minidev.json.JSONObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,28 +36,22 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/configmanager")
-@Tag(name = "ConfigManager: GUI Utilities")
+@RequestMapping("/api/utils")
+@Tag(name = "_Utils")
 public class GuiController {
 
     /**
-     * Auxiliary API to provide data to a GUI, which either comes from the infomodel or is connector
-     * specific.
+     * Auxiliary API endpoint to provide IDS Infomodel or connector specific data.
      *
-     * @param enumName Selection of the domain of the requested data, e.g. language.
      * @return The response message or an error.
      */
-    @Hidden
-    @GetMapping(value = "/enum/{enumName}")
-    @Operation(summary = "Get the specific enum")
-    @ApiResponse(responseCode = ResponseCode.OK, description = ResponseDescription.OK)
-    @ApiResponse(responseCode = ResponseCode.BAD_REQUEST, description
-            = ResponseDescription.BAD_REQUEST)
-    @ApiResponse(responseCode = ResponseCode.UNAUTHORIZED, description
-            = ResponseDescription.UNAUTHORIZED)
-    ResponseEntity<String> getSpecificEnum(final @PathVariable String enumName) {
-        final var enums = GuiUtils.getSpecificEnum(enumName);
-        return enums == null ? ResponseEntity.badRequest().body("Could not get the enums")
-                : ResponseEntity.ok(enums);
+    @GetMapping(value = "/enums", produces = ContentType.JSON)
+    @Operation(summary = "Get a list of enums by value name.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = ResponseCode.OK, description = ResponseDescription.OK),
+            @ApiResponse(responseCode = ResponseCode.UNAUTHORIZED,
+                    description = ResponseDescription.UNAUTHORIZED)})
+    public ResponseEntity<JSONObject> getEnums() {
+        return ResponseEntity.ok(GuiUtils.getListOfEnums());
     }
 }

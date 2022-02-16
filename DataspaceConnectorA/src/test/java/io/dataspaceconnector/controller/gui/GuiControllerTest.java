@@ -15,64 +15,53 @@
  */
 package io.dataspaceconnector.controller.gui;
 
-import io.dataspaceconnector.controller.gui.util.GuiUtils;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
  * Tests for the GuiUtilController class.
  */
-@SpringBootTest(classes = {GuiUtils.class, GuiController.class})
-@AutoConfigureMockMvc
+@SpringBootTest
 class GuiControllerTest {
 
     @Autowired
+    private WebApplicationContext context;
+
     private MockMvc mockMvc;
+
+    @BeforeEach
+    void setUp() {
+        mockMvc = MockMvcBuilders.webAppContextSetup(context).apply(springSecurity()).build();
+    }
 
     @Test
     void unauthorizedGetEnum() throws Exception {
-        mockMvc.perform(get("/api/configmanager/enum/loglevel")).andExpect(status().isUnauthorized()).andReturn();
+        mockMvc.perform(get("/api/utils/enums")).andExpect(status().isUnauthorized()).andReturn();
     }
 
     @Test
-    @WithMockUser("ADMIN")
-    void badRequestGetEnum() throws Exception {
-        mockMvc.perform(get("/api/configmanager/enum/null")).andExpect(status().isBadRequest()).andReturn();
-    }
+    @WithMockUser(roles = {"ADMIN"})
+    void getEnums() throws Exception {
+        /* ARRANGE */
+        // nothing to arrange here
 
-    @Test
-    @WithMockUser("ADMIN")
-    void getSpecificEnum() throws Exception {
-        mockMvc.perform(
-                get("/api/configmanager/enum/loglevel"))
-                .andExpect(status().isOk()).andReturn();
-        mockMvc.perform(
-                get("/api/configmanager/enum/connectorstatus"))
-                .andExpect(status().isOk()).andReturn();
-        mockMvc.perform(
-                get("/api/configmanager/enum/connectordeploymode"))
-                .andExpect(status().isOk()).andReturn();
-        mockMvc.perform(
-                get("/api/configmanager/enum/language"))
-                .andExpect(status().isOk()).andReturn();
-        mockMvc.perform(
-                get("/api/configmanager/enum/deploymethod"))
-                .andExpect(status().isOk()).andReturn();
-        mockMvc.perform(
-                get("/api/configmanager/enum/brokerstatus"))
-                .andExpect(status().isOk()).andReturn();
-        mockMvc.perform(
-                get("/api/configmanager/enum/securityprofile"))
-                .andExpect(status().isOk()).andReturn();
-        mockMvc.perform(
-                get("/api/configmanager/enum/paymentmethod"))
-                .andExpect(status().isOk()).andReturn();
+        /* ACT */
+        final var result = mockMvc.perform(get("/api/utils/enums")).andReturn();
+
+        /* ASSERT */
+        assertFalse(result.getResponse().getContentAsString().isEmpty());
+        assertEquals(200, result.getResponse().getStatus());
     }
 }

@@ -20,17 +20,15 @@ import io.dataspaceconnector.model.base.Entity;
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.CascadeType;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.Inheritance;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * Entity which holds information about the data sources.
@@ -43,13 +41,19 @@ import javax.persistence.Table;
 @SQLDelete(sql = "UPDATE datasource SET deleted=true WHERE id=?")
 @Where(clause = "deleted = false")
 @Table(name = "datasource")
-@RequiredArgsConstructor
 public class DataSource extends Entity {
 
     /**
      * Serial version uid.
      **/
     private static final long serialVersionUID = 1L;
+
+    /**
+     * Creates a DataSource with default type REST.
+     */
+    public DataSource() {
+        this.type = DataSourceType.REST;
+    }
 
     /**
      * The authentication for the data source.
@@ -60,6 +64,6 @@ public class DataSource extends Entity {
     /**
      * The type of the data source.
      */
-    @Enumerated(EnumType.STRING)
-    private DataSourceType type = DataSourceType.DATABASE;
+    @Transient
+    private DataSourceType type;
 }

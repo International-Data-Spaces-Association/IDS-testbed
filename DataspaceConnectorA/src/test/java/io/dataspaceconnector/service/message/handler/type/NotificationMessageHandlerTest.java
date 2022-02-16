@@ -33,7 +33,6 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.SpyBean;
-import org.springframework.test.annotation.DirtiesContext;
 
 import javax.xml.datatype.DatatypeFactory;
 import java.net.URI;
@@ -43,7 +42,6 @@ import java.util.GregorianCalendar;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 class NotificationMessageHandlerTest {
 
     @SpyBean
@@ -76,35 +74,6 @@ class NotificationMessageHandlerTest {
 
         /* ASSERT */
         assertEquals(RejectionReason.BAD_PARAMETERS,
-                result.getRejectionMessage().getRejectionReason());
-    }
-
-    @SneakyThrows
-    @Test
-    public void handleMessage_nullMessage_returnVersionNotSupported() {
-        /* ARRANGE */
-        final var calendar = new GregorianCalendar();
-        calendar.setTime(new Date());
-        final var xmlCalendar = DatatypeFactory.newInstance().newXMLGregorianCalendar(calendar);
-
-        final var message = new NotificationMessageBuilder()
-                ._senderAgent_(uri)
-                ._issuerConnector_(uri)
-                ._securityToken_(token)
-                ._modelVersion_("tetris")
-                ._issued_(xmlCalendar)
-                .build();
-
-        Mockito.doReturn(token).when(connectorService).getCurrentDat();
-        Mockito.doReturn(uri).when(connectorService).getConnectorId();
-        Mockito.doReturn(version).when(connectorService).getOutboundModelVersion();
-
-        /* ACT */
-        final var result = (ErrorResponse) handler.handleMessage((NotificationMessageImpl) message,
-                null);
-
-        /* ASSERT */
-        assertEquals(RejectionReason.VERSION_NOT_SUPPORTED,
                 result.getRejectionMessage().getRejectionReason());
     }
 

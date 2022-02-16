@@ -31,6 +31,11 @@ public enum ErrorMessage {
     DESC_NULL("The description parameter may not be null."),
 
     /**
+     * The passed dat may not be null.
+     */
+    DAT_NULL("The dat may not be null."),
+
+    /**
      * The passed message may not be null.
      */
     MESSAGE_NULL("The message may not be null."),
@@ -77,17 +82,17 @@ public enum ErrorMessage {
     /**
      * The passed uri may not be null.
      */
-    URI_NULL("The passed uri may not be null"),
+    URI_NULL("The passed uri may not be null."),
 
     /**
      * The passed url may not be null.
      */
-    URL_NULL("The passed url may not be null"),
+    URL_NULL("The passed url may not be null."),
 
     /**
      * The passed http arguments may not be null.
      */
-    HTTP_ARGS_NULL("The passed http arguments may not be null"),
+    HTTP_ARGS_NULL("The passed http arguments may not be null."),
 
     /**
      * One of the contracts is empty.
@@ -172,7 +177,7 @@ public enum ErrorMessage {
     /**
      * Data has been accessed with invalid security profile.
      */
-    DATA_ACCESS_INVALID_SECURITY_PROFILE("Data access with invalid security profile"),
+    DATA_ACCESS_INVALID_SECURITY_PROFILE("Data access with invalid security profile."),
 
     /**
      * Application's base URL was retrieved without request context present.
@@ -203,7 +208,17 @@ public enum ErrorMessage {
     /**
      * If a resource update message could not be sent.
      */
-    UPDATE_MESSAGE_FAILED("Failed to send update message.");
+    UPDATE_MESSAGE_FAILED("Failed to send update message."),
+
+    /**
+     * If an http response is null.
+     */
+    RESPONSE_NULL("Received an empty response for http request."),
+
+    /**
+     * If an PKIX error occurs.
+     */
+    CERTIFICATE_NOT_TRUSTED("The recipient's certificate authority is not trusted.");
 
     /**
      * Holds the enums string.

@@ -22,7 +22,7 @@ import io.dataspaceconnector.controller.resource.relation.ArtifactsToRepresentat
 import io.dataspaceconnector.controller.resource.relation.ArtifactsToSubscriptionsController;
 import io.dataspaceconnector.controller.resource.type.ArtifactController;
 import io.dataspaceconnector.controller.resource.view.util.SelfLinking;
-import io.dataspaceconnector.controller.resource.view.util.ViewAssemblerHelper;
+import io.dataspaceconnector.controller.resource.view.util.SelfLinkHelper;
 import io.dataspaceconnector.model.artifact.Artifact;
 import lombok.NoArgsConstructor;
 import lombok.SneakyThrows;
@@ -31,6 +31,7 @@ import org.springframework.hateoas.Link;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
@@ -41,7 +42,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
  */
 @Component
 @NoArgsConstructor
-public class ArtifactViewAssembler
+public class ArtifactViewAssembler extends SelfLinkHelper
         implements RepresentationModelAssembler<Artifact, ArtifactView>, SelfLinking {
     /**
      * Construct the ArtifactView from an Artifact.
@@ -57,7 +58,7 @@ public class ArtifactViewAssembler
         view.add(getSelfLink(artifact.getId()));
 
         final var dataLink = linkTo(methodOn(ArtifactController.class)
-                .getData(artifact.getId(), new QueryInput()))
+                .getData(artifact.getId(), new ArrayList<>(), new QueryInput()))
                 .withRel("data");
         view.add(dataLink);
 
@@ -76,11 +77,16 @@ public class ArtifactViewAssembler
                 .withRel(BaseType.SUBSCRIPTIONS);
         view.add(subscriptionLink);
 
+        final var routeLink = linkTo(methodOn(ArtifactController.class)
+                .getRoute(artifact.getId()))
+                .withRel("route");
+        view.add(routeLink);
+
         return view;
     }
 
     @Override
     public final Link getSelfLink(final UUID entityId) {
-        return ViewAssemblerHelper.getSelfLink(entityId, ArtifactController.class);
+        return getSelfLink(entityId, ArtifactController.class);
     }
 }
