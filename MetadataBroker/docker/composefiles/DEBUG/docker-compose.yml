@@ -2,7 +2,7 @@ version: '3'
 services:
 
   broker-fuseki:
-    image: registry.gitlab.cc-asp.fraunhofer.de:4567/eis-ids/broker-open/fuseki
+    image: registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker-open/fuseki
     environment:
     - ADMIN_PASSWORD=test
     ports:
