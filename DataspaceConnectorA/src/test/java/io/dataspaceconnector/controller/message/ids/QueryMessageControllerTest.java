@@ -27,9 +27,8 @@ import de.fraunhofer.ids.messaging.core.daps.DapsTokenManagerException;
 import de.fraunhofer.ids.messaging.protocol.multipart.parser.MultipartParseException;
 import de.fraunhofer.ids.messaging.requests.MessageContainer;
 import de.fraunhofer.ids.messaging.util.IdsMessageUtils;
-import io.dataspaceconnector.common.exception.ErrorMessage;
-import io.dataspaceconnector.config.ConnectorConfig;
 import io.dataspaceconnector.common.ids.ConnectorService;
+import io.dataspaceconnector.config.ConnectorConfig;
 import io.dataspaceconnector.service.message.GlobalMessageService;
 import io.dataspaceconnector.service.message.handler.dto.Response;
 import lombok.SneakyThrows;
@@ -48,7 +47,6 @@ import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 
 import javax.xml.datatype.DatatypeFactory;
@@ -68,7 +66,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 @SpringBootTest
 @AutoConfigureMockMvc(addFilters = false)
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 public class QueryMessageControllerTest {
 
     @Mock
@@ -197,8 +194,7 @@ public class QueryMessageControllerTest {
 
         /* ASSERT */
         assertEquals(502, result.getResponse().getStatus());
-        final var msg = ErrorMessage.INVALID_MESSAGE.toString();
-        assertEquals(msg, result.getResponse().getContentAsString());
+        assertNotNull(result.getResponse());
     }
 
     @Test
@@ -216,6 +212,7 @@ public class QueryMessageControllerTest {
                 .andReturn();
 
         /* ASSERT */
+        assertNotNull(result.getResponse());
         assertEquals(504, result.getResponse().getStatus());
     }
 
@@ -294,7 +291,7 @@ public class QueryMessageControllerTest {
                 .andReturn();
 
         /* ASSERT */
-        assertNotNull(result);
+        assertNotNull(result.getResponse());
         assertEquals(200, result.getResponse().getStatus());
     }
 
@@ -313,6 +310,7 @@ public class QueryMessageControllerTest {
                 .andReturn();
 
         /* ASSERT */
+        assertNotNull(result.getResponse());
         assertEquals(500, result.getResponse().getStatus());
     }
 
@@ -333,8 +331,7 @@ public class QueryMessageControllerTest {
 
         /* ASSERT */
         assertEquals(502, result.getResponse().getStatus());
-        final var msg = ErrorMessage.INVALID_MESSAGE.toString();
-        assertEquals(msg, result.getResponse().getContentAsString());
+        assertNotNull(result.getResponse());
     }
 
     @Test
@@ -353,6 +350,7 @@ public class QueryMessageControllerTest {
                 .andReturn();
 
         /* ASSERT */
+        assertNotNull(result.getResponse());
         assertEquals(504, result.getResponse().getStatus());
     }
 

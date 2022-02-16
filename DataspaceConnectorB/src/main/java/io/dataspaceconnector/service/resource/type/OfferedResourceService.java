@@ -15,13 +15,38 @@
  */
 package io.dataspaceconnector.service.resource.type;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import io.dataspaceconnector.model.base.AbstractFactory;
 import io.dataspaceconnector.model.resource.OfferedResource;
 import io.dataspaceconnector.model.resource.OfferedResourceDesc;
-import org.springframework.stereotype.Service;
+import io.dataspaceconnector.model.resource.OfferedResourceFactory;
+import io.dataspaceconnector.repository.BaseEntityRepository;
 
 /**
  * Handles the basic logic for offered resources.
  */
-@Service
 public class OfferedResourceService extends ResourceService<OfferedResource, OfferedResourceDesc> {
+
+    /**
+     * Constructor.
+     *
+     * @param repository The offered resource repository.
+     */
+    @SuppressFBWarnings("MC_OVERRIDABLE_METHOD_CALL_IN_CONSTRUCTOR")
+    public OfferedResourceService(final BaseEntityRepository<OfferedResource> repository) {
+        this(repository, new OfferedResourceFactory());
+        ((OfferedResourceFactory) this.getFactory()).setDoesExist(super::doesExist);
+    }
+
+    /**
+     * Constructor.
+     *
+     * @param repository The offered resource repository.
+     * @param factory    The offered resource factory.
+     */
+    public OfferedResourceService(
+            final BaseEntityRepository<OfferedResource> repository,
+            final AbstractFactory<OfferedResource, OfferedResourceDesc> factory) {
+        super(repository, factory);
+    }
 }

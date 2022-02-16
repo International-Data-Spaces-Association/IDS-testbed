@@ -15,20 +15,30 @@
  */
 package io.dataspaceconnector.service.resource.type;
 
+import java.util.UUID;
+
 import io.dataspaceconnector.model.appstore.AppStore;
 import io.dataspaceconnector.model.appstore.AppStoreDesc;
+import io.dataspaceconnector.model.base.AbstractFactory;
 import io.dataspaceconnector.repository.AppStoreRepository;
+import io.dataspaceconnector.repository.BaseEntityRepository;
 import io.dataspaceconnector.service.resource.base.BaseEntityService;
-import org.springframework.stereotype.Service;
-
-import java.net.URI;
-import java.util.UUID;
 
 /**
  * Service class for app stores.
  */
-@Service
 public class AppStoreService extends BaseEntityService<AppStore, AppStoreDesc> {
+
+    /**
+     * Constructor for AppStoreService.
+     * @param repository The appstore repository.
+     * @param factory The appstore factory.
+     */
+    public AppStoreService(
+            final BaseEntityRepository<AppStore> repository,
+            final AbstractFactory<AppStore, AppStoreDesc> factory) {
+        super(repository, factory);
+    }
 
     /**
      * Get app store which is offering the given app.
@@ -38,15 +48,5 @@ public class AppStoreService extends BaseEntityService<AppStore, AppStoreDesc> {
      */
     public AppStore getAppStoreByAppId(final UUID appId) {
         return ((AppStoreRepository) getRepository()).findAppStoreWithAppId(appId);
-    }
-
-    /**
-     * Get app store by its location address.
-     *
-     * @param location The location uri of the app store.
-     * @return The app store identified by its location uri.
-     */
-    public AppStore getAppStoreByLocation(final URI location) {
-        return ((AppStoreRepository) getRepository()).findAppStoreWithLocation(location);
     }
 }

@@ -18,11 +18,11 @@ package io.dataspaceconnector.service.usagecontrol;
 import de.fraunhofer.iais.eis.ContractAgreement;
 import de.fraunhofer.iais.eis.Permission;
 import de.fraunhofer.iais.eis.Rule;
-import io.dataspaceconnector.common.ids.mapping.RdfConverter;
-import io.dataspaceconnector.common.ids.policy.RuleUtils;
 import io.dataspaceconnector.common.exception.PolicyExecutionException;
 import io.dataspaceconnector.common.ids.ConnectorService;
+import io.dataspaceconnector.common.ids.mapping.RdfConverter;
 import io.dataspaceconnector.common.ids.message.ClearingHouseService;
+import io.dataspaceconnector.common.ids.policy.RuleUtils;
 import io.dataspaceconnector.service.message.builder.type.NotificationService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -64,6 +64,10 @@ public class PolicyExecutionService {
      */
     public void sendAgreement(final ContractAgreement agreement) {
         try {
+            // Create a process with the agreement's UUID at the Clearing House
+            clearingHouseSvc.createProcessAtClearingHouse(agreement);
+
+            // Log the agreement under the previously created process.
             final var agreementId = agreement.getId();
             final var logItem = RdfConverter.toRdf(agreement);
 
@@ -122,13 +126,10 @@ public class PolicyExecutionService {
      * @return The log line.
      */
     public String buildLog(final URI target) {
-        final var id = connectorSvc.getConnectorId();
-
-        final var output = new HashMap<String, Object>();
-        output.put("target", target);
-        output.put("issuerConnector", id);
-        output.put("accessed", ZonedDateTime.now(ZoneOffset.UTC));
-
-        return output.toString();
+        return new HashMap<String, Object>() {{
+            put("target", target);
+            put("issuerConnector", connectorSvc.getConnectorId());
+            put("accessed", ZonedDateTime.now(ZoneOffset.UTC));
+        }}.toString();
     }
 }

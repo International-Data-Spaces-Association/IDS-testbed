@@ -21,7 +21,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.net.URI;
@@ -33,7 +32,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 @AutoConfigureMockMvc(addFilters = false)
 class DatasourceControllerIT {
 
@@ -45,7 +43,7 @@ class DatasourceControllerIT {
     void create_validInput_returnNew() throws Exception {
         mockMvc.perform(post("/api/datasources")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{}"))
+                        .content("{\"type\":\"REST\"}"))
                .andExpect(status().isCreated());
     }
 
@@ -55,7 +53,7 @@ class DatasourceControllerIT {
         for(int i = 0; i < 5; i++) {
             mockMvc.perform(post("/api/datasources")
                                     .contentType(MediaType.APPLICATION_JSON)
-                                    .content("{}"))
+                                    .content("{\"type\":\"REST\"}"))
                    .andExpect(status().isCreated());
         }
 
@@ -68,7 +66,7 @@ class DatasourceControllerIT {
         final var newObject =
         mockMvc.perform(post("/api/datasources")
                                 .contentType(MediaType.APPLICATION_JSON)
-                                .content("{}"))
+                                .content("{\"type\":\"REST\"}"))
                .andExpect(status().isCreated()).andReturn();
 
         final var newObj = newObject.getResponse().getHeader("Location");
@@ -82,14 +80,14 @@ class DatasourceControllerIT {
         final var newObject =
                 mockMvc.perform(post("/api/datasources")
                                         .contentType(MediaType.APPLICATION_JSON)
-                                        .content("{}"))
+                                        .content("{\"type\":\"REST\"}"))
                        .andExpect(status().isCreated()).andReturn();
 
         final var newObj = newObject.getResponse().getHeader("Location");
 
         mockMvc.perform(put(URI.create(newObj).getPath())
                                 .contentType(MediaType.APPLICATION_JSON)
-                                .content("{}"))
+                                .content("{\"type\":\"REST\"}"))
                .andExpect(status().isNoContent());
     }
 
@@ -99,7 +97,7 @@ class DatasourceControllerIT {
         final var newObject =
                 mockMvc.perform(post("/api/datasources")
                                         .contentType(MediaType.APPLICATION_JSON)
-                                        .content("{}"))
+                                        .content("{\"type\":\"REST\"}"))
                        .andExpect(status().isCreated()).andReturn();
 
         final var newObj = newObject.getResponse().getHeader("Location");

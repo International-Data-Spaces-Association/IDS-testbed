@@ -15,17 +15,18 @@
  */
 package io.dataspaceconnector.controller.resource.type;
 
+import io.dataspaceconnector.common.exception.PortainerNotConfigured;
 import io.dataspaceconnector.controller.resource.base.exception.MethodNotAllowed;
-import io.dataspaceconnector.model.app.App;
+import io.dataspaceconnector.controller.util.ActionType;
 import io.dataspaceconnector.model.app.AppDesc;
 import io.dataspaceconnector.model.app.AppImpl;
 import io.dataspaceconnector.model.base.Entity;
-import io.dataspaceconnector.service.appstore.portainer.PortainerRequestService;
+import io.dataspaceconnector.service.AppRouteResolver;
+import io.dataspaceconnector.service.appstore.portainer.PortainerService;
 import io.dataspaceconnector.service.resource.type.AppService;
 import okhttp3.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -34,11 +35,11 @@ import org.springframework.http.HttpStatus;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URI;
 import java.util.Map;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.doThrow;
 
 @SpringBootTest
 class AppControllerTest {
@@ -47,7 +48,10 @@ class AppControllerTest {
     private AppService appService;
 
     @MockBean
-    private PortainerRequestService portainerRequestService;
+    private PortainerService portainerService;
+
+    @MockBean
+    private AppRouteResolver appRouteResolver;
 
     @Autowired
     private AppController appController;
@@ -64,31 +68,26 @@ class AppControllerTest {
         containerField.set(returnedApp, "mocked");
 
         //prepare mock response
-        var returnedResponse = new Response.Builder()
-                .request(new Request.Builder().url("https://test").get().build())
-                .code(200)
-                .body(ResponseBody.create("a", MediaType.parse("text/plain")))
-                .protocol(Protocol.HTTP_1_1)
-                .message("Success mocked!")
-                .build();
+        var returnedResponse = createResponseWithCode(200);
 
         //prepare mockito
         Mockito.when(appService.get(Mockito.any(UUID.class))).thenReturn(returnedApp);
         Mockito.when(appService.getDataFromInternalDB(Mockito.any())).thenReturn(InputStream.nullInputStream());
-        Mockito.when(portainerRequestService.createRegistry(Mockito.any())).thenReturn(1);
-        Mockito.when(portainerRequestService.startContainer(Mockito.any())).thenReturn(returnedResponse);
-        Mockito.when(portainerRequestService.pullImage(Mockito.any())).thenReturn(returnedResponse);
-        Mockito.when(portainerRequestService.createVolumes(Mockito.any(), Mockito.any())).thenReturn(Map.of());
-        Mockito.when(portainerRequestService.createContainer(Mockito.any(), Mockito.any())).thenReturn("Mocked.");
-        Mockito.when(portainerRequestService.getNetworkId(Mockito.any())).thenReturn("NetworkID");
-        Mockito.when(portainerRequestService.joinNetwork(Mockito.any(), Mockito.any())).thenReturn(returnedResponse);
-        Mockito.when(portainerRequestService.stopContainer(Mockito.any())).thenReturn(returnedResponse);
-        Mockito.when(portainerRequestService.deleteContainer(Mockito.any())).thenReturn(returnedResponse);
-        Mockito.doNothing().when(portainerRequestService).deleteRegistry(Mockito.any());
+        Mockito.when(portainerService.createRegistry(Mockito.any())).thenReturn(1);
+        Mockito.when(portainerService.startContainer(Mockito.any())).thenReturn(returnedResponse);
+        Mockito.when(portainerService.pullImage(Mockito.any())).thenReturn(returnedResponse);
+        Mockito.when(portainerService.createVolumes(Mockito.any(), Mockito.any())).thenReturn(Map.of());
+        Mockito.when(portainerService.createContainer(Mockito.any(), Mockito.any(), Mockito.any()))
+                .thenReturn("Mocked");
+        Mockito.when(portainerService.getNetworkId(Mockito.any())).thenReturn("NetworkID");
+        Mockito.when(portainerService.joinNetwork(Mockito.any(), Mockito.any())).thenReturn(returnedResponse);
+        Mockito.when(portainerService.stopContainer(Mockito.any())).thenReturn(returnedResponse);
+        Mockito.when(portainerService.deleteContainer(Mockito.any())).thenReturn(returnedResponse);
+        Mockito.doNothing().when(portainerService).deleteRegistry(Mockito.any());
         Mockito.doNothing().when(appService).setContainerIdForApp(Mockito.any(), Mockito.any());
         Mockito.doNothing().when(appService).deleteContainerIdFromApp(Mockito.any());
-        Mockito.when(portainerRequestService.validateContainerRunning(Mockito.any())).thenReturn(false);
-        Mockito.when(portainerRequestService.getDescriptionByContainerId(Mockito.any())).thenReturn(returnedResponse);
+        Mockito.when(portainerService.validateContainerRunning(Mockito.any())).thenReturn(false);
+        Mockito.when(portainerService.getDescriptionByContainerId(Mockito.any())).thenReturn(returnedResponse);
     }
 
     @Test
@@ -120,9 +119,89 @@ class AppControllerTest {
 
     @Test
     public void testContainerManagement() {
-        assertEquals(HttpStatus.OK, appController.containerManagement(UUID.randomUUID(), "START").getStatusCode());
-        assertEquals(HttpStatus.OK, appController.containerManagement(UUID.randomUUID(), "STOP").getStatusCode());
-        assertEquals(HttpStatus.OK, appController.containerManagement(UUID.randomUUID(), "DELETE").getStatusCode());
-        assertEquals(HttpStatus.OK, appController.containerManagement(UUID.randomUUID(), "DESCRIBE").getStatusCode());
+        assertEquals(HttpStatus.OK, appController.containerManagement(UUID.randomUUID(), ActionType.START).getStatusCode());
+        assertEquals(HttpStatus.OK, appController.containerManagement(UUID.randomUUID(), ActionType.STOP).getStatusCode());
+        assertEquals(HttpStatus.OK, appController.containerManagement(UUID.randomUUID(), ActionType.DELETE).getStatusCode());
+        assertEquals(HttpStatus.OK, appController.containerManagement(UUID.randomUUID(), ActionType.DESCRIBE).getStatusCode());
+    }
+
+    @Test
+    public void testContainerManagementExceptions() throws PortainerNotConfigured, IOException {
+        doThrow(new PortainerNotConfigured()).when(portainerService).createEndpointId();
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, appController.containerManagement(UUID.randomUUID(),
+                ActionType.START).getStatusCode());
+
+        doThrow(new IOException()).when(portainerService).createEndpointId();
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, appController.containerManagement(UUID.randomUUID(),
+                ActionType.START).getStatusCode());
+
+
+    }
+
+    @Test
+    public void testDeployApp() throws NoSuchFieldException, IllegalAccessException {
+        //prepare mocked app with container field null
+        var returnedApp = new AppImpl();
+        var idField = Entity.class.getDeclaredField("id");
+        idField.setAccessible(true);
+        idField.set(returnedApp, UUID.randomUUID());
+        var containerField = AppImpl.class.getDeclaredField("containerId");
+        containerField.setAccessible(true);
+        containerField.set(returnedApp, null);
+
+        Mockito.when(appService.get(Mockito.any(UUID.class))).thenReturn(returnedApp);
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, appController.containerManagement(UUID.randomUUID(),
+                ActionType.START).getStatusCode());
+    }
+
+    @Test
+    public void testReadResponse() throws IOException {
+        //prepare mock response
+        var returnedNotModifiedResponse = createResponseWithCode(304);
+        var returnedNotFoundResponse = createResponseWithCode(404);
+        var returnedBadRequestResponse = createResponseWithCode(400);
+        var returnedConflictResponse = createResponseWithCode(409);
+        var returnedUnauthorizedResponse = createResponseWithCode(401);
+
+
+        Mockito.when(portainerService.startContainer(Mockito.any()))
+                .thenReturn(returnedNotFoundResponse);
+        assertEquals(HttpStatus.BAD_REQUEST,
+                appController.containerManagement(UUID.randomUUID(),
+                        ActionType.START).getStatusCode());
+
+        Mockito.when(portainerService.startContainer(Mockito.any()))
+                .thenReturn(returnedNotModifiedResponse);
+        assertEquals(HttpStatus.BAD_REQUEST,
+                appController.containerManagement(UUID.randomUUID(),
+                        ActionType.START).getStatusCode());
+
+        Mockito.when(portainerService.startContainer(Mockito.any()))
+                .thenReturn(returnedBadRequestResponse);
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,
+                appController.containerManagement(UUID.randomUUID(),
+                        ActionType.START).getStatusCode());
+
+        Mockito.when(portainerService.startContainer(Mockito.any()))
+                .thenReturn(returnedConflictResponse);
+        assertEquals(HttpStatus.BAD_REQUEST,
+                appController.containerManagement(UUID.randomUUID(),
+                        ActionType.START).getStatusCode());
+
+        Mockito.when(portainerService.startContainer(Mockito.any()))
+                .thenReturn(returnedUnauthorizedResponse);
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,
+                appController.containerManagement(UUID.randomUUID(),
+                        ActionType.START).getStatusCode());
+    }
+
+    private Response createResponseWithCode(int statusCode) {
+        return new Response.Builder()
+                .request(new Request.Builder().url("https://test").get().build())
+                .code(statusCode)
+                .body(ResponseBody.create("a", MediaType.parse("text/plain")))
+                .protocol(Protocol.HTTP_1_1)
+                .message("Success mocked!")
+                .build();
     }
 }

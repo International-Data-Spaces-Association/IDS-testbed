@@ -48,7 +48,6 @@ import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 
 import javax.xml.datatype.DatatypeFactory;
@@ -56,6 +55,7 @@ import java.io.IOException;
 import java.net.URI;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -64,7 +64,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 @SpringBootTest
 @AutoConfigureMockMvc(addFilters = false)
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 public class ConnectorUpdateMessageControllerTest {
 
     @Mock
@@ -134,7 +133,7 @@ public class ConnectorUpdateMessageControllerTest {
                 .andReturn();
 
         /* ASSERT */
-        assertEquals("Failed to update configuration.", result.getResponse().getContentAsString());
+        assertNotNull(result.getResponse());
         assertEquals(500, result.getResponse().getStatus());
     }
 
@@ -152,6 +151,7 @@ public class ConnectorUpdateMessageControllerTest {
                 .andReturn();
 
         /* ASSERT */
+        assertNotNull(result.getResponse());
         assertEquals(500, result.getResponse().getStatus());
     }
 
@@ -169,6 +169,7 @@ public class ConnectorUpdateMessageControllerTest {
                 .andReturn();
 
         /* ASSERT */
+        assertNotNull(result.getResponse());
         assertEquals(500, result.getResponse().getStatus());
     }
 
@@ -214,7 +215,7 @@ public class ConnectorUpdateMessageControllerTest {
                                                    .param("recipient", recipient)).andReturn();
 
         /* ASSERT */
-        assertEquals("Message sending failed.", result.getResponse().getContentAsString());
+        assertNotNull(result.getResponse());
         assertEquals(500, result.getResponse().getStatus());
     }
 
@@ -230,7 +231,7 @@ public class ConnectorUpdateMessageControllerTest {
                                                    .param("recipient", recipient)).andReturn();
 
         /* ASSERT */
-        assertEquals("Received invalid ids message.", result.getResponse().getContentAsString());
+        assertNotNull(result.getResponse());
         assertEquals(502, result.getResponse().getStatus());
     }
 

@@ -26,9 +26,8 @@ import de.fraunhofer.iais.eis.TokenFormat;
 import de.fraunhofer.ids.messaging.broker.IDSBrokerService;
 import de.fraunhofer.ids.messaging.requests.MessageContainer;
 import de.fraunhofer.ids.messaging.util.IdsMessageUtils;
-import io.dataspaceconnector.common.exception.ErrorMessage;
-import io.dataspaceconnector.config.ConnectorConfig;
 import io.dataspaceconnector.common.ids.ConnectorService;
+import io.dataspaceconnector.config.ConnectorConfig;
 import io.dataspaceconnector.service.message.GlobalMessageService;
 import io.dataspaceconnector.service.message.handler.dto.Response;
 import lombok.SneakyThrows;
@@ -47,7 +46,6 @@ import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 
 import javax.xml.datatype.DatatypeFactory;
@@ -58,6 +56,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -67,7 +66,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc(addFilters = false)
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 public class ResourceUnavailableMessageControllerTest {
 
     @Mock
@@ -153,7 +151,8 @@ public class ResourceUnavailableMessageControllerTest {
                 .andReturn();
 
         /* ASSERT */
-        assertEquals("Resource not found.", result.getResponse().getContentAsString());
+        assertNotNull(result.getResponse());
+        assertEquals(404, result.getResponse().getStatus());
     }
 
     @Test
@@ -173,8 +172,8 @@ public class ResourceUnavailableMessageControllerTest {
                 .andReturn();
 
         /* ASSERT */
-        final var msg = ErrorMessage.MESSAGE_HANDLING_FAILED.toString();
-        assertEquals(msg, result.getResponse().getContentAsString());
+        assertNotNull(result.getResponse());
+        assertEquals(500, result.getResponse().getStatus());
     }
 
     @Test
@@ -194,8 +193,8 @@ public class ResourceUnavailableMessageControllerTest {
                 .andReturn();
 
         /* ASSERT */
-        final var msg = ErrorMessage.MESSAGE_HANDLING_FAILED.toString();
-        assertEquals(msg, result.getResponse().getContentAsString());
+        assertNotNull(result.getResponse());
+        assertEquals(500, result.getResponse().getStatus());
     }
 
     @Test
@@ -227,6 +226,7 @@ public class ResourceUnavailableMessageControllerTest {
                 .andReturn();
 
         /* ASSERT */
+        assertNotNull(result.getResponse());
         assertEquals("EMPTY", result.getResponse().getContentAsString());
     }
 
@@ -245,6 +245,7 @@ public class ResourceUnavailableMessageControllerTest {
                                   .andReturn();
 
         /* ASSERT */
+        assertNotNull(result.getResponse());
         assertEquals(HttpStatus.GATEWAY_TIMEOUT.value(), result.getResponse().getStatus());
     }
 
@@ -263,13 +264,14 @@ public class ResourceUnavailableMessageControllerTest {
         when(connectorConfig.isIdscpEnabled()).thenReturn(true);
 
         /* ACT */
-        final var mvcResult = mockMvc.perform(post("/api/ids/resource/unavailable")
+        final var result = mockMvc.perform(post("/api/ids/resource/unavailable")
                 .param("recipient", recipient)
                 .param("resourceId", resourceId.toString()))
                 .andReturn();
 
         /* ASSERT */
-        assertEquals(HttpStatus.OK.value(), mvcResult.getResponse().getStatus());
+        assertNotNull(result.getResponse());
+        assertEquals(HttpStatus.OK.value(), result.getResponse().getStatus());
     }
 
     @Test

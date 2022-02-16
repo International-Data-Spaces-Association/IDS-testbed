@@ -34,13 +34,14 @@ import de.fraunhofer.ids.messaging.handler.message.MessagePayloadInputstream;
 import de.fraunhofer.ids.messaging.response.BodyResponse;
 import de.fraunhofer.ids.messaging.response.ErrorResponse;
 import de.fraunhofer.ids.messaging.util.IdsMessageUtils;
+import io.dataspaceconnector.common.ids.ConnectorService;
 import io.dataspaceconnector.model.contract.Contract;
 import io.dataspaceconnector.model.contract.ContractDesc;
 import io.dataspaceconnector.model.contract.ContractFactory;
 import io.dataspaceconnector.model.rule.ContractRuleDesc;
 import io.dataspaceconnector.model.rule.ContractRuleFactory;
-import io.dataspaceconnector.service.EntityPersistenceService;
 import io.dataspaceconnector.service.EntityDependencyResolver;
+import io.dataspaceconnector.service.EntityPersistenceService;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -49,7 +50,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
-import org.springframework.test.annotation.DirtiesContext;
 
 import javax.persistence.PersistenceException;
 import javax.xml.datatype.DatatypeConfigurationException;
@@ -58,6 +58,8 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.net.URI;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -67,9 +69,9 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
 @SpringBootTest
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 class ContractRequestHandlerTest {
 
     @MockBean
@@ -77,6 +79,9 @@ class ContractRequestHandlerTest {
 
     @SpyBean
     EntityDependencyResolver dependencyResolver;
+
+    @SpyBean
+    ConnectorService connectorService;
 
     @Autowired
     ContractRequestHandler handler;
@@ -108,27 +113,6 @@ class ContractRequestHandlerTest {
 
         /* ASSERT */
         assertEquals(RejectionReason.BAD_PARAMETERS,
-                result.getRejectionMessage().getRejectionReason());
-    }
-
-    @SneakyThrows
-    @Test
-    public void handleMessage_unsupportedMessage_returnUnsupportedVersionRejectionMessage() {
-        /* ARRANGE */
-        final var message = new ContractRequestMessageBuilder()
-                ._senderAgent_(URI.create("https://localhost:8080"))
-                ._issuerConnector_(URI.create("https://localhost:8080"))
-                ._securityToken_(new DynamicAttributeTokenBuilder()._tokenFormat_(TokenFormat.OTHER)._tokenValue_("").build())
-                ._modelVersion_("1.0.0")
-                ._issued_(xmlCalendar)
-                .build();
-
-        /* ACT */
-        final var result =
-                (ErrorResponse) handler.handleMessage((ContractRequestMessageImpl) message, null);
-
-        /* ASSERT */
-        assertEquals(RejectionReason.VERSION_NOT_SUPPORTED,
                 result.getRejectionMessage().getRejectionReason());
     }
 
@@ -392,6 +376,8 @@ class ContractRequestHandlerTest {
         final var issuerConnector = URI.create("https://localhost:8080");
         final var desc = new ContractDesc();
         desc.setConsumer(issuerConnector);
+        desc.setStart(ZonedDateTime.of(2020, 1, 1, 1, 1, 1, 1, ZoneId.systemDefault()));
+        desc.setEnd(ZonedDateTime.of(2030, 1, 1, 1, 1, 1, 1, ZoneId.systemDefault()));
         final var contract = new ContractFactory().create(desc);
 
         final var message = getMessage();
@@ -428,6 +414,8 @@ class ContractRequestHandlerTest {
         final var issuerConnector = URI.create("https://localhost:8080");
         final var contractDesc = new ContractDesc();
         contractDesc.setConsumer(issuerConnector);
+        contractDesc.setStart(ZonedDateTime.of(2020, 1, 1, 1, 1, 1, 1, ZoneId.systemDefault()));
+        contractDesc.setEnd(ZonedDateTime.of(2030, 1, 1, 1, 1, 1, 1, ZoneId.systemDefault()));
         final var contract = new ContractFactory().create(contractDesc);
 
         final var ruleDesc = new ContractRuleDesc();
@@ -470,6 +458,8 @@ class ContractRequestHandlerTest {
         final var issuerConnector = URI.create("https://localhost:8080");
         final var contractDesc = new ContractDesc();
         contractDesc.setConsumer(issuerConnector);
+        contractDesc.setStart(ZonedDateTime.of(2020, 1, 1, 1, 1, 1, 1, ZoneId.systemDefault()));
+        contractDesc.setEnd(ZonedDateTime.of(2030, 1, 1, 1, 1, 1, 1, ZoneId.systemDefault()));
         final var contract = new ContractFactory().create(contractDesc);
 
         final var ruleDesc = new ContractRuleDesc();
@@ -482,6 +472,10 @@ class ContractRequestHandlerTest {
         Mockito.doReturn(Arrays.asList(rule)).when(dependencyResolver).getRulesByContractOffer(Mockito.eq(contract));
         Mockito.doReturn(getContractAgreement()).when(persistenceService).buildAndSaveContractAgreement(
                 any(), Mockito.eq(Arrays.asList(artifactId)), Mockito.eq(issuerConnector));
+        when(connectorService.getCurrentDat()).thenReturn(new DynamicAttributeTokenBuilder()
+                ._tokenFormat_(TokenFormat.JWT)
+                ._tokenValue_("value")
+                .build());
 
         /* ACT */
         final var result = (BodyResponse<?>) handler

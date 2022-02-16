@@ -30,11 +30,10 @@ import io.dataspaceconnector.controller.resource.type.AgreementController;
 import io.dataspaceconnector.model.agreement.AgreementDesc;
 import io.dataspaceconnector.model.app.App;
 import io.dataspaceconnector.model.appstore.AppStore;
-import io.dataspaceconnector.model.resource.RequestedResource;
-import io.dataspaceconnector.model.resource.RequestedResourceDesc;
 import io.dataspaceconnector.service.message.AppStoreCommunication;
-import io.dataspaceconnector.service.resource.TemplateBuilder;
 import io.dataspaceconnector.service.resource.relation.AgreementArtifactLinker;
+import io.dataspaceconnector.service.resource.templatebuilder.AppTemplateBuilder;
+import io.dataspaceconnector.service.resource.templatebuilder.RequestedResourceTemplateBuilder;
 import io.dataspaceconnector.service.resource.type.AgreementService;
 import io.dataspaceconnector.service.resource.type.AppService;
 import io.dataspaceconnector.service.resource.type.ArtifactService;
@@ -107,14 +106,19 @@ public class EntityPersistenceService {
     private final @NonNull DeserializationService deserializationService;
 
     /**
-     * Template builder.
+     * Requested resource template builder.
      */
-    private final @NonNull TemplateBuilder<RequestedResource, RequestedResourceDesc> tempBuilder;
+    private final @NonNull RequestedResourceTemplateBuilder resourceTemplateBuilder;
+
+    /**
+     * App template builder.
+     */
+    private final @NonNull AppTemplateBuilder appTemplateBuilder;
 
     /**
      * Service for app store communication logic.
      */
-    private final @NonNull AppStoreCommunication appStoreCommunication;
+    private final @NonNull AppStoreCommunication communicationSvc;
 
     /**
      * Save contract agreement to database (consumer side).
@@ -250,7 +254,7 @@ public class EntityPersistenceService {
             resourceTemplate.setRepresentations(representationTemplateList);
 
             // Save all entities.
-            tempBuilder.build(resourceTemplate);
+            resourceTemplateBuilder.build(resourceTemplate);
         } catch (Exception e) {
             if (log.isWarnEnabled()) {
                 log.warn("Could not store resource. [exception=({})]", e.getMessage(), e);
@@ -287,7 +291,7 @@ public class EntityPersistenceService {
             final var resourceTemplate = TemplateUtils.getAppTemplate(resource, remoteUrl);
 
             // Save all entities.
-            app = tempBuilder.build(resourceTemplate);
+            app = appTemplateBuilder.build(resourceTemplate);
         } catch (Exception e) {
             if (log.isWarnEnabled()) {
                 log.warn("Could not store app. [exception=({})]", e.getMessage(), e);
@@ -296,9 +300,9 @@ public class EntityPersistenceService {
         }
 
         // Link app to app store. NOTE: An exception should not abort the download process.
-        appStore.ifPresent(store -> appStoreCommunication.addAppStoreToApp(app.getId(),
-                store.getId()));
-        appStoreCommunication.addAppToAppStore(appStore, app.getId());
+        // If not app store entity was used to download the app, it is saved nevertheless.
+        appStore.ifPresent(store -> communicationSvc.addAppStoreToApp(app.getId(), store.getId()));
+        appStore.ifPresent(store -> communicationSvc.addAppToAppStore(store.getId(), app.getId()));
 
         return instanceId.get();
     }

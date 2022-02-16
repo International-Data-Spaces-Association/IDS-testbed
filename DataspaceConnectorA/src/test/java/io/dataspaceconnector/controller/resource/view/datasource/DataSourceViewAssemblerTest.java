@@ -18,13 +18,11 @@ package io.dataspaceconnector.controller.resource.view.datasource;
 import io.dataspaceconnector.model.datasource.DataSource;
 import io.dataspaceconnector.model.datasource.DataSourceDesc;
 import io.dataspaceconnector.model.datasource.DataSourceFactory;
-import io.dataspaceconnector.model.datasource.DataSourceType;
+import io.dataspaceconnector.model.datasource.RestDataSourceDesc;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@SpringBootTest
 public class DataSourceViewAssemblerTest {
 
     @Test
@@ -45,9 +43,7 @@ public class DataSourceViewAssemblerTest {
     }
 
     private DataSourceDesc getDataSourceDesc() {
-        final var desc = new DataSourceDesc();
-        desc.setType(DataSourceType.DATABASE);
-        return desc;
+        return new RestDataSourceDesc();
     }
 
     private DataSourceView getDataSourceView(){

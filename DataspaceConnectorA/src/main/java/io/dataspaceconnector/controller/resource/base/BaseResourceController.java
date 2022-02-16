@@ -15,12 +15,13 @@
  */
 package io.dataspaceconnector.controller.resource.base;
 
-import java.util.UUID;
-
 import io.dataspaceconnector.common.util.Utils;
+import io.dataspaceconnector.controller.util.ResponseCode;
+import io.dataspaceconnector.controller.util.ResponseDescription;
 import io.dataspaceconnector.model.base.Description;
 import io.dataspaceconnector.model.base.Entity;
 import io.dataspaceconnector.service.resource.base.EntityService;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -35,6 +36,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.util.UUID;
+
 /**
  * Offers REST-Api endpoints for REST resource handling.
  *
@@ -45,6 +48,8 @@ import org.springframework.http.ResponseEntity;
  */
 @Getter(AccessLevel.PROTECTED)
 @Setter(AccessLevel.NONE)
+@ApiResponse(responseCode = ResponseCode.UNAUTHORIZED,
+        description = ResponseDescription.UNAUTHORIZED)
 public class BaseResourceController<T extends Entity, D extends Description, V
         extends RepresentationModel<V>, S extends EntityService<T, D>>
         implements CRUDController<T, D, V> {
@@ -90,13 +95,17 @@ public class BaseResourceController<T extends Entity, D extends Description, V
         return new ResponseEntity<>(entity, headers, HttpStatus.CREATED);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ResponseEntity<V> create(final D desc) {
         return respondCreated(service.create(desc));
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public PagedModel<V> getAll(final Integer page, final Integer size) {
         final var pageable = Utils.toPageRequest(page, size);
@@ -106,6 +115,7 @@ public class BaseResourceController<T extends Entity, D extends Description, V
 
     /**
      * Create a PagedModel from a page.
+     *
      * @param entities The entities.
      * @return The pagemodel.
      */
@@ -121,13 +131,17 @@ public class BaseResourceController<T extends Entity, D extends Description, V
         return model;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public V get(final UUID resourceId) {
         return assembler.toModel(service.get(resourceId));
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ResponseEntity<V> update(final UUID resourceId, final D desc) {
         final var resource = service.update(resourceId, desc);
@@ -141,7 +155,9 @@ public class BaseResourceController<T extends Entity, D extends Description, V
         }
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ResponseEntity<Void> delete(final UUID resourceId) {
         service.delete(resourceId);

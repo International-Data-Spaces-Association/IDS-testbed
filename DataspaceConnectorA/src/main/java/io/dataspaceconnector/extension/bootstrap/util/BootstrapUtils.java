@@ -48,8 +48,8 @@ public final class BootstrapUtils {
     /**
      * Set of entries in bootstrap property files that are allowed to have multiple values.
      */
-    private static final Set<String> MULTI_VALUE_PROPS = new HashSet<>(Arrays.asList(
-            "resource.download.auto"));
+    private static final Set<String> MULTI_VALUE_PROPS
+            = new HashSet<>(Arrays.asList("resource.download.auto"));
 
     private BootstrapUtils() {
         // Nothing to do here.
@@ -83,8 +83,8 @@ public final class BootstrapUtils {
                     loadConfig(config, property, properties.getProperty(property));
                 }
             } catch (IOException e) {
-                if (log.isErrorEnabled()) {
-                    log.error("Could not open properties file. [name=({})]",
+                if (log.isDebugEnabled()) {
+                    log.debug("Could not open properties file. [path=({})]",
                             propertyFile.getPath(), e);
                 }
             }
