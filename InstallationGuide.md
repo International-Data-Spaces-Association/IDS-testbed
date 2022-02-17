@@ -2,21 +2,11 @@
 
 The installation and configuration process is explained below for each of the components. To further support this document, the links to the official installation guides will be linked.
 
-The software required for the successful deployment of the testbed will also be mentioned.
-Software and versions used for the testbed:
-- OS: Ubuntu 20.04.1 LTS
-- Docker: 19.03.8+
-- Docker-compose: 1.25
-- Java: 11
-- Maven: 3.6.3
-- Ruby: 2.7.0
-
 ## Execution modes
 You may either run the preconfigured testbed offered in this repo or follow the instructions for the manual setup below to set it up on your own and possibly adjust it to your needs.
 
 ## Target View: Preconfigured testbed (not available yet)
 Preconfigured setup that can be directly launched
-[TODO SQS: explain how to start the preconfigured setup]
 
 DAPS:  
 * can be reached at http://localhost:4567
@@ -37,9 +27,9 @@ Broker:
 
 ### Setting up requirements
 
-Software and versions used for the testbed:
+The software required for the successful deployment of the testbed is the following:
 - OS: Ubuntu 20.04.1 LTS
-- Docker: 19.03.8+
+- Docker: 20.10.7
 - Docker-compose: 1.25
 - Java: 11
 - Maven: 3.6.3
@@ -107,10 +97,10 @@ docker-compose version
 The output should look similar to
 
 ```
-Cdocker-compose version 1.27.4, build 40524192
+docker-compose version 1.25.0, build unknown
 docker-py version: 4.3.1
-CPython version: 3.7.7
-OpenSSL version: OpenSSL 1.1.0l  10 Sep 2019
+CPython version: 3.8.10
+OpenSSL version: OpenSSL 1.1.1f  31 Mar 2020
 ```
 
 #### Java and maven
@@ -129,16 +119,16 @@ java -version
 The output should look similar to
 
 ```
-openjdk version "11.0.11" 2021-04-20
-OpenJDK Runtime Environment (build 11.0.11+9-Ubuntu-0ubuntu2.20.04)
-OpenJDK 64-Bit Server VM (build 11.0.11+9-Ubuntu-0ubuntu2.20.04, mixed mode, sharing)
+openjdk version "11.0.13" 2021-10-19
+OpenJDK Runtime Environment (build 11.0.13+8-Ubuntu-0ubuntu1.20.04)
+OpenJDK 64-Bit Server VM (build 11.0.13+8-Ubuntu-0ubuntu1.20.04, mixed mode, sharing)
 ```
 > To avoid problems while building components you should set the `JAVA_HOME`environment variable on your system.
 >
 > HINT: you might want to check with ``jrunscript -e 'java.lang.System.out.println(java.lang.System.getProperty("java.home"));'``
 
 
-To enable the build process of the Data Space connector we insall [maven](https://maven.apache.org/)
+To enable the build process of the Data Space connector we install [maven](https://maven.apache.org/)
 
 ```
 sudo apt-get install maven
@@ -155,9 +145,9 @@ The output should look similar to
 ```
 Apache Maven 3.6.3
 Maven home: /usr/share/maven
-Java version: 11.0.11, vendor: Ubuntu, runtime: /usr/lib/jvm/java-11-openjdk-amd64
-Default locale: en, platform encoding: UTF-8
-OS name: "linux", version: "5.10.60.1-microsoft-standard-wsl2", arch: "amd64", family: "unix"
+Java version: 11.0.13, vendor: Ubuntu, runtime: /usr/lib/jvm/java-11-openjdk-amd64
+Default locale: es_ES, platform encoding: UTF-8
+OS name: "linux", version: "5.13.0.28-generic", arch: "amd64", family: "unix"
 ```
 
 
@@ -195,7 +185,7 @@ sudo gem install jwt
 First, let us set up the network with
 
 ```
-docker network create testbed
+docker network create broker-localhost_default
 ```
 
 ## Download the Testbed
@@ -207,7 +197,7 @@ git clone https://github.com/International-Data-Spaces-Association/IDS-testbed.g
 Move to right directory, and make the files executable:
 
 ```
-cd Testbed/CertificateAuthority/
+cd IDS-Testbed/CertificateAuthority/
 ```
 
 The official documentation will cover the scope, dependencies and usage of the component.
@@ -217,7 +207,7 @@ Official documentation: [CertificateAuthority/README.md](./CertificateAuthority/
 The preconfigured setup includes certificates for:
 * a root CA called "ReferenceTestbedCA"
 * a subCA called "ReferenceTestbedSubCA" and
-* certificates for devices called "testbed1", ..., "testbed10"
+* certificates for devices called "testbed1", ... , "testbed10"
 
 ## Continue here after the official documentation has been followed
 
@@ -247,14 +237,6 @@ You should now have two additional files in data/cert
 
 ```
 {CERT_FILENAME}.cert  {CERT_FILENAME}.crt  {CERT_FILENAME}.key  {CERT_FILENAME}.p12
-```
-
-Move the certificates to their respective components and directories. **TO BE MODIFIED WHEN ALL COMPONENTS ARE UPDATED**
-```
-## WAIT UNTIL THE REST OF THE COMPONENTS ARE OUT OF ZIP FILES TO CONFIRM
-cp {CERT_FILENAME}.p12 ../../../DataspaceConnector/src/main/resources/conf
-cp {CERT_FILENAME}.cert ../../../OmejdnDAPS/keys
-
 ```
 
 The certificate chain (CA, SubCA, Certs) has been created and the user should be able to create as many certificates as they need for their environment.
@@ -358,6 +340,19 @@ Run the Omejdn DAPS server
 docker run -d --name omejdn -p 4567:4567 -v $PWD/config:/opt/config -v $PWD/keys:/opt/keys --network=broker-localhost_default daps
 ```
 
+## Required DNS for the DAPS
+Create a certificate with a specific DNS to use TLS and establish https connection. As a Docker network is used in the Testbed, the container name is used as DNS.
+
+```
+openssl req -x509 -newkey rsa:4096 -sha256 -days 2650 -nodes -keyout {NAME.key} -out {NAME.crt} -subj "/C={COUNTRY}/ST={STATE}/L={LOCALITY}/O={ORGANIZATION}/CN={COMMON_NAME}" -addext "subjectAltName=DNS:localhost,DNS:{CONTAINER_NAME}"
+```
+
+It could look something like this
+
+```
+openssl req -x509 -newkey rsa:4096 -sha256 -days 2650 -nodes -keyout omejdn.key -out omejdn.crt -subj "/C=ES/ST=Bizkaia/L=Bilbao/O=SQS/CN=omejdn" -addext "subjectAltName=DNS:localhost,DNS:omejdn"
+```
+
 # DATASPACE CONNECTOR:
 The Testbed will have two built-in Connectors. They will be referred to as ConnectorA and ConnectorB. They will have different configurations, so they will each have their own directory. These directories are going to be referred to as `DataspaceConnectorA` and `DataspaceConnectorB`.
 
@@ -365,17 +360,17 @@ It is recommended to follow the guide with one Connector at a time to avoid conf
 
 Make sure you are in the right directory:
 ```
-cd Testbed/DataspaceConnectorA/
+cd IDS-Testbed/DataspaceConnectorA/
 ```
 or
 ```
-cd Testbed/DataspaceConnectorB/
+cd IDS-Testbed/DataspaceConnectorB/
 ```
 
 ## Component Documentation
 The official documentation will cover the introductions, deployment, documentation and communication guide of the component.
 
-Official documentation: https://github.com/International-Data-Spaces-Association/DataspaceConnector/tree/v6.2.0
+Official documentation: https://github.com/International-Data-Spaces-Association/DataspaceConnector/tree/release/v7.0.1-ra
 
 ## Continue here after reading the official documentation
 Official configuration documentation: https://international-data-spaces-association.github.io/DataspaceConnector/Deployment/Configuration#configuration
@@ -404,14 +399,10 @@ server.port=8081
 Edit the DAPS configuration on both **ConnectorA** and **Connector B**. This will make use of the locally installed DAPS.
 ```
 ## DAPS
-## daps.url=https://daps.aisec.fraunhofer.de
-## daps.token.url=https://daps.aisec.fraunhofer.de/token
-## daps.key.url=https://daps.aisec.fraunhofer.de/.well-known/jwks.json
-## daps.key.url.kid={'https://daps.aisec.fraunhofer.de/.well-known/jwks.json':'default'}
+##daps.url=https://daps.aisec.fraunhofer.de
+##daps.token.url=https://daps.aisec.fraunhofer.de/v2/token
 daps.url=http://omejdn:4567
 daps.token.url=http://omejdn:4567/token
-daps.key.url=http://omejdn:4567/.well-known/jwks.json
-daps.key.url.kid={'http://omejdn:4567/.well-known/jwks.json':'default'}
 ```
 
 ### TLS
@@ -441,11 +432,11 @@ openssl pkcs12 -export -out {NAME.p12) -inkey {NAME.key} -in {NAME.crt} -passout
 
 It could look something like this (**ConnectorA**)
 ```
-openssl pkcs12 -export -out connectora.p12 -inkey connectora.key -in connectora.crt -passout pass:password
+openssl pkcs12 -export -out connectorA.p12 -inkey connectorA.key -in connectorA.crt -passout pass:password
 ```
 It could look something like this (**ConnectorB**)
 ```
-openssl pkcs12 -export -out connectorb.p12 -inkey connectorb.key -in connectorb.crt -passout pass:password
+openssl pkcs12 -export -out connectorB.p12 -inkey connectorB.key -in connectorB.crt -passout pass:password
 ```
 
 The main line of interest is `server.ssl.key-store=classpath:conf/{TLS_FILENAME}.p12`, where `{TLS_FILENAME}` is to be replaced with the TLS cert that was created above:
@@ -455,7 +446,7 @@ It could look something like this (**ConnectorA**)
 ## TLS
 server.ssl.enabled=true
 server.ssl.key-store-type=PKCS12
-server.ssl.key-store=classpath:conf/connectora.p12
+server.ssl.key-store=classpath:conf/connectorA.p12
 server.ssl.key-store-password=password
 server.ssl.key-alias=1
 #security.require-ssl=true
@@ -465,7 +456,7 @@ It could look something like this (**ConnectorB**)
 ## TLS
 server.ssl.enabled=true
 server.ssl.key-store-type=PKCS12
-server.ssl.key-store=classpath:conf/connectorb.p12
+server.ssl.key-store=classpath:conf/connectorB.p12
 server.ssl.key-store-password=password
 server.ssl.key-alias=1
 #security.require-ssl=true
@@ -493,7 +484,7 @@ Edit `connectorDeployMode` from `TEST_DEPLOYMENT` to `PRODUCTIVE_DEPLOYMENT` for
 
 Ensure {CERT_FILENAME} are different for **ConnectorA** and **ConnectorB**
 
-**Note:** Local CA certs will be available. Users can use those, create new ones or bring their own FH cert to replace {CERT_FILENAME}
+**Note:** Local CA certs will be available. Users can use those, create new ones or bring their own FH cert to replace {CERT_FILENAME}.
 
 ### Open the `conf` directory
 ```
@@ -516,6 +507,7 @@ It could look something like this (**ConnectorB**)
 ```
 keytool -import -alias connectorB -file connectorB.crt -storetype PKCS12 -keystore truststore.p12
 ```
+
 It could look something like this (**Omejdn DAPS**)
 ```
 keytool -import -alias omejdn -file omejdn.crt -storetype PKCS12 -keystore truststore.p12
@@ -619,7 +611,7 @@ This will make use of the locally installed DAPS.
 ```
 # DAPS
 # daps.url=https://daps.aisec.fraunhofer.de
-daps.url=http://omejdn:4567
+daps.url=http://omejdn:4567/token
 daps.validateIncoming=true
 ```
 
@@ -627,7 +619,7 @@ daps.validateIncoming=true
 Add the local DAPS to the trusted hosts
 
 ```
-# Securiy-related
+# Security-related
 ...
 jwks.trustedHosts=daps.aisec.fraunhofer.de,omejdn
 ssl.certificatePath=/etc/cert/server.crt
@@ -647,7 +639,7 @@ keytool -importkeystore -srckeystore {SRCKEYSTORE} -srcstoretype {STORETYPE} -sr
 It could look something like this
 
 ```
-keytool -importkeystore -srckeystore testidsa10.p12 -srcstoretype pkcs12 -srcstorepass password -destkeystore isstbroker-keystore.jks -deststoretype jks -deststorepass password
+keytool -importkeystore -srckeystore testbed3.p12 -srcstoretype pkcs12 -srcstorepass password -destkeystore isstbroker-keystore.jks -deststoretype jks -deststorepass password
 ```
 
 Expected outcome:
@@ -675,7 +667,7 @@ Create the following directory path:
 sudo mkdir /etc/idscert/localhost
 ```
 
-Copy the following files into this new path
+Copy the following files from `IDS-Testbed/MetadataBroker/` to `/etc/idscert/localhost/`
 * `server.crt`
 * `server.key`
 
@@ -694,7 +686,7 @@ If port 80 is already in use, the `reverseproxy` container will exit with code 1
 services:
   broker-reverseproxy:
     ...
-    container_name: broker-localhost_broker-reverseproxy_1
+    container_name: broker-reverseproxy
     ...
     ports:
     - "443:443" # IDS-HTTP API
