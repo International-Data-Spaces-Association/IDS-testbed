@@ -27,7 +27,7 @@ if [ ! "$(sudo docker ps -q -f name=omejdn)" ]; then
         sudo docker rm omejdn
     fi
     # run your container
-    gnome-terminal --title "DAPS" -e "docker run --name omejdn -p 4567:4567 -v $PWD/config:/opt/config -v $PWD/keys:/opt/keys --network=broker-localhost_default daps"
+    gnome-terminal --title "DAPS" -e "sudo docker run --name omejdn -p 4567:4567 -v $PWD/config:/opt/config -v $PWD/keys:/opt/keys --network=broker-localhost_default daps"
 fi
 
 #### Dataspace Connector A
@@ -43,7 +43,7 @@ if [ ! "$(sudo docker ps -q -f name=connectora)" ]; then
         sudo docker rm connectora
     fi
     # run your container
-    gnome-terminal --title "CONNECTOR A" -e "docker run --publish 8080:8080 --name connectora --network=broker-localhost_default dsca"
+    gnome-terminal --title "CONNECTOR A" -e "sudo docker run --publish 8080:8080 --name connectora --network=broker-localhost_default dsca"
 fi
 
 #### Dataspace Connector B
@@ -59,7 +59,7 @@ if [ ! "$(sudo docker ps -q -f name=connectorb)" ]; then
         sudo docker rm connectorb
     fi
     # run your container
-    gnome-terminal --title "CONNECTOR B" -e "docker run --publish 8081:8081 --name connectorb --network=broker-localhost_default dscb"
+    gnome-terminal --title "CONNECTOR B" -e "sudo docker run --publish 8081:8081 --name connectorb --network=broker-localhost_default dscb"
 fi
 
 #### Metadata Broker
@@ -80,7 +80,7 @@ if [ "$(sudo docker images -q registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broke
     sudo docker build -t registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker-open/core .
 # Launch the component
     cd ../composefiles/broker-localhost
-    gnome-terminal --title "BROKER" -e "docker-compose up"
+    gnome-terminal --title "BROKER" -e "sudo docker-compose up"
 fi
 
 ### Check the components are running
