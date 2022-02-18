@@ -63,10 +63,15 @@ if [ ! "$(sudo docker ps -q -f name=connectorb)" ]; then
 fi
 
 #### Metadata Broker
+# Configure TLS certificates
+cd ../MetadataBroker
+sudo mkdir /etc/idscert/localhost
+sudo cp server.crt /etc/idscert/localhost
+sudo cp server.key /etc/idscert/localhost
 # Check if the required images are available in the local system
 if [ "$(sudo docker images -q registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker-reverseproxy)" == "" ]; then
 # If the images are no available, pull them
-    cd ../MetadataBroker/docker/composefiles/broker-localhost
+    cd docker/composefiles/broker-localhost
     sudo docker-compose pull
 # The testbed requires local changes. Remove the pulled "core" image
     sudo docker rmi registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker-open/core
