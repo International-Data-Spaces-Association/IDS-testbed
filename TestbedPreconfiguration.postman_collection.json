@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "0e8a8862-4e9c-47cb-90d6-cdab1c7e8898",
+		"_postman_id": "8ddfbeaa-ffd4-4cb5-87e1-c9949447c1e9",
 		"name": "TestBed_Guide",
 		"description": "Example deployment of DSC provider to DSC consumer communication",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -1365,6 +1365,64 @@
 									"response": []
 								}
 							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Automated Testsuite",
+			"item": [
+				{
+					"name": "Information Model",
+					"item": [
+						{
+							"name": "Get Applicant's Self-Description",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();",
+											"pm.test(\"INF_01\", function () {",
+											"  pm.expect(jsonData).to.exist;",
+											"});",
+											"pm.test(\"INF_03\", function () {",
+											"  pm.expect(jsonData[\"ids:publicKey\"][\"ids:keyValue\"]).to.exist;",
+											"  pm.expect(jsonData[\"ids:maintainer\"][\"@id\"]).to.eql(pm.environment.get(\"APPLICANT_MAINTAINER\"));",
+											"  //TODO: data enpoints offered",
+											"  //TODO: log format of data enpoints offered",
+											"  pm.expect(jsonData[\"ids:securityProfile\"][\"@id\"]).to.eql(pm.environment.get(\"APPLICANT_SECURITY_PROFILE\"));",
+											"   pm.expect(jsonData[\"@id\"]).to.eql(pm.environment.get(\"APPLICANT_CONNECTOR_ID\"));",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{CONNECTORA_URL}}/api/ids/description?recipient={{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_ACCESS_URL}}",
+									"host": [
+										"{{CONNECTORA_URL}}"
+									],
+									"path": [
+										"api",
+										"ids",
+										"description"
+									],
+									"query": [
+										{
+											"key": "recipient",
+											"value": "{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_ACCESS_URL}}"
+										}
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				}
