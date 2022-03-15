@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "8ddfbeaa-ffd4-4cb5-87e1-c9949447c1e9",
+		"_postman_id": "065ecc41-28e7-4e86-8f4e-7b3041727187",
 		"name": "TestBed_Guide",
 		"description": "Example deployment of DSC provider to DSC consumer communication",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -1387,6 +1387,109 @@
 											"script": {
 												"exec": [
 													"var jsonData = pm.response.json();",
+													"pm.response.to.be.ok;",
+													"//store applicants self-description for further tests",
+													"pm.collectionVariables.set(\"APPLICANT_SELF_DESCRIPTION\", jsonData)",
+													"pm.test(\"INF_01\", function () {",
+													"  pm.expect(jsonData).to.exist;",
+													"});",
+													"pm.test(\"INF_03\", function () {",
+													"  pm.expect(jsonData[\"ids:publicKey\"][\"ids:keyValue\"]).to.exist;",
+													"  pm.expect(jsonData[\"ids:maintainer\"][\"@id\"]).to.eql(pm.environment.get(\"APPLICANT_MAINTAINER\"));",
+													"  //TODO: data enpoints offered",
+													"  //TODO: log format of data enpoints offered",
+													"  pm.expect(jsonData[\"ids:securityProfile\"][\"@id\"]).to.eql(pm.environment.get(\"APPLICANT_SECURITY_PROFILE\"));",
+													"   pm.expect(jsonData[\"@id\"]).to.eql(pm.environment.get(\"APPLICANT_CONNECTOR_ID\"));",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"tlsPreferServerCiphers": false,
+										"tlsDisabledProtocols": [
+											"TLSv1",
+											"TLSv1_1"
+										]
+									},
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "{{CONNECTORA_URL}}/api/ids/description?recipient={{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_ACCESS_URL}}",
+											"host": [
+												"{{CONNECTORA_URL}}"
+											],
+											"path": [
+												"api",
+												"ids",
+												"description"
+											],
+											"query": [
+												{
+													"key": "recipient",
+													"value": "{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_ACCESS_URL}}"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Register Resource",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Retrieve Offer ID\", function () {",
+													"    var jsonData = pm.response.json();",
+													"    pm.collectionVariables.set(\"offersConnB\", jsonData[\"_links\"][\"self\"][\"href\"])",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"strictSSL": false
+									},
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"title\": \"DWD Weather Warnings\",\n  \"description\": \"DWD weather warnings for germany.\",\n  \"keywords\": [\n    \"DWD\"\n  ],\n  \"publisher\": \"https://dwd.com\",\n  \"language\": \"DE\",\n  \"license\": \"\",\n  \"sovereign\": \"https://dwd.com\",\n  \"endpointDocumentation\": \"\",\n  \"paymentModality\": \"undefined\"\n}\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{CONNECTORB_URL}}/api/offers",
+											"host": [
+												"{{CONNECTORB_URL}}"
+											],
+											"path": [
+												"api",
+												"offers"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Check Resource Metadata",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var jsonData = pm.response.json();",
 													"//store applicants self-description for further tests",
 													"pm.collectionVariables.set(\"APPLICANT_SELF_DESCRIPTION\", jsonData)",
 													"pm.test(\"INF_01\", function () {",
@@ -1418,6 +1521,98 @@
 												"api",
 												"ids",
 												"description"
+											],
+											"query": [
+												{
+													"key": "recipient",
+													"value": "{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_ACCESS_URL}}"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Add Artifact",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Retrieve Artifact ID\", function () {",
+													"    var jsonData = pm.response.json();",
+													"    pm.collectionVariables.set(\"artifactsConnB\", jsonData[\"_links\"][\"self\"][\"href\"])",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"strictSSL": false
+									},
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\"title\": \"string\",\"description\": \"string\",\"accessUrl\": \"https://maps.dwd.de/geoserver/dwd/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=dwd%3AAutowarn_Analyse&maxFeatures=50&outputFormat=application%2Fjson\", \"automatedDownload\": true}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{CONNECTORB_URL}}/api/artifacts",
+											"host": [
+												"{{CONNECTORB_URL}}"
+											],
+											"path": [
+												"api",
+												"artifacts"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Contract",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"strictSSL": false
+									},
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"title\": \"DWD Weather Warnings\",\n  \"description\": \"DWD weather warnings for germany.\",\n  \"keywords\": [\n    \"DWD\"\n  ],\n  \"publisher\": \"https://dwd.com\",\n  \"language\": \"DE\",\n  \"license\": \"\",\n  \"sovereign\": \"https://dwd.com\",\n  \"endpointDocumentation\": \"\",\n  \"paymentModality\": \"undefined\"\n}\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{CONNECTORA_URL}}/api/ids/contract?recipient={{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_ACCESS_URL}}",
+											"host": [
+												"{{CONNECTORA_URL}}"
+											],
+											"path": [
+												"api",
+												"ids",
+												"contract"
 											],
 											"query": [
 												{
@@ -1619,6 +1814,18 @@
 		},
 		{
 			"key": "APPLICANT_SELF_DESCRIPTION",
+			"value": ""
+		},
+		{
+			"key": "RESOURCE_DESCRIPTION",
+			"value": ""
+		},
+		{
+			"key": "offersConnB",
+			"value": ""
+		},
+		{
+			"key": "artifactsConnB",
 			"value": ""
 		}
 	]
