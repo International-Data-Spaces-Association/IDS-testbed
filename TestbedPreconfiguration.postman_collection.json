@@ -1404,8 +1404,20 @@
 												],
 												"type": "text/javascript"
 											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
 										}
 									],
+									"protocolProfileBehavior": {
+										"tlsDisabledProtocols": []
+									},
 									"request": {
 										"method": "POST",
 										"header": [],
@@ -1448,13 +1460,22 @@
 												],
 												"type": "text/javascript"
 											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
 										}
 									],
 									"request": {
 										"method": "POST",
 										"header": [],
 										"url": {
-											"raw": "{{APPLICANT_TEMP_URL}}{{APPLICANT_CONNECTOR_DESCRIPTION_URL}}?recipient={{BROKER}}&elementId={{Broker_catalog_list}}",
+											"raw": "{{APPLICANT_TEMP_URL}}{{APPLICANT_CONNECTOR_DESCRIPTION_URL}}?recipient={{BROKER}}&elementId=https://localhost/connectors",
 											"host": [
 												"{{APPLICANT_TEMP_URL}}{{APPLICANT_CONNECTOR_DESCRIPTION_URL}}"
 											],
@@ -1465,7 +1486,7 @@
 												},
 												{
 													"key": "elementId",
-													"value": "{{Broker_catalog_list}}"
+													"value": "https://localhost/connectors"
 												}
 											]
 										}
@@ -1474,6 +1495,17 @@
 								},
 								{
 									"name": "Broker registration",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
 									"request": {
 										"method": "POST",
 										"header": [],
@@ -1500,11 +1532,177 @@
 								}
 							]
 						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
 					]
 				},
 				{
 					"name": "Broker",
-					"item": []
+					"item": [
+						{
+							"name": "General Requirements",
+							"item": [
+								{
+									"name": "Self-Description",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var jsonData = pm.response.json();",
+													"pm.test(\"BR_GEN_02\", function () {",
+													"  pm.response.to.be.ok;",
+													"  pm.expect(jsonData).to.exist;",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{APPLICANT_BROKER_URL}}",
+											"host": [
+												"{{APPLICANT_BROKER_URL}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Minimal endpoint /browse",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"BR_GEN_03-1\", function () {",
+													"  pm.response.to.have.status(parseInt(pm.environment.get(\"STATUS_CODE_ENDPOINT_BROWSE\")));",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{APPLICANT_BROKER_URL}}/browse",
+											"host": [
+												"{{APPLICANT_BROKER_URL}}"
+											],
+											"path": [
+												"browse"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Minimal endpoint /infrastructure",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"BR_GEN_03-2\", function () {",
+													"  pm.response.to.have.status(parseInt(pm.environment.get(\"STATUS_CODE_ENDPOINT_INFRASTRUCTURE\")));",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "{{CONNECTORA_URL}}/api/ids/description?recipient={{APPLICANT_BROKER_REVERSEPROXY_URL}}/infrastructure",
+											"host": [
+												"{{CONNECTORA_URL}}"
+											],
+											"path": [
+												"api",
+												"ids",
+												"description"
+											],
+											"query": [
+												{
+													"key": "recipient",
+													"value": "{{APPLICANT_BROKER_REVERSEPROXY_URL}}/infrastructure"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Functional Requirements",
+							"item": [
+								{
+									"name": "HTTPS",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"BR_GEN_02\", function () {",
+													"  pm.response.to.have.status(400);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://{{APPLICANT_BROKER_IP}}:443",
+											"protocol": "http",
+											"host": [
+												"{{APPLICANT_BROKER_IP}}"
+											],
+											"port": "443"
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
 				}
 			]
 		}
