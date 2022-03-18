@@ -2,10 +2,10 @@ version: '3'
 services:
   broker-reverseproxy:
     image: registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker-open/reverseproxy
-    container_name: broker-reverseproxy 
+    container_name: broker-reverseproxy
     volumes:
-      - /etc/idscert/localhost:/etc/cert/
-#      - c:/etc/idscert/localhost:/etc/cert/
+      - ../../../server.crt:/etc/cert/server.crt
+      - ../../../server.key:/etc/cert/server.key
     ports:
     - "443:443" # IDS-HTTP API
     - "81:80"
@@ -13,10 +13,6 @@ services:
   broker-core:
     image: registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker-open/core
     container_name: broker-core
-    volumes:
-      - /etc/idscert/localhost:/etc/cert/
-#      - c:/etc/idscert/localhost:/etc/cert/
-    restart: always
     environment:
     - SPARQL_ENDPOINT=http://broker-fuseki:3030/connectorData
     - ELASTICSEARCH_HOSTNAME=broker-elasticsearch
