@@ -146,7 +146,7 @@ The output should look similar to
 Apache Maven 3.6.3
 Maven home: /usr/share/maven
 Java version: 11.0.13, vendor: Ubuntu, runtime: /usr/lib/jvm/java-11-openjdk-amd64
-Default locale: es_ES, platform encoding: UTF-8
+Default locale: en, platform encoding: UTF-8
 OS name: "linux", version: "5.13.0.28-generic", arch: "amd64", family: "unix"
 ```
 
