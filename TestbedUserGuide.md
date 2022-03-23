@@ -430,4 +430,4 @@ Validate that the received list of connectors represents the list retreived in 5
 
 ## In Addition: Execute Automated Test Suite
 
-Please execute the automated (interoperability) test suite provided at https://gitlab.cc-asp.fraunhofer.de/ksa/ids-certification-testing by following the installation and execution instructions in that repository.
+Please execute the automated (interoperability) test suite provided at the Testsuite folder by [following the installation and execution instructions](./Testsuite/README.md).
