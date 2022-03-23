@@ -1,7 +1,9 @@
 # IDS-testbed testsuite (wip)
 
 ## Set-up
-Currently, it is possible to run tests again an IDS connector or and IDS broker. Simply run the following commands and replace $COMPONENT with either "Connector" or "Broker":
+**The Testbed must be set-up and running**. Please follow the instructions in the [installation guide](../InstallationGuide.md) and come back.
+
+Currently, it is possible to run tests again an IDS connector and IDS broker. Simply run the following commands and replace $COMPONENT with either "Connector" or "Broker":
 
 `cd Testsuite`
 
