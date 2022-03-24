@@ -1,4 +1,4 @@
-# Certificate Authortiy (CA)
+# Certificate Authority (CA)
 
 ## Link to the current specification
 Official
@@ -24,7 +24,7 @@ The software requires Python 3 and the Python OpenSSL library to be present. On 
 
 ```bash
 $ git clone https://github.com/International-Data-Spaces-Association/IDS-testbed.git
-$ cd CA
+$ cd CertificateAuthority
 $ sudo apt install python3-openssl
 ```
 
@@ -42,6 +42,10 @@ python3 pki.py  init
 
 A root CA can then be created with the following command:
 ```bash
+python3 pki.py  ca create --common-name [CA name]
+```
+It could look something like this
+```bash
 python3 pki.py  ca create --common-name "Test CA"
 ```
 A list of available parameters with their defaults can be obtained by:
@@ -57,7 +61,11 @@ python3 pki.py ca list
 
 A sub CA can then be created with the following command:
 ```bash
-python3 pki.py subca create --CA [CA name] --common-name "Test CA"
+python3 pki.py subca create --CA [CA name] --common-name [Sub CA name]
+```
+It could look something like this
+```bash
+python3 pki.py subca create --CA "Test CA" --common-name "Test SubCA"
 ```
 The CA used for signing the sub CA is a required parameter.
 
@@ -75,14 +83,19 @@ python3 pki.py subca list
 **Creation of key pair and certificate in one step**  
 A device private key with the respective certificate can be created with the following command:
 ```bash
-python3 pki.py cert create --subCA [Sub CA name] --common-name "example.com" --client
+python3 pki.py cert create --subCA [Sub CA name] --common-name [Cert name] --client --server
+```
+It could look something like this
+```bash
+python3 pki.py cert create --subCA "Test SubCA" --common-name "Example" --client --server
 ```
 The Sub CA used for signing the certificate is a required parameter.
 
+The created key pair is located at the folder `CertificateAuthority/data/cert`
 **Creation of a certificate for an existing key pair**  
 If a private-public key pair is already available on the device, the public key can be signed to gain a device certificate with the following command:
 ```bash
-python3 pki.py cert sign --key-file [path to public key file] --subCA [Sub CA name] --common-name "example.com" --client
+python3 pki.py cert sign --key-file [path to public key file] --subCA [Sub CA name] --common-name "Example" --client --server
 ```
 The path to the (public) key file and the Sub CA used for signing the certificate are required parameters. The public key file must be provided in PEM format.
 
