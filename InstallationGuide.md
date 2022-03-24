@@ -197,7 +197,7 @@ git clone https://github.com/International-Data-Spaces-Association/IDS-testbed.g
 Move to right directory, and make the files executable:
 
 ```
-cd IDS-Testbed/CertificateAuthority/
+cd IDS-testbed/CertificateAuthority/
 ```
 
 The official documentation will cover the scope, dependencies and usage of the component.
@@ -354,17 +354,17 @@ openssl req -x509 -newkey rsa:4096 -sha256 -days 2650 -nodes -keyout omejdn.key 
 ```
 
 # DATASPACE CONNECTOR:
-The Testbed will have two built-in Connectors. They will be referred to as ConnectorA and ConnectorB. They will have different configurations, so they will each have their own directory. These directories are going to be referred to as `DataspaceConnectorA` and `DataspaceConnectorB`.
+The testbed will have two built-in Connectors. They will be referred to as ConnectorA and ConnectorB. They will have different configurations, so they will each have their own directory. These directories are going to be referred to as `DataspaceConnectorA` and `DataspaceConnectorB`.
 
 It is recommended to follow the guide with one Connector at a time to avoid configuration issues.
 
 Make sure you are in the right directory:
 ```
-cd IDS-Testbed/DataspaceConnectorA/
+cd IDS-testbed/DataspaceConnectorA/
 ```
 or
 ```
-cd IDS-Testbed/DataspaceConnectorB/
+cd IDS-testbed/DataspaceConnectorB/
 ```
 
 ## Component Documentation
@@ -565,7 +565,7 @@ Official build documentation: https://international-data-spaces-association.gith
 
 The testbed is run in a docker network defined earlier in this document called `broker-localhost_default`.
 
-Before running your images as a container, add `--network=testbed` to the `docker run` command
+Before running your images as a container, add `--network=broker-localhost_default` to the `docker run` command
 
 ```
 docker build -t <IMAGE_NAME:TAG> .
@@ -661,13 +661,7 @@ keytool -v -list -keystore isstbroker-keystore.jks
 
 ## Adding the TLS certificates
 
-Create the following directory path:
-
-```
-sudo mkdir /etc/idscert/localhost
-```
-
-Copy the following files from `IDS-Testbed/MetadataBroker/` to `/etc/idscert/localhost/`
+The TLS certificates are located in the following directory path `MetadataBroker`
 * `server.crt`
 * `server.key`
 
