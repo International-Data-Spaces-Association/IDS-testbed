@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="TokenGeneratorTest" time="2.047" tests="21" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="awt.toolkit" value="sun.awt.X11.XToolkit"/>
+    <property name="java.specification.version" value="11"/>
+    <property name="sun.cpu.isalist" value=""/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.class.path" value="/mnt/c/Users/erick/Dropbox/IDS-testbed/OmejdnDAPS/tests/target/test-classes:/mnt/c/Users/erick/Dropbox/IDS-testbed/OmejdnDAPS/tests/target/classes:/home/erick/.m2/repository/org/jetbrains/kotlin/kotlin-stdlib/1.4.31/kotlin-stdlib-1.4.31.jar:/home/erick/.m2/repository/org/jetbrains/kotlin/kotlin-stdlib-common/1.4.31/kotlin-stdlib-common-1.4.31.jar:/home/erick/.m2/repository/org/jetbrains/annotations/13.0/annotations-13.0.jar:/home/erick/.m2/repository/org/assertj/assertj-core/3.12.2/assertj-core-3.12.2.jar:/home/erick/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.4.2/junit-jupiter-api-5.4.2.jar:/home/erick/.m2/repository/org/apiguardian/apiguardian-api/1.0.0/apiguardian-api-1.0.0.jar:/home/erick/.m2/repository/org/opentest4j/opentest4j/1.1.1/opentest4j-1.1.1.jar:/home/erick/.m2/repository/org/junit/platform/junit-platform-commons/1.4.2/junit-platform-commons-1.4.2.jar:/home/erick/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.4.2/junit-jupiter-engine-5.4.2.jar:/home/erick/.m2/repository/org/junit/platform/junit-platform-engine/1.4.2/junit-platform-engine-1.4.2.jar:/home/erick/.m2/repository/io/jsonwebtoken/jjwt-api/0.11.2/jjwt-api-0.11.2.jar:/home/erick/.m2/repository/io/jsonwebtoken/jjwt-impl/0.11.2/jjwt-impl-0.11.2.jar:/home/erick/.m2/repository/io/jsonwebtoken/jjwt-jackson/0.11.2/jjwt-jackson-0.11.2.jar:/home/erick/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.9.10.4/jackson-databind-2.9.10.4.jar:/home/erick/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.9.10/jackson-annotations-2.9.10.jar:/home/erick/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.9.10/jackson-core-2.9.10.jar:/home/erick/.m2/repository/org/json/json/20210307/json-20210307.jar:/home/erick/.m2/repository/org/bitbucket/b_c/jose4j/0.7.8/jose4j-0.7.8.jar:/home/erick/.m2/repository/org/slf4j/slf4j-api/1.7.21/slf4j-api-1.7.21.jar:/home/erick/.m2/repository/com/nimbusds/nimbus-jose-jwt/9.13/nimbus-jose-jwt-9.13.jar:/home/erick/.m2/repository/com/github/stephenc/jcip/jcip-annotations/1.0-1/jcip-annotations-1.0-1.jar:/home/erick/.m2/repository/org/bouncycastle/bcpkix-jdk15on/1.69/bcpkix-jdk15on-1.69.jar:/home/erick/.m2/repository/org/bouncycastle/bcprov-jdk15on/1.69/bcprov-jdk15on-1.69.jar:/home/erick/.m2/repository/org/bouncycastle/bcutil-jdk15on/1.69/bcutil-jdk15on-1.69.jar:"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.vendor.url" value="https://openjdk.java.net/"/>
+    <property name="user.timezone" value=""/>
+    <property name="java.vm.specification.version" value="11"/>
+    <property name="os.name" value="Linux"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.boot.library.path" value="/home/erick/.sdkman/candidates/java/11.0.10-open/lib"/>
+    <property name="sun.java.command" value="/mnt/c/Users/erick/Dropbox/IDS-testbed/OmejdnDAPS/tests/target/surefire/surefirebooter16238991074703552594.jar /mnt/c/Users/erick/Dropbox/IDS-testbed/OmejdnDAPS/tests/target/surefire 2022-04-11T20-59-02_899-jvmRun1 surefire14150895584785970498tmp surefire_010591282430520913322tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="/mnt/c/Users/erick/Dropbox/IDS-testbed/OmejdnDAPS/tests/target/test-classes:/mnt/c/Users/erick/Dropbox/IDS-testbed/OmejdnDAPS/tests/target/classes:/home/erick/.m2/repository/org/jetbrains/kotlin/kotlin-stdlib/1.4.31/kotlin-stdlib-1.4.31.jar:/home/erick/.m2/repository/org/jetbrains/kotlin/kotlin-stdlib-common/1.4.31/kotlin-stdlib-common-1.4.31.jar:/home/erick/.m2/repository/org/jetbrains/annotations/13.0/annotations-13.0.jar:/home/erick/.m2/repository/org/assertj/assertj-core/3.12.2/assertj-core-3.12.2.jar:/home/erick/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.4.2/junit-jupiter-api-5.4.2.jar:/home/erick/.m2/repository/org/apiguardian/apiguardian-api/1.0.0/apiguardian-api-1.0.0.jar:/home/erick/.m2/repository/org/opentest4j/opentest4j/1.1.1/opentest4j-1.1.1.jar:/home/erick/.m2/repository/org/junit/platform/junit-platform-commons/1.4.2/junit-platform-commons-1.4.2.jar:/home/erick/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.4.2/junit-jupiter-engine-5.4.2.jar:/home/erick/.m2/repository/org/junit/platform/junit-platform-engine/1.4.2/junit-platform-engine-1.4.2.jar:/home/erick/.m2/repository/io/jsonwebtoken/jjwt-api/0.11.2/jjwt-api-0.11.2.jar:/home/erick/.m2/repository/io/jsonwebtoken/jjwt-impl/0.11.2/jjwt-impl-0.11.2.jar:/home/erick/.m2/repository/io/jsonwebtoken/jjwt-jackson/0.11.2/jjwt-jackson-0.11.2.jar:/home/erick/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.9.10.4/jackson-databind-2.9.10.4.jar:/home/erick/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.9.10/jackson-annotations-2.9.10.jar:/home/erick/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.9.10/jackson-core-2.9.10.jar:/home/erick/.m2/repository/org/json/json/20210307/json-20210307.jar:/home/erick/.m2/repository/org/bitbucket/b_c/jose4j/0.7.8/jose4j-0.7.8.jar:/home/erick/.m2/repository/org/slf4j/slf4j-api/1.7.21/slf4j-api-1.7.21.jar:/home/erick/.m2/repository/com/nimbusds/nimbus-jose-jwt/9.13/nimbus-jose-jwt-9.13.jar:/home/erick/.m2/repository/com/github/stephenc/jcip/jcip-annotations/1.0-1/jcip-annotations-1.0-1.jar:/home/erick/.m2/repository/org/bouncycastle/bcpkix-jdk15on/1.69/bcpkix-jdk15on-1.69.jar:/home/erick/.m2/repository/org/bouncycastle/bcprov-jdk15on/1.69/bcprov-jdk15on-1.69.jar:/home/erick/.m2/repository/org/bouncycastle/bcutil-jdk15on/1.69/bcutil-jdk15on-1.69.jar:"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="/home/erick"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2021-01-19"/>
+    <property name="java.home" value="/home/erick/.sdkman/candidates/java/11.0.10-open"/>
+    <property name="file.separator" value="/"/>
+    <property name="basedir" value="/mnt/c/Users/erick/Dropbox/IDS-testbed/OmejdnDAPS/tests"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment"/>
+    <property name="surefire.real.class.path" value="/mnt/c/Users/erick/Dropbox/IDS-testbed/OmejdnDAPS/tests/target/surefire/surefirebooter16238991074703552594.jar"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="11.0.10+9"/>
+    <property name="user.name" value="erick"/>
+    <property name="path.separator" value=":"/>
+    <property name="os.version" value="5.10.60.1-microsoft-standard-WSL2"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="java.vendor.version" value="18.9"/>
+    <property name="localRepository" value="/home/erick/.m2/repository"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="/tmp"/>
+    <property name="java.version" value="11.0.10"/>
+    <property name="user.dir" value="/mnt/c/Users/erick/Dropbox/IDS-testbed/OmejdnDAPS/tests"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="java.awt.printerjob" value="sun.print.PSPrinterJob"/>
+    <property name="sun.os.patch.level" value="unknown"/>
+    <property name="java.library.path" value="/usr/java/packages/lib:/usr/lib64:/lib64:/lib:/usr/lib"/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.version" value="11.0.10+9"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="55.0"/>
+  </properties>
+  <testcase name="getAccessTokenAndVerify" classname="TokenGeneratorTest" time="1.177"/>
+  <testcase name="futureNBFToken" classname="TokenGeneratorTest" time="0.039"/>
+  <testcase name="getDiffSubKey1" classname="TokenGeneratorTest" time="0.023"/>
+  <testcase name="getDiffSubKey2" classname="TokenGeneratorTest" time="0.023"/>
+  <testcase name="getAccessTokenAndVerifyES256" classname="TokenGeneratorTest" time="0.049"/>
+  <testcase name="getAccessTokenAndVerifyES512" classname="TokenGeneratorTest" time="0.049"/>
+  <testcase name="getAccessTokenAndVerifyPS256" classname="TokenGeneratorTest" time="0.089"/>
+  <testcase name="getAccessTokenAndVerifyPS512" classname="TokenGeneratorTest" time="0.017"/>
+  <testcase name="getJSONInjectionAttackExpiration" classname="TokenGeneratorTest" time="0.018"/>
+  <testcase name="getNaN" classname="TokenGeneratorTest" time="0.013"/>
+  <testcase name="wrongIssuer" classname="TokenGeneratorTest" time="0.017"/>
+  <testcase name="wrongAudience" classname="TokenGeneratorTest" time="0.018"/>
+  <testcase name="getConfusion" classname="TokenGeneratorTest" time="0.241"/>
+  <testcase name="wrongType" classname="TokenGeneratorTest" time="0.037"/>
+  <testcase name="wrongContext" classname="TokenGeneratorTest" time="0.035"/>
+  <testcase name="getAccessTokenAndVerifyRSA512" classname="TokenGeneratorTest" time="0.037"/>
+  <testcase name="getAlgNone" classname="TokenGeneratorTest" time="0.013"/>
+  <testcase name="getJSONInjectionAttackAudience" classname="TokenGeneratorTest" time="0.017"/>
+  <testcase name="getNested" classname="TokenGeneratorTest" time="0.025"/>
+  <testcase name="wrongSubject" classname="TokenGeneratorTest" time="0.02"/>
+  <testcase name="pastNBFToken" classname="TokenGeneratorTest" time="0.036"/>
+</testsuite>

@@ -307,3 +307,58 @@ services:
       - /path/to/config:/opt/config
       - /path/to/keys:/opt/keys
 ```
+## Testing the DAPS
+
+ You can test the DAPS implementation with the provided Dockerfile, however, previous configuration is required. Before creating the image with the Dockerfile, the certificates and keys for 2 clients, and the DAPS signing key should be placed in the `keys` directory. A configuration file should be placed in `tests/test_config.txt`. The configuration file contains information about the clients in order to correctly request DAT tokens. An example configuration file is as follows:
+ ```
+iss=7D:50:61:67:B9:6E:A5:99:A9:58:30:1A:81:C7:78:8E:19:4E:20:C4:keyid:7D:50:61:67:B9:6E:A5:99:A9:58:30:1A:81:C7:78:8E:19:4E:20:C4
+aud=idsc:IDS_CONNECTORS_ALL
+iss_daps=http://omejdn:4567
+securityProfile=idsc:BASE_SECURITY_PROFILE
+referringConnector=http://test1.demo
+@type=ids:DatPayload
+@context=https://w3id.org/idsa/contexts/context.jsonld
+scope=idsc:IDS_CONNECTOR_ATTRIBUTES_ALL
+transportCertsSha256=0c07ba5e4c305e9d1bd3d14c6e6e6b8166864e57c5b0c43b46b39d77994880b6
+keyPath=../keys/test1.key
+keyPath2=../keys/test2.key
+iss2=30:C1:05:0A:2E:00:41:BB:6C:7B:B6:78:A1:F2:67:C7:B8:B1:02:34:keyid:30:C1:05:0A:2E:00:41:BB:6C:7B:B6:78:A1:F2:67:C7:B8:B1:02:34
+url=http://localhost:4567/
+iss_256=E6:60:A2:C2:C5:97:F1:76:21:DE:C4:08:26:85:E9:74:DE:0E:49:FB:keyid:E6:60:A2:C2:C5:97:F1:76:21:DE:C4:08:26:85:E9:74:DE:0E:49:FB
+securityProfile_256=idsc:BASE_SECURITY_PROFILE
+referringConnector_256=http://ec256.demo
+scope_256=idsc:IDS_CONNECTOR_ATTRIBUTES_ALL
+transportCertsSha256_256=9f106ca3c67d4c5f997ae48fefe1107f583ff5d58a6445572944fda901916863
+keyPath3=../keys/ec256.key
+iss_512=2C:9E:A1:D0:CF:4B:9A:37:38:FD:32:3F:1A:49:CE:25:98:73:B3:0F:keyid:2C:9E:A1:D0:CF:4B:9A:37:38:FD:32:3F:1A:49:CE:25:98:73:B3:0F
+securityProfile_512=idsc:BASE_SECURITY_PROFILE
+referringConnector_512=http://ec521.demo
+scope_512=idsc:IDS_CONNECTOR_ATTRIBUTES_ALL
+transportCertsSha256_512=7c5b1aba8484fc8721ac75c02fddfa6b3ccd9da414cb44177a65fd96d65abf53
+keyPath4=../keys/ec521.key
+ ```
+ Each line in the configuration file is an attribute required in that specific order and to be separated with an equal sign without spaces. The attributes refer to:
+ - iss: `client_id` for the first client.
+ - aud: Audience for the first client.
+ - iss_daps: DAPS issuer for DAT tokens.
+ - securityProfile: Expected security profile in DAT.
+ - referringConnector: URI of the first client.
+ - @type: Type of the DAT token.
+ - @context: Context containing the IDS classes.
+ - scope: List of scopes in the DAT.
+ - transporteCertSha256: The public transportation key from the first client used to request a DAT token.
+ - keyPath: Path to the first client's key.
+ - keyPath2: Path to the second client's key.
+ - iss2: `client_id` for the second client.
+ - url: Address at which the DAPS server can be contacted.
+ - iss_256, securityProfile_256, referingConnector_256, scope_256, transportCertSha256_256, keyPath3: These refer to the third client, which is an ES256 certificate, see above for a detailed explanation on each attribute.
+ - iss_512, securityProfile_512, referingConnector_512, scope_512, transportCertSha256_512, keyPath4: These refer to the fourth client, which is an ES512 certificate, see above for a detailed explanation on each attribute. 
+
+ Once all the required material for the testing is ready, we can start testing a DAPS instance by creating a docker image and the running a container. In order to create the image execute:
+ ```
+ $ docker build . -f Dockerfile_test -t daps-test
+ ```
+And then to run the container with the tests simply execute:
+ ```
+ $ docker run --name=test daps-test
+ ```
