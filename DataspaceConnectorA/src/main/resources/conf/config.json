@@ -51,7 +51,7 @@
     }
   },
   "ids:trustStore" : {
-    "@id" : "file:///conf/truststore.p12"
+    "@id" : "file:///config/truststore.p12"
   },
   "ids:connectorStatus" : {
     "@id" : "idsc:CONNECTOR_ONLINE"

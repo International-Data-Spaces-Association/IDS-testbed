@@ -1,16 +1,13 @@
+---
 - client_id: 66:07:ED:E5:80:E4:29:6D:1E:DD:F7:43:CA:0E:EB:38:32:C8:3A:43:keyid:07:FC:95:17:C4:95:B9:E4:AD:09:5F:07:1E:D2:20:75:2D:89:66:85
-  # The client's name
   name: This is an example Client name
-  # A client may request these scopes for access tokens
+  redirect_uri: http://localhost:4200
   allowed_scopes:
   - openid
   - profile
   - omejdn:api
   - omejdn:write
   - idsc:IDS_CONNECTOR_ATTRIBUTES_ALL
-  # A redirect URI
-  redirect_uri: http://localhost:4200
-  # Attributes
   attributes:
   - key: securityProfile
     value: idsc:BASE_SECURITY_PROFILE
@@ -22,21 +19,15 @@
     value: https://w3id.org/idsa/contexts/context.jsonld
   - key: transportCertsSha256
     value: c68d9e6ba3f1799bcbe5bec9d7d98b15b0ef2f292c80f6bca994178aa95ae10d
-  certfile: testbed1.cert
 - client_id: 4B:4A:0E:81:99:6A:19:B9:3A:04:37:B6:7C:86:83:17:19:5A:6E:68:keyid:07:FC:95:17:C4:95:B9:E4:AD:09:5F:07:1E:D2:20:75:2D:89:66:85
-  name: omejdn admin ui
- # The client's name
   name: This is an example Client name
-  # A client may request these scopes for access tokens
+  redirect_uri: http://localhost:4200
   allowed_scopes:
   - openid
   - profile
   - omejdn:api
   - omejdn:write
   - idsc:IDS_CONNECTOR_ATTRIBUTES_ALL
-  # A redirect URI
-  redirect_uri: http://localhost:4200
-  # Attributes
   attributes:
   - key: securityProfile
     value: idsc:BASE_SECURITY_PROFILE
@@ -47,22 +38,16 @@
   - key: "@context"
     value: https://w3id.org/idsa/contexts/context.jsonld
   - key: transportCertsSha256
-    value: 05972ead27ac22b37fb3edc310723a3a0e74c0360d9c109a3b8bd390e55d22e3
-  certfile: testbed2.cert
+    value: '05972ead27ac22b37fb3edc310723a3a0e74c0360d9c109a3b8bd390e55d22e3'
 - client_id: B7:6D:DD:B3:FD:6E:41:52:A8:89:95:B0:0D:8E:4C:BA:0A:1F:72:FD:keyid:07:FC:95:17:C4:95:B9:E4:AD:09:5F:07:1E:D2:20:75:2D:89:66:85
-  name: omejdn admin ui
- # The client's name
   name: This is an example Client name
-  # A client may request these scopes for access tokens
+  redirect_uri: http://localhost:4200
   allowed_scopes:
   - openid
   - profile
   - omejdn:api
   - omejdn:write
   - idsc:IDS_CONNECTOR_ATTRIBUTES_ALL
-  # A redirect URI
-  redirect_uri: http://localhost:4200
-  # Attributes
   attributes:
   - key: securityProfile
     value: idsc:BASE_SECURITY_PROFILE
@@ -74,21 +59,15 @@
     value: https://w3id.org/idsa/contexts/context.jsonld
   - key: transportCertsSha256
     value: e494404614345027713d86d4b5581e345865b1530fd45d697c3878020f8d7904
-  certfile: testbed3.cert 
 - client_id: 51:61:ED:3B:5E:DE:11:C3:F8:12:EE:69:56:41:15:00:D9:69:FF:36:keyid:07:FC:95:17:C4:95:B9:E4:AD:09:5F:07:1E:D2:20:75:2D:89:66:85
-  name: omejdn admin ui
- # The client's name
   name: This is an example Client name
-  # A client may request these scopes for access tokens
+  redirect_uri: http://localhost:4200
   allowed_scopes:
   - openid
   - profile
   - omejdn:api
   - omejdn:write
   - idsc:IDS_CONNECTOR_ATTRIBUTES_ALL
-  # A redirect URI
-  redirect_uri: http://localhost:4200
-  # Attributes
   attributes:
   - key: securityProfile
     value: idsc:BASE_SECURITY_PROFILE
@@ -100,21 +79,15 @@
     value: https://w3id.org/idsa/contexts/context.jsonld
   - key: transportCertsSha256
     value: e494404614345027713d86d4b5581e345865b1530fd45d697c3878020f8d7904
-  certfile: testbed4.cert 
 - client_id: FC:57:89:A2:D5:C3:E3:64:AC:2A:4F:D6:F1:2A:91:0D:87:C8:5E:23:keyid:07:FC:95:17:C4:95:B9:E4:AD:09:5F:07:1E:D2:20:75:2D:89:66:85
-  name: omejdn admin ui
- # The client's name
   name: This is an example Client name
-  # A client may request these scopes for access tokens
+  redirect_uri: http://localhost:4200
   allowed_scopes:
   - openid
   - profile
   - omejdn:api
   - omejdn:write
   - idsc:IDS_CONNECTOR_ATTRIBUTES_ALL
-  # A redirect URI
-  redirect_uri: http://localhost:4200
-  # Attributes
   attributes:
   - key: securityProfile
     value: idsc:BASE_SECURITY_PROFILE
@@ -126,21 +99,15 @@
     value: https://w3id.org/idsa/contexts/context.jsonld
   - key: transportCertsSha256
     value: e494404614345027713d86d4b5581e345865b1530fd45d697c3878020f8d7904
-  certfile: testbed5.cert 
 - client_id: DB:A5:EC:D0:A7:C3:EC:1F:A8:CC:15:CC:DC:03:B5:C1:09:CE:0C:91:keyid:07:FC:95:17:C4:95:B9:E4:AD:09:5F:07:1E:D2:20:75:2D:89:66:85
-  name: omejdn admin ui
- # The client's name
   name: This is an example Client name
-  # A client may request these scopes for access tokens
+  redirect_uri: http://localhost:4200
   allowed_scopes:
   - openid
   - profile
   - omejdn:api
   - omejdn:write
   - idsc:IDS_CONNECTOR_ATTRIBUTES_ALL
-  # A redirect URI
-  redirect_uri: http://localhost:4200
-  # Attributes
   attributes:
   - key: securityProfile
     value: idsc:BASE_SECURITY_PROFILE
@@ -152,21 +119,15 @@
     value: https://w3id.org/idsa/contexts/context.jsonld
   - key: transportCertsSha256
     value: e494404614345027713d86d4b5581e345865b1530fd45d697c3878020f8d7904
-  certfile: testbed6.cert 
 - client_id: 22:E7:71:76:0B:8F:2A:3C:DA:73:B1:07:03:54:D7:78:CF:AA:1B:9B:keyid:07:FC:95:17:C4:95:B9:E4:AD:09:5F:07:1E:D2:20:75:2D:89:66:85
-  name: omejdn admin ui
- # The client's name
   name: This is an example Client name
-  # A client may request these scopes for access tokens
+  redirect_uri: http://localhost:4200
   allowed_scopes:
   - openid
   - profile
   - omejdn:api
   - omejdn:write
   - idsc:IDS_CONNECTOR_ATTRIBUTES_ALL
-  # A redirect URI
-  redirect_uri: http://localhost:4200
-  # Attributes
   attributes:
   - key: securityProfile
     value: idsc:BASE_SECURITY_PROFILE
@@ -178,21 +139,15 @@
     value: https://w3id.org/idsa/contexts/context.jsonld
   - key: transportCertsSha256
     value: e494404614345027713d86d4b5581e345865b1530fd45d697c3878020f8d7904
-  certfile: testbed7.cert 
 - client_id: 3C:C8:3E:92:7A:4E:C6:50:0B:6D:99:A3:2A:A1:28:40:AD:BA:31:F5:keyid:07:FC:95:17:C4:95:B9:E4:AD:09:5F:07:1E:D2:20:75:2D:89:66:85
-  name: omejdn admin ui
- # The client's name
   name: This is an example Client name
-  # A client may request these scopes for access tokens
+  redirect_uri: http://localhost:4200
   allowed_scopes:
   - openid
   - profile
   - omejdn:api
   - omejdn:write
   - idsc:IDS_CONNECTOR_ATTRIBUTES_ALL
-  # A redirect URI
-  redirect_uri: http://localhost:4200
-  # Attributes
   attributes:
   - key: securityProfile
     value: idsc:BASE_SECURITY_PROFILE
@@ -204,21 +159,15 @@
     value: https://w3id.org/idsa/contexts/context.jsonld
   - key: transportCertsSha256
     value: e494404614345027713d86d4b5581e345865b1530fd45d697c3878020f8d7904
-  certfile: testbed8.cert 
 - client_id: 7F:D5:2C:04:19:02:D6:E5:A0:65:E0:E4:52:D0:45:2B:44:AC:21:D7:keyid:07:FC:95:17:C4:95:B9:E4:AD:09:5F:07:1E:D2:20:75:2D:89:66:85
-  name: omejdn admin ui
- # The client's name
   name: This is an example Client name
-  # A client may request these scopes for access tokens
+  redirect_uri: http://localhost:4200
   allowed_scopes:
   - openid
   - profile
   - omejdn:api
   - omejdn:write
   - idsc:IDS_CONNECTOR_ATTRIBUTES_ALL
-  # A redirect URI
-  redirect_uri: http://localhost:4200
-  # Attributes
   attributes:
   - key: securityProfile
     value: idsc:BASE_SECURITY_PROFILE
@@ -230,21 +179,15 @@
     value: https://w3id.org/idsa/contexts/context.jsonld
   - key: transportCertsSha256
     value: e494404614345027713d86d4b5581e345865b1530fd45d697c3878020f8d7904
-  certfile: testbed9.cert 
 - client_id: 4A:F6:BC:D9:A8:36:08:34:CD:4A:30:91:0B:67:05:5D:8E:4B:4F:6C:keyid:07:FC:95:17:C4:95:B9:E4:AD:09:5F:07:1E:D2:20:75:2D:89:66:85
-  name: omejdn admin ui
- # The client's name
   name: This is an example Client name
-  # A client may request these scopes for access tokens
+  redirect_uri: http://localhost:4200
   allowed_scopes:
   - openid
   - profile
   - omejdn:api
   - omejdn:write
   - idsc:IDS_CONNECTOR_ATTRIBUTES_ALL
-  # A redirect URI
-  redirect_uri: http://localhost:4200
-  # Attributes
   attributes:
   - key: securityProfile
     value: idsc:BASE_SECURITY_PROFILE
@@ -256,4 +199,3 @@
     value: https://w3id.org/idsa/contexts/context.jsonld
   - key: transportCertsSha256
     value: e494404614345027713d86d4b5581e345865b1530fd45d697c3878020f8d7904
-  certfile: testbed10.cert 

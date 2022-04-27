@@ -3,7 +3,7 @@
     <Appenders>
         <Console name="ConsoleAppender" target="SYSTEM_OUT">
             <PatternLayout
-                    pattern="%d{ISO8601} [%thread] %highlight{%level}{FATAL=bg_red, ERROR=red, WARN=yellow, INFO=green, DEBUG=blue} - %encode{%.-10000msg}{CRLF}%n" />
+                    pattern="%d{ISO8601} [%thread] [%c] %highlight{%level}{FATAL=bg_red, ERROR=red, WARN=yellow, INFO=green, DEBUG=blue} - %encode{%.-10000msg}{CRLF}%n" />
         </Console>
 <!--        <RollingFile
                 name="RollingFile"
@@ -25,8 +25,9 @@
         </Root>
 <!--        <Logger name="org.springframework" level="info" /> -->
         <Logger name="org.hibernate" level="error"/>
-        <Logger name="io.dataspaceconnector" level="info" />
+        <Logger name="io.dataspaceconnector" level="debug" />
         <Logger name="camel-route-logger" level="info"/>
+        <Logger name="de" level="debug" />
 <!--        <Logger name="de.fhg.aisec.ids.idscp2" level="TRACE" />-->
 <!--        <Logger name="de.fhg.aisec.ids.camel.idscp2" level="TRACE" />-->
     </Loggers>

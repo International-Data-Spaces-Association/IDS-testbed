@@ -1,9 +1,5 @@
 ---
 - username: testUser
-  scopes:
-  - omejdn:api
-  - openid
-  - profile
   attributes:
   - key: email
     value: admin@example.com
@@ -12,3 +8,8 @@
   - key: exampleKey
     value: exampleValue
   password: "$2a$12$Be9.8qVsGOVpUFO4ebiMBel/TNetkPhnUkJ8KENHjHLiDG.IXi0Zi"
+- username: admin
+  attributes:
+  - key: omejdn
+    value: admin
+  password: "$2a$12$Lac2upflCIj8blITRGxS/O3GS7.DSjbYEO9AcwuTLKdbj5rGZMWzu"

@@ -1,0 +1,29 @@
+---
+plugins:
+  user_db:
+    yaml:
+      location: config/users.yml
+  claim_mapper:
+    attribute:
+      skip_access_token: false
+      skip_id_token: true
+  api:
+    admin_v1: 
+    user_selfservice_v1:
+      allow_deletion: false
+      allow_password_change: true
+      editable_attributes: []
+user_backend_default: yaml
+environment: development
+issuer: http://omejdn/auth
+front_url: http://omejdn/auth
+bind_to: 0.0.0.0:4567
+openid: true
+default_audience: idsc:IDS_CONNECTORS_ALL
+accept_audience: idsc:IDS_CONNECTORS_ALL
+access_token:
+  expiration: 3600
+  algorithm: RS256
+id_token:
+  expiration: 3600
+  algorithm: RS256
