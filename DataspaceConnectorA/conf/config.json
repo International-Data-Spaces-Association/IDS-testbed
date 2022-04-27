@@ -57,6 +57,6 @@
     "@id" : "idsc:CONNECTOR_ONLINE"
   },
   "ids:keyStore" : {
-    "@id" : "file:///conf/connector-daps-key.p12"
+    "@id" : "file:///conf/connector-daps.p12"
   }
 }

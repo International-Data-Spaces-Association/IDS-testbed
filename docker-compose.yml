@@ -46,7 +46,7 @@ services:
       - local
     volumes:
       - ./DataspaceConnectorA/conf/config.json:/conf/config.json
-      - ./DataspaceConnectorA/conf/connectora.p12:/conf/connector-daps-key.p12
+      - ./DataspaceConnectorA/conf/connectora-daps.p12:/conf/connector-daps.p12
       - ./DataspaceConnectorA/conf/connectorA.p12:/conf/keystore-localhost.p12
     environment:
       - DAPS_URL=http://omejdn
@@ -62,7 +62,7 @@ services:
       - local
     volumes:
       - ./DataspaceConnectorB/conf/config.json:/conf/config.json
-      - ./DataspaceConnectorB/conf/connectorb.p12:/conf/connector-daps-key.p12
+      - ./DataspaceConnectorB/conf/connectorb-daps.p12:/conf/connector-daps.p12
       - ./DataspaceConnectorB/conf/connectorB.p12:/conf/keystore-localhost.p12
     environment:
       - SERVER_PORT=8081

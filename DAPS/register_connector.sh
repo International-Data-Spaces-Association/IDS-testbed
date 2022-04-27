@@ -18,6 +18,7 @@ if [ -n "$3" ]; then
     openssl x509 -inform "$cert_format" -in "$3" -text > "$CLIENT_CERT"
 else
     openssl req -newkey rsa:2048 -new -batch -nodes -x509 -days 3650 -text -keyout "keys/${CLIENT_NAME}.key" -out "$CLIENT_CERT"
+    openssl pkcs12 -export -in "$CLIENT_CERT" -inkey "keys/${CLIENT_NAME}.key" -out "keys/${CLIENT_NAME}-daps.p12"
 fi
 
 SKI="$(grep -A1 "Subject Key Identifier"  "$CLIENT_CERT" | tail -n 1 | tr -d ' ')"
