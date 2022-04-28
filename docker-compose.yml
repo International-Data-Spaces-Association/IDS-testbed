@@ -45,14 +45,17 @@ services:
     networks:
       - local
     volumes:
-      - ./DataspaceConnectorA/conf/config.json:/conf/config.json
+      - ./DataspaceConnectorA/conf/config.json:/config/config.json
       - ./DataspaceConnectorA/conf/connectora-daps.p12:/conf/connector-daps.p12
-      - ./DataspaceConnectorA/conf/connectorA.p12:/conf/keystore-localhost.p12
+      - ./DataspaceConnectorA/conf/connectorA.p12:/config/connectorA.p12
+      - ./DataspaceConnectorA/conf/truststore.p12:/config/truststore.p12
     environment:
+      - CONFIGURATION_PATH=/config/config.json
       - DAPS_URL=http://omejdn
       - DAPS_TOKEN_URL=http://omejdn/auth/token
       - DAPS_KEY_URL=http://omejdn/auth/jwks.json
       - DAPS_INCOMING_DAT_DEFAULT_WELLKNOWN=/jwks.json
+      - SERVER_SSL_KEY-STORE=file:///config/connectorA.p12
 
   connectorb:
     image: ghcr.io/international-data-spaces-association/dataspace-connector:7.1.0
@@ -61,15 +64,18 @@ services:
     networks:
       - local
     volumes:
-      - ./DataspaceConnectorB/conf/config.json:/conf/config.json
+      - ./DataspaceConnectorB/conf/config.json:/config/config.json
       - ./DataspaceConnectorB/conf/connectorb-daps.p12:/conf/connector-daps.p12
-      - ./DataspaceConnectorB/conf/connectorB.p12:/conf/keystore-localhost.p12
+      - ./DataspaceConnectorB/conf/connectorB.p12:/config/connectorB.p12
+      - ./DataspaceConnectorB/conf/truststore.p12:/config/truststore.p12
     environment:
+      - CONFIGURATION_PATH=/config/config.json
       - SERVER_PORT=8081
       - DAPS_URL=http://omejdn
       - DAPS_TOKEN_URL=http://omejdn/auth/token
       - DAPS_KEY_URL=http://omejdn/auth/jwks.json
       - DAPS_INCOMING_DAT_DEFAULT_WELLKNOWN=/jwks.json
+      - SERVER_SSL_KEY-STORE=file:///config/connectorB.p12
 
   broker-reverseproxy:
     image: registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker-open/reverseproxy
@@ -90,7 +96,7 @@ services:
       - SPARQL_ENDPOINT=http://broker-fuseki:3030/connectorData
       - ELASTICSEARCH_HOSTNAME=broker-elasticsearch
       - SHACL_VALIDATION=true
-      - DAPS_VALIDATE_INCOMING=false
+      - DAPS_VALIDATE_INCOMING=true
       - COMPONENT_URI=https://localhost/
       - COMPONENT_CATALOGURI=https://localhost/connectors/
       - DAPS_URL=http://omejdn/auth/token
