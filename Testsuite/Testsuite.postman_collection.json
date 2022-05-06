@@ -10,6 +10,453 @@
 			"name": "Connector",
 			"item": [
 				{
+					"name": "Set-up",
+					"item": [
+						{
+							"name": "Successful Offer Creation 1/2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Create offer and retrieve offer ID\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.response.to.have.status(201);",
+											"    pm.collectionVariables.set(\"createdTestOffer\", jsonData[\"_links\"][\"self\"][\"href\"])",
+											"    pm.expect(pm.collectionVariables.get(\"createdTestOffer\")).to.exist;",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"DWD Weather Warnings\",\n  \"description\": \"DWD weather warnings for germany.\",\n  \"keywords\": [\n    \"DWD\"\n  ],\n  \"publisher\": \"https://dwd.com\",\n  \"language\": \"DE\",\n  \"license\": \"\",\n  \"sovereign\": \"https://dwd.com\",\n  \"endpointDocumentation\": \"\",\n  \"paymentModality\": \"undefined\"\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{APPLICANT_TEMP_URL}}/api/offers",
+									"host": [
+										"{{APPLICANT_TEMP_URL}}"
+									],
+									"path": [
+										"api",
+										"offers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successful Resource Creation 2/2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Created offer exists\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.response.to.have.status(200);",
+											"    var testOffer = _.get(jsonData, '_embedded.resources');",
+											"    //expect to have the previously created offer available",
+											"    pm.expect(testOffer.some(item => item._links.self.href === pm.collectionVariables.get('createdTestOffer'))).to.eql(true);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{APPLICANT_TEMP_URL}}/api/offers",
+									"host": [
+										"{{APPLICANT_TEMP_URL}}"
+									],
+									"path": [
+										"api",
+										"offers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successful Artifact Creation 1/2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Create artifact and retrieve offer ID\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.response.to.have.status(201);",
+											"    pm.collectionVariables.set(\"createdTestArtifact\", jsonData[\"_links\"][\"self\"][\"href\"]);",
+											"    pm.expect(pm.collectionVariables.get(\"createdTestArtifact\")).to.exist;",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"title\": \"string\",\"description\": \"string\",\"accessUrl\": \"https://maps.dwd.de/geoserver/dwd/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=dwd%3AAutowarn_Analyse&maxFeatures=50&outputFormat=application%2Fjson\", \"automatedDownload\": true}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{APPLICANT_TEMP_URL}}/api/artifacts",
+									"host": [
+										"{{APPLICANT_TEMP_URL}}"
+									],
+									"path": [
+										"api",
+										"artifacts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successful Artifact Creation 2/2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Created artifact exists\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.response.to.have.status(200);",
+											"    var testArtifact = _.get(jsonData, '_embedded.artifacts');",
+											"    //expect to have the previously created artifact available",
+											"    pm.expect(testArtifact.some(item => item._links.self.href === pm.collectionVariables.get('createdTestArtifact'))).to.eql(true);",
+											"    ",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{APPLICANT_TEMP_URL}}/api/artifacts",
+									"host": [
+										"{{APPLICANT_TEMP_URL}}"
+									],
+									"path": [
+										"api",
+										"artifacts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successful Rule Creation 1/2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Create rule and retrieve offer ID\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.response.to.have.status(201);",
+											"    pm.collectionVariables.set(\"createdTestRule\", jsonData[\"_links\"][\"self\"][\"href\"])",
+											"    pm.expect(pm.collectionVariables.get(\"createdTestRule\")).to.exist;",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"title\": \"[\\\"Example Usage Policy\\\"^^http://www.w3.org/2001/XMLSchema#string]\",\n   \"description\": \"\",\n   \"value\": \"{\\n  \\\"@context\\\" : {\\n    \\\"ids\\\" : \\\"https://w3id.org/idsa/core/\\\",\\n    \\\"idsc\\\" : \\\"https://w3id.org/idsa/code/\\\"\\n  },\\n  \\\"@type\\\" : \\\"ids:Permission\\\",\\n  \\\"@id\\\" : \\\"https://w3id.org/idsa/autogen/permission/51f5f7e4-f97f-4f91-bc57-b243714642be\\\",\\n  \\\"ids:description\\\" : [ {\\n    \\\"@value\\\" : \\\"provide-access\\\",\\n    \\\"@type\\\" : \\\"http://www.w3.org/2001/XMLSchema#string\\\"\\n  } ],\\n  \\\"ids:title\\\" : [ {\\n    \\\"@value\\\" : \\\"Example Usage Policy\\\",\\n    \\\"@type\\\" : \\\"http://www.w3.org/2001/XMLSchema#string\\\"\\n  } ],\\n  \\\"ids:postDuty\\\" : [ ],\\n  \\\"ids:assignee\\\" : [ ],\\n  \\\"ids:assigner\\\" : [ ],\\n  \\\"ids:action\\\" : [ {\\n    \\\"@id\\\" : \\\"https://w3id.org/idsa/code/USE\\\"\\n  } ],\\n  \\\"ids:constraint\\\" : [ ],\\n  \\\"ids:preDuty\\\" : [ ]\\n}\"\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{APPLICANT_TEMP_URL}}/api/rules",
+									"host": [
+										"{{APPLICANT_TEMP_URL}}"
+									],
+									"path": [
+										"api",
+										"rules"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successful Rule Creation 2/2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Created rule exists\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.response.to.have.status(200);",
+											"    var testRule = _.get(jsonData, '_embedded.rules');",
+											"    //expect to have the previously created rule available",
+											"    pm.expect(testRule.some(item => item._links.self.href === pm.collectionVariables.get('createdTestRule'))).to.eql(true);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false,
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{APPLICANT_TEMP_URL}}/api/rules",
+									"host": [
+										"{{APPLICANT_TEMP_URL}}"
+									],
+									"path": [
+										"api",
+										"rules"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successful Contract Creation 1/2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Create contract and retrieve offer ID\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.response.to.have.status(201);",
+											"    pm.collectionVariables.set(\"createdTestContract\", jsonData[\"_links\"][\"self\"][\"href\"])",
+											"    pm.expect(pm.collectionVariables.get(\"createdTestContract\")).to.exist;",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"title\": \"TestContract\",\"description\": \"This is an test contract7777\",\"provider\":\"{{APPLICANT_TEMP_URL}}\",\"start\": \"2021-10-22T07:48:37.068Z\",\"end\": \"2023-10-22T07:48:37.068Z\"} ",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{APPLICANT_TEMP_URL}}/api/contracts",
+									"host": [
+										"{{APPLICANT_TEMP_URL}}"
+									],
+									"path": [
+										"api",
+										"contracts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successful Contract Creation 2/2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Created contract exists\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.response.to.have.status(200);",
+											"    var testContract = _.get(jsonData, '_embedded.contracts');",
+											"    //expect to have the previously created contract available",
+											"    pm.expect(testContract.some(item => item._links.self.href === pm.collectionVariables.get('createdTestContract'))).to.eql(true);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{APPLICANT_TEMP_URL}}/api/contracts/",
+									"host": [
+										"{{APPLICANT_TEMP_URL}}"
+									],
+									"path": [
+										"api",
+										"contracts",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successful Offer To Contract Addition",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Created contract exists\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.response.to.have.status(200);",
+											"    pm.expect(jsonData).exist;",
+											"    pm.expect(jsonData._embedded.resources).exist;",
+											"    pm.expect(jsonData._embedded.resources).not.empty;",
+											"    ",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n    \"{{createdTestOffer}}\"\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{createdTestContract}}/offers",
+									"host": [
+										"{{createdTestContract}}"
+									],
+									"path": [
+										"offers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successful Rule To Contract Addition",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Add rule to contract\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.response.to.have.status(200);",
+											"    pm.expect(jsonData).exist;",
+											"    pm.expect(jsonData._embedded.rules).exist;",
+											"    pm.expect(jsonData._embedded.rules).not.empty;",
+											"    ",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n    \"{{createdTestRule}}\"\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{createdTestContract}}/rules",
+									"host": [
+										"{{createdTestContract}}"
+									],
+									"path": [
+										"rules"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
 					"name": "Information Model",
 					"item": [
 						{
@@ -78,6 +525,63 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Get Applicant's Self-Description Error",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();",
+											"pm.response.to.have.status(500);",
+											"pm.test(\"Self-description endpoint does not exist\", () => {",
+											"    pm.expect(jsonData.message).to.eql(\"MESSAGE_HANDLING_FAILED\");",
+											"",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"tlsPreferServerCiphers": false,
+								"tlsDisabledProtocols": [
+									"TLSv1",
+									"TLSv1_1"
+								]
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{CONNECTORA_URL}}/api/ids/description?recipient=https://localhost:8083/api/ids/data",
+									"host": [
+										"{{CONNECTORA_URL}}"
+									],
+									"path": [
+										"api",
+										"ids",
+										"description"
+									],
+									"query": [
+										{
+											"key": "recipient",
+											"value": "https://localhost:8083/api/ids/data"
+										}
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -93,6 +597,7 @@
 										"exec": [
 											"pm.test(\"BRK_01\", function () {",
 											"    var jsonData = pm.response.json();",
+											"    pm.response.to.have.status(200);",
 											"    pm.expect(jsonData[\"@graph\"]).exist;",
 											"});"
 										],
@@ -138,8 +643,22 @@
 							"response": []
 						},
 						{
-							"name": "Broker registration",
+							"name": "Broker Service Inquiries Error",
 							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();",
+											"pm.response.to.have.status(500);",
+											"pm.test(\"Broker endpoint does not exist\", () => {",
+											"    pm.expect(jsonData.message).to.eql(\"MESSAGE_HANDLING_FAILED\");",
+											"",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								},
 								{
 									"listen": "prerequest",
 									"script": {
@@ -160,6 +679,67 @@
 								"method": "POST",
 								"header": [],
 								"url": {
+									"raw": "{{APPLICANT_TEMP_URL}}{{APPLICANT_CONNECTOR_DESCRIPTION_URL}}?recipient=https://broekr-reverseproxy/infrastructure&elementId=https://localhost/connectors",
+									"host": [
+										"{{APPLICANT_TEMP_URL}}{{APPLICANT_CONNECTOR_DESCRIPTION_URL}}"
+									],
+									"query": [
+										{
+											"key": "recipient",
+											"value": "https://broekr-reverseproxy/infrastructure"
+										},
+										{
+											"key": "elementId",
+											"value": "https://localhost/connectors"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Broker registration",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"BRK_02\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"tlsDisabledProtocols": [
+									"TLSv1",
+									"TLSv1_1"
+								]
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"@context\" : {\n    \"ids\" : \"https://w3id.org/idsa/core/\",\n    \"idsc\" : \"https://w3id.org/idsa/code/\"\n  },\n  \"@type\" : \"ids:BaseConnector\",\n  \"@id\" : \"https://connector_B\",\n  \"ids:version\" : \"7.0.1\",\n  \"ids:description\" : [ {\n    \"@value\" : \"BLAAAAAAAAAAAAAAAAA\",\n    \"@type\" : \"http://www.w3.org/2001/XMLSchema#string\"\n  } ],\n  \"ids:publicKey\" : {\n    \"@type\" : \"ids:PublicKey\",\n    \"@id\" : \"https://w3id.org/idsa/autogen/publicKey/78eb73a3-3a2a-4626-a0ff-631ab50a00f9\",\n    \"ids:keyType\" : {\n      \"@id\" : \"https://w3id.org/idsa/code/RSA\"\n    },\n    \"ids:keyValue\" : \"VFVsSlFrbHFRVTVDWjJ0eGFHdHBSemwzTUVKQlVVVkdRVUZQUTBGUk9FRk5TVWxDUTJkTFEwRlJSVUYxZHpadFJuSmtabXhZV2xSS1owWlBRVFZ6YlVSWVF6QTVVMjF3U2xkdlIzQjVSVkphVGtWNU16RndTMlJ6VWtkb1ZHbHdVakkzYWpscGNtMXRjV2xvZGpkblNXZDZRMjU0Tm10SlVrNUhTVEoxTUc5R1VUVkdaM1pQTVhoNFozcGphV2hrY0VZd1EyaGxUMlk1U1U1bmFYTlFhM0UxYUdvNFFXVXZSRmxZYTNacWFGRTJZelpoYXk5YVdXWnFNRTV3Y1hsRlVHTktOVTFNVW0xWlIyVjRUV0ZOV20xVVluRkVTblpLYkRWS1J6TXJZa1V6V1dFeU1XaFVXbGxQZUdsVGFXTndaa1puU2pNd2EyNDFZVlZKUVhSa01EVkpXbmszZWpGelJHbFdUSFJVV0d4TVptVXZXbEZETkhCdWFrWjBjeXQwWXpFeWMxZzVhV2hKYlc1RGEyUXdWM1o2TTBOVVdtOTVRbE56WXpGVVpFSnJZamx0TUVNMWRIWm5NR1pSVURSUlowWXZla2d5VVc5YWJtNXlTVFV5ZFVGYU9FMXZiVmQwV1RKc2RETkVNR3RyY0ZJMk9YQm1Wa1JLTjNremRrNHZaWGRKUkVGUlFVST0=\"\n  },\n  \"ids:title\" : [ {\n    \"@value\" : \"Dataspace Connector\",\n    \"@type\" : \"http://www.w3.org/2001/XMLSchema#string\"\n  } ],\n  \"ids:hasDefaultEndpoint\" : {\n    \"@type\" : \"ids:ConnectorEndpoint\",\n    \"@id\" : \"https://w3id.org/idsa/autogen/connectorEndpoint/e5e2ab04-633a-44b9-87d9-a097ae6da3cf\",\n    \"ids:accessURL\" : {\n      \"@id\" : \"https://connectorb:8081/api/ids/data\"\n    }\n  },\n  \"ids:securityProfile\" : {\n    \"@id\" : \"https://w3id.org/idsa/code/BASE_SECURITY_PROFILE\"\n  },\n  \"ids:maintainer\" : {\n    \"@id\" : \"https://www.isst.fraunhofer.de/\"\n  },\n  \"ids:curator\" : {\n    \"@id\" : \"https://www.isst.fraunhofer.de/\"\n  },\n  \"ids:inboundModelVersion\" : [ \"4.2.6\", \"4.2.7\", \"4.2.0\", \"4.2.1\", \"4.1.2\", \"4.0.0\", \"4.1.0\", \"4.2.4\", \"4.2.5\", \"4.2.2\", \"4.2.3\" ],\n  \"ids:outboundModelVersion\" : \"4.2.7\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
 									"raw": "{{APPLICANT_TEMP_URL}}/api/ids/connector/update?recipient={{BROKER}}",
 									"host": [
 										"{{APPLICANT_TEMP_URL}}"
@@ -175,6 +755,157 @@
 											"key": "recipient",
 											"value": "{{BROKER}}"
 										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Data Usage Control",
+					"item": [
+						{
+							"name": "Definition of usage policies 1/3",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"USC_01-1\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData).exist;",
+											"    pm.expect(jsonData._links.rules).exist;",
+											"    pm.expect(jsonData._links.rules).not.empty;",
+											"    pm.expect(jsonData._links.offers).exist;",
+											"    pm.expect(jsonData._links.offers).not.empty;",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{createdTestContract}}",
+									"host": [
+										"{{createdTestContract}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Definition of usage policies 2/3",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"USC_01-2\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.response.to.have.status(200);",
+											"    pm.expect(jsonData).exist;",
+											"    pm.expect(jsonData._embedded.resources).exist;",
+											"    pm.expect(jsonData._embedded.resources).not.empty;",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{createdTestContract}}/offers",
+									"host": [
+										"{{createdTestContract}}"
+									],
+									"path": [
+										"offers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Definition of usage policies 3/3",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"USC_01-3\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.response.to.have.status(200);",
+											"    pm.expect(jsonData).exist;",
+											"    pm.expect(jsonData._embedded.rules).exist;",
+											"    pm.expect(jsonData._embedded.rules).not.empty;",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{createdTestContract}}/rules",
+									"host": [
+										"{{createdTestContract}}"
+									],
+									"path": [
+										"rules"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Definition of usage policies Error",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();",
+											"pm.response.to.have.status(404);",
+											"pm.test(\"Contract does not exist\", () => {",
+											"    pm.expect(jsonData.message).to.eql(\"Resource not found.\");",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{APPLICANT_TEMP_URL}}/api/contracts/{{RESOURCE_NOT_EXISTING}}",
+									"host": [
+										"{{APPLICANT_TEMP_URL}}"
+									],
+									"path": [
+										"api",
+										"contracts",
+										"{{RESOURCE_NOT_EXISTING}}"
 									]
 								}
 							},
@@ -291,6 +1022,51 @@
 							"response": []
 						},
 						{
+							"name": "Minimal endpoint /browse Copy",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"BR_GEN_03-1\", function () {",
+											"  pm.response.to.have.status(parseInt(pm.environment.get(\"STATUS_CODE_ENDPOINT_BROWSE\")));",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"tlsDisabledProtocols": [
+									"TLSv1",
+									"TLSv1_1"
+								]
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{APPLICANT_BROKER_URL}}/browse",
+									"host": [
+										"{{APPLICANT_BROKER_URL}}"
+									],
+									"path": [
+										"browse"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Minimal endpoint /infrastructure",
 							"event": [
 								{
@@ -346,8 +1122,10 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"var jsonData = pm.response.json();",
 											"pm.test(\"BR_GEN_02\", function () {",
-											"  pm.response.to.have.status(400);",
+											"  //pm.response.to.have.status(400);",
+											"  //pm.expect(jsonData).to.not.exist;",
 											"});"
 										],
 										"type": "text/javascript"
@@ -364,12 +1142,12 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://{{APPLICANT_BROKER_IP}}:443",
+									"raw": "http://{{APPLICANT_BROKER_IP}}:81",
 									"protocol": "http",
 									"host": [
 										"{{APPLICANT_BROKER_IP}}"
 									],
-									"port": "443"
+									"port": "81"
 								}
 							},
 							"response": []
@@ -501,6 +1279,30 @@
 		},
 		{
 			"key": "artifactsConnB",
+			"value": ""
+		},
+		{
+			"key": "dwd_testResource",
+			"value": ""
+		},
+		{
+			"key": "createdTestContract",
+			"value": ""
+		},
+		{
+			"key": "createdTestResource",
+			"value": ""
+		},
+		{
+			"key": "createdTestArtifact",
+			"value": ""
+		},
+		{
+			"key": "createdTestRule",
+			"value": ""
+		},
+		{
+			"key": "createdTestOffer",
 			"value": ""
 		}
 	]

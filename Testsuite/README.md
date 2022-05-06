@@ -10,14 +10,14 @@ Currently, it is possible to run tests again an IDS connector and IDS broker. Si
 `docker build --network host -t test . --build-arg component=$COMPONENT`
 
 ## Covered IDS certification criteria (Connector)
-Last update: **March 23nd, 2022**
+Last update: **May 06th, 2022**
 
 | Criterion  | Covered  | Comment  |
 | :---:      | :-:      | :-:      |
 | COM_01     |   Yes    | implicitly through allowing only TLS v.1.2 and v.1.3 |
 | COM_02     |   Yes    | implicitly through successful connection establishment (requesting DAT everytime) |
 | COM_03     |   Yes    | implicitly through allowing only TLS v.1.2 and v.1.3 |
-| USC_01     |   No     |          |
+| USC_01     |   Yes     |          |
 | USC_02     |   No     |          |
 | INF_01     |   Yes     | SUT is able to send a self-description |
 | INF_03     |   Partly | Currently, the sent self description do not define connector operator and log format of data endpoints offered |
@@ -36,4 +36,4 @@ Last update: **March 23nd, 2022**
 | CR\_3\_1_1 |   Yes     | implicitly through allowing only TLS v.1.2 and v.1.3   |
 | CR\_7_7    |   No     |          | |
 
-**Complete: 52%**
+**Complete: 57%**
