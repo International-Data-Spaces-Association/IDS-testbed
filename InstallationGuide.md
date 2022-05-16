@@ -5,10 +5,79 @@ The installation and configuration process is explained below for each of the co
 ## Execution modes
 You may either run the preconfigured testbed offered in this repo or follow the instructions for the manual setup below to set it up on your own and possibly adjust it to your needs.
 
-## Target View: Preconfigured testbed (not available yet)
-Preconfigured setup that can be directly launched
+# Target View: Preconfigured testbed
+Follow this section to automatically launch the Preconfigured set up of the Testbed.
 
-DAPS:  
+### Setting up requirements
+
+The software required for the successful deployment of the testbed is the following:
+- OS: Ubuntu 20.04.1 LTS
+- Docker: 20.10.7
+- Docker-compose: 1.25
+- Java: 11
+- Maven: 3.6.3
+- Ruby: 2.7.0
+- Python3
+
+First, verify your ubuntu version
+
+```
+$lsb_release -a
+```
+
+the output should be similar to this
+
+```
+No LSB modules are available.
+Distributor ID: Ubuntu
+Description:    Ubuntu 20.04 LTS
+Release:        20.04
+Codename:       focal
+```
+
+Then update your system with
+
+```
+sudo apt-get update
+sudo apt-get upgrade
+```
+
+Download the `IDS-testbed` to your local environment.
+```
+sudo apt install git
+git clone https://github.com/International-Data-Spaces-Association/IDS-testbed.git
+```
+Move to the downloaded directory and execute the `install.sh` script.
+```
+cd IDS-testbed
+./install.sh
+```
+If you face problems with docker or user rights execute the following commands and log out and back so that your group memebership is re-evaluated.
+```
+sudo groupadd docker
+sudo usermod -ag docker $USER 
+# Where $USER is obtained by executing in the terminal the command `whoami`
+# Log out and log back in so that your group membership is re-evaluated.
+```
+Re-execute the `install.sh` script.
+
+The following lines should appear in the terminal if everything is correct.
+```
+Checking OmejdnDAPS availability...
+Checking Dataspace Connector A availability...
+Checking Dataspace Connector B availability...
+Checking Metadata Broker availability...
+> SUCCESS - Omejdn DAPS is available: http://localhost:4567
+> SUCCESS - Dataspace Connector A is available: https://localhost:8080
+> SUCCESS - Dataspace Connector B is available: https://localhost:8081
+> SUCCESS - Metadata Broker is available: https://localhost
+```
+
+If errors persist, try to execute the install script with the command `sudo ./install.sh`.
+
+The IDS-testbed will be correctly deployed. The components that are part of the IDS-testbed can be reached at the URLs mentioned above.
+
+DAPS:
 * can be reached at http://localhost:4567
 * needs to be preconfigured to know connector A, B and the Broker
 
@@ -25,6 +94,9 @@ Broker:
 * can be reached at https://localhost[:443]
 * needs to be aware of connector A, connector B and store their self-descriptions
 
+# Target View: Manual testbed set up
+
+Follow this section to manually launch the Testbed.
 ### Setting up requirements
 
 The software required for the successful deployment of the testbed is the following:
@@ -190,6 +262,7 @@ docker network create broker-localhost_default
 
 ## Download the Testbed
 ```
+sudo apt install git
 git clone https://github.com/International-Data-Spaces-Association/IDS-testbed.git
 ```
 
