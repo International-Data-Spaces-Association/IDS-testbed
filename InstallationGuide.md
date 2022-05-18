@@ -13,7 +13,7 @@ Follow this section to automatically launch the Preconfigured set up of the Test
 The software required for the successful deployment of the testbed is the following:
 - OS: Ubuntu 20.04.1 LTS
 - Docker: 20.10.7
-- Docker-compose: 1.25
+- Docker-compose: 1.27.4
 - Java: 11
 - Maven: 3.6.3
 - Ruby: 2.7.0
@@ -102,7 +102,7 @@ Follow this section to manually launch the Testbed.
 The software required for the successful deployment of the testbed is the following:
 - OS: Ubuntu 20.04.1 LTS
 - Docker: 20.10.7
-- Docker-compose: 1.25
+- Docker-compose: 1.27.4
 - Java: 11
 - Maven: 3.6.3
 - Ruby: 2.7.0
@@ -169,7 +169,7 @@ docker-compose version
 The output should look similar to
 
 ```
-docker-compose version 1.25.0, build unknown
+docker-compose version 1.27.4, build unknown
 docker-py version: 4.3.1
 CPython version: 3.8.10
 OpenSSL version: OpenSSL 1.1.1f  31 Mar 2020
