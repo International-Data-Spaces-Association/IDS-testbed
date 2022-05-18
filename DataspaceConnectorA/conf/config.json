@@ -44,10 +44,10 @@
       "@id" : "idsc:BASE_SECURITY_PROFILE"
     },
     "ids:curator" : {
-      "@id" : "https://www.isst.fraunhofer.de/"
+      "@id" : "https://sovity.de/"
     },
     "ids:maintainer" : {
-      "@id" : "https://www.isst.fraunhofer.de/"
+      "@id" : "https://sovity.de/"
     }
   },
   "ids:trustStore" : {
