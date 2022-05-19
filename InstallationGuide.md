@@ -98,7 +98,7 @@ docker-compose up
 If you face problems with docker or user rights execute the following commands and log out and back so that your group membership is re-evaluated.
 ```
 sudo groupadd docker
-sudo usermod -ag docker $USER 
+sudo usermod -aG docker $USER 
 # Where $USER is obtained by executing in the terminal the command `whoami`
 # Log out and log back in so that your group membership is re-evaluated.
 ```
