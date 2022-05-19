@@ -59,7 +59,7 @@
 							"response": []
 						},
 						{
-							"name": "Successful Resource Creation 2/2",
+							"name": "Successful Offer Creation 2/2",
 							"event": [
 								{
 									"listen": "test",
@@ -97,13 +97,97 @@
 							"response": []
 						},
 						{
+							"name": "Successful Catalog Creation 1/2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Create catalog and retrieve catalog ID\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.response.to.have.status(201);",
+											"    pm.collectionVariables.set(\"createdTestCatalog\", jsonData[\"_links\"][\"self\"][\"href\"]);",
+											"    pm.expect(pm.collectionVariables.get(\"createdTestCatalog\")).to.exist;",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"title\": \"IDS Catalog\", \n\"description\": \"This catalog is created from an IDS infomodel catalog.\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{APPLICANT_TEMP_URL}}/api/catalogs",
+									"host": [
+										"{{APPLICANT_TEMP_URL}}"
+									],
+									"path": [
+										"api",
+										"catalogs"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successful Catalog Creation 2/2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Created catalog exists\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.response.to.have.status(200);",
+											"    var testCatalog = _.get(jsonData, '_embedded.catalogs');",
+											"    //expect to have the previously created catalog available",
+											"    pm.expect(testCatalog.some(item => item._links.self.href === pm.collectionVariables.get('createdTestCatalog'))).to.eql(true);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{APPLICANT_TEMP_URL}}/api/catalogs",
+									"host": [
+										"{{APPLICANT_TEMP_URL}}"
+									],
+									"path": [
+										"api",
+										"catalogs"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Successful Artifact Creation 1/2",
 							"event": [
 								{
 									"listen": "test",
 									"script": {
 										"exec": [
-											"pm.test(\"Create artifact and retrieve offer ID\", function () {",
+											"pm.test(\"Create artifact and retrieve artifact ID\", function () {",
 											"    var jsonData = pm.response.json();",
 											"    pm.response.to.have.status(201);",
 											"    pm.collectionVariables.set(\"createdTestArtifact\", jsonData[\"_links\"][\"self\"][\"href\"]);",
@@ -188,7 +272,7 @@
 									"listen": "test",
 									"script": {
 										"exec": [
-											"pm.test(\"Create rule and retrieve offer ID\", function () {",
+											"pm.test(\"Create rule and retrieve rule ID\", function () {",
 											"    var jsonData = pm.response.json();",
 											"    pm.response.to.have.status(201);",
 											"    pm.collectionVariables.set(\"createdTestRule\", jsonData[\"_links\"][\"self\"][\"href\"])",
@@ -207,7 +291,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n   \"title\": \"[\\\"Example Usage Policy\\\"^^http://www.w3.org/2001/XMLSchema#string]\",\n   \"description\": \"\",\n   \"value\": \"{\\n  \\\"@context\\\" : {\\n    \\\"ids\\\" : \\\"https://w3id.org/idsa/core/\\\",\\n    \\\"idsc\\\" : \\\"https://w3id.org/idsa/code/\\\"\\n  },\\n  \\\"@type\\\" : \\\"ids:Permission\\\",\\n  \\\"@id\\\" : \\\"https://w3id.org/idsa/autogen/permission/51f5f7e4-f97f-4f91-bc57-b243714642be\\\",\\n  \\\"ids:description\\\" : [ {\\n    \\\"@value\\\" : \\\"provide-access\\\",\\n    \\\"@type\\\" : \\\"http://www.w3.org/2001/XMLSchema#string\\\"\\n  } ],\\n  \\\"ids:title\\\" : [ {\\n    \\\"@value\\\" : \\\"Example Usage Policy\\\",\\n    \\\"@type\\\" : \\\"http://www.w3.org/2001/XMLSchema#string\\\"\\n  } ],\\n  \\\"ids:postDuty\\\" : [ ],\\n  \\\"ids:assignee\\\" : [ ],\\n  \\\"ids:assigner\\\" : [ ],\\n  \\\"ids:action\\\" : [ {\\n    \\\"@id\\\" : \\\"https://w3id.org/idsa/code/USE\\\"\\n  } ],\\n  \\\"ids:constraint\\\" : [ ],\\n  \\\"ids:preDuty\\\" : [ ]\\n}\"\n}\n",
+									"raw": "{\n    \"title\": \"[\\\"Example Usage Policy\\\"^^http://www.w3.org/2001/XMLSchema#string]\",\n    \"description\": \"\",\n    \"value\": \"{\\n  \\\"@context\\\" : {\\n    \\\"ids\\\" : \\\"https://w3id.org/idsa/core/\\\",\\n    \\\"idsc\\\" : \\\"https://w3id.org/idsa/code/\\\"\\n  },\\n  \\\"@type\\\" : \\\"ids:Permission\\\",\\n  \\\"@id\\\" : \\\"https://w3id.org/idsa/autogen/permission/51f5f7e4-f97f-4f91-bc57-b243714642be\\\",\\n  \\\"ids:description\\\" : [ {\\n    \\\"@value\\\" : \\\"provide-access\\\",\\n    \\\"@type\\\" : \\\"http://www.w3.org/2001/XMLSchema#string\\\"\\n  } ],\\n  \\\"ids:title\\\" : [ {\\n    \\\"@value\\\" : \\\"Example Usage Policy\\\",\\n    \\\"@type\\\" : \\\"http://www.w3.org/2001/XMLSchema#string\\\"\\n  } ],\\n  \\\"ids:postDuty\\\" : [ ],\\n  \\\"ids:assignee\\\" : [ ],\\n  \\\"ids:assigner\\\" : [ ],\\n  \\\"ids:action\\\" : [ {\\n    \\\"@id\\\" : \\\"https://w3id.org/idsa/code/USE\\\"\\n  } ],\\n  \\\"ids:constraint\\\" : [ ],\\n  \\\"ids:preDuty\\\" : [ ]\\n}\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -282,7 +366,7 @@
 									"listen": "test",
 									"script": {
 										"exec": [
-											"pm.test(\"Create contract and retrieve offer ID\", function () {",
+											"pm.test(\"Create contract and retrieve contract ID\", function () {",
 											"    var jsonData = pm.response.json();",
 											"    pm.response.to.have.status(201);",
 											"    pm.collectionVariables.set(\"createdTestContract\", jsonData[\"_links\"][\"self\"][\"href\"])",
@@ -361,13 +445,237 @@
 							"response": []
 						},
 						{
+							"name": "Successful Representaion Creation 1/2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Create representation and retrieve representation ID\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.response.to.have.status(201);",
+											"    pm.collectionVariables.set(\"createdTestRepresentation\", jsonData[\"_links\"][\"self\"][\"href\"]);",
+											"    pm.expect(pm.collectionVariables.get(\"createdTestRepresentation\")).to.exist;",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"title\": \"Example Representation\",\"description\": \"\", \"mediaType\": \"json\", \"language\": \"https://w3id.org/idsa/code/EN\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{APPLICANT_TEMP_URL}}/api/representations",
+									"host": [
+										"{{APPLICANT_TEMP_URL}}"
+									],
+									"path": [
+										"api",
+										"representations"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successful Representaion Creation 2/2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Created representation exists\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.response.to.have.status(200);",
+											"    var testRepresentation = _.get(jsonData, '_embedded.representations');",
+											"    //expect to have the previously created representation available",
+											"    pm.expect(testRepresentation.some(item => item._links.self.href === pm.collectionVariables.get('createdTestRepresentation'))).to.eql(true);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{APPLICANT_TEMP_URL}}/api/representations",
+									"host": [
+										"{{APPLICANT_TEMP_URL}}"
+									],
+									"path": [
+										"api",
+										"representations"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successful Artifact To Representation Addition",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Add artifact to representation\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.response.to.have.status(200);",
+											"    pm.expect(jsonData).exist;",
+											"    pm.expect(jsonData._embedded.artifacts).exist;",
+											"    pm.expect(jsonData._embedded.artifacts).not.empty;  ",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n    \"{{createdTestArtifact}}\"\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{createdTestRepresentation}}/artifacts",
+									"host": [
+										"{{createdTestRepresentation}}"
+									],
+									"path": [
+										"artifacts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successful Representation To Offer Addition",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Add representation to offer\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.response.to.have.status(200);",
+											"    pm.expect(jsonData).exist;",
+											"    pm.expect(jsonData._embedded.representations).exist;",
+											"    pm.expect(jsonData._embedded.representations).not.empty;",
+											"    ",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\"{{createdTestRepresentation}}\"]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{createdTestOffer}}/representations",
+									"host": [
+										"{{createdTestOffer}}"
+									],
+									"path": [
+										"representations"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successful Offer To Catalog Addition",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Add offer to catalog\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.response.to.have.status(200);",
+											"    pm.expect(jsonData).exist;",
+											"    pm.expect(jsonData._embedded.resources).exist;",
+											"    pm.expect(jsonData._embedded.resources).not.empty;",
+											"    ",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[ \n\"{{createdTestOffer}}\"\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{createdTestCatalog}}/offers",
+									"host": [
+										"{{createdTestCatalog}}"
+									],
+									"path": [
+										"offers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Successful Offer To Contract Addition",
 							"event": [
 								{
 									"listen": "test",
 									"script": {
 										"exec": [
-											"pm.test(\"Created contract exists\", function () {",
+											"pm.test(\"Add offer to contract\", function () {",
 											"    var jsonData = pm.response.json();",
 											"    pm.response.to.have.status(200);",
 											"    pm.expect(jsonData).exist;",
@@ -402,6 +710,53 @@
 									],
 									"path": [
 										"offers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successful Contract To Offer Addition",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Adding contract to offer\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.response.to.have.status(200);",
+											"    pm.expect(jsonData).exist;",
+											"    pm.expect(jsonData._embedded.contracts).exist;",
+											"    pm.expect(jsonData._embedded.contracts).not.empty;",
+											"    ",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\"{{createdTestContract}}\"]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{createdTestOffer}}/contracts",
+									"host": [
+										"{{createdTestOffer}}"
+									],
+									"path": [
+										"contracts"
 									]
 								}
 							},
@@ -910,6 +1265,279 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Sending of usage policies 1/4",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"USC_02-1\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.collectionVariables.set(\"sendingUsagePolicyResource\", jsonData[\"ids:offeredResource\"][0][\"@id\"]);\r",
+											"    pm.collectionVariables.set(\"sendingUsagePolicyArtifact\", jsonData[\"ids:offeredResource\"][0][\"ids:representation\"][0][\"ids:instance\"][0][\"@id\"]);\r",
+											"    pm.collectionVariables.set(\"sendingUsagePolicyRule\", jsonData[\"ids:offeredResource\"][0][\"ids:contractOffer\"][0][\"ids:permission\"][0][\"@id\"]);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{CONNECTORA_URL}}/api/ids/description?recipient={{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_ACCESS_URL}}&elementId={{createdTestCatalog}}",
+									"host": [
+										"{{CONNECTORA_URL}}"
+									],
+									"path": [
+										"api",
+										"ids",
+										"description"
+									],
+									"query": [
+										{
+											"key": "recipient",
+											"value": "{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_ACCESS_URL}}"
+										},
+										{
+											"key": "elementId",
+											"value": "{{createdTestCatalog}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Sending of usage policies 2/4",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"USC_02-2\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    var consumerAgreementLong = jsonData[\"_links\"][\"self\"][\"href\"];",
+											"    var consumerAgreementId = consumerAgreementLong.replace(\"https://localhost:8080/api/agreements/\", \"\");",
+											"    pm.collectionVariables.set(\"consumerAgreementId\", consumerAgreementId);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[ {\n        \"@type\" : \"ids:Permission\",\n        \"@id\" : \"{{sendingUsagePolicyRule}}\", \n        \"ids:description\" : [ {\n          \"@value\" : \"provide-access\",\n          \"@type\" : \"http://www.w3.org/2001/XMLSchema#string\"\n        } ],\n        \"ids:title\" : [ {\n          \"@value\" : \"Example Usage Policy\",\n          \"@type\" : \"http://www.w3.org/2001/XMLSchema#string\"\n        } ],\n        \"ids:action\" : [ {\n          \"@id\" : \"https://w3id.org/idsa/code/USE\"\n        }],\n        \"ids:target\" : \"{{sendingUsagePolicyArtifact}}\"\n} ]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{CONNECTORA_URL}}/api/ids/contract?recipient={{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_ACCESS_URL}}&resourceIds={{sendingUsagePolicyResource}}&artifactIds={{sendingUsagePolicyArtifact}}&download=false",
+									"host": [
+										"{{CONNECTORA_URL}}"
+									],
+									"path": [
+										"api",
+										"ids",
+										"contract"
+									],
+									"query": [
+										{
+											"key": "recipient",
+											"value": "{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_ACCESS_URL}}"
+										},
+										{
+											"key": "resourceIds",
+											"value": "{{sendingUsagePolicyResource}}"
+										},
+										{
+											"key": "artifactIds",
+											"value": "{{sendingUsagePolicyArtifact}}"
+										},
+										{
+											"key": "download",
+											"value": "false"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Sending of usage policies 3/4",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"USC_02-3\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    var requestedData = jsonData[\"_embedded\"][\"artifacts\"][0][\"_links\"][\"data\"][\"href\"];\r",
+											"    pm.collectionVariables.set(\"requestedData\", requestedData);\r",
+											"    pm.response.to.have.status(200);\r",
+											"    pm.expect(jsonData).exist;\r",
+											"    pm.expect(jsonData._embedded.artifacts).exist;\r",
+											"    pm.expect(jsonData._embedded.artifacts).not.empty;\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{CONNECTORA_URL}}/api/agreements/{{consumerAgreementId}}/artifacts",
+									"host": [
+										"{{CONNECTORA_URL}}"
+									],
+									"path": [
+										"api",
+										"agreements",
+										"{{consumerAgreementId}}",
+										"artifacts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Sending of usage policies 4/4",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"USC_02-4\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.response.to.have.status(200);\r",
+											"    pm.expect(jsonData).exist;\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{requestedData}}",
+									"host": [
+										"{{requestedData}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Sending of usage policies Rejection",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"pm.response.to.have.status(417);\r",
+											"pm.test(\"Sending of usage policy rejected\", () => {\r",
+											"    pm.expect(jsonData.details.type).to.eql(\"de.fraunhofer.iais.eis.RejectionMessageImpl\");\r",
+											"    pm.expect(jsonData.message).to.eql(\"Received unexpected response message.\");\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{CONNECTORA_URL}}/api/ids/description?recipient={{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_ACCESS_URL}}&elementId={{APPLICANT_CONNECTOR_URL}}/{{RESOURCE_NOT_EXISTING}}",
+									"host": [
+										"{{CONNECTORA_URL}}"
+									],
+									"path": [
+										"api",
+										"ids",
+										"description"
+									],
+									"query": [
+										{
+											"key": "recipient",
+											"value": "{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_ACCESS_URL}}"
+										},
+										{
+											"key": "elementId",
+											"value": "{{APPLICANT_CONNECTOR_URL}}/{{RESOURCE_NOT_EXISTING}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Sending of usage policies Error",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"pm.response.to.have.status(404);\r",
+											"pm.test(\"Resource does not exist\", () => {\r",
+											"    pm.expect(jsonData.message).to.eql(\"Resource not found.\");\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{CONNECTORA_URL}}/api/agreements/{{RESOURCE_NOT_EXISTING}}/artifacts",
+									"host": [
+										"{{CONNECTORA_URL}}"
+									],
+									"path": [
+										"api",
+										"agreements",
+										"{{RESOURCE_NOT_EXISTING}}",
+										"artifacts"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				}
@@ -1303,6 +1931,54 @@
 		},
 		{
 			"key": "createdTestOffer",
+			"value": ""
+		},
+		{
+			"key": "createdTestRepresentation",
+			"value": ""
+		},
+		{
+			"key": "createTestCatalog",
+			"value": ""
+		},
+		{
+			"key": "createdTestCatalog",
+			"value": ""
+		},
+		{
+			"key": "usc_resource",
+			"value": ""
+		},
+		{
+			"key": "usc_artifact",
+			"value": ""
+		},
+		{
+			"key": "usc_rule",
+			"value": ""
+		},
+		{
+			"key": "sendingUsagePolicyResource",
+			"value": ""
+		},
+		{
+			"key": "sendingUsagePolicyArtifact",
+			"value": ""
+		},
+		{
+			"key": "sendingUsagePolicyRule",
+			"value": ""
+		},
+		{
+			"key": "consumerAgreementId",
+			"value": ""
+		},
+		{
+			"key": "tesDataLink",
+			"value": ""
+		},
+		{
+			"key": "requestedData",
 			"value": ""
 		}
 	]
