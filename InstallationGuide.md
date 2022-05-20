@@ -13,11 +13,7 @@ Follow this section to automatically launch the Preconfigured set up of the Test
 The software required for the successful deployment of the testbed is the following:
 - OS: Ubuntu 20.04.1 LTS
 - Docker: 20.10.7
-- Docker-compose: 1.25
-- Java: 11
-- Maven: 3.6.3
-- Ruby: 2.7.0
-- Python3
+- Docker-compose: 1.27.4
 
 First, verify your ubuntu version
 
@@ -42,40 +38,75 @@ sudo apt-get update
 sudo apt-get upgrade
 ```
 
+Install docker and docker-compose
+```
+sudo apt-get install docker
+sudo apt-get install docker-compose
+```
+
+verify install with
+
+```
+docker version
+```
+
+The output should look similar to
+
+```
+Client:
+ Version:           20.10.7
+ API version:       1.41
+ Go version:        go1.13.8
+ Git commit:        20.10.7-0ubuntu5~20.04.2
+ Built:             Mon Nov  1 00:34:17 2021
+ OS/Arch:           linux/amd64
+ Context:           default
+ Experimental:      true
+```
+
+```
+docker-compose version
+```
+
+The output should look similar to
+
+```
+docker-compose version 1.27.4, build unknown
+docker-py version: 4.3.1
+CPython version: 3.8.10
+OpenSSL version: OpenSSL 1.1.1f  31 Mar 2020
+```
+
+If your docker-compose version is not the required one execute the following commands.
+
+```
+sudo apt-get install curl
+sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+```
+
 Download the `IDS-testbed` to your local environment.
 ```
 sudo apt install git
 git clone https://github.com/International-Data-Spaces-Association/IDS-testbed.git
 ```
-Move to the downloaded directory and execute the `install.sh` script.
+Move to the downloaded directory and execute the `docker-compose.yml` script.
 ```
 cd IDS-testbed
-./install.sh
+docker-compose up
 ```
-If you face problems with docker or user rights execute the following commands and log out and back so that your group memebership is re-evaluated.
+If you face problems with docker or user rights execute the following commands and log out and back so that your group membership is re-evaluated.
 ```
 sudo groupadd docker
-sudo usermod -ag docker $USER 
+sudo usermod -aG docker $USER 
 # Where $USER is obtained by executing in the terminal the command `whoami`
 # Log out and log back in so that your group membership is re-evaluated.
 ```
-Re-execute the `install.sh` script.
+Re-execute the `docker-compose.yml` script.
 
-The following lines should appear in the terminal if everything is correct.
-```
-Checking OmejdnDAPS availability...
-Checking Dataspace Connector A availability...
-Checking Dataspace Connector B availability...
-Checking Metadata Broker availability...
-> SUCCESS - Omejdn DAPS is available: http://localhost:4567
-> SUCCESS - Dataspace Connector A is available: https://localhost:8080
-> SUCCESS - Dataspace Connector B is available: https://localhost:8081
-> SUCCESS - Metadata Broker is available: https://localhost
-```
+The process of downloading the images and launching the containers of the different components (DAPS, DSC and MDB) will begin.
 
-If errors persist, try to execute the install script with the command `sudo ./install.sh`.
-
-The IDS-testbed will be correctly deployed. The components that are part of the IDS-testbed can be reached at the URLs mentioned above.
+The IDS-testbed will be correctly deployed. The components that are part of the IDS-testbed can be reached at the URLs mentioned below.
 
 DAPS:
 * can be reached at http://localhost:4567
@@ -102,7 +133,7 @@ Follow this section to manually launch the Testbed.
 The software required for the successful deployment of the testbed is the following:
 - OS: Ubuntu 20.04.1 LTS
 - Docker: 20.10.7
-- Docker-compose: 1.25
+- Docker-compose: 1.27.4
 - Java: 11
 - Maven: 3.6.3
 - Ruby: 2.7.0
@@ -169,7 +200,7 @@ docker-compose version
 The output should look similar to
 
 ```
-docker-compose version 1.25.0, build unknown
+docker-compose version 1.27.4, build unknown
 docker-py version: 4.3.1
 CPython version: 3.8.10
 OpenSSL version: OpenSSL 1.1.1f  31 Mar 2020

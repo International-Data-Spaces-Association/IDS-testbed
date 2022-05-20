@@ -1,0 +1,9 @@
+# Human readable descriptions for each scope.
+# These are shown to a user before authorizing a client
+profile: "Standard profile claims (e.g.: Name, picture, website, gender, birthdate, location)"
+email: "Email-Address"
+address: "Address"
+phone: "Phone-number"
+omejdn:read: "Read access to the Omejdn server API"
+omejdn:write: "Write access to the Omejdn server API"
+omejdn:admin: "Access to the Omejdn server admin API"
