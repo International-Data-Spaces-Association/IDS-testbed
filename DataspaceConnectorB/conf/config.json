@@ -44,10 +44,10 @@
       "@id" : "idsc:BASE_SECURITY_PROFILE"
     },
     "ids:curator" : {
-      "@id" : "https://sovity.de"
+      "@id" : "https://sovity.de/"
     },
     "ids:maintainer" : {
-      "@id" : "https://sovity.de"
+      "@id" : "https://sovity.de/"
     }
   },
   "ids:trustStore" : {
@@ -57,6 +57,6 @@
     "@id" : "idsc:CONNECTOR_ONLINE"
   },
   "ids:keyStore" : {
-    "@id" : "file:///conf/connector-daps.p12"
+    "@id" : "file:///conf/testbed2.p12"
   }
 }
