@@ -15,11 +15,15 @@ Set up with Open Source IDS components which can be used to verify that a com
 
 ## How to get started?
 
-1. Install the reference testbed in the Testbed Folder. You can either use the Preconfigured set up using the [install script](./install.sh) and the [Postman collection](./TestbedPreconfiguration.postman_collection.json) or install and configure every component manually following the [installation guide](./InstallationGuide.md) and the [instructions for preconfigurations](./PreparingPreconfiguredSetup.md). Current available components are: Dataspace connector, DAPS, CA, Metadata Broker.
+1. Git clone this repository to your local machine and go into the directory (usually ```cd IDS-testbed```) 
 
-2. Test the compatibility of your own developed component following the steps of the [Testbed User Guide](./TestbedUserGuide.md).
+2. Make sure you have installed Docker and Docker Compose on your machine. Run ```docker compose up -d``` or ```docker-compose up -d``` to start the Testbed. Or install and configure every component manually following the [installation guide](./InstallationGuide.md) and the [instructions for preconfigurations](./PreparingPreconfiguredSetup.md). Current available components are: Dataspace connector, DAPS, CA, Metadata Broker.
+   
+3. Run the [Postman collection](./Testbed_Preconfiguration.postman_collection.json) to start the tests.
 
-3. Download the [Test Suite](https://gitlab.cc-asp.fraunhofer.de/ksa/ids-certification-testing) and follow the instructions to conduct automated tests for your own developed connector
+4. Download the [Test Suite](https://gitlab.cc-asp.fraunhofer.de/ksa/ids-certification-testing) and follow the instructions to conduct automated tests for your own developed connector
+
+5. Test the compatibility of your own developed component following the steps of the [Testbed User Guide](./TestbedUserGuide.md).
 
 ## Current version (V1.0)
 

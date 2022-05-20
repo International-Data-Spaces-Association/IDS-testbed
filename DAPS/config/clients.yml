@@ -1,0 +1,58 @@
+---
+- client_id: 92:60:02:01:B7:E0:3A:40:6F:18:C1:15:BA:B3:CA:57:CB:C8:30:45:keyid:92:60:02:01:B7:E0:3A:40:6F:18:C1:15:BA:B3:CA:57:CB:C8:30:45
+  client_name: connectora
+  grant_types: client_credentials
+  token_endpoint_auth_method: private_key_jwt
+  scope: idsc:IDS_CONNECTOR_ATTRIBUTES_ALL
+  attributes:
+  - key: idsc
+    value: IDS_CONNECTOR_ATTRIBUTES_ALL
+  - key: securityProfile
+    value: idsc:BASE_SECURITY_PROFILE
+  - key: referringConnector
+    value: http://connectora.demo
+  - key: "@type"
+    value: ids:DatPayload
+  - key: "@context"
+    value: https://w3id.org/idsa/contexts/context.jsonld
+  - key: transportCertsSha256
+    value: 4f474ed078560165f16cf63d170cf96c6972428cbd58792fb57b72e96561b5fb
+  import_certfile: keys/connectora.cert
+- client_id: 68:AF:58:5F:F4:99:26:39:91:D0:10:2B:53:CB:DB:D8:D5:F4:30:55:keyid:68:AF:58:5F:F4:99:26:39:91:D0:10:2B:53:CB:DB:D8:D5:F4:30:55
+  client_name: connectorb
+  grant_types: client_credentials
+  token_endpoint_auth_method: private_key_jwt
+  scope: idsc:IDS_CONNECTOR_ATTRIBUTES_ALL
+  attributes:
+  - key: idsc
+    value: IDS_CONNECTOR_ATTRIBUTES_ALL
+  - key: securityProfile
+    value: idsc:BASE_SECURITY_PROFILE
+  - key: referringConnector
+    value: http://connectorb.demo
+  - key: "@type"
+    value: ids:DatPayload
+  - key: "@context"
+    value: https://w3id.org/idsa/contexts/context.jsonld
+  - key: transportCertsSha256
+    value: 21d4cf3a3cff49b76e5640eeb7db4e3fcb2931ff77ed4735b90769b68f102617
+  import_certfile: keys/connectorb.cert
+- client_id: 28:6A:32:06:B3:1E:4E:07:42:AB:F3:9D:A1:85:1D:CE:4F:AC:E3:5C:keyid:28:6A:32:06:B3:1E:4E:07:42:AB:F3:9D:A1:85:1D:CE:4F:AC:E3:5C
+  client_name: broker
+  grant_types: client_credentials
+  token_endpoint_auth_method: private_key_jwt
+  scope: idsc:IDS_CONNECTOR_ATTRIBUTES_ALL
+  attributes:
+  - key: idsc
+    value: IDS_CONNECTOR_ATTRIBUTES_ALL
+  - key: securityProfile
+    value: idsc:BASE_SECURITY_PROFILE
+  - key: referringConnector
+    value: http://broker.demo
+  - key: "@type"
+    value: ids:DatPayload
+  - key: "@context"
+    value: https://w3id.org/idsa/contexts/context.jsonld
+  - key: transportCertsSha256
+    value: d6a6ecb73aca8e97564b8bd3abdd2e1d8728154e059a9489cb0442466f27b884
+  import_certfile: keys/broker.cert

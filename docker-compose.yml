@@ -1,0 +1,122 @@
+services:
+
+  omejdn:
+    image: nginx:1.21.6
+    ports:
+      - 80:80
+    environment:
+      - OMEJDN_DOMAIN=${OMEJDN_DOMAIN}
+      - OMEJDN_PATH=${OMEJDN_PATH}
+      - UI_PATH=${UI_PATH}
+    volumes:
+      - ./DAPS/nginx.conf:/etc/nginx/templates/default.conf.template
+    networks:
+      - local
+
+  omejdn-server:
+    image: ghcr.io/fraunhofer-aisec/omejdn-server:${OMEJDN_VERSION}
+    environment:
+      - OMEJDN_ISSUER=${OMEJDN_ISSUER}
+      - OMEJDN_FRONT_URL=${OMEJDN_ISSUER}
+      - OMEJDN_OPENID=true
+      - OMEJDN_ENVIRONMENT=${OMEJDN_ENVIRONMENT}
+      - OMEJDN_ACCEPT_AUDIENCE=idsc:IDS_CONNECTORS_ALL
+      - OMEJDN_DEFAULT_AUDIENCE=idsc:IDS_CONNECTORS_ALL
+      - OMEJDN_ADMIN=${ADMIN_USERNAME}:${ADMIN_PASSWORD}
+    volumes:
+      - ./DAPS/config:/opt/config
+      - ./DAPS/keys:/opt/keys
+    networks:
+      - local
+
+  omejdn-ui:
+    image: ghcr.io/fraunhofer-aisec/omejdn-ui:${UI_VERSION}
+    environment:
+      - OIDC_ISSUER=${OMEJDN_ISSUER}
+      - API_URL=${OMEJDN_ISSUER}/api/v1
+      - CLIENT_ID=adminUI
+    networks:
+      - local
+
+  connectora:
+    image: ghcr.io/international-data-spaces-association/dataspace-connector:7.1.0
+    ports:
+      - 8080:8080
+    networks:
+      - local
+    volumes:
+      - ./DataspaceConnectorA/conf/config.json:/config/config.json
+      - ./DataspaceConnectorA/conf/connectora-daps.p12:/conf/connector-daps.p12
+      - ./DataspaceConnectorA/conf/connectorA.p12:/config/connectorA.p12
+      - ./DataspaceConnectorA/conf/truststore.p12:/config/truststore.p12
+    environment:
+      - CONFIGURATION_PATH=/config/config.json
+      - DAPS_URL=http://omejdn
+      - DAPS_TOKEN_URL=http://omejdn/auth/token
+      - DAPS_KEY_URL=http://omejdn/auth/jwks.json
+      - DAPS_INCOMING_DAT_DEFAULT_WELLKNOWN=/jwks.json
+      - SERVER_SSL_KEY-STORE=file:///config/connectorA.p12
+
+  connectorb:
+    image: ghcr.io/international-data-spaces-association/dataspace-connector:7.1.0
+    ports:
+      - 8081:8081
+    networks:
+      - local
+    volumes:
+      - ./DataspaceConnectorB/conf/config.json:/config/config.json
+      - ./DataspaceConnectorB/conf/connectorb-daps.p12:/conf/connector-daps.p12
+      - ./DataspaceConnectorB/conf/connectorB.p12:/config/connectorB.p12
+      - ./DataspaceConnectorB/conf/truststore.p12:/config/truststore.p12
+    environment:
+      - CONFIGURATION_PATH=/config/config.json
+      - SERVER_PORT=8081
+      - DAPS_URL=http://omejdn
+      - DAPS_TOKEN_URL=http://omejdn/auth/token
+      - DAPS_KEY_URL=http://omejdn/auth/jwks.json
+      - DAPS_INCOMING_DAT_DEFAULT_WELLKNOWN=/jwks.json
+      - SERVER_SSL_KEY-STORE=file:///config/connectorB.p12
+
+  broker-reverseproxy:
+    image: registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker-open/reverseproxy
+    volumes:
+      - ./MetadataBroker/server.crt:/etc/cert/server.crt
+      - ./MetadataBroker/server.key:/etc/cert/server.key
+    ports:
+      - "443:443" # IDS-HTTP API
+      - "81:80"
+    networks:
+      - local
+
+  broker-core:
+    image: broker-core-testbed:4.2.8
+    build:
+      context: ./MetadataBroker/build
+    environment:
+      - SPARQL_ENDPOINT=http://broker-fuseki:3030/connectorData
+      - ELASTICSEARCH_HOSTNAME=broker-elasticsearch
+      - SHACL_VALIDATION=true
+      - DAPS_VALIDATE_INCOMING=true
+      - COMPONENT_URI=https://localhost/
+      - COMPONENT_CATALOGURI=https://localhost/connectors/
+      - DAPS_URL=http://omejdn/auth/token
+    expose:
+      - "8080"
+    networks:
+      - local
+
+  broker-fuseki:
+    image: registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker-open/fuseki
+    volumes:
+      - broker-fuseki:/fuseki
+    expose:
+      - "3030"
+    networks:
+      - local
+
+volumes:
+  broker-fuseki:
+
+networks:
+  local:
+    driver: bridge
