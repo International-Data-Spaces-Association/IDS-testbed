@@ -2,6 +2,7 @@ services:
 
   omejdn:
     image: nginx:1.21.6
+    container_name: omejdn
     ports:
       - 80:80
     environment:
@@ -15,6 +16,7 @@ services:
 
   omejdn-server:
     image: ghcr.io/fraunhofer-aisec/omejdn-server:${OMEJDN_VERSION}
+    container_name: omejdn-server
     environment:
       - OMEJDN_ISSUER=${OMEJDN_ISSUER}
       - OMEJDN_FRONT_URL=${OMEJDN_ISSUER}
@@ -31,6 +33,7 @@ services:
 
   omejdn-ui:
     image: ghcr.io/fraunhofer-aisec/omejdn-ui:${UI_VERSION}
+    container_name: omejdn-ui
     environment:
       - OIDC_ISSUER=${OMEJDN_ISSUER}
       - API_URL=${OMEJDN_ISSUER}/api/v1
@@ -40,13 +43,14 @@ services:
 
   connectora:
     image: ghcr.io/international-data-spaces-association/dataspace-connector:7.1.0
+    container_name: connectora
     ports:
       - 8080:8080
     networks:
       - local
     volumes:
       - ./DataspaceConnectorA/conf/config.json:/config/config.json
-      - ./DataspaceConnectorA/conf/connectora-daps.p12:/conf/connector-daps.p12
+      - ./DataspaceConnectorA/conf/testbed1.p12:/conf/testbed1.p12
       - ./DataspaceConnectorA/conf/connectorA.p12:/config/connectorA.p12
       - ./DataspaceConnectorA/conf/truststore.p12:/config/truststore.p12
     environment:
@@ -59,13 +63,14 @@ services:
 
   connectorb:
     image: ghcr.io/international-data-spaces-association/dataspace-connector:7.1.0
+    container_name: connectorb
     ports:
       - 8081:8081
     networks:
       - local
     volumes:
       - ./DataspaceConnectorB/conf/config.json:/config/config.json
-      - ./DataspaceConnectorB/conf/connectorb-daps.p12:/conf/connector-daps.p12
+      - ./DataspaceConnectorB/conf/testbed2.p12:/conf/testbed2.p12
       - ./DataspaceConnectorB/conf/connectorB.p12:/config/connectorB.p12
       - ./DataspaceConnectorB/conf/truststore.p12:/config/truststore.p12
     environment:
@@ -79,6 +84,7 @@ services:
 
   broker-reverseproxy:
     image: registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker-open/reverseproxy
+    container_name: broker-reverseproxy
     volumes:
       - ./MetadataBroker/server.crt:/etc/cert/server.crt
       - ./MetadataBroker/server.key:/etc/cert/server.key
@@ -90,6 +96,7 @@ services:
 
   broker-core:
     image: broker-core-testbed:4.2.8
+    container_name: broker-core
     build:
       context: ./MetadataBroker/build
     environment:
@@ -107,6 +114,7 @@ services:
 
   broker-fuseki:
     image: registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker-open/fuseki
+    container_name: broker-fuseki
     volumes:
       - broker-fuseki:/fuseki
     expose:
