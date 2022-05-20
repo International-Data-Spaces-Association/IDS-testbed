@@ -17,12 +17,11 @@ if [ -n "$3" ]; then
     openssl x509 -noout -in "$3" 2>/dev/null && cert_format="PEM"
     openssl x509 -inform "$cert_format" -in "$3" -text > "$CLIENT_CERT"
 else
-    openssl req -newkey rsa:2048 -new -batch -nodes -x509 -days 3650 -text -keyout "keys/${CLIENT_NAME}.key" -out "$CLIENT_CERT"
-    openssl pkcs12 -export -in "$CLIENT_CERT" -inkey "keys/${CLIENT_NAME}.key" -out "keys/${CLIENT_NAME}-daps.p12"
+    openssl pkcs12 -export -in "$CLIENT_CERT" -inkey "keys/${CLIENT_NAME}.key" -out "keys/${CLIENT_NAME}.p12"
 fi
 
-SKI="$(grep -A1 "Subject Key Identifier"  "$CLIENT_CERT" | tail -n 1 | tr -d ' ')"
-AKI="$(grep -A1 "Authority Key Identifier"  "$CLIENT_CERT" | tail -n 1 | tr -d ' ')"
+SKI="$(openssl x509 -in "keys/${CLIENT_NAME}.cert" -noout -text | grep -A1 "Subject Key Identifier" | tail -n 1 | tr -d ' ')"
+AKI="$(openssl x509 -in "keys/${CLIENT_NAME}.cert" -noout -text | grep -A1 "Authority Key Identifier" | tail -n 1 | tr -d ' ')"
 CLIENT_ID="$SKI:$AKI"
 
 CLIENT_CERT_SHA="$(openssl x509 -in "$CLIENT_CERT" -noout -sha256 -fingerprint | tr '[:upper:]' '[:lower:]' | tr -d : | sed 's/.*=//')"
