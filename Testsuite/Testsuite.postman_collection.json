@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "2d5c2e9a-3ac1-4802-bf8a-505d6799e1ee",
-		"name": "Testsuite",
+		"_postman_id": "a3c40ef5-318c-4b99-8581-98c146a6e8d2",
+		"name": "Testsuite Copy 3",
 		"description": "Example deployment of DSC provider to DSC consumer communication",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -46,13 +46,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{APPLICANT_TEMP_URL}}/api/offers",
+									"raw": "{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_OFFERS_URL}}",
 									"host": [
-										"{{APPLICANT_TEMP_URL}}"
-									],
-									"path": [
-										"api",
-										"offers"
+										"{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_OFFERS_URL}}"
 									]
 								}
 							},
@@ -84,13 +80,9 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{APPLICANT_TEMP_URL}}/api/offers",
+									"raw": "{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_OFFERS_URL}}",
 									"host": [
-										"{{APPLICANT_TEMP_URL}}"
-									],
-									"path": [
-										"api",
-										"offers"
+										"{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_OFFERS_URL}}"
 									]
 								}
 							},
@@ -130,13 +122,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{APPLICANT_TEMP_URL}}/api/catalogs",
+									"raw": "{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_CATALOGS_URL}}",
 									"host": [
-										"{{APPLICANT_TEMP_URL}}"
-									],
-									"path": [
-										"api",
-										"catalogs"
+										"{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_CATALOGS_URL}}"
 									]
 								}
 							},
@@ -168,13 +156,9 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{APPLICANT_TEMP_URL}}/api/catalogs",
+									"raw": "{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_CATALOGS_URL}}",
 									"host": [
-										"{{APPLICANT_TEMP_URL}}"
-									],
-									"path": [
-										"api",
-										"catalogs"
+										"{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_CATALOGS_URL}}"
 									]
 								}
 							},
@@ -214,13 +198,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{APPLICANT_TEMP_URL}}/api/artifacts",
+									"raw": "{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_ARTIFACTS_URL}}",
 									"host": [
-										"{{APPLICANT_TEMP_URL}}"
-									],
-									"path": [
-										"api",
-										"artifacts"
+										"{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_ARTIFACTS_URL}}"
 									]
 								}
 							},
@@ -253,13 +233,9 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{APPLICANT_TEMP_URL}}/api/artifacts",
+									"raw": "{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_ARTIFACTS_URL}}",
 									"host": [
-										"{{APPLICANT_TEMP_URL}}"
-									],
-									"path": [
-										"api",
-										"artifacts"
+										"{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_ARTIFACTS_URL}}"
 									]
 								}
 							},
@@ -299,13 +275,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{APPLICANT_TEMP_URL}}/api/rules",
+									"raw": "{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_RULES_URL}}",
 									"host": [
-										"{{APPLICANT_TEMP_URL}}"
-									],
-									"path": [
-										"api",
-										"rules"
+										"{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_RULES_URL}}"
 									]
 								}
 							},
@@ -347,13 +319,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{APPLICANT_TEMP_URL}}/api/rules",
+									"raw": "{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_RULES_URL}}",
 									"host": [
-										"{{APPLICANT_TEMP_URL}}"
-									],
-									"path": [
-										"api",
-										"rules"
+										"{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_RULES_URL}}"
 									]
 								}
 							},
@@ -385,7 +353,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\"title\": \"TestContract\",\"description\": \"This is an test contract7777\",\"provider\":\"{{APPLICANT_TEMP_URL}}\",\"start\": \"2021-10-22T07:48:37.068Z\",\"end\": \"2023-10-22T07:48:37.068Z\"} ",
+									"raw": "{\"title\": \"TestContract\",\"description\": \"This is an test contract7777\",\"provider\":\"{{APPLICANT_CONNECTOR_URL}}\",\"start\": \"2021-10-22T07:48:37.068Z\",\"end\": \"2023-10-22T07:48:37.068Z\"} ",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -393,13 +361,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{APPLICANT_TEMP_URL}}/api/contracts",
+									"raw": "{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_CONTRACTS_URL}}",
 									"host": [
-										"{{APPLICANT_TEMP_URL}}"
-									],
-									"path": [
-										"api",
-										"contracts"
+										"{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_CONTRACTS_URL}}"
 									]
 								}
 							},
@@ -431,14 +395,9 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{APPLICANT_TEMP_URL}}/api/contracts/",
+									"raw": "{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_CONTRACTS_URL}}",
 									"host": [
-										"{{APPLICANT_TEMP_URL}}"
-									],
-									"path": [
-										"api",
-										"contracts",
-										""
+										"{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_CONTRACTS_URL}}"
 									]
 								}
 							},
@@ -478,13 +437,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{APPLICANT_TEMP_URL}}/api/representations",
+									"raw": "{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_REPRESENTATIONS_URL}}",
 									"host": [
-										"{{APPLICANT_TEMP_URL}}"
-									],
-									"path": [
-										"api",
-										"representations"
+										"{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_REPRESENTATIONS_URL}}"
 									]
 								}
 							},
@@ -516,13 +471,9 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{APPLICANT_TEMP_URL}}/api/representations",
+									"raw": "{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_REPRESENTATIONS_URL}}",
 									"host": [
-										"{{APPLICANT_TEMP_URL}}"
-									],
-									"path": [
-										"api",
-										"representations"
+										"{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_REPRESENTATIONS_URL}}"
 									]
 								}
 							},
@@ -563,12 +514,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{createdTestRepresentation}}/artifacts",
+									"raw": "{{createdTestRepresentation}}{{APPLICANT_CONNECTOR_ARTIFACTS_RESOURCE}}",
 									"host": [
-										"{{createdTestRepresentation}}"
-									],
-									"path": [
-										"artifacts"
+										"{{createdTestRepresentation}}{{APPLICANT_CONNECTOR_ARTIFACTS_RESOURCE}}"
 									]
 								}
 							},
@@ -610,12 +558,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{createdTestOffer}}/representations",
+									"raw": "{{createdTestOffer}}{{APPLICANT_CONNECTOR_REPRESENTATIONS_RESOURCE}}",
 									"host": [
-										"{{createdTestOffer}}"
-									],
-									"path": [
-										"representations"
+										"{{createdTestOffer}}{{APPLICANT_CONNECTOR_REPRESENTATIONS_RESOURCE}}"
 									]
 								}
 							},
@@ -657,12 +602,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{createdTestCatalog}}/offers",
+									"raw": "{{createdTestCatalog}}{{APPLICANT_CONNECTOR_OFFERS_RESOURCE}}",
 									"host": [
-										"{{createdTestCatalog}}"
-									],
-									"path": [
-										"offers"
+										"{{createdTestCatalog}}{{APPLICANT_CONNECTOR_OFFERS_RESOURCE}}"
 									]
 								}
 							},
@@ -704,12 +646,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{createdTestContract}}/offers",
+									"raw": "{{createdTestContract}}{{APPLICANT_CONNECTOR_OFFERS_RESOURCE}}",
 									"host": [
-										"{{createdTestContract}}"
-									],
-									"path": [
-										"offers"
+										"{{createdTestContract}}{{APPLICANT_CONNECTOR_OFFERS_RESOURCE}}"
 									]
 								}
 							},
@@ -751,12 +690,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{createdTestOffer}}/contracts",
+									"raw": "{{createdTestOffer}}{{APPLICANT_CONNECTOR_CONTRACTS_RESOURCE}}",
 									"host": [
-										"{{createdTestOffer}}"
-									],
-									"path": [
-										"contracts"
+										"{{createdTestOffer}}{{APPLICANT_CONNECTOR_CONTRACTS_RESOURCE}}"
 									]
 								}
 							},
@@ -798,12 +734,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{createdTestContract}}/rules",
+									"raw": "{{createdTestContract}}{{APPLICANT_CONNECTOR_RULES_RESOURCE}}",
 									"host": [
-										"{{createdTestContract}}"
-									],
-									"path": [
-										"rules"
+										"{{createdTestContract}}{{APPLICANT_CONNECTOR_RULES_RESOURCE}}"
 									]
 								}
 							},
@@ -863,7 +796,7 @@
 								"method": "POST",
 								"header": [],
 								"url": {
-									"raw": "{{CONNECTORA_URL}}/api/ids/description?recipient={{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_ACCESS_URL}}",
+									"raw": "{{CONNECTORA_URL}}/api/ids/description?recipient={{APPLICANT_CONNECTOR_URL_DNS}}{{APPLICANT_CONNECTOR_ACCESS_URL}}",
 									"host": [
 										"{{CONNECTORA_URL}}"
 									],
@@ -875,7 +808,7 @@
 									"query": [
 										{
 											"key": "recipient",
-											"value": "{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_ACCESS_URL}}"
+											"value": "{{APPLICANT_CONNECTOR_URL_DNS}}{{APPLICANT_CONNECTOR_ACCESS_URL}}"
 										}
 									]
 								}
@@ -920,7 +853,7 @@
 								"method": "POST",
 								"header": [],
 								"url": {
-									"raw": "{{CONNECTORA_URL}}/api/ids/description?recipient=https://localhost:8083/api/ids/data",
+									"raw": "{{CONNECTORA_URL}}/api/ids/description?recipient=https://localhost:8083{{APPLICANT_CONNECTOR_ACCESS_URL}}",
 									"host": [
 										"{{CONNECTORA_URL}}"
 									],
@@ -932,7 +865,7 @@
 									"query": [
 										{
 											"key": "recipient",
-											"value": "https://localhost:8083/api/ids/data"
+											"value": "https://localhost:8083{{APPLICANT_CONNECTOR_ACCESS_URL}}"
 										}
 									]
 								}
@@ -980,9 +913,9 @@
 								"method": "POST",
 								"header": [],
 								"url": {
-									"raw": "{{APPLICANT_TEMP_URL}}{{APPLICANT_CONNECTOR_DESCRIPTION_URL}}?recipient={{BROKER}}&elementId=https://localhost/connectors",
+									"raw": "{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_DESCRIPTION_URL}}?recipient={{BROKER}}&elementId=https://localhost/connectors",
 									"host": [
-										"{{APPLICANT_TEMP_URL}}{{APPLICANT_CONNECTOR_DESCRIPTION_URL}}"
+										"{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_DESCRIPTION_URL}}"
 									],
 									"query": [
 										{
@@ -1035,9 +968,9 @@
 								"method": "POST",
 								"header": [],
 								"url": {
-									"raw": "{{APPLICANT_TEMP_URL}}{{APPLICANT_CONNECTOR_DESCRIPTION_URL}}?recipient=https://broekr-reverseproxy/infrastructure&elementId=https://localhost/connectors",
+									"raw": "{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_DESCRIPTION_URL}}?recipient=https://broekr-reverseproxy/infrastructure&elementId=https://localhost/connectors",
 									"host": [
-										"{{APPLICANT_TEMP_URL}}{{APPLICANT_CONNECTOR_DESCRIPTION_URL}}"
+										"{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_DESCRIPTION_URL}}"
 									],
 									"query": [
 										{
@@ -1096,15 +1029,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{APPLICANT_TEMP_URL}}/api/ids/connector/update?recipient={{BROKER}}",
+									"raw": "{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_UPDATE_URL}}?recipient={{BROKER}}",
 									"host": [
-										"{{APPLICANT_TEMP_URL}}"
-									],
-									"path": [
-										"api",
-										"ids",
-										"connector",
-										"update"
+										"{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_UPDATE_URL}}"
 									],
 									"query": [
 										{
@@ -1182,12 +1109,9 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{createdTestContract}}/offers",
+									"raw": "{{createdTestContract}}{{APPLICANT_CONNECTOR_OFFERS_RESOURCE}}",
 									"host": [
-										"{{createdTestContract}}"
-									],
-									"path": [
-										"offers"
+										"{{createdTestContract}}{{APPLICANT_CONNECTOR_OFFERS_RESOURCE}}"
 									]
 								}
 							},
@@ -1219,12 +1143,9 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{createdTestContract}}/rules",
+									"raw": "{{createdTestContract}}{{APPLICANT_CONNECTOR_RULES_RESOURCE}}",
 									"host": [
-										"{{createdTestContract}}"
-									],
-									"path": [
-										"rules"
+										"{{createdTestContract}}{{APPLICANT_CONNECTOR_RULES_RESOURCE}}"
 									]
 								}
 							},
@@ -1254,13 +1175,11 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{APPLICANT_TEMP_URL}}/api/contracts/{{RESOURCE_NOT_EXISTING}}",
+									"raw": "{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_CONTRACTS_URL}}/{{RESOURCE_NOT_EXISTING}}",
 									"host": [
-										"{{APPLICANT_TEMP_URL}}"
+										"{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_CONTRACTS_URL}}"
 									],
 									"path": [
-										"api",
-										"contracts",
 										"{{RESOURCE_NOT_EXISTING}}"
 									]
 								}
@@ -1292,7 +1211,7 @@
 								"method": "POST",
 								"header": [],
 								"url": {
-									"raw": "{{CONNECTORA_URL}}/api/ids/description?recipient={{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_ACCESS_URL}}&elementId={{createdTestCatalog}}",
+									"raw": "{{CONNECTORA_URL}}/api/ids/description?recipient={{APPLICANT_CONNECTOR_URL_DNS}}{{APPLICANT_CONNECTOR_ACCESS_URL}}&elementId={{createdTestCatalog}}",
 									"host": [
 										"{{CONNECTORA_URL}}"
 									],
@@ -1304,7 +1223,7 @@
 									"query": [
 										{
 											"key": "recipient",
-											"value": "{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_ACCESS_URL}}"
+											"value": "{{APPLICANT_CONNECTOR_URL_DNS}}{{APPLICANT_CONNECTOR_ACCESS_URL}}"
 										},
 										{
 											"key": "elementId",
@@ -1349,7 +1268,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{CONNECTORA_URL}}/api/ids/contract?recipient={{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_ACCESS_URL}}&resourceIds={{sendingUsagePolicyResource}}&artifactIds={{sendingUsagePolicyArtifact}}&download=false",
+									"raw": "{{CONNECTORA_URL}}/api/ids/contract?recipient={{APPLICANT_CONNECTOR_URL_DNS}}{{APPLICANT_CONNECTOR_ACCESS_URL}}&resourceIds={{sendingUsagePolicyResource}}&artifactIds={{sendingUsagePolicyArtifact}}&download=false",
 									"host": [
 										"{{CONNECTORA_URL}}"
 									],
@@ -1361,7 +1280,7 @@
 									"query": [
 										{
 											"key": "recipient",
-											"value": "{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_ACCESS_URL}}"
+											"value": "{{APPLICANT_CONNECTOR_URL_DNS}}{{APPLICANT_CONNECTOR_ACCESS_URL}}"
 										},
 										{
 											"key": "resourceIds",
@@ -1479,7 +1398,7 @@
 								"method": "POST",
 								"header": [],
 								"url": {
-									"raw": "{{CONNECTORA_URL}}/api/ids/description?recipient={{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_ACCESS_URL}}&elementId={{APPLICANT_CONNECTOR_URL}}/{{RESOURCE_NOT_EXISTING}}",
+									"raw": "{{CONNECTORA_URL}}/api/ids/description?recipient={{APPLICANT_CONNECTOR_URL_DNS}}{{APPLICANT_CONNECTOR_ACCESS_URL}}&elementId={{APPLICANT_CONNECTOR_URL_DNS}}/{{RESOURCE_NOT_EXISTING}}",
 									"host": [
 										"{{CONNECTORA_URL}}"
 									],
@@ -1491,11 +1410,11 @@
 									"query": [
 										{
 											"key": "recipient",
-											"value": "{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_ACCESS_URL}}"
+											"value": "{{APPLICANT_CONNECTOR_URL_DNS}}{{APPLICANT_CONNECTOR_ACCESS_URL}}"
 										},
 										{
 											"key": "elementId",
-											"value": "{{APPLICANT_CONNECTOR_URL}}/{{RESOURCE_NOT_EXISTING}}"
+											"value": "{{APPLICANT_CONNECTOR_URL_DNS}}/{{RESOURCE_NOT_EXISTING}}"
 										}
 									]
 								}

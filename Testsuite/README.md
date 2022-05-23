@@ -1,16 +1,77 @@
-# IDS-testbed testsuite (wip)
+# IDS-testbed Testsuite (wip)
 
 ## Set-up
 **The Testbed must be set-up and running**. Please follow the instructions in the [installation guide](../InstallationGuide.md) and come back.
 
-Currently, it is possible to run tests again an IDS connector and IDS broker. Simply run the following commands and replace $COMPONENT with either "Connector" or "Broker":
+## Configuration file
+There are a couple of environmental variables to set before running the test suite. Because the configuration differs between IDS components, it is necessary to change at least the following values (whereas the others might be common between different IDS components):
+
+### Connector environment variables
+Navigate to the file `Testsuite/env/Applicant_IDS_Connector_Test_Configuration.postman_environment.json` and open it in an editor of choice.
+
+Replace the **value of the JSON "value"** at least of the following environment variables - if necessary - so it fits to your IDS Connector configuration:
+```json
+{
+  "key": "APPLICANT_CONNECTOR_PROTOCOL",
+  "value": "https",
+  "type": "default",
+  "enabled": true
+},
+{
+  "key": "APPLICANT_CONNECTOR_IP_DNS",
+  "value": "connectorb",
+  "type": "default",
+  "enabled": true
+},
+{
+  "key": "APPLICANT_CONNECTOR_IP",
+  "value": "localhost",
+  "type": "default",
+  "enabled": true
+},
+{
+  "key": "APPLICANT_CONNECTOR_PORT",
+  "value": "8081",
+  "type": "default",
+  "enabled": true
+},
+{
+  "key": "APPLICANT_MAINTAINER",
+  "value": "https://sovity.de/",
+  "type": "default",
+  "enabled": true
+},
+{
+  "key": "APPLICANT_SECURITY_PROFILE",
+  "value": "https://w3id.org/idsa/code/BASE_SECURITY_PROFILE",
+  "type": "default",
+  "enabled": true
+},
+{
+  "key": "APPLICANT_CONNECTOR_ID",
+  "value": "https://connector_B",
+  "type": "default",
+  "enabled": true
+}
+```
+In addition, please check whether you need to adjust the following values according to your component:
+
+```json
+TODO
+```
+
+
+
+
+## Execution
+Currently, it is possible to run tests again an IDS Connector and IDS Broker. Simply run the following commands and replace $COMPONENT with either "Connector" or "Broker":
 
 `cd Testsuite`
 
 `docker build --network host -t test . --build-arg component=$COMPONENT`
 
 ## Covered IDS certification criteria (Connector) for Testbed v1.1
-Last update: **May 06th, 2022**
+Last update: **May 20th, 2022**
 
 | Criterion  | Covered  | Comment  |
 | :---:      | :-:      | :-:      |
