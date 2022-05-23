@@ -1,0 +1,14 @@
+## You may configure additional OAuth Providers as follows
+#- name: 'Some OAuth Provider'
+#  redirect_uri: 'http://localhost:4567/oauth_cb?provider=BFH'
+#  client_id: 'our_client_id'
+#  client_secret: 'our_secret'
+#  scopes:
+#    - 'email'
+#    - 'profile'
+#    - 'openid'
+#  external_userid: 'nickname'
+#  authorization_endpoint: 'https://authorize'
+#  token_endpoint: 'https://token'
+#  userinfo_endpoint: 'https://userinfo'
+# response_type: 'code'
