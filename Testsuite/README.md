@@ -4,7 +4,7 @@
 **The Testbed must be set-up and running**. Please follow the instructions in the [installation guide](../InstallationGuide.md) and come back.
 
 ## Configuration file
-There are a couple of environmental variables to set before running the test suite. Because the configuration differs between IDS components, it is necessary to change at least the following values (whereas the others might be common between different IDS components):
+There are a couple of environmental variables to set before running the test suite. Because the configuration differs between IDS components, it is necessary to change at least the following values (whereas the others might be common between different IDS components).
 
 ### Connector environment variables
 Navigate to the file `Testsuite/env/Applicant_IDS_Connector_Test_Configuration.postman_environment.json` and open it in an editor of choice.
@@ -54,14 +54,36 @@ Replace the **value of the JSON "value"** at least of the following environment 
   "enabled": true
 }
 ```
-In addition, please check whether you need to adjust the following values according to your component:
+In addition, please check whether you need to adjust the following values according to your component. The Testsuite uses some default paths to resources known in the IDS, e.g. `/api/ids/data`. If you need to change those too, please change the environment variables accordingly.
+
+Normally, every resource is represented by one environment variable as shown in following extract:
 
 ```json
-TODO
+{
+  "key": "APPLICANT_FIRST_LEVEL_RESOURCE_NAME",
+  "value": "/api",
+  "type": "default",
+  "enabled": true
+},
+{
+  "key": "APPLICANT_IDS_RESOURCE_NAME",
+  "value": "/ids",
+  "type": "default",
+  "enabled": true
+},
+{
+  "key": "APPLICANT_DATA_RESOURCE_NAME",
+  "value": "/data",
+  "type": "default",
+  "enabled": true
+},
+{
+  "key": "APPLICANT_CONNECTOR_ACCESS_URL",
+  "value": "{{APPLICANT_FIRST_LEVEL_RESOURCE_NAME}}{{APPLICANT_IDS_RESOURCE_NAME}}{{APPLICANT_DATA_RESOURCE_NAME}}",
+  "type": "default",
+  "enabled": true
+}
 ```
-
-
-
 
 ## Execution
 Currently, it is possible to run tests again an IDS Connector and IDS Broker. Simply run the following commands and replace $COMPONENT with either "Connector" or "Broker":
