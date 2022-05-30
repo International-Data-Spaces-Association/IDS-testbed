@@ -5,12 +5,15 @@ services:
     container_name: omejdn
     ports:
       - 80:80
+      - 443:443      
     environment:
       - OMEJDN_DOMAIN=${OMEJDN_DOMAIN}
       - OMEJDN_PATH=${OMEJDN_PATH}
       - UI_PATH=${UI_PATH}
     volumes:
       - ./DAPS/nginx.conf:/etc/nginx/templates/default.conf.template
+      - ./DAPS/keys/TLS/daps.cert:/etc/nginx/daps.cert
+      - ./DAPS/keys/TLS/daps.key:/etc/nginx/daps.key
     networks:
       - local
 
