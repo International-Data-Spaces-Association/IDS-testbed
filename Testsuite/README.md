@@ -3,6 +3,10 @@
 ## Set-up
 **The Testbed must be set-up and running**. Please follow the instructions in the [installation guide](../InstallationGuide.md) and come back.
 
+Please ensure, you have already installed. If not, please use the following command (depending on you OS):
+
+`sudo apt install htmldoc`
+
 In addition, you need a running [NodeJs installation](https://nodejs.org/en/download/).
 
 You install the missing modules by running the following commands (probably with `sudo`):
