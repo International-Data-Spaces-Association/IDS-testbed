@@ -13,7 +13,7 @@ You install the missing modules by running the following commands (probably with
 
 `npm install -g newman`
 
-`npm install -g newman-reporter-htmlextra`
+`npm install -g newman-reporter-html`
 
 ## Configuration file
 There are a couple of environmental variables to be set before running the test suite. Because the configuration differs between IDS components, it is necessary to change at least the following values (whereas the others might be common between different IDS components).
