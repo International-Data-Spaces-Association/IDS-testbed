@@ -1,2 +1,6 @@
-* text=auto
+* text=lf
 *.bat eol=lf
+*.Dockerfile eol=lf
+
+*.png binary
+*.jpg binary
