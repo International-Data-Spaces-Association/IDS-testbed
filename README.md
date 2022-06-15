@@ -1,10 +1,10 @@
 # IDS-testbed
 
-## What is it?
-
-Set up with Open Source IDS components which can be used to verify that a component:​
-- implements the IDS specifications for establishing connections and communication.​
+IDS Testbed is a setup with Open Source IDS components which can be used to verify that a component:
+- implements the IDS specifications for establishing connections and communication.
 - and, thus, can work interoperable with all IDS components in the testbed setup.
+
+:arrow_forward: **This setup can also be used as a MVDS (Minimum Viable Data Space) that is a quickstart to sharing data in a secure and sovereign way.** you can discover more on the [Minimum Viable Data Space page] (/MVDS.md).
 
 ## What is it for?
 
