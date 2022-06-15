@@ -13,7 +13,7 @@ IDS Testbed is a setup with Open Source IDS components which can be used to ve
 
 :arrow_forward: **This setup can also be used as a MVDS (Minimum Viable Data Space) that is a quickstart to sharing data in a secure and sovereign way.** you can discover more on the [Minimum Viable Data Space page](/MVDS.md).
 
-⬇️: If you would like to use it only for testing purposes, you can continue following the steps below.
+:arrow_down_small: If you would like to use it only for testing purposes, you can continue following the steps below.
 
 ## How to get started?
 
