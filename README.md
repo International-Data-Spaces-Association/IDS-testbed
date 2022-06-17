@@ -39,7 +39,7 @@ Used versions of the IDS-testbed components:
 ## Roadmap
 ### Version 2.0 of the test bed
 
-Minimal viable data space with all essential components and first test cases
+Minimum viable data space with all essential components and first test cases
 ![next_version](./pictures/Testbed_2.0.png)
 
 ### Version X.Y of the test bed
