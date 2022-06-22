@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose-resolved.yaml --volumes hostPath -o export
+    kompose.version: 1.26.0 (40646f47)
+  
+  labels:
+    io.kompose.service: broker-core
+  name: broker-core
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: broker-core
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f docker-compose-resolved.yaml --volumes hostPath -o export
+        kompose.version: 1.26.0 (40646f47)
+      
+      labels:
+        io.kompose.network/local: "true"
+        io.kompose.service: broker-core
+    spec:
+
+      containers:
+      - env:
+        - name: COMPONENT_CATALOGURI
+          value: https://localhost/connectors/
+        - name: COMPONENT_URI
+          value: https://localhost/
+        - name: DAPS_URL
+          value: http://omejdn/auth/token
+        - name: DAPS_VALIDATE_INCOMING
+          value: "true"
+        - name: ELASTICSEARCH_HOSTNAME
+          value: broker-elasticsearch
+        - name: SHACL_VALIDATION
+          value: "true"
+        - name: SPARQL_ENDPOINT
+          value: http://broker-fuseki:3030/connectorData
+        image: broker-core-testbed:4.2.8
+
+        name: broker-core
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            memory: "1024Mi"
+            cpu: "500m"
+          limits:
+            memory: "4Gi"
+            cpu: "2000m"
+              
+      restartPolicy: Always
+status: {}

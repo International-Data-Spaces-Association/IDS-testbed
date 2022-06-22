@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose-resolved.yaml --volumes hostPath -o export
+    kompose.version: 1.26.0 (40646f47)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: omejdn-ui
+  name: omejdn-ui
+spec:
+  type: ClusterIP
+  ports:
+    - name: "8088"
+      port: 8088
+      targetPort: 8088
+  selector:
+    io.kompose.service: omejdn-ui
+status:
+  loadBalancer: {}

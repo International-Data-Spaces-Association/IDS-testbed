@@ -1,0 +1,45 @@
+#https://cloud.redhat.com/blog/what-is-kubelinter?intcmp=701f2000000tjyaAAA
+checks:
+  addAllBuiltIn: true
+  exclude:
+    - access-to-create-pods
+    - access-to-secrets
+    - cluster-admin-role-binding
+    # - dangling-service
+    - default-service-account
+    # - deprecated-service-account-field
+    - docker-sock
+    - drop-net-raw-capability
+    # - env-var-secret
+    - exposed-services
+    - host-ipc
+    - host-network
+    - host-pid
+    - latest-tag
+    - minimum-three-replicas
+    # - mismatching-selector
+    # - no-anti-affinity
+    # - no-extensions-v1beta
+    - no-liveness-probe
+    - no-node-affinity
+    - no-read-only-root-fs
+    - no-readiness-probe
+    - no-rolling-update-strategy
+    # - non-existent-service-account
+    - privilege-escalation-container
+    # - privileged-container
+    - privileged-ports
+    - read-secret-from-env-var
+    - required-annotation-email
+    - required-label-release-deployment
+    - required-label-owner
+    - run-as-non-root
+    - sensitive-host-mounts
+    # - ssh-port
+    - unsafe-proc-mount
+    - unsafe-sysctls
+    # - unset-cpu-requirements
+    # - unset-memory-requirements
+    - use-namespace
+    - wildcard-in-rules
+    - writable-host-mount

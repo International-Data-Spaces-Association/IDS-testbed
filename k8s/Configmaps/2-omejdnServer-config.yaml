@@ -1,0 +1,150 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2022-06-02T10:29:08Z"
+  name: ids-files-daps-config-v2
+  namespace: ids-2
+  resourceVersion: "177242"
+  uid: d16d894a-75c2-458b-996c-1fefd48fb588
+data:
+  omejdn.yml: |
+    plugins:
+      user_db:
+        yaml:
+          location: config/users.yml
+      claim_mapper:
+        attribute:
+          skip_access_token: false
+          skip_id_token: true
+      api:
+        admin_v1: 
+        user_selfservice_v1:
+          allow_deletion: false
+          allow_password_change: true
+          editable_attributes: []
+    user_backend_default: yaml
+    environment: development
+    issuer: http://omejdn/auth
+    front_url: http://omejdn/auth
+    bind_to: 0.0.0.0:4567
+    openid: true
+    default_audience: idsc:IDS_CONNECTORS_ALL
+    accept_audience: idsc:IDS_CONNECTORS_ALL
+    access_token:
+      expiration: 3600
+      algorithm: RS256
+    id_token:
+      expiration: 3600
+      algorithm: RS256
+  clients.yml: |
+    - client_id: 66:07:ED:E5:80:E4:29:6D:1E:DD:F7:43:CA:0E:EB:38:32:C8:3A:43:keyid:07:FC:95:17:C4:95:B9:E4:AD:09:5F:07:1E:D2:20:75:2D:89:66:85
+      client_name: testbed1
+      grant_types: client_credentials
+      token_endpoint_auth_method: private_key_jwt
+      scope: idsc:IDS_CONNECTOR_ATTRIBUTES_ALL
+      attributes:
+      - key: idsc
+        value: IDS_CONNECTOR_ATTRIBUTES_ALL
+      - key: securityProfile
+        value: idsc:BASE_SECURITY_PROFILE
+      - key: referringConnector
+        value: http://testbed1.demo
+      - key: "@type"
+        value: ids:DatPayload
+      - key: "@context"
+        value: https://w3id.org/idsa/contexts/context.jsonld
+      - key: transportCertsSha256
+        value: a1da7cfeac22ddffa4ebbe67b323d9af1c05e9d92a9d3dfbc098f6c45609caa9
+    - client_id: 4B:4A:0E:81:99:6A:19:B9:3A:04:37:B6:7C:86:83:17:19:5A:6E:68:keyid:07:FC:95:17:C4:95:B9:E4:AD:09:5F:07:1E:D2:20:75:2D:89:66:85
+      client_name: testbed2
+      grant_types: client_credentials
+      token_endpoint_auth_method: private_key_jwt
+      scope: idsc:IDS_CONNECTOR_ATTRIBUTES_ALL
+      attributes:
+      - key: idsc
+        value: IDS_CONNECTOR_ATTRIBUTES_ALL
+      - key: securityProfile
+        value: idsc:BASE_SECURITY_PROFILE
+      - key: referringConnector
+        value: http://testbed2.demo
+      - key: "@type"
+        value: ids:DatPayload
+      - key: "@context"
+        value: https://w3id.org/idsa/contexts/context.jsonld
+      - key: transportCertsSha256
+        value: cf0dd49a552008eacd0b82cbf7850cbaacbf9c2a8942e542801db9bf4c2f0f5a
+    - client_id: B7:6D:DD:B3:FD:6E:41:52:A8:89:95:B0:0D:8E:4C:BA:0A:1F:72:FD:keyid:07:FC:95:17:C4:95:B9:E4:AD:09:5F:07:1E:D2:20:75:2D:89:66:85
+      client_name: testbed3
+      grant_types: client_credentials
+      token_endpoint_auth_method: private_key_jwt
+      scope: idsc:IDS_CONNECTOR_ATTRIBUTES_ALL
+      attributes:
+      - key: idsc
+        value: IDS_CONNECTOR_ATTRIBUTES_ALL
+      - key: securityProfile
+        value: idsc:BASE_SECURITY_PROFILE
+      - key: referringConnector
+        value: http://testbed3.demo
+      - key: "@type"
+        value: ids:DatPayload
+      - key: "@context"
+        value: https://w3id.org/idsa/contexts/context.jsonld
+      - key: transportCertsSha256
+        value: 0d9eb3600540532c69c7345e7ab04e0f420434b693e26e415783875a93e9fc4b
+
+  scope_description.yml: |
+    # Human readable descriptions for each scope.
+    # These are shown to a user before authorizing a client
+    profile: "Standard profile claims (e.g.: Name, picture, website, gender, birthdate, location)"
+    email: "Email-Address"
+    address: "Address"
+    phone: "Phone-number"
+    omejdn:read: "Read access to the Omejdn server API"
+    omejdn:write: "Write access to the Omejdn server API"
+    omejdn:admin: "Access to the Omejdn server admin API"
+  scope_mapping.yml: |
+    # Necessary IDS Claims to issue a DAT
+    idsc:IDS_CONNECTOR_ATTRIBUTES_ALL:
+      - securityProfile
+      - referringConnector
+      - "@type"
+      - "@context"
+      - transportCertsSha256
+
+
+
+  users.yml: |
+    - username: admin
+      attributes:
+      - key: omejdn
+        value: admin
+      password: "$2a$12$AFOdHeju8dD4J0hPQ1Rjd.9bYAvSkxEB504J8eKPX4VrQKQb8upOy"
+
+
+  webfinger.yml: |
+    # Define a webfinger here
+    #localhost.com:
+    #  name: test
+    #  website: http://localhost:4567
+
+
+
+  oauth_providers.yml: |
+    ## You may configure additional OAuth Providers as follows
+    #- name: 'Some OAuth Provider'
+    #  redirect_uri: 'http://localhost:4567/oauth_cb?provider=BFH'
+    #  client_id: 'our_client_id'
+    #  client_secret: 'our_secret'
+    #  scopes:
+    #    - 'email'
+    #    - 'profile'
+    #    - 'openid'
+    #  external_userid: 'nickname'
+    #  authorization_endpoint: 'https://authorize'
+    #  token_endpoint: 'https://token'
+    #  userinfo_endpoint: 'https://userinfo'
+    # response_type: 'code'
+
+
+  
+  

@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yml --volumes hostPath -o export
+    kompose.version: 1.26.0 (40646f47)
+
+  labels:
+    io.kompose.service: omejdn
+  name: omejdn
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: omejdn
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f docker-compose.yml --volumes hostPath -o export
+        kompose.version: 1.26.0 (40646f47)
+
+      labels:
+        io.kompose.network/local: "true"
+        io.kompose.service: omejdn
+    spec:
+
+      containers:
+        - env:
+          - name: OMEJDN_DOMAIN
+            value: omejdn
+          - name: OMEJDN_PATH
+            value: /auth
+          - name: UI_PATH
+            value: ""
+          image: nginx:1.21.6
+
+          name: omejdn
+          ports:
+          - containerPort: 80
+          
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "100m"
+            limits:
+              memory: "4Gi"
+              cpu: "2000m"
+          
+          volumeMounts:
+          - mountPath: /etc/nginx/templates/
+            name: omejdn-hostpath0
+      restartPolicy: Always
+      volumes:
+      - name: omejdn-hostpath0 
+        configMap:
+          name: ids-files-nginxconfig
+    
+status: {}
