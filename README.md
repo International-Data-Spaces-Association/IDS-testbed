@@ -30,10 +30,16 @@ Set up with Open Source IDS components which can be used to verify that a com
 Minimal setup with essential and already available components
 ![first_version](./pictures/Testbed_1.0.png)
 
+Used versions of the IDS-testbed components: 
+- Certificate Authority (CA)
+- Dynamic Attribute Provisioning Service (DAPS) v1.6.0
+- Dataspace Connector (DSC) v7.1.0
+- MetadataBroker (MDB) v4.2.8
+
 ## Roadmap
 ### Version 2.0 of the test bed
 
-Minimal viable data space with all essential components and first test cases
+Minimum viable data space with all essential components and first test cases
 ![next_version](./pictures/Testbed_2.0.png)
 
 ### Version X.Y of the test bed
