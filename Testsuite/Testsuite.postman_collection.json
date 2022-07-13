@@ -1,0 +1,2286 @@
+{
+	"info": {
+		"_postman_id": "083d69d0-d820-4c41-a70d-3f8a648ddb9c",
+		"name": "Testsuite",
+		"description": "Example deployment of DSC provider to DSC consumer communication",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Connector",
+			"item": [
+				{
+					"name": "Set-up",
+					"item": [
+						{
+							"name": "Successful Offer Creation 1/2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Create offer and retrieve offer ID\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.response.to.have.status(201);",
+											"    pm.collectionVariables.set(\"createdTestOffer\", jsonData[\"_links\"][\"self\"][\"href\"])",
+											"    pm.expect(pm.collectionVariables.get(\"createdTestOffer\")).to.exist;",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"DWD Weather Warnings\",\n  \"description\": \"DWD weather warnings for germany.\",\n  \"keywords\": [\n    \"DWD\"\n  ],\n  \"publisher\": \"https://dwd.com\",\n  \"language\": \"DE\",\n  \"license\": \"\",\n  \"sovereign\": \"https://dwd.com\",\n  \"endpointDocumentation\": \"\",\n  \"paymentModality\": \"undefined\"\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_OFFERS_URL}}",
+									"host": [
+										"{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_OFFERS_URL}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successful Offer Creation 2/2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Created offer exists\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.response.to.have.status(200);",
+											"    var testOffer = _.get(jsonData, '_embedded.resources');",
+											"    //expect to have the previously created offer available",
+											"    pm.expect(testOffer.some(item => item._links.self.href === pm.collectionVariables.get('createdTestOffer'))).to.eql(true);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_OFFERS_URL}}",
+									"host": [
+										"{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_OFFERS_URL}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successful Catalog Creation 1/2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Create catalog and retrieve catalog ID\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.response.to.have.status(201);",
+											"    pm.collectionVariables.set(\"createdTestCatalog\", jsonData[\"_links\"][\"self\"][\"href\"]);",
+											"    pm.expect(pm.collectionVariables.get(\"createdTestCatalog\")).to.exist;",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"title\": \"IDS Catalog\", \n\"description\": \"This catalog is created from an IDS infomodel catalog.\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_CATALOGS_URL}}",
+									"host": [
+										"{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_CATALOGS_URL}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successful Catalog Creation 2/2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Created catalog exists\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.response.to.have.status(200);",
+											"    var testCatalog = _.get(jsonData, '_embedded.catalogs');",
+											"    //expect to have the previously created catalog available",
+											"    pm.expect(testCatalog.some(item => item._links.self.href === pm.collectionVariables.get('createdTestCatalog'))).to.eql(true);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_CATALOGS_URL}}",
+									"host": [
+										"{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_CATALOGS_URL}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successful Artifact Creation 1/2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Create artifact and retrieve artifact ID\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.response.to.have.status(201);",
+											"    pm.collectionVariables.set(\"createdTestArtifact\", jsonData[\"_links\"][\"self\"][\"href\"]);",
+											"    pm.expect(pm.collectionVariables.get(\"createdTestArtifact\")).to.exist;",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"title\": \"string\",\"description\": \"string\",\"accessUrl\": \"https://maps.dwd.de/geoserver/dwd/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=dwd%3AAutowarn_Analyse&maxFeatures=50&outputFormat=application%2Fjson\", \"automatedDownload\": true}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_ARTIFACTS_URL}}",
+									"host": [
+										"{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_ARTIFACTS_URL}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successful Artifact Creation 2/2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Created artifact exists\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.response.to.have.status(200);",
+											"    var testArtifact = _.get(jsonData, '_embedded.artifacts');",
+											"    //expect to have the previously created artifact available",
+											"    pm.expect(testArtifact.some(item => item._links.self.href === pm.collectionVariables.get('createdTestArtifact'))).to.eql(true);",
+											"    ",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_ARTIFACTS_URL}}",
+									"host": [
+										"{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_ARTIFACTS_URL}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successful Rule Creation 1/2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Create rule and retrieve rule ID\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.response.to.have.status(201);",
+											"    pm.collectionVariables.set(\"createdTestRule\", jsonData[\"_links\"][\"self\"][\"href\"])",
+											"    pm.expect(pm.collectionVariables.get(\"createdTestRule\")).to.exist;",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"[\\\"Example Usage Policy\\\"^^http://www.w3.org/2001/XMLSchema#string]\",\n    \"description\": \"\",\n    \"value\": \"{\\n  \\\"@context\\\" : {\\n    \\\"ids\\\" : \\\"https://w3id.org/idsa/core/\\\",\\n    \\\"idsc\\\" : \\\"https://w3id.org/idsa/code/\\\"\\n  },\\n  \\\"@type\\\" : \\\"ids:Permission\\\",\\n  \\\"@id\\\" : \\\"https://w3id.org/idsa/autogen/permission/51f5f7e4-f97f-4f91-bc57-b243714642be\\\",\\n  \\\"ids:description\\\" : [ {\\n    \\\"@value\\\" : \\\"provide-access\\\",\\n    \\\"@type\\\" : \\\"http://www.w3.org/2001/XMLSchema#string\\\"\\n  } ],\\n  \\\"ids:title\\\" : [ {\\n    \\\"@value\\\" : \\\"Example Usage Policy\\\",\\n    \\\"@type\\\" : \\\"http://www.w3.org/2001/XMLSchema#string\\\"\\n  } ],\\n  \\\"ids:postDuty\\\" : [ ],\\n  \\\"ids:assignee\\\" : [ ],\\n  \\\"ids:assigner\\\" : [ ],\\n  \\\"ids:action\\\" : [ {\\n    \\\"@id\\\" : \\\"https://w3id.org/idsa/code/USE\\\"\\n  } ],\\n  \\\"ids:constraint\\\" : [ ],\\n  \\\"ids:preDuty\\\" : [ ]\\n}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_RULES_URL}}",
+									"host": [
+										"{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_RULES_URL}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successful Rule Creation 2/2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Created rule exists\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.response.to.have.status(200);",
+											"    var testRule = _.get(jsonData, '_embedded.rules');",
+											"    //expect to have the previously created rule available",
+											"    pm.expect(testRule.some(item => item._links.self.href === pm.collectionVariables.get('createdTestRule'))).to.eql(true);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false,
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_RULES_URL}}",
+									"host": [
+										"{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_RULES_URL}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successful Contract Creation 1/2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Create contract and retrieve contract ID\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.response.to.have.status(201);",
+											"    pm.collectionVariables.set(\"createdTestContract\", jsonData[\"_links\"][\"self\"][\"href\"])",
+											"    pm.expect(pm.collectionVariables.get(\"createdTestContract\")).to.exist;",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"title\": \"TestContract\",\"description\": \"This is an test contract7777\",\"provider\":\"{{APPLICANT_CONNECTOR_URL}}\",\"start\": \"2021-10-22T07:48:37.068Z\",\"end\": \"2023-10-22T07:48:37.068Z\"} ",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_CONTRACTS_URL}}",
+									"host": [
+										"{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_CONTRACTS_URL}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successful Contract Creation 2/2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Created contract exists\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.response.to.have.status(200);",
+											"    var testContract = _.get(jsonData, '_embedded.contracts');",
+											"    //expect to have the previously created contract available",
+											"    pm.expect(testContract.some(item => item._links.self.href === pm.collectionVariables.get('createdTestContract'))).to.eql(true);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_CONTRACTS_URL}}",
+									"host": [
+										"{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_CONTRACTS_URL}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successful Representaion Creation 1/2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Create representation and retrieve representation ID\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.response.to.have.status(201);",
+											"    pm.collectionVariables.set(\"createdTestRepresentation\", jsonData[\"_links\"][\"self\"][\"href\"]);",
+											"    pm.expect(pm.collectionVariables.get(\"createdTestRepresentation\")).to.exist;",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"title\": \"Example Representation\",\"description\": \"\", \"mediaType\": \"json\", \"language\": \"https://w3id.org/idsa/code/EN\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_REPRESENTATIONS_URL}}",
+									"host": [
+										"{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_REPRESENTATIONS_URL}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successful Representaion Creation 2/2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Created representation exists\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.response.to.have.status(200);",
+											"    var testRepresentation = _.get(jsonData, '_embedded.representations');",
+											"    //expect to have the previously created representation available",
+											"    pm.expect(testRepresentation.some(item => item._links.self.href === pm.collectionVariables.get('createdTestRepresentation'))).to.eql(true);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_REPRESENTATIONS_URL}}",
+									"host": [
+										"{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_REPRESENTATIONS_URL}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successful Artifact To Representation Addition",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Add artifact to representation\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.response.to.have.status(200);",
+											"    pm.expect(jsonData).exist;",
+											"    pm.expect(jsonData._embedded.artifacts).exist;",
+											"    pm.expect(jsonData._embedded.artifacts).not.empty;  ",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n    \"{{createdTestArtifact}}\"\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{createdTestRepresentation}}{{APPLICANT_CONNECTOR_ARTIFACTS_RESOURCE}}",
+									"host": [
+										"{{createdTestRepresentation}}{{APPLICANT_CONNECTOR_ARTIFACTS_RESOURCE}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successful Representation To Offer Addition",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Add representation to offer\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.response.to.have.status(200);",
+											"    pm.expect(jsonData).exist;",
+											"    pm.expect(jsonData._embedded.representations).exist;",
+											"    pm.expect(jsonData._embedded.representations).not.empty;",
+											"    ",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\"{{createdTestRepresentation}}\"]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{createdTestOffer}}{{APPLICANT_CONNECTOR_REPRESENTATIONS_RESOURCE}}",
+									"host": [
+										"{{createdTestOffer}}{{APPLICANT_CONNECTOR_REPRESENTATIONS_RESOURCE}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successful Offer To Catalog Addition",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Add offer to catalog\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.response.to.have.status(200);",
+											"    pm.expect(jsonData).exist;",
+											"    pm.expect(jsonData._embedded.resources).exist;",
+											"    pm.expect(jsonData._embedded.resources).not.empty;",
+											"    ",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[ \n\"{{createdTestOffer}}\"\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{createdTestCatalog}}{{APPLICANT_CONNECTOR_OFFERS_RESOURCE}}",
+									"host": [
+										"{{createdTestCatalog}}{{APPLICANT_CONNECTOR_OFFERS_RESOURCE}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successful Offer To Contract Addition",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Add offer to contract\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.response.to.have.status(200);",
+											"    pm.expect(jsonData).exist;",
+											"    pm.expect(jsonData._embedded.resources).exist;",
+											"    pm.expect(jsonData._embedded.resources).not.empty;",
+											"    ",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n    \"{{createdTestOffer}}\"\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{createdTestContract}}{{APPLICANT_CONNECTOR_OFFERS_RESOURCE}}",
+									"host": [
+										"{{createdTestContract}}{{APPLICANT_CONNECTOR_OFFERS_RESOURCE}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successful Contract To Offer Addition",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Adding contract to offer\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.response.to.have.status(200);",
+											"    pm.expect(jsonData).exist;",
+											"    pm.expect(jsonData._embedded.contracts).exist;",
+											"    pm.expect(jsonData._embedded.contracts).not.empty;",
+											"    ",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\"{{createdTestContract}}\"]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{createdTestOffer}}{{APPLICANT_CONNECTOR_CONTRACTS_RESOURCE}}",
+									"host": [
+										"{{createdTestOffer}}{{APPLICANT_CONNECTOR_CONTRACTS_RESOURCE}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successful Rule To Contract Addition",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Add rule to contract\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.response.to.have.status(200);",
+											"    pm.expect(jsonData).exist;",
+											"    pm.expect(jsonData._embedded.rules).exist;",
+											"    pm.expect(jsonData._embedded.rules).not.empty;",
+											"    ",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n    \"{{createdTestRule}}\"\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{createdTestContract}}{{APPLICANT_CONNECTOR_RULES_RESOURCE}}",
+									"host": [
+										"{{createdTestContract}}{{APPLICANT_CONNECTOR_RULES_RESOURCE}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Information Model",
+					"item": [
+						{
+							"name": "Get Applicant's Self-Description",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();",
+											"pm.response.to.be.ok;",
+											"//store applicants self-description for further tests",
+											"pm.collectionVariables.set(\"APPLICANT_SELF_DESCRIPTION\", jsonData)",
+											"pm.test(\"INF_01\", function () {",
+											"  pm.expect(jsonData).to.exist;",
+											"});",
+											"pm.test(\"INF_03\", function () {",
+											"  pm.expect(jsonData[\"ids:publicKey\"][\"ids:keyValue\"]).to.exist;",
+											"  pm.expect(jsonData[\"ids:maintainer\"][\"@id\"]).to.eql(pm.environment.get(\"APPLICANT_MAINTAINER\"));",
+											"  //TODO: data enpoints offered",
+											"  //TODO: log format of data enpoints offered",
+											"  pm.expect(jsonData[\"ids:securityProfile\"][\"@id\"]).to.eql(pm.environment.get(\"APPLICANT_SECURITY_PROFILE\"));",
+											"  pm.expect(jsonData[\"@id\"]).to.eql(pm.environment.get(\"APPLICANT_CONNECTOR_ID\"));",
+											"});",
+											"pm.collectionVariables.set(\"applicantSelfDescription\", jsonData);",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"tlsPreferServerCiphers": false,
+								"tlsDisabledProtocols": [
+									"TLSv1",
+									"TLSv1_1"
+								]
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{CONNECTORA_URL}}/api/ids/description?recipient={{APPLICANT_CONNECTOR_URL_DNS}}{{APPLICANT_CONNECTOR_ACCESS_URL}}",
+									"host": [
+										"{{CONNECTORA_URL}}"
+									],
+									"path": [
+										"api",
+										"ids",
+										"description"
+									],
+									"query": [
+										{
+											"key": "recipient",
+											"value": "{{APPLICANT_CONNECTOR_URL_DNS}}{{APPLICANT_CONNECTOR_ACCESS_URL}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Applicant's Self-Description Error",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();",
+											"pm.response.to.have.status(500);",
+											"pm.test(\"Self-description endpoint does not exist\", () => {",
+											"    pm.expect(jsonData.message).to.eql(\"MESSAGE_HANDLING_FAILED\");",
+											"",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"tlsPreferServerCiphers": false,
+								"tlsDisabledProtocols": [
+									"TLSv1",
+									"TLSv1_1"
+								]
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{CONNECTORA_URL}}/api/ids/description?recipient=https://localhost:8083{{APPLICANT_CONNECTOR_ACCESS_URL}}",
+									"host": [
+										"{{CONNECTORA_URL}}"
+									],
+									"path": [
+										"api",
+										"ids",
+										"description"
+									],
+									"query": [
+										{
+											"key": "recipient",
+											"value": "https://localhost:8083{{APPLICANT_CONNECTOR_ACCESS_URL}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Broker Service",
+					"item": [
+						{
+							"name": "Broker Service Inquiries",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"BRK_01\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.response.to.have.status(200);",
+											"    pm.expect(jsonData[\"@graph\"]).exist;",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"tlsDisabledProtocols": [
+									"TLSv1",
+									"TLSv1_1"
+								]
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_DESCRIPTION_URL}}?recipient={{BROKER}}&elementId=https://localhost/connectors/",
+									"host": [
+										"{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_DESCRIPTION_URL}}"
+									],
+									"query": [
+										{
+											"key": "recipient",
+											"value": "{{BROKER}}"
+										},
+										{
+											"key": "elementId",
+											"value": "https://localhost/connectors/"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Broker Service Inquiries Error",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();",
+											"pm.response.to.have.status(500);",
+											"pm.test(\"Broker endpoint does not exist\", () => {",
+											"    pm.expect(jsonData.message).to.eql(\"MESSAGE_HANDLING_FAILED\");",
+											"",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"tlsDisabledProtocols": [
+									"TLSv1",
+									"TLSv1_1"
+								]
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_DESCRIPTION_URL}}?recipient=https://broekr-reverseproxy/infrastructure&elementId=https://localhost/connectors",
+									"host": [
+										"{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_DESCRIPTION_URL}}"
+									],
+									"query": [
+										{
+											"key": "recipient",
+											"value": "https://broekr-reverseproxy/infrastructure"
+										},
+										{
+											"key": "elementId",
+											"value": "https://localhost/connectors"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Broker registration",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"BRK_02\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"tlsDisabledProtocols": [
+									"TLSv1",
+									"TLSv1_1"
+								]
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"@context\" : {\n    \"ids\" : \"https://w3id.org/idsa/core/\",\n    \"idsc\" : \"https://w3id.org/idsa/code/\"\n  },\n  \"@type\" : \"ids:BaseConnector\",\n  \"@id\" : \"https://connector_B\",\n  \"ids:description\" : [ {\n    \"@value\" : \"CHANGED\",\n    \"@type\" : \"http://www.w3.org/2001/XMLSchema#string\"\n  } ],\n  \"ids:publicKey\" : {\n    \"@type\" : \"ids:PublicKey\",\n    \"@id\" : \"https://w3id.org/idsa/autogen/publicKey/78eb73a3-3a2a-4626-a0ff-631ab50a00f9\",\n    \"ids:keyType\" : {\n      \"@id\" : \"https://w3id.org/idsa/code/RSA\"\n    },\n    \"ids:keyValue\" : \"VFVsSlFrbHFRVTVDWjJ0eGFHdHBSemwzTUVKQlVVVkdRVUZQUTBGUk9FRk5TVWxDUTJkTFEwRlJSVUYxZHpadFJuSmtabXhZV2xSS1owWlBRVFZ6YlVSWVF6QTVVMjF3U2xkdlIzQjVSVkphVGtWNU16RndTMlJ6VWtkb1ZHbHdVakkzYWpscGNtMXRjV2xvZGpkblNXZDZRMjU0Tm10SlVrNUhTVEoxTUc5R1VUVkdaM1pQTVhoNFozcGphV2hrY0VZd1EyaGxUMlk1U1U1bmFYTlFhM0UxYUdvNFFXVXZSRmxZYTNacWFGRTJZelpoYXk5YVdXWnFNRTV3Y1hsRlVHTktOVTFNVW0xWlIyVjRUV0ZOV20xVVluRkVTblpLYkRWS1J6TXJZa1V6V1dFeU1XaFVXbGxQZUdsVGFXTndaa1puU2pNd2EyNDFZVlZKUVhSa01EVkpXbmszZWpGelJHbFdUSFJVV0d4TVptVXZXbEZETkhCdWFrWjBjeXQwWXpFeWMxZzVhV2hKYlc1RGEyUXdWM1o2TTBOVVdtOTVRbE56WXpGVVpFSnJZamx0TUVNMWRIWm5NR1pSVURSUlowWXZla2d5VVc5YWJtNXlTVFV5ZFVGYU9FMXZiVmQwV1RKc2RETkVNR3RyY0ZJMk9YQm1Wa1JLTjNremRrNHZaWGRKUkVGUlFVST0=\"\n  },\n  \"ids:version\" : \"7.0.1\",\n  \"ids:hasDefaultEndpoint\" : {\n    \"@type\" : \"ids:ConnectorEndpoint\",\n    \"@id\" : \"https://w3id.org/idsa/autogen/connectorEndpoint/e5e2ab04-633a-44b9-87d9-a097ae6da3cf\",\n    \"ids:accessURL\" : {\n      \"@id\" : \"https://connectorb:8081/api/ids/data\"\n    }\n  },\n  \"ids:resourceCatalog\" : [ {\n    \"@type\" : \"ids:ResourceCatalog\",\n    \"@id\" : \"https://connectorb:8081/api/catalogs/86a5e409-358a-4681-8548-83f3e8478c84\"\n  }, {\n    \"@type\" : \"ids:ResourceCatalog\",\n    \"@id\" : \"https://connectorb:8081/api/catalogs/dd4646ea-0618-42b6-95c7-632a604eaadb\"\n  }, {\n    \"@type\" : \"ids:ResourceCatalog\",\n    \"@id\" : \"https://connectorb:8081/api/catalogs/84545957-404a-4873-91c1-77db26664a31\"\n  }, {\n    \"@type\" : \"ids:ResourceCatalog\",\n    \"@id\" : \"https://connectorb:8081/api/catalogs/cbcb6c1a-f4eb-4eae-8b15-8adec6c95bf7\"\n  }, {\n    \"@type\" : \"ids:ResourceCatalog\",\n    \"@id\" : \"https://connectorb:8081/api/catalogs/ab6d6810-d661-487c-bc25-12326c63b5bb\"\n  }, {\n    \"@type\" : \"ids:ResourceCatalog\",\n    \"@id\" : \"https://connectorb:8081/api/catalogs/9b9d457a-f2b6-4e4a-89bd-9c3514b5cc83\"\n  }, {\n    \"@type\" : \"ids:ResourceCatalog\",\n    \"@id\" : \"https://connectorb:8081/api/catalogs/b1d5dfaf-6af3-46da-a0d7-f251636b7cd9\"\n  }, {\n    \"@type\" : \"ids:ResourceCatalog\",\n    \"@id\" : \"https://connectorb:8081/api/catalogs/e86399dd-85e1-45de-ae34-14525490d8f5\"\n  }, {\n    \"@type\" : \"ids:ResourceCatalog\",\n    \"@id\" : \"https://connectorb:8081/api/catalogs/c4a3f48a-d5f9-4fb3-9b4f-12afb70f0b37\"\n  }, {\n    \"@type\" : \"ids:ResourceCatalog\",\n    \"@id\" : \"https://connectorb:8081/api/catalogs/009b5472-d9b5-42d3-b8d6-5344c763625d\"\n  }, {\n    \"@type\" : \"ids:ResourceCatalog\",\n    \"@id\" : \"https://connectorb:8081/api/catalogs/969f9d13-4309-49ad-90db-76d142c49ce9\"\n  }, {\n    \"@type\" : \"ids:ResourceCatalog\",\n    \"@id\" : \"https://connectorb:8081/api/catalogs/1e896878-a951-4566-8aa7-1ea29cb5ad7e\"\n  }, {\n    \"@type\" : \"ids:ResourceCatalog\",\n    \"@id\" : \"https://connectorb:8081/api/catalogs/6782ee9c-c1a5-45ed-a85f-9bcf3c5a6de0\"\n  }, {\n    \"@type\" : \"ids:ResourceCatalog\",\n    \"@id\" : \"https://connectorb:8081/api/catalogs/1bbd4a58-13fd-46a4-9486-3c3a4051e9e9\"\n  }, {\n    \"@type\" : \"ids:ResourceCatalog\",\n    \"@id\" : \"https://connectorb:8081/api/catalogs/d5c81124-9943-495e-a460-0b3cbe499e44\"\n  }, {\n    \"@type\" : \"ids:ResourceCatalog\",\n    \"@id\" : \"https://connectorb:8081/api/catalogs/801fc43b-6ada-411b-aa4a-70fba1158ce6\"\n  }, {\n    \"@type\" : \"ids:ResourceCatalog\",\n    \"@id\" : \"https://connectorb:8081/api/catalogs/175c42d4-ede6-47fe-95f4-ed9b8169ddba\"\n  }, {\n    \"@type\" : \"ids:ResourceCatalog\",\n    \"@id\" : \"https://connectorb:8081/api/catalogs/45abfcd4-a6dd-44a7-aa44-7a922750b8f7\"\n  }, {\n    \"@type\" : \"ids:ResourceCatalog\",\n    \"@id\" : \"https://connectorb:8081/api/catalogs/331a7a79-b409-4199-8cf7-aa4e96861538\"\n  }, {\n    \"@type\" : \"ids:ResourceCatalog\",\n    \"@id\" : \"https://connectorb:8081/api/catalogs/ced5db03-28dd-4a7e-9511-b95fabef1c58\"\n  }, {\n    \"@type\" : \"ids:ResourceCatalog\",\n    \"@id\" : \"https://connectorb:8081/api/catalogs/91ec4244-0300-459b-bd97-6ee0d90718ad\"\n  }, {\n    \"@type\" : \"ids:ResourceCatalog\",\n    \"@id\" : \"https://connectorb:8081/api/catalogs/6de2068c-4fd4-4244-9a02-e94d0948670d\"\n  }, {\n    \"@type\" : \"ids:ResourceCatalog\",\n    \"@id\" : \"https://connectorb:8081/api/catalogs/530eccde-4b2f-49c1-af21-5dbf1e9aa984\"\n  }, {\n    \"@type\" : \"ids:ResourceCatalog\",\n    \"@id\" : \"https://connectorb:8081/api/catalogs/c187ca8b-ac36-498c-a923-bd9710aa13d3\"\n  }, {\n    \"@type\" : \"ids:ResourceCatalog\",\n    \"@id\" : \"https://connectorb:8081/api/catalogs/f5731718-96ca-4ce1-a577-e9a4cb0f7442\"\n  } ],\n  \"ids:securityProfile\" : {\n    \"@id\" : \"https://w3id.org/idsa/code/BASE_SECURITY_PROFILE\"\n  },\n  \"ids:maintainer\" : {\n    \"@id\" : \"https://www.isst.fraunhofer.de/\"\n  },\n  \"ids:curator\" : {\n    \"@id\" : \"https://www.isst.fraunhofer.de/\"\n  },\n  \"ids:inboundModelVersion\" : [ \"4.1.2\", \"4.1.0\", \"4.2.6\", \"4.2.7\", \"4.2.0\", \"4.2.1\", \"4.2.4\", \"4.2.5\", \"4.2.2\", \"4.2.3\", \"4.0.0\" ],\n  \"ids:outboundModelVersion\" : \"4.2.7\",\n  \"ids:title\" : [ {\n    \"@value\" : \"Dataspace Connector\",\n    \"@type\" : \"http://www.w3.org/2001/XMLSchema#string\"\n  } ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_UPDATE_URL}}?recipient={{BROKER}}",
+									"host": [
+										"{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_UPDATE_URL}}"
+									],
+									"query": [
+										{
+											"key": "recipient",
+											"value": "{{BROKER}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Data Usage Control",
+					"item": [
+						{
+							"name": "Definition of usage policies 1/3",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"USC_01-1\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData).exist;",
+											"    pm.expect(jsonData._links.rules).exist;",
+											"    pm.expect(jsonData._links.rules).not.empty;",
+											"    pm.expect(jsonData._links.offers).exist;",
+											"    pm.expect(jsonData._links.offers).not.empty;",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{createdTestContract}}",
+									"host": [
+										"{{createdTestContract}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Definition of usage policies 2/3",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"USC_01-2\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.response.to.have.status(200);",
+											"    pm.expect(jsonData).exist;",
+											"    pm.expect(jsonData._embedded.resources).exist;",
+											"    pm.expect(jsonData._embedded.resources).not.empty;",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{createdTestContract}}{{APPLICANT_CONNECTOR_OFFERS_RESOURCE}}",
+									"host": [
+										"{{createdTestContract}}{{APPLICANT_CONNECTOR_OFFERS_RESOURCE}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Definition of usage policies 3/3",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"USC_01-3\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.response.to.have.status(200);",
+											"    pm.expect(jsonData).exist;",
+											"    pm.expect(jsonData._embedded.rules).exist;",
+											"    pm.expect(jsonData._embedded.rules).not.empty;",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{createdTestContract}}{{APPLICANT_CONNECTOR_RULES_RESOURCE}}",
+									"host": [
+										"{{createdTestContract}}{{APPLICANT_CONNECTOR_RULES_RESOURCE}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Definition of usage policies Error",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();",
+											"pm.response.to.have.status(404);",
+											"pm.test(\"Contract does not exist\", () => {",
+											"    pm.expect(jsonData.message).to.eql(\"Resource not found.\");",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_CONTRACTS_URL}}/{{RESOURCE_NOT_EXISTING}}",
+									"host": [
+										"{{APPLICANT_CONNECTOR_URL}}{{APPLICANT_CONNECTOR_CONTRACTS_URL}}"
+									],
+									"path": [
+										"{{RESOURCE_NOT_EXISTING}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Sending of usage policies 1/4",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"USC_02-1\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.collectionVariables.set(\"sendingUsagePolicyResource\", jsonData[\"ids:offeredResource\"][0][\"@id\"]);\r",
+											"    pm.collectionVariables.set(\"sendingUsagePolicyArtifact\", jsonData[\"ids:offeredResource\"][0][\"ids:representation\"][0][\"ids:instance\"][0][\"@id\"]);\r",
+											"    pm.collectionVariables.set(\"sendingUsagePolicyRule\", jsonData[\"ids:offeredResource\"][0][\"ids:contractOffer\"][0][\"ids:permission\"][0][\"@id\"]);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{CONNECTORA_URL}}/api/ids/description?recipient={{APPLICANT_CONNECTOR_URL_DNS}}{{APPLICANT_CONNECTOR_ACCESS_URL}}&elementId={{createdTestCatalog}}",
+									"host": [
+										"{{CONNECTORA_URL}}"
+									],
+									"path": [
+										"api",
+										"ids",
+										"description"
+									],
+									"query": [
+										{
+											"key": "recipient",
+											"value": "{{APPLICANT_CONNECTOR_URL_DNS}}{{APPLICANT_CONNECTOR_ACCESS_URL}}"
+										},
+										{
+											"key": "elementId",
+											"value": "{{createdTestCatalog}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Sending of usage policies 2/4",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"USC_02-2\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    var consumerAgreementLong = jsonData[\"_links\"][\"self\"][\"href\"];",
+											"    var consumerAgreementId = consumerAgreementLong.replace(\"https://localhost:8080/api/agreements/\", \"\");",
+											"    pm.collectionVariables.set(\"consumerAgreementId\", consumerAgreementId);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[ {\n        \"@type\" : \"ids:Permission\",\n        \"@id\" : \"{{sendingUsagePolicyRule}}\", \n        \"ids:description\" : [ {\n          \"@value\" : \"provide-access\",\n          \"@type\" : \"http://www.w3.org/2001/XMLSchema#string\"\n        } ],\n        \"ids:title\" : [ {\n          \"@value\" : \"Example Usage Policy\",\n          \"@type\" : \"http://www.w3.org/2001/XMLSchema#string\"\n        } ],\n        \"ids:action\" : [ {\n          \"@id\" : \"https://w3id.org/idsa/code/USE\"\n        }],\n        \"ids:target\" : \"{{sendingUsagePolicyArtifact}}\"\n} ]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{CONNECTORA_URL}}/api/ids/contract?recipient={{APPLICANT_CONNECTOR_URL_DNS}}{{APPLICANT_CONNECTOR_ACCESS_URL}}&resourceIds={{sendingUsagePolicyResource}}&artifactIds={{sendingUsagePolicyArtifact}}&download=false",
+									"host": [
+										"{{CONNECTORA_URL}}"
+									],
+									"path": [
+										"api",
+										"ids",
+										"contract"
+									],
+									"query": [
+										{
+											"key": "recipient",
+											"value": "{{APPLICANT_CONNECTOR_URL_DNS}}{{APPLICANT_CONNECTOR_ACCESS_URL}}"
+										},
+										{
+											"key": "resourceIds",
+											"value": "{{sendingUsagePolicyResource}}"
+										},
+										{
+											"key": "artifactIds",
+											"value": "{{sendingUsagePolicyArtifact}}"
+										},
+										{
+											"key": "download",
+											"value": "false"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Sending of usage policies 3/4",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"USC_02-3\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    var requestedData = jsonData[\"_embedded\"][\"artifacts\"][0][\"_links\"][\"data\"][\"href\"];\r",
+											"    pm.collectionVariables.set(\"requestedData\", requestedData);\r",
+											"    pm.response.to.have.status(200);\r",
+											"    pm.expect(jsonData).exist;\r",
+											"    pm.expect(jsonData._embedded.artifacts).exist;\r",
+											"    pm.expect(jsonData._embedded.artifacts).not.empty;\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{CONNECTORA_URL}}/api/agreements/{{consumerAgreementId}}/artifacts",
+									"host": [
+										"{{CONNECTORA_URL}}"
+									],
+									"path": [
+										"api",
+										"agreements",
+										"{{consumerAgreementId}}",
+										"artifacts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Sending of usage policies 4/4",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"USC_02-4\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.response.to.have.status(200);\r",
+											"    pm.expect(jsonData).exist;\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{requestedData}}",
+									"host": [
+										"{{requestedData}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Sending of usage policies Rejection",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"pm.response.to.have.status(417);\r",
+											"pm.test(\"Sending of usage policy rejected\", () => {\r",
+											"    pm.expect(jsonData.details.type).to.eql(\"de.fraunhofer.iais.eis.RejectionMessageImpl\");\r",
+											"    pm.expect(jsonData.message).to.eql(\"Received unexpected response message.\");\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{CONNECTORA_URL}}/api/ids/description?recipient={{APPLICANT_CONNECTOR_URL_DNS}}{{APPLICANT_CONNECTOR_ACCESS_URL}}&elementId={{APPLICANT_CONNECTOR_URL_DNS}}/{{RESOURCE_NOT_EXISTING}}",
+									"host": [
+										"{{CONNECTORA_URL}}"
+									],
+									"path": [
+										"api",
+										"ids",
+										"description"
+									],
+									"query": [
+										{
+											"key": "recipient",
+											"value": "{{APPLICANT_CONNECTOR_URL_DNS}}{{APPLICANT_CONNECTOR_ACCESS_URL}}"
+										},
+										{
+											"key": "elementId",
+											"value": "{{APPLICANT_CONNECTOR_URL_DNS}}/{{RESOURCE_NOT_EXISTING}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Sending of usage policies Error",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"pm.response.to.have.status(404);\r",
+											"pm.test(\"Resource does not exist\", () => {\r",
+											"    pm.expect(jsonData.message).to.eql(\"Resource not found.\");\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{CONNECTORA_URL}}/api/agreements/{{RESOURCE_NOT_EXISTING}}/artifacts",
+									"host": [
+										"{{CONNECTORA_URL}}"
+									],
+									"path": [
+										"api",
+										"agreements",
+										"{{RESOURCE_NOT_EXISTING}}",
+										"artifacts"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Tear down",
+					"item": [
+						{
+							"name": "Successful Offer Deletion 1/2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Delete created offer\", () => {",
+											"    pm.response.to.have.status(204);",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{createdTestOffer}}",
+									"host": [
+										"{{createdTestOffer}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successful Offer Deletion 2/2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();",
+											"pm.response.to.have.status(404);",
+											"pm.test(\"Offer does not exist anymore\", () => {",
+											"    pm.expect(jsonData.message).to.eql(\"Resource not found.\");",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{createdTestOffer}}",
+									"host": [
+										"{{createdTestOffer}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successful Catalog Deletion 1/2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Delete created catalog\", () => {",
+											"    pm.response.to.have.status(204);",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{createdTestCatalog}}",
+									"host": [
+										"{{createdTestCatalog}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successful Catalog Deletion 2/2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();",
+											"pm.response.to.have.status(404);",
+											"pm.test(\"Catalog does not exist anymore\", () => {",
+											"    pm.expect(jsonData.message).to.eql(\"Resource not found.\");",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{createdTestCatalog}}",
+									"host": [
+										"{{createdTestCatalog}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successful Artifact Deletion 1/2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Delete created artifact\", () => {",
+											"    pm.response.to.have.status(204);",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{createdTestArtifact}}",
+									"host": [
+										"{{createdTestArtifact}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successful Artifact Deletion 2/2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();",
+											"pm.response.to.have.status(404);",
+											"pm.test(\"Artifact does not exist anymore\", () => {",
+											"    pm.expect(jsonData.message).to.eql(\"Resource not found.\");",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{createdTestArtifact}}",
+									"host": [
+										"{{createdTestArtifact}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successful Rule Deletion 1/2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Delete created rule\", () => {",
+											"    pm.response.to.have.status(204);",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{createdTestRule}}",
+									"host": [
+										"{{createdTestRule}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successful Rule Deletion 2/2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();",
+											"pm.response.to.have.status(404);",
+											"pm.test(\"Rule does not exist anymore\", () => {",
+											"    pm.expect(jsonData.message).to.eql(\"Resource not found.\");",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{createdTestRule}}",
+									"host": [
+										"{{createdTestRule}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successful Contract Deletion 1/2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Delete created contract\", () => {",
+											"    pm.response.to.have.status(204);",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{createdTestContract}}",
+									"host": [
+										"{{createdTestContract}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successful Contract Deletion 2/2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();",
+											"pm.response.to.have.status(404);",
+											"pm.test(\"Contract does not exist anymore\", () => {",
+											"    pm.expect(jsonData.message).to.eql(\"Resource not found.\");",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{createdTestContract}}",
+									"host": [
+										"{{createdTestContract}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successful Representation Deletion 1/2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Delete created representation\", () => {",
+											"    pm.response.to.have.status(204);",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{createdTestRepresentation}}",
+									"host": [
+										"{{createdTestRepresentation}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Successful Representation Deletion 2/2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();",
+											"pm.response.to.have.status(404);",
+											"pm.test(\"Representation does not exist anymore\", () => {",
+											"    pm.expect(jsonData.message).to.eql(\"Resource not found.\");",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{createdTestRepresentation}}",
+									"host": [
+										"{{createdTestRepresentation}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Broker",
+			"item": [
+				{
+					"name": "General Requirements",
+					"item": [
+						{
+							"name": "Self-Description",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();",
+											"pm.test(\"BR_GEN_02\", function () {",
+											"  pm.response.to.be.ok;",
+											"  pm.expect(jsonData).to.exist;",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"tlsDisabledProtocols": [
+									"TLSv1",
+									"TLSv1_1"
+								]
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{APPLICANT_BROKER_URL}}",
+									"host": [
+										"{{APPLICANT_BROKER_URL}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Minimal endpoint /browse",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"BR_GEN_03-1\", function () {",
+											"  pm.response.to.have.status(parseInt(pm.environment.get(\"STATUS_CODE_ENDPOINT_BROWSE\")));",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"tlsDisabledProtocols": [
+									"TLSv1",
+									"TLSv1_1"
+								]
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{APPLICANT_BROKER_URL}}/browse",
+									"host": [
+										"{{APPLICANT_BROKER_URL}}"
+									],
+									"path": [
+										"browse"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Minimal endpoint /browse Copy",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"BR_GEN_03-1\", function () {",
+											"  pm.response.to.have.status(parseInt(pm.environment.get(\"STATUS_CODE_ENDPOINT_BROWSE\")));",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"tlsDisabledProtocols": [
+									"TLSv1",
+									"TLSv1_1"
+								]
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{APPLICANT_BROKER_URL}}/browse",
+									"host": [
+										"{{APPLICANT_BROKER_URL}}"
+									],
+									"path": [
+										"browse"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Minimal endpoint /infrastructure",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"BR_GEN_03-2\", function () {",
+											"  pm.response.to.have.status(parseInt(pm.environment.get(\"STATUS_CODE_ENDPOINT_INFRASTRUCTURE\")));",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"tlsDisabledProtocols": [
+									"TLSv1",
+									"TLSv1_1"
+								]
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{CONNECTORA_URL}}/api/ids/description?recipient={{APPLICANT_BROKER_REVERSEPROXY_URL}}/infrastructure",
+									"host": [
+										"{{CONNECTORA_URL}}"
+									],
+									"path": [
+										"api",
+										"ids",
+										"description"
+									],
+									"query": [
+										{
+											"key": "recipient",
+											"value": "{{APPLICANT_BROKER_REVERSEPROXY_URL}}/infrastructure"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Functional Requirements",
+					"item": [
+						{
+							"name": "HTTPS",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();",
+											"pm.test(\"BR_GEN_02\", function () {",
+											"  //pm.response.to.have.status(400);",
+											"  //pm.expect(jsonData).to.not.exist;",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"tlsDisabledProtocols": [
+									"TLSv1",
+									"TLSv1_1"
+								]
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{APPLICANT_BROKER_IP}}:81",
+									"protocol": "http",
+									"host": [
+										"{{APPLICANT_BROKER_IP}}"
+									],
+									"port": "81"
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "password",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "admin",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "CONNECTORA_URL",
+			"value": "https://localhost:8080"
+		},
+		{
+			"key": "CONNECTORB_URL",
+			"value": "https://localhost:8081"
+		},
+		{
+			"key": "offers",
+			"value": ""
+		},
+		{
+			"key": "catalogs",
+			"value": ""
+		},
+		{
+			"key": "rules",
+			"value": ""
+		},
+		{
+			"key": "contracts",
+			"value": ""
+		},
+		{
+			"key": "artifacts",
+			"value": ""
+		},
+		{
+			"key": "representations",
+			"value": ""
+		},
+		{
+			"key": "Provider_catalog",
+			"value": ""
+		},
+		{
+			"key": "Provider_resource",
+			"value": ""
+		},
+		{
+			"key": "Provider_artifact",
+			"value": ""
+		},
+		{
+			"key": "Provider_rule",
+			"value": ""
+		},
+		{
+			"key": "Recipient_url",
+			"value": "https://connectora:8080/api/ids/data"
+		},
+		{
+			"key": "Consumer agreement ID",
+			"value": ""
+		},
+		{
+			"key": "dataLink",
+			"value": ""
+		},
+		{
+			"key": "BROKER",
+			"value": "https://broker-reverseproxy/infrastructure"
+		},
+		{
+			"key": "Broker_catalog_list",
+			"value": ""
+		},
+		{
+			"key": "Broker_catalog",
+			"value": ""
+		},
+		{
+			"key": "APPLICANT_SELF_DESCRIPTION",
+			"value": ""
+		},
+		{
+			"key": "RESOURCE_DESCRIPTION",
+			"value": ""
+		},
+		{
+			"key": "offersConnB",
+			"value": ""
+		},
+		{
+			"key": "artifactsConnB",
+			"value": ""
+		},
+		{
+			"key": "dwd_testResource",
+			"value": ""
+		},
+		{
+			"key": "createdTestContract",
+			"value": ""
+		},
+		{
+			"key": "createdTestResource",
+			"value": ""
+		},
+		{
+			"key": "createdTestArtifact",
+			"value": ""
+		},
+		{
+			"key": "createdTestRule",
+			"value": ""
+		},
+		{
+			"key": "createdTestOffer",
+			"value": ""
+		},
+		{
+			"key": "createdTestRepresentation",
+			"value": ""
+		},
+		{
+			"key": "createTestCatalog",
+			"value": ""
+		},
+		{
+			"key": "createdTestCatalog",
+			"value": ""
+		},
+		{
+			"key": "usc_resource",
+			"value": ""
+		},
+		{
+			"key": "usc_artifact",
+			"value": ""
+		},
+		{
+			"key": "usc_rule",
+			"value": ""
+		},
+		{
+			"key": "sendingUsagePolicyResource",
+			"value": ""
+		},
+		{
+			"key": "sendingUsagePolicyArtifact",
+			"value": ""
+		},
+		{
+			"key": "sendingUsagePolicyRule",
+			"value": ""
+		},
+		{
+			"key": "consumerAgreementId",
+			"value": ""
+		},
+		{
+			"key": "tesDataLink",
+			"value": ""
+		},
+		{
+			"key": "requestedData",
+			"value": ""
+		},
+		{
+			"key": "applicantSelfDescription",
+			"value": ""
+		}
+	]
+}
