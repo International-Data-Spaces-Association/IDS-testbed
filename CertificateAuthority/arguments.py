@@ -85,6 +85,8 @@ def parse():
     parser_cert_create.add_argument('--email', help='Email address')
     parser_cert_create.add_argument('--server', action='store_true', help='Certificate is for Server')
     parser_cert_create.add_argument('--client', action='store_true', help='Certificate is for Client')
+    parser_cert_create.add_argument('--san-name', action='append', help='Name to use in SAN (can be specified multiple times)')
+    parser_cert_create.add_argument('--san-ip', action='append', help='IP to use in SAN (can be specified multiple times)')
 
     # cert sign parser
     parser_cert_create = subparsers_cert.add_parser('sign', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
