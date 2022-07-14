@@ -14,9 +14,9 @@ plugins:
       allow_password_change: true
       editable_attributes: []
 user_backend_default: yaml
-environment: development
-issuer: http://omejdn/auth
-front_url: http://omejdn/auth
+environment: production
+issuer: https://omejdn/auth
+front_url: https://omejdn/auth
 bind_to: 0.0.0.0:4567
 openid: true
 default_audience: idsc:IDS_CONNECTORS_ALL
