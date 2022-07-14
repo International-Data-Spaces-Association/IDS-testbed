@@ -3,14 +3,11 @@ A minimum viable data space (MVDS) is a combination of components to initiate a 
 It aims to facilitate the work of experimenters by shortening the implementation time (by avoiding lengthy details that would slow down the first release). 
 This allows them to start with a first working version (where secure and sovereign data exchange is granted), where the development team can iterate, identify and respond to the assumptions about the requirements of the data space. 
 
-A Minimum Viable Data Space consists of the items that are available in Portfolio of IDS-compliant Building Blocks that are currently available 
-on the [Build Components page](https://github.com/International-Data-Spaces-Association/idsa/blob/main/how-to-build-data-spaces/3-Build-Components.md) of the 
-[How to Build Data Spaces?](https://github.com/International-Data-Spaces-Association/idsa/tree/main/how-to-build-data-spaces) section. 
-
 The MVDS is the unique solution provided by IDSA Head Office, as current best practice.
 
-(*The IDS Deployment Scenarios is currently under development and will be available by Q2, 2022*).
-The deployment scenarios will act as best practices and sources of inspiration on building data spaces. 
+The [IDS Deployment Scenarios](https://github.com/International-Data-Spaces-Association/IDS-Deployment-Scenarios) act as best practices and sources of inspiration on building data spaces. There, you will find various examples of implementation, along with experiments also run with MVDS.
+
+To find more information on implementing data spaces and a step-by-step classification of existing IDS documentation, you may check [How to Build Data Spaces?](https://github.com/International-Data-Spaces-Association/idsa/tree/main/how-to-build-data-spaces). 
 
 # What are the components that make a MVDS?
 A minimum viable data space consists of: 
