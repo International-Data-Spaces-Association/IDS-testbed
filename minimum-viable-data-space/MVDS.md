@@ -17,7 +17,7 @@ A minimum viable data space consists of:
 1. Two or more IDS connectors  
 2. The [Certificate Authority (CA)](https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/InstallationGuide.md#certificate-authority) granting X.509 certificates (not to be confused with certification)
 3. The [Dynamic Attributes Provisioning Service (DAPS)](https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/InstallationGuide.md#daps) to handle dynamic attributes and manage dynamic access tokens
-4. MetadataBroker 
+4. [MetadataBroker](https://github.com/International-Data-Spaces-Association/IDS-testbed/tree/master/MetadataBroker) 
 
 ![Minimum Viable Data Space](images/MVDS-Testbed_1.0.png)
 
