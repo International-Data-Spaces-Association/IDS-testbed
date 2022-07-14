@@ -19,24 +19,9 @@ A minimum viable data space consists of:
 3. The [Dynamic Attributes Provisioning Service (DAPS)](https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/InstallationGuide.md#daps) to handle dynamic attributes and manage dynamic access tokens
 4. [MetadataBroker](https://github.com/International-Data-Spaces-Association/IDS-testbed/tree/master/MetadataBroker) 
 
-![Minimum Viable Data Space](images/MVDS-Testbed_1.0.png)
+![Minimum Viable Data Space](../pictures/MVDS-Testbed_1.0.png)
 
 [Certification](https://internationaldataspaces.org/use/certification/) of all components and the operational environments is an additional trust layer, since it ensures the functionality of components work in clearly specified boundaries.
-
-# What are the practical things MVDS setup allows you to do?
-Every data provider can define the rules and conditions (usage policies) under which Data is shared with a data consumer. These rules include scenarios like, e. g., restriction of data usage for a specific group of participants, restriction of usage to specific purposes, usage of data not more then N times, etc.
-
-After a data consumer requests a data set from the provider a contract negotiation process is started during which the usage policies are negotiated.
-
-The picture below depicts a data flow example from two technical and legal enforcement perspectives.
-![Minimum Viable Data Space](images/IDSA_MVDS-Scenarios.png)
-
-## Example :one: (legal enforcement) 
-The connector of the data consumer (Company 2) is connected with an ERP system that is not deployed in the connector. Therefore the data
-provider (company 1) has to agree that data will be processed outside of the connector. Here a digital contract between the two parties is establishes that is legally binding for both parties, even though, technical control is lost for the data provider.
-
-## Example :two: (technical enforcement) 
-The app that is deployed in the connector of the data consumer (company 3). Applications which are deployed in the runtime environment of a connector can enforce usage policies in a technical manner, e. g., deleting data after 5 days. This adds a further trust layer to the digital contracts as established with company 2.
 
 # How can I start experimenting with a MVDS? 
 To start with implementing a MVDS, you can check the list of IDS-compliant components that are listed [on this page](https://github.com/International-Data-Spaces-Association/idsa/blob/main/how-to-build-data-spaces/3-Build-Components.md), which is part of the
