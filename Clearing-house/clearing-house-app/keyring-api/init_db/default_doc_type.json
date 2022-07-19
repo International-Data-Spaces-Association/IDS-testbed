@@ -1,0 +1,42 @@
+{
+  "id": "IDS_MESSAGE",
+  "pid": "default",
+  "parts": [
+    {
+      "name": "model_version"
+    },
+    {
+      "name": "correlation_message"
+    },
+    {
+      "name": "transfer_contract"
+    },
+    {
+      "name": "issued"
+    },
+    {
+      "name": "issuer_connector"
+    },
+    {
+      "name": "content_version"
+    },
+    {
+      "name": "recipient_connector"
+    },
+    {
+      "name": "sender_agent"
+    },
+    {
+      "name": "recipient_agent"
+    },
+    {
+      "name": "payload"
+    },
+    {
+      "name": "payload_type"
+    },
+    {
+      "name": "message_id"
+    }
+  ]
+}

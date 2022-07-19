@@ -1,0 +1,112 @@
+-----BEGIN CERTIFICATE-----
+MIIDZzCCAk+gAwIBAgIJALIB7y7FZtiHMA0GCSqGSIb3DQEBBQUAMEIxCzAJBgNV
+BAYTAkRFMRMwEQYDVQQKDApGcmF1bmhvZmVyMR4wHAYDVQQDDBVJRFMgUm9vdCBU
+ZXN0IENBIDIwMTgwHhcNMTgxMDMxMTYxMjAyWhcNMzgxMDI2MTYxMjAyWjBCMQsw
+CQYDVQQGEwJERTETMBEGA1UECgwKRnJhdW5ob2ZlcjEeMBwGA1UEAwwVSURTIFJv
+b3QgVGVzdCBDQSAyMDE4MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA
+sh2FI432kI1BYWCs1CBPgJakTBsQt/BP7DQJ2lULlBKhtJpJM85tD1dXgIhLoBFi
+5cMQPCX8kEy7TQLEOB4pPvqvUk+Tc48bNA39F4p3nOLZzlYREaTHui9r+FDvHy7j
+TJGuRuDNKbP8qOAAd8Ci63e9iabSTL1wXLuZFnkEEHKraCwUQhzck5Dk7ll5Vncw
+StishI+zk47uOiM3v0yMO4TSRyxFvwKfHB09hKLbLg6fr+62IqLEQWU/r0qo9h8e
+4N16HdXLojyTam36JPDfExB2yHwMAe5fqtzwknWy0VfkrI2+KjN004EmjhsD9tL0
+dKS+MSRARDQYuHenSpG6XQIDAQABo2AwXjAdBgNVHQ4EFgQUl+fsV0kEi4xmZ+NX
+uXYPdqDwY5AwHwYDVR0jBBgwFoAUl+fsV0kEi4xmZ+NXuXYPdqDwY5AwDwYDVR0T
+AQH/BAUwAwEB/zALBgNVHQ8EBAMCAUYwDQYJKoZIhvcNAQEFBQADggEBAIgDI5Zq
+xvrI0ihxtgdnr/p7Nx71imoEIquGDWR+W9smzUGcY5zkAX9V2zm/vydNhRrA3iNn
+/+bmsM/xUYk4J6Oju8czYE1EQ/43OUB3iODzdzdAUspaa4MQORi0qaHehLrOzf28
+RVDPzLhhy64Z7muvhiKlWlwlLMqJSKIrJpeCSYTQZJFLLvu2atktoFJok477z1cX
+ZpV2P1ODUyVETlA2WpOkb1g+BeaboDcODV3lwHA0kToDnjCeVo1rzs9ghjIpxvmg
+gWMVSvLUgHTqUq1ruyqg9dJ7kN4rxpmTYBhVzYueVCfaRNQ+kKkUOyNEIAH9/c2g
+lmTm5QRelsvLnbk=
+-----END CERTIFICATE-----
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 1 (0x1)
+    Signature Algorithm: sha256WithRSAEncryption
+        Issuer: C=DE, O=Fraunhofer, CN=IDS Root Test CA 2018
+        Validity
+            Not Before: Oct 31 16:12:04 2018 GMT
+            Not After : Oct 29 16:12:04 2026 GMT
+        Subject: C=DE, O=Fraunhofer, CN=IDS Test SubCA 2018
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (2048 bit)
+                Modulus:
+                    00:ab:24:8c:56:4f:da:26:8a:74:d1:c1:da:e6:fe:
+                    c6:2e:1d:cc:98:c9:43:c7:a0:7a:59:cf:59:e7:7c:
+                    4e:c0:5e:2a:6b:dd:b4:e6:b0:ae:20:c0:20:d6:aa:
+                    37:25:5f:22:98:62:ba:bc:d4:76:fc:c8:72:fc:a7:
+                    64:48:36:b7:35:33:58:69:46:19:b7:51:70:34:3c:
+                    b0:82:58:75:33:29:56:6f:c9:e7:f5:1e:22:fc:14:
+                    db:cf:78:9c:a9:22:9d:a8:5b:f7:52:56:82:4d:51:
+                    89:9e:26:ef:14:8f:30:5b:f8:58:87:5b:83:e1:80:
+                    b2:e2:0f:6c:7a:76:a1:b8:92:2e:e6:53:50:c3:c1:
+                    20:41:66:0d:0d:f9:c2:f8:d3:34:76:ef:d8:5e:45:
+                    15:39:88:20:c9:fb:34:88:61:c4:66:a0:c3:10:58:
+                    c0:ad:86:6b:1f:8f:4b:ca:0a:47:6f:44:84:c3:59:
+                    92:aa:66:15:21:14:79:25:01:a7:3d:16:9e:59:01:
+                    c3:69:eb:24:47:7a:84:ed:81:8d:c4:f9:4b:4b:75:
+                    8b:09:0a:54:11:77:81:db:12:be:50:bd:6b:86:95:
+                    fa:66:6f:b4:3f:45:4e:0b:af:1a:0f:51:57:1a:2b:
+                    ef:bc:ec:5c:d6:a2:37:f1:95:9f:ca:4a:73:30:b6:
+                    ed:eb
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Subject Key Identifier: 
+                CB:8C:C7:B6:85:79:A8:23:A6:CB:15:AB:17:50:2F:E6:65:43:5D:E8
+            X509v3 Authority Key Identifier: 
+                keyid:97:E7:EC:57:49:04:8B:8C:66:67:E3:57:B9:76:0F:76:A0:F0:63:90
+
+            X509v3 Basic Constraints: critical
+                CA:TRUE
+            X509v3 Key Usage: 
+                Digital Signature, Certificate Sign, CRL Sign
+            X509v3 CRL Distribution Points: 
+
+                Full Name:
+                  URI:http://crl.aisec.fraunhofer.de/ids.crl
+
+            Authority Information Access: 
+                CA Issuers - URI:http://downloads.aisec.fraunhofer.de/rootcacert2016.cert
+
+    Signature Algorithm: sha256WithRSAEncryption
+         11:95:1a:ed:ec:b4:2e:3d:fd:7b:fd:a0:fd:7c:68:08:42:6b:
+         5f:ad:84:cd:1a:53:b7:90:22:09:fe:d5:26:68:d6:0a:6e:b4:
+         05:f1:85:8b:d5:6b:26:52:d3:75:00:6b:06:fa:d0:43:14:7d:
+         19:53:e9:09:0a:97:14:c6:fe:14:12:c8:7c:d0:c7:50:8d:67:
+         db:63:de:aa:49:ce:6b:6d:07:8a:ae:9e:39:c5:91:ef:af:85:
+         06:fb:51:70:d2:c4:f6:b4:07:26:b1:da:e3:ac:b5:38:9e:61:
+         cf:bf:4e:47:9b:1d:51:6a:4c:6f:b9:a0:b8:a6:a8:b0:da:e4:
+         60:e3:29:85:5c:ad:2d:65:29:60:7b:e5:16:a0:1f:7c:c6:62:
+         ed:fe:48:04:81:3f:9f:3b:e3:9b:d8:8b:78:1b:5a:8b:f1:46:
+         5e:39:f3:bf:e2:8e:68:62:cd:ec:fa:17:98:80:5b:8a:5d:89:
+         61:2e:f2:bb:68:7b:9c:ec:7e:e5:c1:6f:b1:03:0c:81:fe:45:
+         6f:32:01:31:0a:dc:25:83:90:11:96:a3:ba:e4:8a:d9:58:20:
+         f4:85:21:e9:7b:00:d2:11:df:bc:e6:8c:bb:5e:f8:31:18:60:
+         40:9d:66:9f:af:6a:99:8b:42:8a:9f:f3:6b:c4:f4:be:a5:01:
+         24:b8:f4:26
+-----BEGIN CERTIFICATE-----
+MIID7jCCAtagAwIBAgIBATANBgkqhkiG9w0BAQsFADBCMQswCQYDVQQGEwJERTET
+MBEGA1UECgwKRnJhdW5ob2ZlcjEeMBwGA1UEAwwVSURTIFJvb3QgVGVzdCBDQSAy
+MDE4MB4XDTE4MTAzMTE2MTIwNFoXDTI2MTAyOTE2MTIwNFowQDELMAkGA1UEBhMC
+REUxEzARBgNVBAoMCkZyYXVuaG9mZXIxHDAaBgNVBAMME0lEUyBUZXN0IFN1YkNB
+IDIwMTgwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCrJIxWT9ominTR
+wdrm/sYuHcyYyUPHoHpZz1nnfE7AXipr3bTmsK4gwCDWqjclXyKYYrq81Hb8yHL8
+p2RINrc1M1hpRhm3UXA0PLCCWHUzKVZvyef1HiL8FNvPeJypIp2oW/dSVoJNUYme
+Ju8UjzBb+FiHW4PhgLLiD2x6dqG4ki7mU1DDwSBBZg0N+cL40zR279heRRU5iCDJ
++zSIYcRmoMMQWMCthmsfj0vKCkdvRITDWZKqZhUhFHklAac9Fp5ZAcNp6yRHeoTt
+gY3E+UtLdYsJClQRd4HbEr5QvWuGlfpmb7Q/RU4LrxoPUVcaK++87FzWojfxlZ/K
+SnMwtu3rAgMBAAGjgfAwge0wHQYDVR0OBBYEFMuMx7aFeagjpssVqxdQL+ZlQ13o
+MB8GA1UdIwQYMBaAFJfn7FdJBIuMZmfjV7l2D3ag8GOQMA8GA1UdEwEB/wQFMAMB
+Af8wCwYDVR0PBAQDAgGGMDcGA1UdHwQwMC4wLKAqoCiGJmh0dHA6Ly9jcmwuYWlz
+ZWMuZnJhdW5ob2Zlci5kZS9pZHMuY3JsMFQGCCsGAQUFBwEBBEgwRjBEBggrBgEF
+BQcwAoY4aHR0cDovL2Rvd25sb2Fkcy5haXNlYy5mcmF1bmhvZmVyLmRlL3Jvb3Rj
+YWNlcnQyMDE2LmNlcnQwDQYJKoZIhvcNAQELBQADggEBABGVGu3stC49/Xv9oP18
+aAhCa1+thM0aU7eQIgn+1SZo1gputAXxhYvVayZS03UAawb60EMUfRlT6QkKlxTG
+/hQSyHzQx1CNZ9tj3qpJzmttB4qunjnFke+vhQb7UXDSxPa0Byax2uOstTieYc+/
+TkebHVFqTG+5oLimqLDa5GDjKYVcrS1lKWB75RagH3zGYu3+SASBP58745vYi3gb
+WovxRl4587/ijmhizez6F5iAW4pdiWEu8rtoe5zsfuXBb7EDDIH+RW8yATEK3CWD
+kBGWo7rkitlYIPSFIel7ANIR37zmjLte+DEYYECdZp+vapmLQoqf82vE9L6lASS4
+9CY=
+-----END CERTIFICATE-----

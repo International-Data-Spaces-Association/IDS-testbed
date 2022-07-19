@@ -53,3 +53,39 @@
     value: https://w3id.org/idsa/contexts/context.jsonld
   - key: transportCertsSha256
     value: 0d9eb3600540532c69c7345e7ab04e0f420434b693e26e415783875a93e9fc4b
+- client_id: 8E:35:0F:5C:51:83:62:62:69:6B:6B:48:CD:02:7F:25:47:85:EF:D3:keyid:8E:35:0F:5C:51:83:62:62:69:6B:6B:48:CD:02:7F:25:47:85:EF:D3
+  client_name: server
+  grant_types: client_credentials
+  token_endpoint_auth_method: private_key_jwt
+  scope: idsc:IDS_CONNECTOR_ATTRIBUTES_ALL
+  attributes:
+  - key: idsc
+    value: IDS_CONNECTOR_ATTRIBUTES_ALL
+  - key: securityProfile
+    value: idsc:BASE_SECURITY_PROFILE
+  - key: referringConnector
+    value: http://server.demo
+  - key: "@type"
+    value: ids:DatPayload
+  - key: "@context"
+    value: https://w3id.org/idsa/contexts/context.jsonld
+  - key: transportCertsSha256
+    value: e7163deeb63e3ed65aa3e7cc89d31bb37b6825317c9f7479ec9a0cf1a636ad41
+- client_id: A5:0C:A5:F0:84:D9:90:BB:BC:D9:57:3A:04:C8:7F:93:ED:97:A2:52:keyid:CB:8C:C7:B6:85:79:A8:23:A6:CB:15:AB:17:50:2F:E6:65:43:5D:E8
+  client_name: consumer-core
+  grant_types: client_credentials
+  token_endpoint_auth_method: private_key_jwt
+  scope: idsc:IDS_CONNECTOR_ATTRIBUTES_ALL
+  attributes:
+  - key: idsc
+    value: IDS_CONNECTOR_ATTRIBUTES_ALL
+  - key: securityProfile
+    value: consumer-core3.key
+  - key: referringConnector
+    value: http://consumer-core.demo
+  - key: "@type"
+    value: ids:DatPayload
+  - key: "@context"
+    value: https://w3id.org/idsa/contexts/context.jsonld
+  - key: transportCertsSha256
+    value: c15e6558088dbfef215a43d2507bbd124f44fb8facd561c14561a2c1a669d0e0

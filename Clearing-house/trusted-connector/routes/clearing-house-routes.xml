@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:camel="http://camel.apache.org/schema/spring"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+          https://www.springframework.org/schema/beans/spring-beans.xsd
+          http://camel.apache.org/schema/spring
+          https://camel.apache.org/schema/spring/camel-spring-3.16.0.xsd">
+
+    <camel:sslContextParameters id="ChSslContext">
+        <camel:keyManagers keyPassword="password">
+            <camel:keyStore resource="etc/keystore.p12" password="password"/>
+        </camel:keyManagers>
+        <camel:trustManagers>
+            <camel:keyStore resource="etc/truststore.p12" password="password"/>
+        </camel:trustManagers>
+    </camel:sslContextParameters>
+
+    <!-- Beans -->
+    <bean id="CHOutputProcessor" class="de.fhg.aisec.ids.clearinghouse.ClearingHouseOutputProcessor" />
+    <bean id="MultipartOutputProcessor" class="de.fhg.aisec.ids.clearinghouse.MultipartOutputProcessor" />
+    <bean id="InfoModelParsingProcessor" class="de.fhg.aisec.ids.clearinghouse.ClearingHouseInfomodelParsingProcessor" />
+    <bean id="TokenValidationProcessor" class="de.fhg.aisec.ids.clearinghouse.TokenValidationProcessor" />
+    <bean id="idscp2Processor" class="de.fhg.aisec.ids.clearinghouse.ClearingHouseIdscp2InputProcessor" />
+    <bean id="Idscp2ErrorHandler" class="de.fhg.aisec.ids.clearinghouse.ClearingHouseExceptionProcessor" />
+    <bean id="MultipartInputProcessor" class="de.fhg.aisec.ids.camel.multipart.MultiPartInputProcessor" />
+    <bean id="TypeExtractionProcessor" class="de.fhg.aisec.ids.camel.processors.IdsMessageTypeExtractionProcessor" />
+
+    <!-- Routes -->
+    <camelContext xmlns="http://camel.apache.org/schema/spring">
+        <restConfiguration scheme="https" component="jetty" host="0.0.0.0" port="9999" bindingMode="off">
+            <endpointProperty key="sslContextParameters" value="#ChSslContext"/>
+        </restConfiguration>
+
+        <rest id="CH_REST">
+            <post path="/messages/query/{pid}" id="CH_QUERY_PID">
+                <to uri="direct:multipart" />
+            </post>
+            <post path="/messages/query/{pid}/{id}" id="CH_QUERY_PID_ID">
+                <to uri="direct:multipart" />
+            </post>
+            <post path="/messages/log/{pid}" id="CH_LOG_PID">
+                <to uri="direct:multipart" />
+            </post>
+            <post path="/process/{pid}" id="CH_CREATE_PID">
+                <to uri="direct:multipart" />
+            </post>
+        </rest>
+        <route id="CH_MULTIPART_ROUTE">
+            <from uri="direct:multipart"/>
+            <onException>
+                <exception>java.io.IOException</exception>
+                <exception>java.lang.SecurityException</exception>
+                <exception>java.lang.IllegalArgumentException</exception>
+                <handled>
+                    <constant>true</constant>
+                </handled>
+                <transform><simple>${exception.message}</simple></transform>
+                <log message="### Handle ${exception.class} ###"/>
+                <removeHeader name="idsMultipartHeader"/>
+                <removeHeader name="pid"/>
+                <choice>
+                    <when>
+                        <simple>${exception.class} == 'java.lang.SecurityException' || ${exception.class} == 'java.lang.IllegalArgumentException'</simple>
+                        <setHeader name="CamelHttpResponseCode"><simple>401</simple></setHeader>
+                    </when>
+                    <when>
+                        <simple>${exception.class} == 'java.io.IOException'</simple>
+                        <setHeader name="CamelHttpResponseCode"><simple>400</simple></setHeader>
+                    </when>
+                    <otherwise>
+                        <setHeader name="CamelHttpResponseCode"><simple>500</simple></setHeader>
+                        <transform><constant>Internal Server Error</constant></transform>
+						<log message="### Handle ${exception} ###"/>
+                        <log message="### With Trace ${exception.stacktrace} ###"/>
+						<log message="### With Cause ${exception.cause.stacktrace} ###"/>
+                    </otherwise>
+                </choice>
+            </onException>
+            <process ref="MultipartInputProcessor" />
+            <process ref="InfoModelParsingProcessor" />
+            <process ref="TokenValidationProcessor" />
+            <to uri="http://logging-service:8000/?bridgeEndpoint=true&amp;throwExceptionOnFailure=false" />
+            <process ref="CHOutputProcessor" />
+            <process ref="MultipartOutputProcessor" />
+        </route>
+        <route id="CH_IDSCP2_ROUTE">
+            <from uri="idscp2server://0.0.0.0:29292?sslContextParameters=#ChSslContext&amp;useIdsMessages=true&amp;copyHeadersRegex=%28ch-ids-%5Ba-z%5D%2A%7CContent-Type%29"/>
+            <onException>
+                <exception>java.io.IOException</exception>
+                <exception>java.lang.SecurityException</exception>
+                <exception>java.lang.IllegalArgumentException</exception>
+                <handled>
+                    <constant>true</constant>
+                </handled>
+                <log message="### Handle ${exception.class} ###"/>
+                <removeHeader name="idsMultipartHeader"/>
+                <removeHeader name="pid"/>
+                <process ref="Idscp2ErrorHandler"/>
+            </onException>
+            <process ref="TypeExtractionProcessor"/>
+            <choice>
+                <when>
+                    <simple>${exchangeProperty.ids-type} == 'RequestMessage'</simple>
+                    <log message="### Handle RequestMessage ###"/>
+                    <setHeader name="CamelHttpMethod"><simple>POST</simple></setHeader>
+                    <setHeader name="CamelHttpPath"><simple>/process/${headers.ch-ids-pid}</simple></setHeader>
+                    <process ref="idscp2Processor"/>
+                    <process ref="TokenValidationProcessor" />
+                    <to uri="http://logging-service:8000/?bridgeEndpoint=true&amp;throwExceptionOnFailure=false" />
+                    <process ref="CHOutputProcessor" />
+                </when>
+                <when>
+                    <simple>${exchangeProperty.ids-type} == 'QueryMessage'</simple>
+                    <log message="### Handle QueryMessage ###"/>
+                    <setHeader name="CamelHttpMethod"><simple>POST</simple></setHeader>
+                    <setHeader name="CamelHttpPath"><simple>/messages/query/${headers.ch-ids-pid}</simple></setHeader>
+                    <process ref="idscp2Processor"/>
+                    <process ref="TokenValidationProcessor" />
+                    <to uri="http://logging-service:8000/?bridgeEndpoint=true&amp;throwExceptionOnFailure=false" />
+                    <process ref="CHOutputProcessor" />
+                </when>
+                <when>
+                    <simple>${exchangeProperty.ids-type} == 'LogMessage'</simple>
+                    <log message="### Handle LogMessage ###"/>
+                    <setHeader name="CamelHttpMethod"><simple>POST</simple></setHeader>
+                    <setHeader name="CamelHttpPath"><simple>/messages/log/${headers.ch-ids-pid}</simple></setHeader>
+                    <process ref="idscp2Processor"/>
+                    <process ref="TokenValidationProcessor" />
+                    <to uri="http://logging-service:8000/?bridgeEndpoint=true&amp;throwExceptionOnFailure=false" />
+                    <process ref="CHOutputProcessor" />
+                </when>
+                <otherwise>
+                    <log loggingLevel="ERROR" message="### Server received unexpected message (otherwise branch):\n${body}\n### Header: ###\n${headers[idscp2-header]}"/>
+                    <removeHeader name="idscp2-header" />
+                    <setBody><simple>${null}</simple></setBody>
+                </otherwise>
+            </choice>
+        </route>
+    </camelContext>
+</beans>

@@ -1,0 +1,7 @@
+* text=lf
+*.bat eol=lf
+*.Dockerfile eol=lf
+*.sh eol=lf
+
+*.png binary
+*.jpg binary

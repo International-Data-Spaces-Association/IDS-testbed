@@ -1,0 +1,27 @@
+[global]
+limits = { json = 5242880 }
+daps_api_url = "http://omejdn"
+connector_name = "https://clearinghouse.aisec.fraunhofer.de/"
+infomodel_version = "4.0.0"
+server_agent = "https://clearinghouse.aisec.fraunhofer.de"
+signing_key = "keys/private_key.der"
+
+[debug]
+address = "0.0.0.0"
+port = 8000
+log_level = "normal"
+limits = { forms = 32768 }
+database_url = "mongodb://localhost:27019"
+keyring_api_url = "http://localhost:8002"
+document_api_url = "http://localhost:8001"
+clear_db = true
+
+[release]
+address = "0.0.0.0"
+port = 8000
+log_level = "normal"
+limits = { forms = 32768 }
+database_url = "mongodb://logging-service-mongo:27017"
+keyring_api_url = "http://keyring-api:8002"
+document_api_url = "http://document-api:8001"
+clear_db = false
