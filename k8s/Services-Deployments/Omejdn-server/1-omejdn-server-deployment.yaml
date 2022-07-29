@@ -1,0 +1,140 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose-resolved.yaml --volumes hostPath -o export
+    kompose.version: 1.26.0 (40646f47)
+
+  labels:
+    io.kompose.service: omejdn-server
+  name: omejdn-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: omejdn-server
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f docker-compose-resolved.yaml --volumes hostPath -o export
+        kompose.version: 1.26.0 (40646f47)
+
+      labels:
+        io.kompose.network/local: "true"
+        io.kompose.service: omejdn-server
+    spec:
+      # securityContext:
+      #   runAsUser: 1000
+      #   runAsGroup: 1000
+      #   #readOnlyRootFilesystem: true
+      containers:
+
+
+
+        - env:
+          - name: OMEJDN_ACCEPT_AUDIENCE
+            value: idsc:IDS_CONNECTORS_ALL
+          - name: OMEJDN_ADMIN
+            value: admin:password
+          - name: OMEJDN_DEFAULT_AUDIENCE
+            value: idsc:IDS_CONNECTORS_ALL
+          - name: OMEJDN_ENVIRONMENT
+            value: development
+          - name: OMEJDN_FRONT_URL
+            value: http://omejdn/auth
+          - name: OMEJDN_ISSUER
+            value: http://omejdn/auth
+          - name: OMEJDN_OPENID
+            value: "true"
+          image: ghcr.io/fraunhofer-aisec/omejdn-server:1.6.0
+          name: omejdn-server
+          #command: ["/bin/sh"]
+          #args: ["-c", "while true; do echo hello; sleep 10;done"]
+          ports:
+          - containerPort: 4567
+
+          volumeMounts:
+          - mountPath: /opt/config
+            name: data
+          - mountPath: /home
+            name: config
+          - mountPath: /opt/keys
+            name: key
+            readOnly: true
+          - mountPath: /opt/keys/clients
+            name: keys-final-volume
+          - mountPath: /opt/keys/omejdn
+            name: key-omejdn    
+
+          resources:
+            requests:
+              memory: "1024Mi"
+              cpu: "500m"
+            limits:
+              memory: "4Gi"
+              cpu: "2000m"
+
+      initContainers:
+      - name: copy
+        image: ghcr.io/fraunhofer-aisec/omejdn-server:1.6.0
+        command: ["bash", "-c", "cp /config_data/clients.yml /config_data/oauth_providers.yml /config_data/omejdn.yml /config_data/scope_description.yml /config_data/scope_mapping.yml /config_data/users.yml /config_data/webfinger.yml  /opt/config/"]
+        volumeMounts:
+        - mountPath: /config_data
+          name: config
+        - mountPath: /opt/config
+          name: data 
+        resources:
+          requests:
+            memory: "1024Mi"
+            cpu: "500m"
+          limits:
+            memory: "4Gi"
+            cpu: "2000m" 
+
+
+
+      - name: copy-rename-keys
+        image: ghcr.io/fraunhofer-aisec/omejdn-server:1.6.0
+
+
+        command: ["bash", "-c", "cd /keys/; for filename in *.cert; do cp \"$filename\" /opt/keys/clients/\"${filename%.*}=.cert\"; done;"]
+        volumeMounts:
+        - mountPath: /keys
+          name: key-client-temp
+        - mountPath: /opt/keys/clients/
+          name: keys-final-volume
+        resources:
+          requests:
+            memory: "1024Mi"
+            cpu: "500m"
+          limits:
+            memory: "4Gi"
+            cpu: "2000m"          
+
+      restartPolicy: Always
+      volumes:
+      - name: data
+        emptyDir: {}
+      
+      - name: keys-final-volume
+        emptyDir: {}
+
+      - name: config
+        configMap:
+          name: ids-files-daps-config-v2
+
+      - name: key 
+        configMap:
+          name: ids-files-daps-key
+
+      - name: key-client-temp
+        configMap: 
+          name: ids-files-daps-config-key-client
+
+      - name: key-omejdn
+        configMap:
+          name: ids-files-daps-key-omejdn                        
+
+status: {}

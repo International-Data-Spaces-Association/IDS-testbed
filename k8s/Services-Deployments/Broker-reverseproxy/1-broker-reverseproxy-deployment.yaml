@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose-resolved.yaml --volumes hostPath -o export
+    kompose.version: 1.26.0 (40646f47)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: broker-reverseproxy
+  name: broker-reverseproxy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: broker-reverseproxy
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f docker-compose-resolved.yaml --volumes hostPath -o export
+        kompose.version: 1.26.0 (40646f47)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/local: "true"
+        io.kompose.service: broker-reverseproxy
+    spec: 
+
+      containers:
+      - image: registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker-open/reverseproxy
+
+        name: broker-reverseproxy
+        ports:
+        - containerPort: 443
+        - containerPort: 81
+        volumeMounts:
+        - mountPath: /etc/cert
+          name: mydir
+
+
+      
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "100m"
+          limits:
+            memory: "4Gi"
+            cpu: "2000m"     
+
+      volumes:
+      - name: mydir 
+        configMap:
+          name: ids-files-server-cert 
+        
+
+
+          
+
+
+

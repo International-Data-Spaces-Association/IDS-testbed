@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2022-06-02T10:29:08Z"
+  name: ids-files-nginxconfig
+  namespace: ids-2
+  resourceVersion: "177242"
+  uid: b16d894a-75c2-458b-996c-1fefd48fb588
+data:
+  default.conf.template: |
+    server {
+      listen              80 default_server;
+      listen              [::]:80 default_server ;
+      server_name         ${OMEJDN_DOMAIN};
+
+      proxy_set_header   Host $host;
+      proxy_set_header   X-Forwarded-Proto http;
+
+      # Proxy to Omejdn
+      location  ${OMEJDN_PATH} {
+        rewrite ${OMEJDN_PATH}/(.*) /$1  break;
+        proxy_pass         http://omejdn-server:4567;
+        proxy_redirect     off;
+      }
+
+      # Proxy to the Admin UI
+      location  /${UI_PATH} {
+        rewrite ${UI_PATH}/(.*) /$1  break;
+        proxy_pass         http://omejdn-ui;
+        proxy_redirect     off;
+      }
+
+      #  Well-Known URIs
+      location /.well-known {
+        # RFC 8414 style metadata document and compatibility backup
+        rewrite /\.well-known/oauth-authorization-server${OMEJDN_PATH} ${OMEJDN_PATH}/.well-known/oauth-authorization-server last;
+        rewrite /\.well-known/openid-configuration${OMEJDN_PATH}       ${OMEJDN_PATH}/.well-known/openid-configuration       last;
+        rewrite /\.well-known/jwks.json                                ${OMEJDN_PATH}/jwks.json                              last;
+
+        # Webfinger
+        rewrite /\.well-known/webfinger                                ${OMEJDN_PATH}/.well-known/webfinger                  last;
+      }
+    }
+

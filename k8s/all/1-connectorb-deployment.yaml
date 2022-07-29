@@ -1,0 +1,100 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose-resolved.yaml --volumes hostPath -o export
+    kompose.version: 1.26.0 (40646f47)
+
+  labels:
+    io.kompose.service: connectorb
+  name: connectorb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: connectorb
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f docker-compose-resolved.yaml --volumes hostPath -o export
+        kompose.version: 1.26.0 (40646f47)
+
+      labels:
+        io.kompose.network/local: "true"
+        io.kompose.service: connectorb
+    spec:
+      # securityContext:
+      #   runAsUser: 1000
+      #   runAsGroup: 1000
+      #   #readOnlyRootFilesystem: true
+      containers:
+      - env:
+        - name: CONFIGURATION_PATH
+          value: /config/config.json
+        - name: DAPS_INCOMING_DAT_DEFAULT_WELLKNOWN
+          value: /jwks.json
+        - name: DAPS_KEY_URL
+          value: http://omejdn/auth/jwks.json
+        - name: DAPS_TOKEN_URL
+          value: http://omejdn/auth/token
+        - name: DAPS_URL
+          value: http://omejdn
+        - name: SERVER_PORT
+          value: "8081"
+        - name: SERVER_SSL_KEY-STORE
+          value: file:///config/connectorB.p12
+        
+        image: ghcr.io/international-data-spaces-association/dataspace-connector:7.1.0
+        name: connectorb
+
+        
+        ports:
+        - containerPort: 8081
+        
+
+        resources:
+          requests:
+            memory: "1024Mi"
+            cpu: "500m"
+          limits:
+            memory: "4Gi"
+            cpu: "2000m"
+        
+        volumeMounts:
+        - mountPath: /config/config.json
+          name: mydir-config
+          subPath: config.json
+
+        - name: mydir-secret-config
+          mountPath: /config/connectorB.p12
+          subPath: connectorB.p12
+        
+        - name: mydir-secret-config
+          mountPath: /config/truststore.p12
+          subPath: truststore.p12
+        
+        - name: mydir-secret-config
+          mountPath: /conf/testbed2.p12
+          subPath: testbed2.p12            
+      
+      restartPolicy: Always
+
+      volumes:
+      - name: mydir-secret-config
+        secret:
+          secretName: connectorb-secret
+          items:
+            - key: connectorb
+              path: connectorB.p12
+            - key: truststore
+              path: truststore.p12
+            - key: testbed2
+              path: testbed2.p12                         
+
+
+      - name: mydir-config 
+        configMap:
+          name: ids-files-config-conectorb
+status: {}

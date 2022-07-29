@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose-resolved.yaml --volumes hostPath -o export
+    kompose.version: 1.26.0 (40646f47)
+  
+  labels:
+    io.kompose.service: broker-fuseki
+  name: broker-fuseki
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: broker-fuseki
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f docker-compose-resolved.yaml --volumes hostPath -o export
+        kompose.version: 1.26.0 (40646f47)
+      labels:
+        io.kompose.network/local: "true"
+        io.kompose.service: broker-fuseki
+    spec:
+      containers:
+      - image: registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker-open/fuseki
+        name: broker-fuseki
+        ports:
+        - containerPort: 3030
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "100m"
+          limits:
+            memory: "4Gi"
+            cpu: "2000m"
+
+        volumeMounts:
+        - mountPath: /fuseki
+          name: broker-fuseki
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: broker-fuseki
+        name: broker-fuseki
+status: {}

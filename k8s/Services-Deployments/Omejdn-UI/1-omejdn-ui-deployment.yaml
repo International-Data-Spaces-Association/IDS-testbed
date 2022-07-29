@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose-resolved.yaml --volumes hostPath -o export
+    kompose.version: 1.26.0 (40646f47)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: omejdn-ui
+  name: omejdn-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: omejdn-ui
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f docker-compose-resolved.yaml --volumes hostPath -o export
+        kompose.version: 1.26.0 (40646f47)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/local: "true"
+        io.kompose.service: omejdn-ui
+    spec:
+      # securityContext:
+      #   runAsUser: 1000
+      #   runAsGroup: 1000
+      #   #readOnlyRootFilesystem: true    
+      containers:
+      - env:
+          - name: API_URL
+            value: http://omejdn/auth/api/v1
+          - name: CLIENT_ID
+            value: adminUI
+          - name: OIDC_ISSUER
+            value: http://omejdn/auth
+        image: ghcr.io/fraunhofer-aisec/omejdn-ui:dev
+
+        name: omejdn-ui
+        ports:
+          - containerPort: 8088
+
+      
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "100m"
+          limits:
+            memory: "4Gi"
+            cpu: "2000m"
+
+      restartPolicy: Always
+status: {}

@@ -1,0 +1,1560 @@
+{
+	"info": {
+		"_postman_id": "f1d845dc-a26e-4ed4-b863-5ea97f25ad17",
+		"name": "TestBed_Guide",
+		"description": "Example deployment of DSC provider to DSC consumer communication",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Guide for Preparing and Validating the Preconfigured Setup",
+			"item": [
+				{
+					"name": "Preconfiguration",
+					"item": [
+						{
+							"name": "Register Resource: POST /api/offers",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Retrieve Offer ID\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.collectionVariables.set(\"offers\", jsonData[\"_links\"][\"self\"][\"href\"])",
+											"});",
+											"",
+											"pm.test(\"Status code is 201\", function () {",
+											"    pm.response.to.have.status(201);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"DWD Weather Warnings\",\n  \"description\": \"DWD weather warnings for germany.\",\n  \"keywords\": [\n    \"DWD\"\n  ],\n  \"publisher\": \"https://dwd.com\",\n  \"language\": \"DE\",\n  \"license\": \"\",\n  \"sovereign\": \"https://dwd.com\",\n  \"endpointDocumentation\": \"\",\n  \"paymentModality\": \"undefined\"\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{CONNECTORA_URL}}/api/offers",
+									"host": [
+										"{{CONNECTORA_URL}}"
+									],
+									"path": [
+										"api",
+										"offers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Catalog: POST /api/catalogs",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Retrieve Catalog ID\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.collectionVariables.set(\"catalogs\", jsonData[\"_links\"][\"self\"][\"href\"])",
+											"});",
+											"",
+											"pm.test(\"Status code is 201\", function () {",
+											"    pm.response.to.have.status(201);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"IDS Catalog\", \n    \"description\": \"This catalog is created from an IDS infomodel catalog.\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{CONNECTORA_URL}}/api/catalogs",
+									"host": [
+										"{{CONNECTORA_URL}}"
+									],
+									"path": [
+										"api",
+										"catalogs"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Offer to Catalog: POST /api/catalogs/{id}/offers",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[ \n    \"{{offers}}\"\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{catalogs}}/offers",
+									"host": [
+										"{{catalogs}}"
+									],
+									"path": [
+										"offers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Rule: POST /api/rules",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Retrieve Rule ID\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.collectionVariables.set(\"rules\", jsonData[\"_links\"][\"self\"][\"href\"])",
+											"});",
+											"",
+											"pm.test(\"Status code is 201\", function () {",
+											"    pm.response.to.have.status(201);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"title\": \"Example Usage Policy\",\n   \"description\": \"Usage policy provide access applied\",\n   \"value\": \"{\\n  \\\"@context\\\" : {\\n    \\\"ids\\\" : \\\"https://w3id.org/idsa/core/\\\",\\n    \\\"idsc\\\" : \\\"https://w3id.org/idsa/code/\\\"\\n  },\\n  \\\"@type\\\" : \\\"ids:Permission\\\",\\n  \\\"@id\\\" : \\\"https://w3id.org/idsa/autogen/permission/51f5f7e4-f97f-4f91-bc57-b243714642be\\\",\\n  \\\"ids:description\\\" : [ {\\n    \\\"@value\\\" : \\\"Usage policy provide access applied\\\",\\n    \\\"@type\\\" : \\\"http://www.w3.org/2001/XMLSchema#string\\\"\\n  } ],\\n  \\\"ids:title\\\" : [ {\\n    \\\"@value\\\" : \\\"Example Usage Policy\\\",\\n    \\\"@type\\\" : \\\"http://www.w3.org/2001/XMLSchema#string\\\"\\n  } ],\\n    \\\"ids:action\\\" : [ {\\n    \\\"@id\\\" : \\\"https://w3id.org/idsa/code/USE\\\"\\n  } ]\\n }\"\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{CONNECTORA_URL}}/api/rules",
+									"host": [
+										"{{CONNECTORA_URL}}"
+									],
+									"path": [
+										"api",
+										"rules"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Generate Contract Template: POST /api/contracts",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Retrieve Contract ID\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.collectionVariables.set(\"contracts\", jsonData[\"_links\"][\"self\"][\"href\"])",
+											"});",
+											"",
+											"pm.test(\"Status code is 201\", function () {",
+											"    pm.response.to.have.status(201);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"Contract\",\n    \"description\": \"This is an example contract\",\n    \"provider\":\"https://connectora:8080/\",\n    \"start\": \"2021-10-22T07:48:37.068Z\",\n    \"end\": \"2023-10-22T07:48:37.068Z\"\n} ",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{CONNECTORA_URL}}/api/contracts",
+									"host": [
+										"{{CONNECTORA_URL}}"
+									],
+									"path": [
+										"api",
+										"contracts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Rule to Contract Template: POST /api/contracts/{id}/rules",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n    \"{{rules}}\"  \n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{contracts}}/rules",
+									"host": [
+										"{{contracts}}"
+									],
+									"path": [
+										"rules"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Artifacts: POST /api/artifacts",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Retrieve Artifact ID\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.collectionVariables.set(\"artifacts\", jsonData[\"_links\"][\"self\"][\"href\"])",
+											"});",
+											"",
+											"pm.test(\"Status code is 201\", function () {",
+											"    pm.response.to.have.status(201);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"Example artifact with weather data\",\n    \"description\": \"This is an example artifact that contains information about weather data\",\n    \"value\": \"{‘type’:’FeatureCollection’,’features’:[{‘type’:’Feature’,’id’:’Autowarn_Analyse.fid-46a27240_180cc7856b1_-1fb6’,’geometry’:null,’geometry_name’:’THE_GEOM’,’properties’:{‘ID’:1667125,’CREATED’:’2022-05-02T21:55:05.285Z’,’ID_ALERT’:’1651528474710.2’,’SOURCE’:’NowCastMIXAnalysis’,’CATEGORY’:’Met’,’EVENT’:’HBN’,’SEVERITY’:’Unknown’,’EC_II’:’HBN’,’EC_GROUP’:’HEARTBEAT’,’EC_AREA_COLOR’:’255 255 255’,’EFFECTIVE’:’2022-05-02T21:54:34Z’,’ONSET’:’2022-05-02T21:50:00Z’,’EXPIRES’:’2022-05-02T21:55:00Z’,’SENDERNAME’:’propHB’,’HEADLINE’:’Heartbeat Event (NowCastMIX)’,’ALTITUDE’:0,’CEILING’:9842.52}},{‘type’:’Feature’,’id’:’Autowarn_Analyse.fid-46a27240_180cc7856b1_-1fb5’,’geometry’:{‘type’:’Polygon’,’coordinates’:[[[12.1763,47.4999],[12.152,47.5089],[12.1222,47.5306],[12.1116,47.5644],[12.0932,47.5691],[12.0633,47.5907],[12.0518,47.6078],[12.0536,47.6413],[12.0669,47.6578],[12.0992,47.6779],[12.1245,47.6857],[12.1743,47.6844],[12.1987,47.6754],[12.2286,47.6537],[12.2391,47.6198],[12.2575,47.6152],[12.2873,47.5934],[12.2987,47.5763],[12.2967,47.5428],[12.2833,47.5264],[12.2511,47.5063],[12.2259,47.4986],[12.1763,47.4999]]]},’geometry_name’:’THE_GEOM’,’properties’:{‘ID’:1667126,’CREATED’:’2022-05-02T21:55:05.378Z’,’ID_ALERT’:’1651528474710.1’,’SOURCE’:’NowCastMIXAnalysis’,’CATEGORY’:’Met’,’EVENT’:’31’,’SEVERITY’:’Minor’,’EC_II’:’31’,’EC_GROUP’:’Gewitter’,’EC_AREA_COLOR’:’255 255 51’,’EFFECTIVE’:’2022-05-02T21:54:34Z’,’ONSET’:’2022-05-02T21:50:00Z’,’EXPIRES’:’2022-05-02T21:55:00Z’,’SENDERNAME’:’propNC’,’HEADLINE’:’NowCastMIX’,’ALTITUDE’:0,’CEILING’:9842.52},’bbox’:[12.0518,47.4986,12.2987,47.6857]},{‘type’:’Feature’,’id’:’Autowarn_Analyse.fid-46a27240_180cc7856b1_-1fb4’,’geometry’:{‘type’:’Polygon’,’coordinates’:[[[12.1474,48.0968],[12.1227,48.1058],[12.0924,48.1276],[12.0807,48.1447],[12.0825,48.1784],[12.0961,48.1949],[12.1288,48.2151],[12.1545,48.2229],[12.205,48.2216],[12.2297,48.2126],[12.26,48.1907],[12.2716,48.1736],[12.2696,48.14],[12.256,48.1235],[12.2233,48.1033],[12.1977,48.0955],[12.1474,48.0968]]]},’geometry_name’:’THE_GEOM’,’properties’:{‘ID’:1667127,’CREATED’:’2022-05-02T21:55:05.378Z’,’ID_ALERT’:’1651528474710.1’,’SOURCE’:’NowCastMIXAnalysis’,’CATEGORY’:’Met’,’EVENT’:’31’,’SEVERITY’:’Minor’,’EC_II’:’31’,’EC_GROUP’:’Gewitter’,’EC_AREA_COLOR’:’255 255 51’,’EFFECTIVE’:’2022-05-02T21:54:34Z’,’ONSET’:’2022-05-02T21:50:00Z’,’EXPIRES’:’2022-05-02T21:55:00Z’,’SENDERNAME’:’propNC’,’HEADLINE’:’NowCastMIX’,’ALTITUDE’:0,’CEILING’:9842.52},’bbox’:[12.0807,48.0955,12.2716,48.2229]},{‘type’:’Feature’,’id’:’Autowarn_Analyse.fid-46a27240_180cc7856b1_-1fb3’,’geometry’:{‘type’:’Polygon’,’coordinates’:[[[7.9724,47.5204],[7.9472,47.5281],[7.915,47.5483],[7.9017,47.5647],[7.8999,47.5982],[7.9114,47.6153],[7.9414,47.637],[7.9658,47.646],[8.0155,47.6471],[8.0408,47.6393],[8.0729,47.6191],[8.0862,47.6026],[8.0879,47.5691],[8.0763,47.5521],[8.0463,47.5305],[8.022,47.5215],[7.9724,47.5204]]]},’geometry_name’:’THE_GEOM’,’properties’:{‘ID’:1669628,’CREATED’:’2022-05-03T14:00:07.731Z’,’ID_ALERT’:’1651586376386.1’,’SOURCE’:’NowCastMIXAnalysis’,’CATEGORY’:’Met’,’EVENT’:’31’,’SEVERITY’:’Minor’,’EC_II’:’31’,’EC_GROUP’:’Gewitter’,’EC_AREA_COLOR’:’255 255 51’,’EFFECTIVE’:’2022-05-03T13:59:36Z’,’ONSET’:’2022-05-03T13:55:00Z’,’EXPIRES’:’2022-05-03T14:00:00Z’,’SENDERNAME’:’propNC’,’HEADLINE’:’NowCastMIX’,’ALTITUDE’:0,’CEILING’:9842.52},’bbox’:[7.8999,47.5204,8.0879,47.6471]},{‘type’:’Feature’,’id’:’Autowarn_Analyse.fid-46a27240_180cc7856b1_-1fb2’,’geometry’:{‘type’:’Polygon’,’coordinates’:[[[11.7187,47.5272],[11.6942,47.5361],[11.6641,47.5576],[11.6524,47.5746],[11.6539,47.6081],[11.667,47.6246],[11.699,47.6449],[11.7243,47.6528],[11.7616,47.652],[11.768,47.6561],[11.7442,47.6818],[11.7457,47.7153],[11.759,47.7318],[11.7911,47.7521],[11.8164,47.76],[11.8663,47.7589],[11.8909,47.7499],[11.921,47.7283],[11.9326,47.7112],[11.9309,47.6777],[11.9177,47.6612],[11.8855,47.641],[11.8603,47.6332],[11.823,47.634],[11.8165,47.6299],[11.8402,47.6043],[11.8386,47.5707],[11.8254,47.5543],[11.7934,47.534],[11.7682,47.5262],[11.7187,47.5272]]]},’geometry_name’:’THE_GEOM’,’properties’:{‘ID’:1669629,’CREATED’:’2022-05-03T14:00:07.731Z’,’ID_ALERT’:’1651586376386.1’,’SOURCE’:’NowCastMIXAnalysis’,’CATEGORY’:’Met’,’EVENT’:’31’,’SEVERITY’:’Minor’,’EC_II’:’31’,’EC_GROUP’:’Gewitter’,’EC_AREA_COLOR’:’255 255 51’,’EFFECTIVE’:’2022-05-03T13:59:36Z’,’ONSET’:’2022-05-03T13:55:00Z’,’EXPIRES’:’2022-05-03T14:00:00Z’,’SENDERNAME’:’propNC’,’HEADLINE’:’NowCastMIX’,’ALTITUDE’:0,’CEILING’:9842.52},’bbox’:[11.6524,47.5262,11.9326,47.76]},{‘type’:’Feature’,’id’:’Autowarn_Analyse.fid-46a27240_180cc7856b1_-1fb1’,’geometry’:{‘type’:’Polygon’,’coordinates’:[[[14.5382,47.734],[14.5143,47.7437],[14.4857,47.7662],[14.4752,47.7836],[14.4791,47.8171],[14.4935,47.8331],[14.5271,47.8524],[14.5531,47.8594],[14.6029,47.8568],[14.6269,47.847],[14.6555,47.8244],[14.6659,47.807],[14.6619,47.7736],[14.6474,47.7575],[14.6138,47.7383],[14.5879,47.7313],[14.5382,47.734]]]},’geometry_name’:’THE_GEOM’,’properties’:{‘ID’:1669630,’CREATED’:’2022-05-03T14:00:07.731Z’,’ID_ALERT’:’1651586376386.1’,’SOURCE’:’NowCastMIXAnalysis’,’CATEGORY’:’Met’,’EVENT’:’31’,’SEVERITY’:’Minor’,’EC_II’:’31’,’EC_GROUP’:’Gewitter’,’EC_AREA_COLOR’:’255 255 51’,’EFFECTIVE’:’2022-05-03T13:59:36Z’,’ONSET’:’2022-05-03T13:55:00Z’,’EXPIRES’:’2022-05-03T14:00:00Z’,’SENDERNAME’:’propNC’,’HEADLINE’:’NowCastMIX’,’ALTITUDE’:0,’CEILING’:9842.52},’bbox’:[14.4752,47.7313,14.6659,47.8594]},{‘type’:’Feature’,’id’:’Autowarn_Analyse.fid-46a27240_180cc7856b1_-1fb0’,’geometry’:null,’geometry_name’:’THE_GEOM’,’properties’:{‘ID’:1670320,’CREATED’:’2022-05-03T14:50:08.356Z’,’ID_ALERT’:’1651589377221.3’,’SOURCE’:’NowCastMIXAnalysis’,’CATEGORY’:’Met’,’EVENT’:’HBN’,’SEVERITY’:’Unknown’,’EC_II’:’HBN’,’EC_GROUP’:’HEARTBEAT’,’EC_AREA_COLOR’:’255 255 255’,’EFFECTIVE’:’2022-05-03T14:49:37Z’,’ONSET’:’2022-05-03T14:45:00Z’,’EXPIRES’:’2022-05-03T14:50:00Z’,’SENDERNAME’:’propHB’,’HEADLINE’:’Heartbeat Event (NowCastMIX)’,’ALTITUDE’:0,’CEILING’:9842.52}},{‘type’:’Feature’,’id’:’Autowarn_Analyse.fid-46a27240_180cc7856b1_-1faf’,’geometry’:{‘type’:’Polygon’,’coordinates’:[[[8.6177,47.5166],[8.5926,47.5245],[8.5608,47.5449],[8.5478,47.5615],[8.5465,47.595],[8.5583,47.612],[8.5886,47.6334],[8.6132,47.6422],[8.6629,47.643],[8.6881,47.635],[8.7199,47.6145],[8.7329,47.598],[8.734,47.5645],[8.7221,47.5475],[8.6918,47.5261],[8.6673,47.5174],[8.6177,47.5166]]]},’geometry_name’:’THE_GEOM’,’properties’:{‘ID’:1670321,’CREATED’:’2022-05-03T14:50:08.506Z’,’ID_ALERT’:’1651589377221.1’,’SOURCE’:’NowCastMIXAnalysis’,’CATEGORY’:’Met’,’EVENT’:’31’,’SEVERITY’:’Minor’,’EC_II’:’31’,’EC_GROUP’:’Gewitter’,’EC_AREA_COLOR’:’255 255 51’,’EFFECTIVE’:’2022-05-03T14:49:37Z’,’ONSET’:’2022-05-03T14:45:00Z’,’EXPIRES’:’2022-05-03T14:50:00Z’,’SENDERNAME’:’propNC’,’HEADLINE’:’NowCastMIX’,’ALTITUDE’:0,’CEILING’:9842.52},’bbox’:[8.5465,47.5166,8.734,47.643]},{‘type’:’Feature’,’id’:’Autowarn_Analyse.fid-46a27240_180cc7856b1_-1fae’,’geometry’:{‘type’:’Polygon’,’coordinates’:[[[6.4864,47.2036],[6.4611,47.2109],[6.4285,47.2305],[6.4146,47.2466],[6.4116,47.28],[6.4223,47.2972],[6.4512,47.3194],[6.4751,47.3288],[6.5243,47.3308],[6.5497,47.3235],[6.5823,47.3038],[6.5961,47.2877],[6.599,47.2543],[6.5882,47.2371],[6.5593,47.215],[6.5355,47.2056],[6.4864,47.2036]]]},’geometry_name’:’THE_GEOM’,’properties’:{‘ID’:1670322,’CREATED’:’2022-05-03T14:50:08.506Z’,’ID_ALERT’:’1651589377221.1’,’SOURCE’:’NowCastMIXAnalysis’,’CATEGORY’:’Met’,’EVENT’:’31’,’SEVERITY’:’Minor’,’EC_II’:’31’,’EC_GROUP’:’Gewitter’,’EC_AREA_COLOR’:’255 255 51’,’EFFECTIVE’:’2022-05-03T14:49:37Z’,’ONSET’:’2022-05-03T14:45:00Z’,’EXPIRES’:’2022-05-03T14:50:00Z’,’SENDERNAME’:’propNC’,’HEADLINE’:’NowCastMIX’,’ALTITUDE’:0,’CEILING’:9842.52},’bbox’:[6.4116,47.2036,6.599,47.3308]},{‘type’:’Feature’,’id’:’Autowarn_Analyse.fid-46a27240_180cc7856b1_-1fad’,’geometry’:{‘type’:’Polygon’,’coordinates’:[[[10.9153,47.657],[10.8906,47.6656],[10.8599,47.6869],[10.8478,47.7038],[10.8486,47.7373],[10.8614,47.754],[10.8931,47.7746],[10.9056,47.7745],[10.9373,47.7951],[10.9379,47.8203],[10.9508,47.837],[10.9826,47.8576],[11.0078,47.8657],[11.0579,47.8651],[11.0827,47.8564],[11.1133,47.835],[11.1253,47.818],[11.1244,47.7845],[11.1116,47.7763],[11.1109,47.7511],[11.0852,47.7263],[11.0848,47.7095],[11.0718,47.6929],[11.0401,47.6723],[11.015,47.6642],[10.9777,47.6647],[10.965,47.6564],[10.9153,47.657]]]},’geometry_name’:’THE_GEOM’,’properties’:{‘ID’:1670323,’CREATED’:’2022-05-03T14:50:08.506Z’,’ID_ALERT’:’1651589377221.1’,’SOURCE’:’NowCastMIXAnalysis’,’CATEGORY’:’Met’,’EVENT’:’31’,’SEVERITY’:’Minor’,’EC_II’:’31’,’EC_GROUP’:’Gewitter’,’EC_AREA_COLOR’:’255 255 51’,’EFFECTIVE’:’2022-05-03T14:49:37Z’,’ONSET’:’2022-05-03T14:45:00Z’,’EXPIRES’:’2022-05-03T14:50:00Z’,’SENDERNAME’:’propNC’,’HEADLINE’:’NowCastMIX’,’ALTITUDE’:0,’CEILING’:9842.52},’bbox’:[10.8478,47.6564,11.1253,47.8657]},{‘type’:’Feature’,’id’:’Autowarn_Analyse.fid-46a27240_180cc7856b1_-1fac’,’geometry’:{‘type’:’Polygon’,’coordinates’:[[[13.7479,47.5792],[13.7239,47.5887],[13.6949,47.6109],[13.6841,47.6282],[13.6873,47.6617],[13.7014,47.6778],[13.7345,47.6974],[13.7601,47.7047],[13.8099,47.7025],[13.8339,47.693],[13.8629,47.6707],[13.8736,47.6534],[13.8703,47.6199],[13.8562,47.6038],[13.8231,47.5843],[13.7975,47.577],[13.7479,47.5792]]]},’geometry_name’:’THE_GEOM’,’properties’:{‘ID’:1670324,’CREATED’:’2022-05-03T14:50:08.506Z’,’ID_ALERT’:’1651589377221.1’,’SOURCE’:’NowCastMIXAnalysis’,’CATEGORY’:’Met’,’EVENT’:’31’,’SEVERITY’:’Minor’,’EC_II’:’31’,’EC_GROUP’:’Gewitter’,’EC_AREA_COLOR’:’255 255 51’,’EFFECTIVE’:’2022-05-03T14:49:37Z’,’ONSET’:’2022-05-03T14:45:00Z’,’EXPIRES’:’2022-05-03T14:50:00Z’,’SENDERNAME’:’propNC’,’HEADLINE’:’NowCastMIX’,’ALTITUDE’:0,’CEILING’:9842.52},’bbox’:[13.6841,47.577,13.8736,47.7047]},{‘type’:’Feature’,’id’:’Autowarn_Analyse.fid-46a27240_180cc7856b1_-1fab’,’geometry’:{‘type’:’Polygon’,’coordinates’:[[[11.8024,47.7267],[11.7779,47.7356],[11.7477,47.7572],[11.7359,47.7742],[11.7378,47.8162],[11.7257,47.8248],[11.7272,47.8584],[11.7405,47.8749],[11.7727,47.8952],[11.7982,47.9031],[11.8482,47.902],[11.8729,47.8931],[11.9031,47.8714],[11.9385,47.8286],[11.9368,47.7951],[11.9239,47.787],[11.9231,47.7702],[11.9098,47.7537],[11.8776,47.7335],[11.8522,47.7256],[11.8024,47.7267]]]},’geometry_name’:’THE_GEOM’,’properties’:{‘ID’:1670325,’CREATED’:’2022-05-03T14:50:08.506Z’,’ID_ALERT’:’1651589377221.1’,’SOURCE’:’NowCastMIXAnalysis’,’CATEGORY’:’Met’,’EVENT’:’31’,’SEVERITY’:’Minor’,’EC_II’:’31’,’EC_GROUP’:’Gewitter’,’EC_AREA_COLOR’:’255 255 51’,’EFFECTIVE’:’2022-05-03T14:49:37Z’,’ONSET’:’2022-05-03T14:45:00Z’,’EXPIRES’:’2022-05-03T14:50:00Z’,’SENDERNAME’:’propNC’,’HEADLINE’:’NowCastMIX’,’ALTITUDE’:0,’CEILING’:9842.52},’bbox’:[11.7257,47.7256,11.9385,47.9031]},{‘type’:’Feature’,’id’:’Autowarn_Analyse.fid-46a27240_180cc7856b1_-1faa’,’geometry’:{‘type’:’Polygon’,’coordinates’:[[[4.5813,47.6824],[4.5553,47.6891],[4.5213,47.708],[4.5065,47.7239],[4.5018,47.7573],[4.5118,47.7748],[4.5399,47.7977],[4.5636,47.8076],[4.6133,47.8108],[4.653,47.7964],[4.6563,47.8177],[4.6664,47.8352],[4.6946,47.858],[4.7184,47.8679],[4.7683,47.871],[4.7943,47.8642],[4.8283,47.8452],[4.843,47.8292],[4.8475,47.7958],[4.8373,47.7783],[4.809,47.7555],[4.7853,47.7457],[4.7356,47.7426],[4.6961,47.757],[4.6927,47.7357],[4.6826,47.7182],[4.6545,47.6954],[4.6309,47.6855],[4.5813,47.6824]]]},’geometry_name’:’THE_GEOM’,’properties’:{‘ID’:1670326,’CREATED’:’2022-05-03T14:50:08.506Z’,’ID_ALERT’:’1651589377221.1’,’SOURCE’:’NowCastMIXAnalysis’,’CATEGORY’:’Met’,’EVENT’:’31’,’SEVERITY’:’Minor’,’EC_II’:’31’,’EC_GROUP’:’Gewitter’,’EC_AREA_COLOR’:’255 255 51’,’EFFECTIVE’:’2022-05-03T14:49:37Z’,’ONSET’:’2022-05-03T14:45:00Z’,’EXPIRES’:’2022-05-03T14:50:00Z’,’SENDERNAME’:’propNC’,’HEADLINE’:’NowCastMIX’,’ALTITUDE’:0,’CEILING’:9842.52},’bbox’:[4.5018,47.6824,4.8475,47.871]},{‘type’:’Feature’,’id’:’Autowarn_Analyse.fid-46a27240_180cc7856b1_-1fa9’,’geometry’:{‘type’:’Polygon’,’coordinates’:[[[7.1243,48.2439],[7.0984,48.2515],[7.0652,48.2714],[7.0513,48.2878],[7.0487,48.3214],[7.06,48.3387],[7.0901,48.3608],[7.1147,48.37],[7.1654,48.3717],[7.1913,48.3641],[7.2245,48.3441],[7.2384,48.3277],[7.2409,48.2941],[7.2294,48.2769],[7.1994,48.2548],[7.1748,48.2456],[7.1243,48.2439]]]},’geometry_name’:’THE_GEOM’,’properties’:{‘ID’:1670327,’CREATED’:’2022-05-03T14:50:08.506Z’,’ID_ALERT’:’1651589377221.1’,’SOURCE’:’NowCastMIXAnalysis’,’CATEGORY’:’Met’,’EVENT’:’31’,’SEVERITY’:’Minor’,’EC_II’:’31’,’EC_GROUP’:’Gewitter’,’EC_AREA_COLOR’:’255 255 51’,’EFFECTIVE’:’2022-05-03T14:49:37Z’,’ONSET’:’2022-05-03T14:45:00Z’,’EXPIRES’:’2022-05-03T14:50:00Z’,’SENDERNAME’:’propNC’,’HEADLINE’:’NowCastMIX’,’ALTITUDE’:0,’CEILING’:9842.52},’bbox’:[7.0487,48.2439,7.2409,48.3717]},{‘type’:’Feature’,’id’:’Autowarn_Analyse.fid-46a27240_180cc7856b1_-1fa8’,’geometry’:{‘type’:’Polygon’,’coordinates’:[[[7.0462,48.4352],[7.0202,48.4427],[6.9868,48.4627],[6.9861,48.4711],[6.9667,48.4746],[6.9333,48.4946],[6.9192,48.511],[6.9165,48.5446],[6.9279,48.5619],[6.958,48.5841],[6.9828,48.5934],[7.021,48.5948],[7.0331,48.6036],[7.084,48.6053],[7.1101,48.5978],[7.1436,48.5778],[7.1576,48.5613],[7.1633,48.4856],[7.1518,48.4683],[7.1217,48.4462],[7.0969,48.4369],[7.0462,48.4352]]]},’geometry_name’:’THE_GEOM’,’properties’:{‘ID’:1670328,’CREATED’:’2022-05-03T14:50:08.506Z’,’ID_ALERT’:’1651589377221.1’,’SOURCE’:’NowCastMIXAnalysis’,’CATEGORY’:’Met’,’EVENT’:’31’,’SEVERITY’:’Minor’,’EC_II’:’31’,’EC_GROUP’:’Gewitter’,’EC_AREA_COLOR’:’255 255 51’,’EFFECTIVE’:’2022-05-03T14:49:37Z’,’ONSET’:’2022-05-03T14:45:00Z’,’EXPIRES’:’2022-05-03T14:50:00Z’,’SENDERNAME’:’propNC’,’HEADLINE’:’NowCastMIX’,’ALTITUDE’:0,’CEILING’:9842.52},’bbox’:[6.9165,48.4352,7.1633,48.6053]},{‘type’:’Feature’,’id’:’Autowarn_Analyse.fid-46a27240_180cc7856b1_-1fa7’,’geometry’:{‘type’:’Polygon’,’coordinates’:[[[13.9063,48.5325],[13.8699,48.551],[13.8445,48.5522],[13.831,48.5443],[13.7801,48.5466],[13.7555,48.5561],[13.7258,48.5785],[13.7147,48.5959],[13.7181,48.6295],[13.7325,48.6458],[13.7664,48.6655],[13.7928,48.6728],[13.8438,48.6706],[13.8803,48.652],[13.9058,48.6509],[13.9194,48.6587],[13.9704,48.6564],[13.995,48.6468],[14.0246,48.6243],[14.0355,48.6069],[14.0319,48.5732],[14.0174,48.557],[13.9834,48.5374],[13.9572,48.5302],[13.9063,48.5325]]]},’geometry_name’:’THE_GEOM’,’properties’:{‘ID’:1670329,’CREATED’:’2022-05-03T14:50:08.506Z’,’ID_ALERT’:’1651589377221.1’,’SOURCE’:’NowCastMIXAnalysis’,’CATEGORY’:’Met’,’EVENT’:’31’,’SEVERITY’:’Minor’,’EC_II’:’31’,’EC_GROUP’:’Gewitter’,’EC_AREA_COLOR’:’255 255 51’,’EFFECTIVE’:’2022-05-03T14:49:37Z’,’ONSET’:’2022-05-03T14:45:00Z’,’EXPIRES’:’2022-05-03T14:50:00Z’,’SENDERNAME’:’propNC’,’HEADLINE’:’NowCastMIX’,’ALTITUDE’:0,’CEILING’:9842.52},’bbox’:[13.7147,48.5302,14.0355,48.6728]},{‘type’:’Feature’,’id’:’Autowarn_Analyse.fid-46a27240_180cc7856b1_-1fa6’,’geometry’:{‘type’:’Polygon’,’coordinates’:[[[13.1074,48.5902],[13.0826,48.5996],[13.0524,48.6218],[13.041,48.6391],[13.0437,48.6728],[13.0579,48.6892],[13.0915,48.7091],[13.1178,48.7166],[13.1689,48.7148],[13.1937,48.7054],[13.2238,48.6832],[13.2351,48.6658],[13.2323,48.6321],[13.2181,48.6158],[13.1845,48.5959],[13.1583,48.5884],[13.1074,48.5902]]]},’geometry_name’:’THE_GEOM’,’properties’:{‘ID’:1670330,’CREATED’:’2022-05-03T14:50:08.506Z’,’ID_ALERT’:’1651589377221.1’,’SOURCE’:’NowCastMIXAnalysis’,’CATEGORY’:’Met’,’EVENT’:’31’,’SEVERITY’:’Minor’,’EC_II’:’31’,’EC_GROUP’:’Gewitter’,’EC_AREA_COLOR’:’255 255 51’,’EFFECTIVE’:’2022-05-03T14:49:37Z’,’ONSET’:’2022-05-03T14:45:00Z’,’EXPIRES’:’2022-05-03T14:50:00Z’,’SENDERNAME’:’propNC’,’HEADLINE’:’NowCastMIX’,’ALTITUDE’:0,’CEILING’:9842.52},’bbox’:[13.041,48.5884,13.2351,48.7166]},{‘type’:’Feature’,’id’:’Autowarn_Analyse.fid-46a27240_180cc7856b1_-1fa5’,’geometry’:{‘type’:’Polygon’,’coordinates’:[[[6.7605,48.653],[6.7343,48.6605],[6.7006,48.6803],[6.6863,48.6967],[6.6834,48.7304],[6.6947,48.7477],[6.7248,48.77],[6.7497,48.7794],[6.8009,48.7813],[6.8272,48.7738],[6.8609,48.7539],[6.8751,48.7375],[6.8779,48.7038],[6.8665,48.6865],[6.8364,48.6643],[6.8115,48.6549],[6.7605,48.653]]]},’geometry_name’:’THE_GEOM’,’properties’:{‘ID’:1670331,’CREATED’:’2022-05-03T14:50:08.506Z’,’ID_ALERT’:’1651589377221.1’,’SOURCE’:’NowCastMIXAnalysis’,’CATEGORY’:’Met’,’EVENT’:’31’,’SEVERITY’:’Minor’,’EC_II’:’31’,’EC_GROUP’:’Gewitter’,’EC_AREA_COLOR’:’255 255 51’,’EFFECTIVE’:’2022-05-03T14:49:37Z’,’ONSET’:’2022-05-03T14:45:00Z’,’EXPIRES’:’2022-05-03T14:50:00Z’,’SENDERNAME’:’propNC’,’HEADLINE’:’NowCastMIX’,’ALTITUDE’:0,’CEILING’:9842.52},’bbox’:[6.6834,48.653,6.8779,48.7813]},{‘type’:’Feature’,’id’:’Autowarn_Analyse.fid-46a27240_180cc7856b1_-1fa4’,’geometry’:{‘type’:’Polygon’,’coordinates’:[[[8.3166,48.7394],[8.2906,48.7473],[8.2577,48.7678],[8.2441,48.7844],[8.2425,48.8182],[8.2545,48.8354],[8.2857,48.8571],[8.311,48.8661],[8.3623,48.867],[8.3884,48.8591],[8.4213,48.8385],[8.4349,48.8219],[8.4363,48.7881],[8.4242,48.771],[8.393,48.7493],[8.3678,48.7404],[8.3166,48.7394]]]},’geometry_name’:’THE_GEOM’,’properties’:{‘ID’:1670332,’CREATED’:’2022-05-03T14:50:08.506Z’,’ID_ALERT’:’1651589377221.1’,’SOURCE’:’NowCastMIXAnalysis’,’CATEGORY’:’Met’,’EVENT’:’31’,’SEVERITY’:’Minor’,’EC_II’:’31’,’EC_GROUP’:’Gewitter’,’EC_AREA_COLOR’:’255 255 51’,’EFFECTIVE’:’2022-05-03T14:49:37Z’,’ONSET’:’2022-05-03T14:45:00Z’,’EXPIRES’:’2022-05-03T14:50:00Z’,’SENDERNAME’:’propNC’,’HEADLINE’:’NowCastMIX’,’ALTITUDE’:0,’CEILING’:9842.52},’bbox’:[8.2425,48.7394,8.4363,48.867]},{‘type’:’Feature’,’id’:’Autowarn_Analyse.fid-46a27240_180cc7856b1_-1fa3’,’geometry’:{‘type’:’Polygon’,’coordinates’:[[[8.6741,48.7709],[8.661,48.7792],[8.6226,48.7786],[8.5898,48.7992],[8.5763,48.8159],[8.575,48.8496],[8.5872,48.8667],[8.6186,48.8884],[8.644,48.8972],[8.6954,48.898],[8.7214,48.89],[8.7542,48.8693],[8.7676,48.8526],[8.7687,48.8188],[8.7564,48.8017],[8.7251,48.7801],[8.6741,48.7709]]]},’geometry_name’:’THE_GEOM’,’properties’:{‘ID’:1670333,’CREATED’:’2022-05-03T14:50:08.506Z’,’ID_ALERT’:’1651589377221.1’,’SOURCE’:’NowCastMIXAnalysis’,’CATEGORY’:’Met’,’EVENT’:’31’,’SEVERITY’:’Minor’,’EC_II’:’31’,’EC_GROUP’:’Gewitter’,’EC_AREA_COLOR’:’255 255 51’,’EFFECTIVE’:’2022-05-03T14:49:37Z’,’ONSET’:’2022-05-03T14:45:00Z’,’EXPIRES’:’2022-05-03T14:50:00Z’,’SENDERNAME’:’propNC’,’HEADLINE’:’NowCastMIX’,’ALTITUDE’:0,’CEILING’:9842.52},’bbox’:[8.575,48.7709,8.7687,48.898]},{‘type’:’Feature’,’id’:’Autowarn_Analyse.fid-46a27240_180cc7856b1_-1fa2’,’geometry’:{‘type’:’Polygon’,’coordinates’:[[[7.7565,48.8958],[7.7303,48.9036],[7.6968,48.9239],[7.6829,48.9404],[7.6809,48.9742],[7.6927,48.9915],[7.7236,49.0134],[7.7489,49.0226],[7.8004,49.0239],[7.8267,49.0161],[7.8601,48.9957],[7.874,48.9791],[7.8759,48.9453],[7.864,48.9281],[7.8331,48.9062],[7.8078,48.8971],[7.7565,48.8958]]]},’geometry_name’:’THE_GEOM’,’properties’:{‘ID’:1670334,’CREATED’:’2022-05-03T14:50:08.506Z’,’ID_ALERT’:’1651589377221.1’,’SOURCE’:’NowCastMIXAnalysis’,’CATEGORY’:’Met’,’EVENT’:’31’,’SEVERITY’:’Minor’,’EC_II’:’31’,’EC_GROUP’:’Gewitter’,’EC_AREA_COLOR’:’255 255 51’,’EFFECTIVE’:’2022-05-03T14:49:37Z’,’ONSET’:’2022-05-03T14:45:00Z’,’EXPIRES’:’2022-05-03T14:50:00Z’,’SENDERNAME’:’propNC’,’HEADLINE’:’NowCastMIX’,’ALTITUDE’:0,’CEILING’:9842.52},’bbox’:[7.6809,48.8958,7.8759,49.0239]},{‘type’:’Feature’,’id’:’Autowarn_Analyse.fid-46a27240_180cc7856b1_-1fa1’,’geometry’:{‘type’:’Polygon’,’coordinates’:[[[8.1783,48.1548],[8.1141,48.1787],[8.0889,48.1781],[8.0432,48.2066],[8.0424,48.2234],[8.0293,48.2315],[8.0284,48.2483],[8.0406,48.257],[8.0398,48.2739],[8.1192,48.3304],[8.1442,48.3394],[8.1948,48.3404],[8.2205,48.3325],[8.2531,48.3122],[8.2673,48.2787],[8.2803,48.2706],[8.2815,48.2453],[8.2945,48.2372],[8.296,48.2035],[8.2841,48.1865],[8.2413,48.1561],[8.1783,48.1548]]]},’geometry_name’:’THE_GEOM’,’properties’:{‘ID’:1668800,’CREATED’:’2022-05-03T12:45:04.602Z’,’ID_ALERT’:’1651581876847.4’,’SOURCE’:’NowCastMIXAnalysis’,’CATEGORY’:’Met’,’EVENT’:’42’,’SEVERITY’:’Severe’,’EC_II’:’42’,’EC_GROUP’:’Gewitter’,’EC_AREA_COLOR’:’255 112 112’,’EFFECTIVE’:’2022-05-03T12:44:36Z’,’ONSET’:’2022-05-03T12:40:00Z’,’EXPIRES’:’2022-05-03T12:45:00Z’,’SENDERNAME’:’propNC’,’HEADLINE’:’NowCastMIX’,’ALTITUDE’:0,’CEILING’:9842.52},’bbox’:[8.0284,48.1548,8.296,48.3404]},{‘type’:’Feature’,’id’:’Autowarn_Analyse.fid-46a27240_180cc7856b1_-1fa0’,’geometry’:{‘type’:’Polygon’,’coordinates’:[[[8.1073,48.0608],[8.0817,48.0686],[8.0492,48.0889],[8.0358,48.1054],[8.0336,48.1474],[8.0076,48.1637],[7.9941,48.1802],[7.9923,48.2138],[8.0041,48.2309],[8.0223,48.244],[8.0424,48.2234],[8.0432,48.2066],[8.0889,48.1781],[8.1141,48.1787],[8.1783,48.1548],[8.2287,48.1559],[8.2356,48.1434],[8.2234,48.1347],[8.2246,48.1095],[8.2128,48.0925],[8.1823,48.0708],[8.1576,48.0619],[8.1073,48.0608]]]},’geometry_name’:’THE_GEOM’,’properties’:{‘ID’:1668801,’CREATED’:’2022-05-03T12:45:04.718Z’,’ID_ALERT’:’1651581876847.3’,’SOURCE’:’NowCastMIXAnalysis’,’CATEGORY’:’Met’,’EVENT’:’38’,’SEVERITY’:’Moderate’,’EC_II’:’38’,’EC_GROUP’:’Gewitter’,’EC_AREA_COLOR’:’255 112 0’,’EFFECTIVE’:’2022-05-03T12:44:36Z’,’ONSET’:’2022-05-03T12:40:00Z’,’EXPIRES’:’2022-05-03T12:45:00Z’,’SENDERNAME’:’propNC’,’HEADLINE’:’NowCastMIX’,’ALTITUDE’:0,’CEILING’:9842.52},’bbox’:[7.9923,48.0608,8.2356,48.244]},{‘type’:’Feature’,’id’:’Autowarn_Analyse.fid-46a27240_180cc7856b1_-1f9f’,’geometry’:{‘type’:’Polygon’,’coordinates’:[[[7.8801,48.0723],[7.8545,48.08],[7.8219,48.1003],[7.8084,48.1167],[7.8064,48.1503],[7.8181,48.1675],[7.8484,48.1893],[7.8731,48.1983],[7.9236,48.1996],[7.9493,48.1918],[7.9819,48.1715],[7.9954,48.155],[7.9972,48.1214],[7.9855,48.1042],[7.9551,48.0825],[7.9304,48.0735],[7.8801,48.0723]]]},’geometry_name’:’THE_GEOM’,’properties’:{‘ID’:1668802,’CREATED’:’2022-05-03T12:45:04.718Z’,’ID_ALERT’:’1651581876847.3’,’SOURCE’:’NowCastMIXAnalysis’,’CATEGORY’:’Met’,’EVENT’:’38’,’SEVERITY’:’Moderate’,’EC_II’:’38’,’EC_GROUP’:’Gewitter’,’EC_AREA_COLOR’:’255 112 0’,’EFFECTIVE’:’2022-05-03T12:44:36Z’,’ONSET’:’2022-05-03T12:40:00Z’,’EXPIRES’:’2022-05-03T12:45:00Z’,’SENDERNAME’:’propNC’,’HEADLINE’:’NowCastMIX’,’ALTITUDE’:0,’CEILING’:9842.52},’bbox’:[7.8064,48.0723,7.9972,48.1996]},{‘type’:’Feature’,’id’:’Autowarn_Analyse.fid-46a27240_180cc7856b1_-1f9e’,’geometry’:{‘type’:’Polygon’,’coordinates’:[[[8.3017,48.2163],[8.2945,48.2372],[8.2815,48.2453],[8.2803,48.2706],[8.2673,48.2787],[8.2666,48.2956],[8.2531,48.3122],[8.2205,48.3325],[8.2079,48.3323],[8.1883,48.3445],[8.2067,48.3575],[8.2316,48.3665],[8.2823,48.3675],[8.308,48.3596],[8.3406,48.3391],[8.354,48.3226],[8.3555,48.2889],[8.3432,48.2802],[8.3443,48.255],[8.3017,48.2163]]]},’geometry_name’:’THE_GEOM’,’properties’:{‘ID’:1668803,’CREATED’:’2022-05-03T12:45:04.718Z’,’ID_ALERT’:’1651581876847.3’,’SOURCE’:’NowCastMIXAnalysis’,’CATEGORY’:’Met’,’EVENT’:’38’,’SEVERITY’:’Moderate’,’EC_II’:’38’,’EC_GROUP’:’Gewitter’,’EC_AREA_COLOR’:’255 112 0’,’EFFECTIVE’:’2022-05-03T12:44:36Z’,’ONSET’:’2022-05-03T12:40:00Z’,’EXPIRES’:’2022-05-03T12:45:00Z’,’SENDERNAME’:’propNC’,’HEADLINE’:’NowCastMIX’,’ALTITUDE’:0,’CEILING’:9842.52},’bbox’:[8.1883,48.2163,8.3555,48.3675]},{‘type’:’Feature’,’id’:’Autowarn_Analyse.fid-46a27240_180cc7856b1_-1f9d’,’geometry’:{‘type’:’Polygon’,’coordinates’:[[[8.0341,48.2611],[8.0258,48.2988],[8.0376,48.3159],[8.0682,48.3377],[8.0931,48.3467],[8.1437,48.3478],[8.1503,48.3437],[8.1319,48.3307],[8.1192,48.3304],[8.0398,48.2739],[8.0341,48.2611]]]},’geometry_name’:’THE_GEOM’,’properties’:{‘ID’:1668804,’CREATED’:’2022-05-03T12:45:04.718Z’,’ID_ALERT’:’1651581876847.3’,’SOURCE’:’NowCastMIXAnalysis’,’CATEGORY’:’Met’,’EVENT’:’38’,’SEVERITY’:’Moderate’,’EC_II’:’38’,’EC_GROUP’:’Gewitter’,’EC_AREA_COLOR’:’255 112 0’,’EFFECTIVE’:’2022-05-03T12:44:36Z’,’ONSET’:’2022-05-03T12:40:00Z’,’EXPIRES’:’2022-05-03T12:45:00Z’,’SENDERNAME’:’propNC’,’HEADLINE’:’NowCastMIX’,’ALTITUDE’:0,’CEILING’:9842.52},’bbox’:[8.0258,48.2611,8.1503,48.3478]},{‘type’:’Feature’,’id’:’Autowarn_Analyse.fid-46a27240_180cc7856b1_-1f9c’,’geometry’:{‘type’:’Polygon’,’coordinates’:[[[8.2942,47.821],[8.2688,47.8289],[8.2366,47.8492],[8.2233,47.8657],[8.2218,47.8993],[8.2335,47.9164],[8.2639,47.938],[8.2886,47.9469],[8.3387,47.9479],[8.3641,47.94],[8.3963,47.9196],[8.4096,47.903],[8.411,47.8694],[8.3991,47.8524],[8.3688,47.8309],[8.3441,47.822],[8.2942,47.821]]]},’geometry_name’:’THE_GEOM’,’properties’:{‘ID’:1668805,’CREATED’:’2022-05-03T12:45:04.736Z’,’ID_ALERT’:’1651581876847.2’,’SOURCE’:’NowCastMIXAnalysis’,’CATEGORY’:’Met’,’EVENT’:’34’,’SEVERITY’:’Moderate’,’EC_II’:’34’,’EC_GROUP’:’Gewitter’,’EC_AREA_COLOR’:’255 208 144’,’EFFECTIVE’:’2022-05-03T12:44:36Z’,’ONSET’:’2022-05-03T12:40:00Z’,’EXPIRES’:’2022-05-03T12:45:00Z’,’SENDERNAME’:’propNC’,’HEADLINE’:’NowCastMIX’,’ALTITUDE’:0,’CEILING’:9842.52},’bbox’:[8.2218,47.821,8.411,47.9479]},{‘type’:’Feature’,’id’:’Autowarn_Analyse.fid-46a27240_180cc7856b1_-1f9b’,’geometry’:{‘type’:’Polygon’,’coordinates’:[[[9.3307,47.8858],[9.318,47.8941],[9.2804,47.8938],[9.2552,47.902],[9.2235,47.9227],[9.2106,47.9394],[9.2099,47.973],[9.2223,47.9815],[9.222,47.9983],[9.2342,48.0152],[9.2652,48.0365],[9.2902,48.0451],[9.3404,48.0455],[9.3911,48.0207],[9.4035,48.0291],[9.4538,48.0295],[9.4791,48.0212],[9.5107,48.0004],[9.5235,47.9837],[9.5239,47.9501],[9.5116,47.9332],[9.4805,47.912],[9.4556,47.9035],[9.418,47.9032],[9.3807,47.8862],[9.3307,47.8858]]]},’geometry_name’:’THE_GEOM’,’properties’:{‘ID’:1668806,’CREATED’:’2022-05-03T12:45:04.736Z’,’ID_ALERT’:’1651581876847.2’,’SOURCE’:’NowCastMIXAnalysis’,’CATEGORY’:’Met’,’EVENT’:’34’,’SEVERITY’:’Moderate’,’EC_II’:’34’,’EC_GROUP’:’Gewitter’,’EC_AREA_COLOR’:’255 208 144’,’EFFECTIVE’:’2022-05-03T12:44:36Z’,’ONSET’:’2022-05-03T12:40:00Z’,’EXPIRES’:’2022-05-03T12:45:00Z’,’SENDERNAME’:’propNC’,’HEADLINE’:’NowCastMIX’,’ALTITUDE’:0,’CEILING’:9842.52},’bbox’:[9.2099,47.8858,9.5239,48.0455]},{‘type’:’Feature’,’id’:’Autowarn_Analyse.fid-46a27240_180cc7856b1_-1f9a’,’geometry’:{‘type’:’Polygon’,’coordinates’:[[[9.2037,48.5748],[9.1781,48.583],[9.1457,48.6038],[9.1326,48.6205],[9.1318,48.6543],[9.1694,48.6884],[9.143,48.7219],[9.1423,48.7557],[9.1547,48.7727],[9.1863,48.7941],[9.2117,48.8028],[9.2502,48.8032],[9.2755,48.8203],[9.301,48.8289],[9.4037,48.8297],[9.4424,48.813],[9.4615,48.8258],[9.4614,48.8343],[9.4932,48.8556],[9.5188,48.8642],[9.5702,48.8645],[9.5959,48.8561],[9.6282,48.8352],[9.6412,48.8183],[9.6416,48.7845],[9.6289,48.7676],[9.5971,48.7463],[9.546,48.7376],[9.5272,48.708],[9.4955,48.6867],[9.47,48.6781],[9.4061,48.6777],[9.3871,48.6649],[9.3877,48.6312],[9.3752,48.6142],[9.3437,48.5929],[9.3183,48.5842],[9.2673,48.5838],[9.2547,48.5753],[9.2037,48.5748]]]},’geometry_name’:’THE_GEOM’,’properties’:{‘ID’:1668807,’CREATED’:’2022-05-03T12:45:04.736Z’,’ID_ALERT’:’1651581876847.2’,’SOURCE’:’NowCastMIXAnalysis’,’CATEGORY’:’Met’,’EVENT’:’34’,’SEVERITY’:’Moderate’,’EC_II’:’34’,’EC_GROUP’:’Gewitter’,’EC_AREA_COLOR’:’255 208 144’,’EFFECTIVE’:’2022-05-03T12:44:36Z’,’ONSET’:’2022-05-03T12:40:00Z’,’EXPIRES’:’2022-05-03T12:45:00Z’,’SENDERNAME’:’propNC’,’HEADLINE’:’NowCastMIX’,’ALTITUDE’:0,’CEILING’:9842.52},’bbox’:[9.1318,48.5748,9.6416,48.8645]},{‘type’:’Feature’,’id’:’Autowarn_Analyse.fid-46a27240_180cc7856b1_-1f99’,’geometry’:{‘type’:’Polygon’,’coordinates’:[[[13.7212,48.7267],[13.6965,48.7362],[13.6666,48.7586],[13.6571,48.7929],[13.6331,48.8108],[13.6219,48.8282],[13.6252,48.8619],[13.6669,48.8941],[13.6822,48.9188],[13.7096,48.9346],[13.7112,48.9515],[13.7258,48.9678],[13.76,48.9875],[13.7866,48.9948],[13.838,48.9926],[13.8629,48.983],[13.8928,48.9605],[13.9039,48.9431],[13.9004,48.9093],[13.8722,48.8852],[13.8952,48.8587],[13.8917,48.825],[13.8498,48.793],[13.8473,48.7677],[13.8328,48.7514],[13.7987,48.7318],[13.7723,48.7245],[13.7212,48.7267]]]},’geometry_name’:’THE_GEOM’,’properties’:{‘ID’:1668808,’CREATED’:’2022-05-03T12:45:04.736Z’,’ID_ALERT’:’1651581876847.2’,’SOURCE’:’NowCastMIXAnalysis’,’CATEGORY’:’Met’,’EVENT’:’34’,’SEVERITY’:’Moderate’,’EC_II’:’34’,’EC_GROUP’:’Gewitter’,’EC_AREA_COLOR’:’255 208 144’,’EFFECTIVE’:’2022-05-03T12:44:36Z’,’ONSET’:’2022-05-03T12:40:00Z’,’EXPIRES’:’2022-05-03T12:45:00Z’,’SENDERNAME’:’propNC’,’HEADLINE’:’NowCastMIX’,’ALTITUDE’:0,’CEILING’:9842.52},’bbox’:[13.6219,48.7245,13.9039,48.9948]},{‘type’:’Feature’,’id’:’Autowarn_Analyse.fid-46a27240_180cc7856b1_-1f98’,’geometry’:{‘type’:’Polygon’,’coordinates’:[[[9.4923,48.9232],[9.4664,48.9315],[9.4339,48.9524],[9.4208,48.9693],[9.4203,49.0031],[9.4331,49.0116],[9.4328,49.0286],[9.4456,49.0371],[9.4454,49.0456],[9.4259,49.0581],[9.4001,49.058],[9.3616,49.0408],[9.31,49.0404],[9.284,49.0486],[9.2513,49.0695],[9.2381,49.0863],[9.2374,49.1202],[9.25,49.1372],[9.2819,49.1586],[9.3464,49.1761],[9.3592,49.1846],[9.411,49.185],[9.4632,49.1599],[9.4891,49.1601],[9.5147,49.1772],[9.5405,49.1858],[9.5924,49.186],[9.6184,49.1777],[9.6509,49.1567],[9.664,49.1398],[9.6643,49.1059],[9.6259,49.0719],[9.6261,49.055],[9.6132,49.0465],[9.6263,49.0296],[9.6267,48.9958],[9.6139,48.9873],[9.614,48.9703],[9.6013,48.9534],[9.5694,48.9321],[9.5437,48.9235],[9.4923,48.9232]]]},’geometry_name’:’THE_GEOM’,’properties’:{‘ID’:1668809,’CREATED’:’2022-05-03T12:45:04.736Z’,’ID_ALERT’:’1651581876847.2’,’SOURCE’:’NowCastMIXAnalysis’,’CATEGORY’:’Met’,’EVENT’:’34’,’SEVERITY’:’Moderate’,’EC_II’:’34’,’EC_GROUP’:’Gewitter’,’EC_AREA_COLOR’:’255 208 144’,’EFFECTIVE’:’2022-05-03T12:44:36Z’,’ONSET’:’2022-05-03T12:40:00Z’,’EXPIRES’:’2022-05-03T12:45:00Z’,’SENDERNAME’:’propNC’,’HEADLINE’:’NowCastMIX’,’ALTITUDE’:0,’CEILING’:9842.52},’bbox’:[9.2374,48.9232,9.6643,49.186]},{‘type’:’Feature’,’id’:’Autowarn_Analyse.fid-46a27240_180cc7856b1_-1f97’,’geometry’:{‘type’:’Polygon’,’coordinates’:[[[9.9168,48.9669],[9.891,48.9754],[9.8587,48.9965],[9.8457,49.0303],[9.8327,49.0387],[9.8326,49.0725],[9.8454,49.0895],[9.8776,49.1107],[9.9035,49.1192],[9.9552,49.1192],[9.9811,49.1108],[10.0134,49.0896],[10.0263,49.0558],[10.0392,49.0473],[10.0392,49.0135],[10.0263,48.9966],[9.994,48.9754],[9.9683,48.967],[9.9168,48.9669]]]},’geometry_name’:’THE_GEOM’,’properties’:{‘ID’:1668810,’CREATED’:’2022-05-03T12:45:04.736Z’,’ID_ALERT’:’1651581876847.2’,’SOURCE’:’NowCastMIXAnalysis’,’CATEGORY’:’Met’,’EVENT’:’34’,’SEVERITY’:’Moderate’,’EC_II’:’34’,’EC_GROUP’:’Gewitter’,’EC_AREA_COLOR’:’255 208 144’,’EFFECTIVE’:’2022-05-03T12:44:36Z’,’ONSET’:’2022-05-03T12:40:00Z’,’EXPIRES’:’2022-05-03T12:45:00Z’,’SENDERNAME’:’propNC’,’HEADLINE’:’NowCastMIX’,’ALTITUDE’:0,’CEILING’:9842.52},’bbox’:[9.8326,48.9669,10.0392,49.1192]},{‘type’:’Feature’,’id’:’Autowarn_Analyse.fid-46a27240_180cc7856b1_-1f96’,’geometry’:{‘type’:’Polygon’,’coordinates’:[[[7.3892,48.9956],[7.3629,49.0033],[7.3292,49.0234],[7.3151,49.0399],[7.3127,49.0737],[7.325,49.0826],[7.3226,49.1164],[7.3343,49.1337],[7.3651,49.1558],[7.3904,49.1651],[7.4421,49.1666],[7.4821,49.1508],[7.5079,49.1515],[7.5344,49.1438],[7.568,49.1236],[7.5821,49.107],[7.5842,49.0732],[7.5724,49.0559],[7.5416,49.0339],[7.4906,49.024],[7.4659,49.0063],[7.4407,48.9971],[7.3892,48.9956]]]},’geometry_name’:’THE_GEOM’,’properties’:{‘ID’:1668811,’CREATED’:’2022-05-03T12:45:04.736Z’,’ID_ALERT’:’1651581876847.2’,’SOURCE’:’NowCastMIXAnalysis’,’CATEGORY’:’Met’,’EVENT’:’34’,’SEVERITY’:’Moderate’,’EC_II’:’34’,’EC_GROUP’:’Gewitter’,’EC_AREA_COLOR’:’255 208 144’,’EFFECTIVE’:’2022-05-03T12:44:36Z’,’ONSET’:’2022-05-03T12:40:00Z’,’EXPIRES’:’2022-05-03T12:45:00Z’,’SENDERNAME’:’propNC’,’HEADLINE’:’NowCastMIX’,’ALTITUDE’:0,’CEILING’:9842.52},’bbox’:[7.3127,48.9956,7.5842,49.1666]},{‘type’:’Feature’,’id’:’Autowarn_Analyse.fid-46a27240_180cc7856b1_-1f95’,’geometry’:{‘type’:’Polygon’,’coordinates’:[[[11.816,47.7516],[11.7915,47.7605],[11.7613,47.7821],[11.7496,47.7991],[11.7511,47.8327],[11.7644,47.8492],[11.7966,47.8695],[11.822,47.8774],[11.872,47.8763],[11.8966,47.8674],[11.9269,47.8457],[11.9385,47.8286],[11.9368,47.7951],[11.9235,47.7786],[11.8913,47.7583],[11.8659,47.7505],[11.816,47.7516]]]},’geometry_name’:’THE_GEOM’,’properties’:{‘ID’:1670394,’CREATED’:’2022-05-03T14:55:06.147Z’,’ID_ALERT’:’1651589675802.1’,’SOURCE’:’NowCastMIXAnalysis’,’CATEGORY’:’Met’,’EVENT’:’31’,’SEVERITY’:’Minor’,’EC_II’:’31’,’EC_GROUP’:’Gewitter’,’EC_AREA_COLOR’:’255 255 51’,’EFFECTIVE’:’2022-05-03T14:54:35Z’,’ONSET’:’2022-05-03T14:50:00Z’,’EXPIRES’:’2022-05-03T14:55:00Z’,’SENDERNAME’:’propNC’,’HEADLINE’:’NowCastMIX’,’ALTITUDE’:0,’CEILING’:9842.52},’bbox’:[11.7496,47.7505,11.9385,47.8774]},{‘type’:’Feature’,’id’:’Autowarn_Analyse.fid-46a27240_180cc7856b1_-1f94’,’geometry’:{‘type’:’Polygon’,’coordinates’:[[[6.9881,47.7261],[6.9625,47.7336],[6.9297,47.7534],[6.9159,47.7697],[6.9133,47.8032],[6.9244,47.8204],[6.9539,47.8425],[6.9783,47.8517],[7.0282,47.8535],[7.0538,47.846],[7.0867,47.8261],[7.1004,47.8098],[7.1029,47.7762],[7.0917,47.7591],[7.0622,47.7371],[7.0379,47.7278],[6.9881,47.7261]]]},’geometry_name’:’THE_GEOM’,’properties’:{‘ID’:1670395,’CREATED’:’2022-05-03T14:55:06.147Z’,’ID_ALERT’:’1651589675802.1’,’SOURCE’:’NowCastMIXAnalysis’,’CATEGORY’:’Met’,’EVENT’:’31’,’SEVERITY’:’Minor’,’EC_II’:’31’,’EC_GROUP’:’Gewitter’,’EC_AREA_COLOR’:’255 255 51’,’EFFECTIVE’:’2022-05-03T14:54:35Z’,’ONSET’:’2022-05-03T14:50:00Z’,’EXPIRES’:’2022-05-03T14:55:00Z’,’SENDERNAME’:’propNC’,’HEADLINE’:’NowCastMIX’,’ALTITUDE’:0,’CEILING’:9842.52},’bbox’:[6.9133,47.7261,7.1029,47.8535]},{‘type’:’Feature’,’id’:’Autowarn_Analyse.fid-46a27240_180cc7856b1_-1f93’,’geometry’:{‘type’:’Polygon’,’coordinates’:[[[4.5565,47.6808],[4.5305,47.6875],[4.4965,47.7064],[4.4817,47.7223],[4.4769,47.7557],[4.4869,47.7732],[4.515,47.7961],[4.5387,47.806],[4.5884,47.8092],[4.6553,47.7797],[4.6575,47.8093],[4.6676,47.8268],[4.6958,47.8497],[4.7196,47.8596],[4.7694,47.8627],[4.7955,47.8558],[4.8294,47.8368],[4.8441,47.8209],[4.8486,47.7874],[4.8384,47.77],[4.8102,47.7472],[4.7864,47.7373],[4.7368,47.7343],[4.6701,47.7638],[4.6679,47.7342],[4.6578,47.7167],[4.6297,47.6939],[4.6061,47.6839],[4.5565,47.6808]]]},’geometry_name’:’THE_GEOM’,’properties’:{‘ID’:1670396,’CREATED’:’2022-05-03T14:55:06.147Z’,’ID_ALERT’:’1651589675802.1’,’SOURCE’:’NowCastMIXAnalysis’,’CATEGORY’:’Met’,’EVENT’:’31’,’SEVERITY’:’Minor’,’EC_II’:’31’,’EC_GROUP’:’Gewitter’,’EC_AREA_COLOR’:’255 255 51’,’EFFECTIVE’:’2022-05-03T14:54:35Z’,’ONSET’:’2022-05-03T14:50:00Z’,’EXPIRES’:’2022-05-03T14:55:00Z’,’SENDERNAME’:’propNC’,’HEADLINE’:’NowCastMIX’,’ALTITUDE’:0,’CEILING’:9842.52},’bbox’:[4.4769,47.6808,4.8486,47.8627]},{‘type’:’Feature’,’id’:’Autowarn_Analyse.fid-46a27240_180cc7856b1_-1f92’,’geometry’:{‘type’:’Polygon’,’coordinates’:[[[6.813,48.3341],[6.787,48.3416],[6.7536,48.3614],[6.7395,48.3778],[6.7366,48.4114],[6.7479,48.4287],[6.7778,48.4509],[6.8024,48.4603],[6.8532,48.4621],[6.8793,48.4547],[6.9127,48.4348],[6.9267,48.4184],[6.9295,48.3847],[6.9182,48.3675],[6.8882,48.3453],[6.8636,48.336],[6.813,48.3341]]]},’geometry_name’:’THE_GEOM’,’properties’:{‘ID’:1670397,’CREATED’:’2022-05-03T14:55:06.147Z’,’ID_ALERT’:’1651589675802.1’,’SOURCE’:’NowCastMIXAnalysis’,’CATEGORY’:’Met’,’EVENT’:’31’,’SEVERITY’:’Minor’,’EC_II’:’31’,’EC_GROUP’:’Gewitter’,’EC_AREA_COLOR’:’255 255 51’,’EFFECTIVE’:’2022-05-03T14:54:35Z’,’ONSET’:’2022-05-03T14:50:00Z’,’EXPIRES’:’2022-05-03T14:55:00Z’,’SENDERNAME’:’propNC’,’HEADLINE’:’NowCastMIX’,’ALTITUDE’:0,’CEILING’:9842.52},’bbox’:[6.7366,48.3341,6.9295,48.4621]},{‘type’:’Feature’,’id’:’Autowarn_Analyse.fid-46a27240_180cc7856b1_-1f91’,’geometry’:{‘type’:’Polygon’,’coordinates’:[[[7.0469,48.4268],[7.0208,48.4343],[6.9875,48.4543],[6.9868,48.4627],[6.9333,48.4946],[6.9192,48.511],[6.9165,48.5446],[6.9279,48.5619],[6.958,48.5841],[7.0082,48.5943],[7.0203,48.6032],[7.0713,48.6049],[7.0974,48.5973],[7.1309,48.5774],[7.1449,48.5609],[7.148,48.5188],[7.1614,48.5108],[7.1639,48.4771],[7.1525,48.4599],[7.1223,48.4378],[7.0976,48.4285],[7.0469,48.4268]]]},’geometry_name’:’THE_GEOM’,’properties’:{‘ID’:1670398,’CREATED’:’2022-05-03T14:55:06.147Z’,’ID_ALERT’:’1651589675802.1’,’SOURCE’:’NowCastMIXAnalysis’,’CATEGORY’:’Met’,’EVENT’:’31’,’SEVERITY’:’Minor’,’EC_II’:’31’,’EC_GROUP’:’Gewitter’,’EC_AREA_COLOR’:’255 255 51’,’EFFECTIVE’:’2022-05-03T14:54:35Z’,’ONSET’:’2022-05-03T14:50:00Z’,’EXPIRES’:’2022-05-03T14:55:00Z’,’SENDERNAME’:’propNC’,’HEADLINE’:’NowCastMIX’,’ALTITUDE’:0,’CEILING’:9842.52},’bbox’:[6.9165,48.4268,7.1639,48.6049]},{‘type’:’Feature’,’id’:’Autowarn_Analyse.fid-46a27240_180cc7856b1_-1f90’,’geometry’:{‘type’:’Polygon’,’coordinates’:[[[13.7801,48.5466],[13.7555,48.5561],[13.7258,48.5785],[13.7147,48.5959],[13.7181,48.6295],[13.7325,48.6458],[13.7664,48.6655],[13.7928,48.6728],[13.8438,48.6706],[13.8557,48.6616],[13.9084,48.6761],[13.9594,48.6738],[13.984,48.6642],[14.0136,48.6417],[14.0246,48.6243],[14.021,48.5906],[14.0065,48.5744],[13.9725,48.5548],[13.9462,48.5476],[13.8954,48.5499],[13.8835,48.5589],[13.831,48.5443],[13.7801,48.5466]]]},’geometry_name’:’THE_GEOM’,’properties’:{‘ID’:1670399,’CREATED’:’2022-05-03T14:55:06.147Z’,’ID_ALERT’:’1651589675802.1’,’SOURCE’:’NowCastMIXAnalysis’,’CATEGORY’:’Met’,’EVENT’:’31’,’SEVERITY’:’Minor’,’EC_II’:’31’,’EC_GROUP’:’Gewitter’,’EC_AREA_COLOR’:’255 255 51’,’EFFECTIVE’:’2022-05-03T14:54:35Z’,’ONSET’:’2022-05-03T14:50:00Z’,’EXPIRES’:’2022-05-03T14:55:00Z’,’SENDERNAME’:’propNC’,’HEADLINE’:’NowCastMIX’,’ALTITUDE’:0,’CEILING’:9842.52},’bbox’:[13.7147,48.5443,14.0246,48.6761]},{‘type’:’Feature’,’id’:’Autowarn_Analyse.fid-46a27240_180cc7856b1_-1f8f’,’geometry’:{‘type’:’Polygon’,’coordinates’:[[[13.108,48.5987],[13.0833,48.608],[13.0531,48.6302],[13.0417,48.6475],[13.0444,48.6812],[13.0585,48.6976],[13.0922,48.7176],[13.1185,48.7251],[13.1696,48.7232],[13.1944,48.7138],[13.2245,48.6916],[13.2359,48.6743],[13.233,48.6406],[13.2188,48.6242],[13.1852,48.6043],[13.159,48.5968],[13.108,48.5987]]]},’geometry_name’:’THE_GEOM’,’properties’:{‘ID’:1670400,’CREATED’:’2022-05-03T14:55:06.147Z’,’ID_ALERT’:’1651589675802.1’,’SOURCE’:’NowCastMIXAnalysis’,’CATEGORY’:’Met’,’EVENT’:’31’,’SEVERITY’:’Minor’,’EC_II’:’31’,’EC_GROUP’:’Gewitter’,’EC_AREA_COLOR’:’255 255 51’,’EFFECTIVE’:’2022-05-03T14:54:35Z’,’ONSET’:’2022-05-03T14:50:00Z’,’EXPIRES’:’2022-05-03T14:55:00Z’,’SENDERNAME’:’propNC’,’HEADLINE’:’NowCastMIX’,’ALTITUDE’:0,’CEILING’:9842.52},’bbox’:[13.0417,48.5968,13.2359,48.7251]},{‘type’:’Feature’,’id’:’Autowarn_Analyse.fid-46a27240_180cc7856b1_-1f8e’,’geometry’:{‘type’:’Polygon’,’coordinates’:[[[6.7471,48.6609],[6.7208,48.6684],[6.6871,48.6883],[6.6728,48.7046],[6.6698,48.7383],[6.6811,48.7557],[6.7113,48.778],[6.7361,48.7874],[6.7873,48.7893],[6.8137,48.7818],[6.8474,48.7619],[6.8616,48.7455],[6.8644,48.7118],[6.853,48.6944],[6.8229,48.6722],[6.7981,48.6628],[6.7471,48.6609]]]},’geometry_name’:’THE_GEOM’,’properties’:{‘ID’:1670401,’CREATED’:’2022-05-03T14:55:06.147Z’,’ID_ALERT’:’1651589675802.1’,’SOURCE’:’NowCastMIXAnalysis’,’CATEGORY’:’Met’,’EVENT’:’31’,’SEVERITY’:’Minor’,’EC_II’:’31’,’EC_GROUP’:’Gewitter’,’EC_AREA_COLOR’:’255 255 51’,’EFFECTIVE’:’2022-05-03T14:54:35Z’,’ONSET’:’2022-05-03T14:50:00Z’,’EXPIRES’:’2022-05-03T14:55:00Z’,’SENDERNAME’:’propNC’,’HEADLINE’:’NowCastMIX’,’ALTITUDE’:0,’CEILING’:9842.52},’bbox’:[6.6698,48.6609,6.8644,48.7893]},{‘type’:’Feature’,’id’:’Autowarn_Analyse.fid-46a27240_180cc7856b1_-1f8d’,’geometry’:{‘type’:’Polygon’,’coordinates’:[[[8.3945,48.7155],[8.3813,48.7237],[8.3557,48.7233],[8.3426,48.7315],[8.317,48.731],[8.3038,48.7392],[8.2782,48.7386],[8.2584,48.7509],[8.2569,48.7847],[8.2689,48.8018],[8.3374,48.8496],[8.3627,48.8586],[8.414,48.8595],[8.4401,48.8516],[8.473,48.831],[8.4865,48.8143],[8.4879,48.7806],[8.4757,48.7635],[8.3945,48.7155]]]},’geometry_name’:’THE_GEOM’,’properties’:{‘ID’:1670402,’CREATED’:’2022-05-03T14:55:06.147Z’,’ID_ALERT’:’1651589675802.1’,’SOURCE’:’NowCastMIXAnalysis’,’CATEGORY’:’Met’,’EVENT’:’31’,’SEVERITY’:’Minor’,’EC_II’:’31’,’EC_GROUP’:’Gewitter’,’EC_AREA_COLOR’:’255 255 51’,’EFFECTIVE’:’2022-05-03T14:54:35Z’,’ONSET’:’2022-05-03T14:50:00Z’,’EXPIRES’:’2022-05-03T14:55:00Z’,’SENDERNAME’:’propNC’,’HEADLINE’:’NowCastMIX’,’ALTITUDE’:0,’CEILING’:9842.52},’bbox’:[8.2569,48.7155,8.4879,48.8595]},{‘type’:’Feature’,’id’:’Autowarn_Analyse.fid-46a27240_180cc7856b1_-1f8c’,’geometry’:{‘type’:’Polygon’,’coordinates’:[[[8.6101,48.7699],[8.5969,48.7782],[8.5713,48.7778],[8.5454,48.7858],[8.5125,48.8063],[8.499,48.823],[8.4977,48.8568],[8.5098,48.8739],[8.5411,48.8956],[8.5665,48.9045],[8.6308,48.9055],[8.6433,48.9141],[8.6948,48.9149],[8.7079,48.9067],[8.7722,48.9076],[8.7982,48.8995],[8.831,48.8788],[8.8444,48.8621],[8.8454,48.8283],[8.8331,48.8112],[8.8017,48.7897],[8.7507,48.7805],[8.7382,48.7719],[8.7126,48.7715],[8.6995,48.7798],[8.6482,48.779],[8.6101,48.7699]]]},’geometry_name’:’THE_GEOM’,’properties’:{‘ID’:1670403,’CREATED’:’2022-05-03T14:55:06.147Z’,’ID_ALERT’:’1651589675802.1’,’SOURCE’:’NowCastMIXAnalysis’,’CATEGORY’:’Met’,’EVENT’:’31’,’SEVERITY’:’Minor’,’EC_II’:’31’,’EC_GROUP’:’Gewitter’,’EC_AREA_COLOR’:’255 255 51’,’EFFECTIVE’:’2022-05-03T14:54:35Z’,’ONSET’:’2022-05-03T14:50:00Z’,’EXPIRES’:’2022-05-03T14:55:00Z’,’SENDERNAME’:’propNC’,’HEADLINE’:’NowCastMIX’,’ALTITUDE’:0,’CEILING’:9842.52},’bbox’:[8.4977,48.7699,8.8454,48.9149]},{‘type’:’Feature’,’id’:’Autowarn_Analyse.fid-46a27240_180cc7856b1_-1f8b’,’geometry’:{‘type’:’Polygon’,’coordinates’:[[[7.7436,48.8955],[7.7174,48.9033],[7.684,48.9235],[7.6701,48.9401],[7.668,48.9739],[7.6798,48.9911],[7.7107,49.0131],[7.736,49.0222],[7.7876,49.0235],[7.8138,49.0157],[7.8473,48.9954],[7.8611,48.9788],[7.863,48.945],[7.8511,48.9278],[7.8202,48.9059],[7.795,48.8968],[7.7436,48.8955]]]},’geometry_name’:’THE_GEOM’,’properties’:{‘ID’:1670404,’CREATED’:’2022-05-03T14:55:06.147Z’,’ID_ALERT’:’1651589675802.1’,’SOURCE’:’NowCastMIXAnalysis’,’CATEGORY’:’Met’,’EVENT’:’31’,’SEVERITY’:’Minor’,’EC_II’:’31’,’EC_GROUP’:’Gewitter’,’EC_AREA_COLOR’:’255 255 51’,’EFFECTIVE’:’2022-05-03T14:54:35Z’,’ONSET’:’2022-05-03T14:50:00Z’,’EXPIRES’:’2022-05-03T14:55:00Z’,’SENDERNAME’:’propNC’,’HEADLINE’:’NowCastMIX’,’ALTITUDE’:0,’CEILING’:9842.52},’bbox’:[7.668,48.8955,7.863,49.0235]},{‘type’:’Feature’,’id’:’Autowarn_Analyse.fid-46a27240_180cc7856b1_-1f8a’,’geometry’:{‘type’:’Polygon’,’coordinates’:[[[9.5298,49.008],[9.5039,49.0163],[9.4714,49.0373],[9.4582,49.0541],[9.4577,49.088],[9.4704,49.105],[9.5025,49.1263],[9.5282,49.1349],[9.58,49.1352],[9.6059,49.1268],[9.6385,49.1058],[9.6516,49.0889],[9.6519,49.0551],[9.6391,49.0381],[9.6071,49.0168],[9.5814,49.0082],[9.5298,49.008]]]},’geometry_name’:’THE_GEOM’,’properties’:{‘ID’:1670405,’CREATED’:’2022-05-03T14:55:06.147Z’,’ID_ALERT’:’1651589675802.1’,’SOURCE’:’NowCastMIXAnalysis’,’CATEGORY’:’Met’,’EVENT’:’31’,’SEVERITY’:’Minor’,’EC_II’:’31’,’EC_GROUP’:’Gewitter’,’EC_AREA_COLOR’:’255 255 51’,’EFFECTIVE’:’2022-05-03T14:54:35Z’,’ONSET’:’2022-05-03T14:50:00Z’,’EXPIRES’:’2022-05-03T14:55:00Z’,’SENDERNAME’:’propNC’,’HEADLINE’:’NowCastMIX’,’ALTITUDE’:0,’CEILING’:9842.52},’bbox’:[9.4577,49.008,9.6519,49.1352]},{‘type’:’Feature’,’id’:’Autowarn_Analyse.fid-46a27240_180cc7856b1_-1f89’,’geometry’:{‘type’:’Polygon’,’coordinates’:[[[14.3107,48.9451],[14.286,48.9548],[14.2563,48.9774],[14.2453,48.9949],[14.253,49.0624],[14.2678,49.0787],[14.3024,49.0982],[14.3153,49.0975],[14.3222,49.1014],[14.3034,49.1066],[14.2735,49.1293],[14.2626,49.1468],[14.2655,49.1721],[14.2415,49.1903],[14.2305,49.2078],[14.2382,49.2754],[14.2521,49.2832],[14.2531,49.2917],[14.2341,49.2968],[14.2041,49.3195],[14.193,49.337],[14.1968,49.3709],[14.2117,49.3872],[14.2466,49.4067],[14.2736,49.4139],[14.3256,49.4114],[14.3506,49.4016],[14.3806,49.3789],[14.3916,49.3613],[14.3876,49.3275],[14.3736,49.3197],[14.3726,49.3113],[14.3916,49.3061],[14.4215,49.2833],[14.4324,49.2658],[14.4254,49.2067],[14.4492,49.1885],[14.4601,49.1709],[14.4561,49.1372],[14.4273,49.1131],[14.458,49.0989],[14.4967,49.0969],[14.5086,49.0878],[14.573,49.0844],[14.5977,49.0746],[14.6273,49.0518],[14.6381,49.0343],[14.6339,49.0006],[14.619,48.9844],[14.5843,48.965],[14.5576,48.9579],[14.5062,48.9606],[14.4944,48.9697],[14.4272,48.9477],[14.3758,48.9503],[14.362,48.9425],[14.3107,48.9451]]]},’geometry_name’:’THE_GEOM’,’properties’:{‘ID’:1670406,’CREATED’:’2022-05-03T14:55:06.147Z’,’ID_ALERT’:’1651589675802.1’,’SOURCE’:’NowCastMIXAnalysis’,’CATEGORY’:’Met’,’EVENT’:’31’,’SEVERITY’:’Minor’,’EC_II’:’31’,’EC_GROUP’:’Gewitter’,’EC_AREA_COLOR’:’255 255 51’,’EFFECTIVE’:’2022-05-03T14:54:35Z’,’ONSET’:’2022-05-03T14:50:00Z’,’EXPIRES’:’2022-05-03T14:55:00Z’,’SENDERNAME’:’propNC’,’HEADLINE’:’NowCastMIX’,’ALTITUDE’:0,’CEILING’:9842.52},’bbox’:[14.193,48.9425,14.6381,49.4139]},{‘type’:’Feature’,’id’:’Autowarn_Analyse.fid-46a27240_180cc7856b1_-1f88’,’geometry’:{‘type’:’Polygon’,’coordinates’:[[[6.8014,49.0777],[6.7749,49.0852],[6.7408,49.1051],[6.7264,49.1216],[6.7235,49.1554],[6.7349,49.1728],[6.7654,49.1951],[6.7906,49.2045],[6.8423,49.2064],[6.8689,49.1988],[6.903,49.1788],[6.9174,49.1624],[6.9202,49.1286],[6.9086,49.1112],[6.8781,49.0889],[6.853,49.0796],[6.8014,49.0777]]]},’geometry_name’:’THE_GEOM’,’properties’:{‘ID’:1670407,’CREATED’:’2022-05-03T14:55:06.147Z’,’ID_ALERT’:’1651589675802.1’,’SOURCE’:’NowCastMIXAnalysis’,’CATEGORY’:’Met’,’EVENT’:’31’,’SEVERITY’:’Minor’,’EC_II’:’31’,’EC_GROUP’:’Gewitter’,’EC_AREA_COLOR’:’255 255 51’,’EFFECTIVE’:’2022-05-03T14:54:35Z’,’ONSET’:’2022-05-03T14:50:00Z’,’EXPIRES’:’2022-05-03T14:55:00Z’,’SENDERNAME’:’propNC’,’HEADLINE’:’NowCastMIX’,’ALTITUDE’:0,’CEILING’:9842.52},’bbox’:[6.7235,49.0777,6.9202,49.2064]},{‘type’:’Feature’,’id’:’Autowarn_Analyse.fid-46a27240_180cc7856b1_-1f87’,’geometry’:null,’geometry_name’:’THE_GEOM’,’properties’:{‘ID’:1667287,’CREATED’:’2022-05-03T00:49:39.332Z’,’ID_ALERT’:’1651538976321.1’,’SOURCE’:’NowCastMIXAnalysis’,’CATEGORY’:’Met’,’EVENT’:’HBN’,’SEVERITY’:’Unknown’,’EC_II’:’HBN’,’EC_GROUP’:’HEARTBEAT’,’EC_AREA_COLOR’:’255 255 255’,’EFFECTIVE’:’2022-05-03T00:49:36Z’,’ONSET’:’2022-05-03T00:45:00Z’,’EXPIRES’:’2022-05-03T00:50:00Z’,’SENDERNAME’:’propHB’,’HEADLINE’:’Heartbeat Event (NowCastMIX)’,’ALTITUDE’:0,’CEILING’:9842.52}},{‘type’:’Feature’,’id’:’Autowarn_Analyse.fid-46a27240_180cc7856b1_-1f86’,’geometry’:{‘type’:’Polygon’,’coordinates’:[[[8.0118,47.2366],[7.9868,47.2444],[7.9549,47.2646],[7.9417,47.281],[7.9399,47.3144],[7.9633,47.3401],[7.9598,47.407],[7.9712,47.424],[8.0011,47.4456],[8.0254,47.4546],[8.0749,47.4557],[8.1,47.4479],[8.132,47.4277],[8.1451,47.4112],[8.1467,47.3778],[8.1595,47.3697],[8.1611,47.3362],[8.1257,47.302],[8.1265,47.2853],[8.115,47.2683],[8.0852,47.2467],[8.061,47.2378],[8.0118,47.2366]]]},’geometry_name’:’THE_GEOM’,’properties’:{‘ID’:1671385,’CREATED’:’2022-05-03T16:10:06.323Z’,’ID_ALERT’:’1651594178175.1’,’SOURCE’:’NowCastMIXAnalysis’,’CATEGORY’:’Met’,’EVENT’:’31’,’SEVERITY’:’Minor’,’EC_II’:’31’,’EC_GROUP’:’Gewitter’,’EC_AREA_COLOR’:’255 255 51’,’EFFECTIVE’:’2022-05-03T16:09:38Z’,’ONSET’:’2022-05-03T16:05:00Z’,’EXPIRES’:’2022-05-03T16:10:00Z’,’SENDERNAME’:’propNC’,’HEADLINE’:’NowCastMIX’,’ALTITUDE’:0,’CEILING’:9842.52},’bbox’:[7.9399,47.2366,8.1611,47.4557]},{‘type’:’Feature’,’id’:’Autowarn_Analyse.fid-46a27240_180cc7856b1_-1f85’,’geometry’:{‘type’:’Polygon’,’coordinates’:[[[4.6038,47.2549],[4.5781,47.2617],[4.5445,47.2805],[4.5141,47.3205],[4.4693,47.3302],[4.4356,47.349],[4.4209,47.3648],[4.4161,47.3981],[4.4272,47.4073],[4.4248,47.4239],[4.4113,47.4315],[4.4065,47.4648],[4.4164,47.4823],[4.4442,47.5051],[4.4677,47.5151],[4.5171,47.5183],[4.543,47.5116],[4.5768,47.4927],[4.5914,47.4768],[4.5961,47.4435],[4.5849,47.4344],[4.5873,47.4177],[4.6063,47.4147],[4.6231,47.4284],[4.6219,47.4367],[4.6498,47.4595],[4.6733,47.4694],[4.7227,47.4725],[4.7485,47.4657],[4.7821,47.4468],[4.7967,47.4309],[4.8012,47.3975],[4.7911,47.3801],[4.7632,47.3573],[4.7151,47.346],[4.7141,47.3081],[4.7041,47.2907],[4.6762,47.2679],[4.6529,47.258],[4.6038,47.2549]]]},’geometry_name’:’THE_GEOM’,’properties’:{‘ID’:1671386,’CREATED’:’2022-05-03T16:10:06.323Z’,’ID_ALERT’:’1651594178175.1’,’SOURCE’:’NowCastMIXAnalysis’,’CATEGORY’:’Met’,’EVENT’:’31’,’SEVERITY’:’Minor’,’EC_II’:’31’,’EC_GROUP’:’Gewitter’,’EC_AREA_COLOR’:’255 255 51’,’EFFECTIVE’:’2022-05-03T16:09:38Z’,’ONSET’:’2022-05-03T16:05:00Z’,’EXPIRES’:’2022-05-03T16:10:00Z’,’SENDERNAME’:’propNC’,’HEADLINE’:’NowCastMIX’,’ALTITUDE’:0,’CEILING’:9842.52},’bbox’:[4.4065,47.2549,4.8012,47.5183]}],’totalFeatures’:17197,’numberMatched’:17197,’numberReturned’:50,’timeStamp’:’2022-05-16T10:45:44.762Z’,’crs’:{‘type’:’name’,’properties’:{‘name’:’urn:ogc:def:crs:EPSG::4326’}},’bbox’:[2.6032,46.9577,15.5253,54.5151]}\", \n    \"automatedDownload\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{CONNECTORA_URL}}/api/artifacts",
+									"host": [
+										"{{CONNECTORA_URL}}"
+									],
+									"path": [
+										"api",
+										"artifacts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Representations: POST /api/representations",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Retrieve Representation ID\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.collectionVariables.set(\"representations\", jsonData[\"_links\"][\"self\"][\"href\"])",
+											"});",
+											"",
+											"pm.test(\"Status code is 201\", function () {",
+											"    pm.response.to.have.status(201);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"Example Representation\",\n    \"description\": \"\", \n    \"mediaType\": \"json\", \n    \"language\": \"https://w3id.org/idsa/code/EN\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{CONNECTORA_URL}}/api/representations",
+									"host": [
+										"{{CONNECTORA_URL}}"
+									],
+									"path": [
+										"api",
+										"representations"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Artifact to Representation: POST /api/representations/{id}/artifacts",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n    \"{{artifacts}}\"\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{representations}}/artifacts",
+									"host": [
+										"{{representations}}"
+									],
+									"path": [
+										"artifacts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Representation to Offer: POST /api/offers/{id}/representations",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n    \"{{representations}}\"\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{offers}}/representations",
+									"host": [
+										"{{offers}}"
+									],
+									"path": [
+										"representations"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Contract to Offer: POST /api/offers/{id}/contracts",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n    \"{{contracts}}\"\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{offers}}/contracts",
+									"host": [
+										"{{offers}}"
+									],
+									"path": [
+										"contracts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Register Connector A at MetaData Broker: POST /api/ids/connector/update",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {},
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{CONNECTORA_URL}}/api/ids/connector/update?recipient={{BROKER}}",
+									"host": [
+										"{{CONNECTORA_URL}}"
+									],
+									"path": [
+										"api",
+										"ids",
+										"connector",
+										"update"
+									],
+									"query": [
+										{
+											"key": "recipient",
+											"value": "{{BROKER}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Register Connector B at MetaData Broker: POST /api/ids/connector/update",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {},
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{CONNECTORB_URL}}/api/ids/connector/update?recipient={{BROKER}}",
+									"host": [
+										"{{CONNECTORB_URL}}"
+									],
+									"path": [
+										"api",
+										"ids",
+										"connector",
+										"update"
+									],
+									"query": [
+										{
+											"key": "recipient",
+											"value": "{{BROKER}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cheking successful registration",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Select the first catalog from the list of catalog ID\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.collectionVariables.set(\"Broker_catalog\", jsonData[\"@graph\"][1][\"@id\"])\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{CONNECTORB_URL}}/api/ids/description?recipient={{BROKER}}&elementId=https://localhost/connectors/",
+									"host": [
+										"{{CONNECTORB_URL}}"
+									],
+									"path": [
+										"api",
+										"ids",
+										"description"
+									],
+									"query": [
+										{
+											"key": "recipient",
+											"value": "{{BROKER}}"
+										},
+										{
+											"key": "elementId",
+											"value": "https://localhost/connectors/"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Validating Preconfigured Setup: Interaction between Connectors",
+					"item": [
+						{
+							"name": "Request Self-description from Connector A: POST /api/ids/description",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Retrieve Catalog ID\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.collectionVariables.set(\"Provider_catalog\", jsonData[\"ids:resourceCatalog\"][0][\"@id\"])\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{CONNECTORB_URL}}/api/ids/description?recipient={{Recipient_url}}",
+									"host": [
+										"{{CONNECTORB_URL}}"
+									],
+									"path": [
+										"api",
+										"ids",
+										"description"
+									],
+									"query": [
+										{
+											"key": "recipient",
+											"value": "{{Recipient_url}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Request Information regarding the desired resource: POST /api/ids/description",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Retrieve Catalog ID\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.collectionVariables.set(\"Provider_resource\", jsonData[\"ids:offeredResource\"][0][\"@id\"]);\r",
+											"    pm.collectionVariables.set(\"Provider_artifact\", jsonData[\"ids:offeredResource\"][0][\"ids:representation\"][0][\"ids:instance\"][0][\"@id\"]);\r",
+											"    pm.collectionVariables.set(\"Provider_rule\", jsonData[\"ids:offeredResource\"][0][\"ids:contractOffer\"][0][\"ids:permission\"][0][\"@id\"]);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{CONNECTORB_URL}}/api/ids/description?recipient={{Recipient_url}}&elementId={{Provider_catalog}}",
+									"host": [
+										"{{CONNECTORB_URL}}"
+									],
+									"path": [
+										"api",
+										"ids",
+										"description"
+									],
+									"query": [
+										{
+											"key": "recipient",
+											"value": "{{Recipient_url}}"
+										},
+										{
+											"key": "elementId",
+											"value": "{{Provider_catalog}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Start Negotiation: POST /api/ids/contract",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Retrieve Consumer agreement ID\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    var agreementLong = jsonData[\"_links\"][\"self\"][\"href\"]\r",
+											"    var agreementId = agreementLong.replace(\"https://localhost:8081/api/agreements/\", \"\")\r",
+											"    pm.collectionVariables.set(\"Consumer agreement ID\", agreementId)\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {},
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[ {\r\n        \"@type\" : \"ids:Permission\",\r\n        \"@id\" : \"{{Provider_rule}}\",\r\n        \"ids:description\" : [ {\r\n          \"@value\" : \"Usage policy provide access applied\",\r\n          \"@type\" : \"http://www.w3.org/2001/XMLSchema#string\"\r\n        } ],\r\n        \"ids:title\" : [ {\r\n          \"@value\" : \"Example Usage Policy\",\r\n          \"@type\" : \"http://www.w3.org/2001/XMLSchema#string\"\r\n        } ],\r\n        \"ids:action\" : [ {\r\n          \"@id\" : \"https://w3id.org/idsa/code/USE\"\r\n        }],\r\n        \"ids:target\" : \"{{Provider_artifact}}\"\r\n} ]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{CONNECTORB_URL}}/api/ids/contract?recipient={{Recipient_url}}&resourceIds={{Provider_resource}}&artifactIds={{Provider_artifact}}&download=false",
+									"host": [
+										"{{CONNECTORB_URL}}"
+									],
+									"path": [
+										"api",
+										"ids",
+										"contract"
+									],
+									"query": [
+										{
+											"key": "recipient",
+											"value": "{{Recipient_url}}"
+										},
+										{
+											"key": "resourceIds",
+											"value": "{{Provider_resource}}"
+										},
+										{
+											"key": "artifactIds",
+											"value": "{{Provider_artifact}}"
+										},
+										{
+											"key": "download",
+											"value": "false"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Request the Artifact based on the Existing Agreement: POST /api/agreements/{id}/artifacts",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Retrieve data URL\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    var dataLink = jsonData[\"_embedded\"][\"artifacts\"][0][\"_links\"][\"data\"][\"href\"]\r",
+											"    pm.collectionVariables.set(\"dataLink\", dataLink)\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{Consumer agreement ID}}/artifacts",
+									"host": [
+										"{{CONNECTORB_URL}}"
+									],
+									"path": [
+										"api",
+										"agreements",
+										"{{Consumer agreement ID}}",
+										"artifacts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Obtain data",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true,
+								"strictSSL": false
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{dataLink}}",
+									"host": [
+										"{{dataLink}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Validating Preconfigured Setup: Interaction with Broker",
+					"item": [
+						{
+							"name": "Request Broker Self-Description: POST /api/ids/description",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Retrieve List of Catalog ID\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.collectionVariables.set(\"Broker_catalog_list\", jsonData[\"ids:resourceCatalog\"][0][\"ids:offeredResource\"][0][\"ids:representation\"][0][\"ids:instance\"][0][\"@id\"])\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{CONNECTORB_URL}}/api/ids/description?recipient={{BROKER}}",
+									"host": [
+										"{{CONNECTORB_URL}}"
+									],
+									"path": [
+										"api",
+										"ids",
+										"description"
+									],
+									"query": [
+										{
+											"key": "recipient",
+											"value": "{{BROKER}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Query List of Connectors to Check Successful Registration: POST /api/ids/description",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Select the first catalog from the list of catalog ID\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.collectionVariables.set(\"Broker_catalog\", jsonData[\"@graph\"][1][\"@id\"])\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{CONNECTORB_URL}}/api/ids/description?recipient={{BROKER}}&elementId={{Broker_catalog_list}}",
+									"host": [
+										"{{CONNECTORB_URL}}"
+									],
+									"path": [
+										"api",
+										"ids",
+										"description"
+									],
+									"query": [
+										{
+											"key": "recipient",
+											"value": "{{BROKER}}"
+										},
+										{
+											"key": "elementId",
+											"value": "{{Broker_catalog_list}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Request Information About Connector A: POST /api/ids/description",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{CONNECTORB_URL}}/api/ids/description?recipient={{BROKER}}&elementId={{Broker_catalog}}",
+									"host": [
+										"{{CONNECTORB_URL}}"
+									],
+									"path": [
+										"api",
+										"ids",
+										"description"
+									],
+									"query": [
+										{
+											"key": "recipient",
+											"value": "{{BROKER}}"
+										},
+										{
+											"key": "elementId",
+											"value": "{{Broker_catalog}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Testbed User Guide",
+			"item": [
+				{
+					"name": "4. Interacting with Connectors",
+					"item": [
+						{
+							"name": "4.1. Request Self-descriptions from Available Connectors",
+							"item": [
+								{
+									"name": "Connector A",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Retrieve Catalog ID\", function () {\r",
+													"    var jsonData = pm.response.json();\r",
+													"    pm.collectionVariables.set(\"Provider_catalog\", jsonData[\"ids:resourceCatalog\"][0][\"@id\"])\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"strictSSL": false
+									},
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "{{CONNECTORA_URL}}/api/ids/description?recipient=https://localhost:8080/api/ids/data",
+											"host": [
+												"{{CONNECTORA_URL}}"
+											],
+											"path": [
+												"api",
+												"ids",
+												"description"
+											],
+											"query": [
+												{
+													"key": "recipient",
+													"value": "https://localhost:8080/api/ids/data"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Connector B",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"strictSSL": false
+									},
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "{{CONNECTORB_URL}}/api/ids/description?recipient=https://localhost:8081/api/ids/data",
+											"host": [
+												"{{CONNECTORB_URL}}"
+											],
+											"path": [
+												"api",
+												"ids",
+												"description"
+											],
+											"query": [
+												{
+													"key": "recipient",
+													"value": "https://localhost:8081/api/ids/data"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "4.2. Request Data from Available Connectors",
+							"item": [
+								{
+									"name": "Connector A",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Retrieve Catalog ID\", function () {\r",
+													"    var jsonData = pm.response.json();\r",
+													"    pm.collectionVariables.set(\"Provider_resource\", jsonData[\"ids:offeredResource\"][0][\"@id\"]);\r",
+													"    pm.collectionVariables.set(\"Provider_artifact\", jsonData[\"ids:offeredResource\"][0][\"ids:representation\"][0][\"ids:instance\"][0][\"@id\"]);\r",
+													"    pm.collectionVariables.set(\"Provider_rule\", jsonData[\"ids:offeredResource\"][0][\"ids:contractOffer\"][0][\"ids:permission\"][0][\"@id\"]);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"strictSSL": false
+									},
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "{{CONNECTORB_URL}}/api/ids/description?recipient=https://connectora:8080/api/ids/data&elementId={{Provider_catalog}}",
+											"host": [
+												"{{CONNECTORB_URL}}"
+											],
+											"path": [
+												"api",
+												"ids",
+												"description"
+											],
+											"query": [
+												{
+													"key": "recipient",
+													"value": "https://connectora:8080/api/ids/data"
+												},
+												{
+													"key": "elementId",
+													"value": "{{Provider_catalog}}"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Start Negotiation: POST /api/ids/contract",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Retrieve Consumer agreement ID\", function () {\r",
+													"    var jsonData = pm.response.json();\r",
+													"    var agreementLong = jsonData[\"_links\"][\"self\"][\"href\"]\r",
+													"    var agreementId = agreementLong.replace(\"https://localhost:8081/api/agreements/\", \"\")\r",
+													"    pm.collectionVariables.set(\"Consumer agreement ID\", agreementId)\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Status code is 201\", function () {\r",
+													"    pm.response.to.have.status(201);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disabledSystemHeaders": {},
+										"strictSSL": false
+									},
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "[ {\r\n        \"@type\" : \"ids:Permission\",\r\n        \"@id\" : \"{{Provider_rule}}\",\r\n        \"ids:description\" : [ {\r\n          \"@value\" : \"provide-access\",\r\n          \"@type\" : \"http://www.w3.org/2001/XMLSchema#string\"\r\n        } ],\r\n        \"ids:title\" : [ {\r\n          \"@value\" : \"Example Usage Policy\",\r\n          \"@type\" : \"http://www.w3.org/2001/XMLSchema#string\"\r\n        } ],\r\n        \"ids:action\" : [ {\r\n          \"@id\" : \"https://w3id.org/idsa/code/USE\"\r\n        }],\r\n        \"ids:target\" : \"{{Provider_artifact}}\"\r\n} ]",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{CONNECTORB_URL}}/api/ids/contract?recipient={{Recipient_url}}&resourceIds={{Provider_resource}}&artifactIds={{Provider_artifact}}&download=false",
+											"host": [
+												"{{CONNECTORB_URL}}"
+											],
+											"path": [
+												"api",
+												"ids",
+												"contract"
+											],
+											"query": [
+												{
+													"key": "recipient",
+													"value": "{{Recipient_url}}"
+												},
+												{
+													"key": "resourceIds",
+													"value": "{{Provider_resource}}"
+												},
+												{
+													"key": "artifactIds",
+													"value": "{{Provider_artifact}}"
+												},
+												{
+													"key": "download",
+													"value": "false"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Request the Artifact based on the Existing Agreement: POST /api/agreements/{id}/artifacts",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Retrieve data URL\", function () {\r",
+													"    var jsonData = pm.response.json();\r",
+													"    var dataLink = jsonData[\"_embedded\"][\"artifacts\"][0][\"_links\"][\"data\"][\"href\"]\r",
+													"    pm.collectionVariables.set(\"dataLink\", dataLink)\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"strictSSL": false
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{Consumer agreement ID}}/artifacts",
+											"host": [
+												"{{CONNECTORB_URL}}"
+											],
+											"path": [
+												"api",
+												"agreements",
+												"{{Consumer agreement ID}}",
+												"artifacts"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "5. Interacting with the MetaData Broker",
+					"item": [
+						{
+							"name": "5.1. Query the Self-description of the MetaData Broker",
+							"item": [
+								{
+									"name": "Request Broker Self-Description: POST /api/ids/description",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Retrieve List of Catalog ID\", function () {\r",
+													"    var jsonData = pm.response.json();\r",
+													"    pm.collectionVariables.set(\"Broker_catalog_list\", jsonData[\"ids:resourceCatalog\"][0][\"ids:offeredResource\"][0][\"ids:representation\"][0][\"ids:instance\"][0][\"@id\"])\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"strictSSL": false
+									},
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "{{CONNECTORB_URL}}/api/ids/description?recipient={{BROKER}}",
+											"host": [
+												"{{CONNECTORB_URL}}"
+											],
+											"path": [
+												"api",
+												"ids",
+												"description"
+											],
+											"query": [
+												{
+													"key": "recipient",
+													"value": "{{BROKER}}"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "5.2. Query the MetaData Broker for Available Connectors in the Testbed",
+							"item": [
+								{
+									"name": "Query List of Connectors to Check Successful Registration: POST /api/ids/description",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Select the first catalog from the list of catalog ID\", function () {\r",
+													"    var jsonData = pm.response.json();\r",
+													"    pm.collectionVariables.set(\"Broker_catalog\", jsonData[\"@graph\"][1][\"@id\"])\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"strictSSL": false
+									},
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "{{CONNECTORB_URL}}/api/ids/description?recipient={{BROKER}}&elementId={{Broker_catalog_list}}",
+											"host": [
+												"{{CONNECTORB_URL}}"
+											],
+											"path": [
+												"api",
+												"ids",
+												"description"
+											],
+											"query": [
+												{
+													"key": "recipient",
+													"value": "{{BROKER}}"
+												},
+												{
+													"key": "elementId",
+													"value": "{{Broker_catalog_list}}"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "password",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "admin",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "CONNECTORA_URL",
+			"value": "https://connectora.localhost"
+		},
+		{
+			"key": "CONNECTORB_URL",
+			"value": "https://connectorb.localhost"
+		},
+		{
+			"key": "offers",
+			"value": ""
+		},
+		{
+			"key": "catalogs",
+			"value": ""
+		},
+		{
+			"key": "rules",
+			"value": ""
+		},
+		{
+			"key": "contracts",
+			"value": ""
+		},
+		{
+			"key": "artifacts",
+			"value": ""
+		},
+		{
+			"key": "representations",
+			"value": ""
+		},
+		{
+			"key": "Provider_catalog",
+			"value": ""
+		},
+		{
+			"key": "Provider_resource",
+			"value": ""
+		},
+		{
+			"key": "Provider_artifact",
+			"value": ""
+		},
+		{
+			"key": "Provider_rule",
+			"value": ""
+		},
+		{
+			"key": "Recipient_url",
+			"value": "https://connectora:8080/api/ids/data"
+		},
+		{
+			"key": "Consumer agreement ID",
+			"value": ""
+		
+		},
+		{
+			"key": "dataLink",
+			"value": ""
+		},
+		{
+			"key": "BROKER",
+			"value": "https://broker-reverseproxy/infrastructure"
+		},
+		{
+			"key": "Broker_catalog_list",
+			"value": ""
+		},
+		{
+			"key": "Broker_catalog",
+			"value": ""
+		}
+	]
+}
