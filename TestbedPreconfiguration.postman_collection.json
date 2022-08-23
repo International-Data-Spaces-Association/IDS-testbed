@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "f1d845dc-a26e-4ed4-b863-5ea97f25ad17",
+		"_postman_id": "a4ebf7de-50d2-4dad-b473-1ed031696423",
 		"name": "TestBed_Guide",
 		"description": "Example deployment of DSC provider to DSC consumer communication",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -364,7 +364,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"title\": \"Example Representation\",\n    \"description\": \"\", \n    \"mediaType\": \"json\", \n    \"language\": \"https://w3id.org/idsa/code/EN\"\n}",
+									"raw": "{\n    \"title\": \"Example Representation\",\n    \"description\": \"\", \n    \"mediaType\": \"application/json\", \n    \"language\": \"https://w3id.org/idsa/code/EN\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
