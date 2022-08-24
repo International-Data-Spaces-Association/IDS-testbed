@@ -5,12 +5,15 @@ services:
     container_name: omejdn
     ports:
       - 80:80
+      - 443:443      
     environment:
       - OMEJDN_DOMAIN=${OMEJDN_DOMAIN}
       - OMEJDN_PATH=${OMEJDN_PATH}
       - UI_PATH=${UI_PATH}
     volumes:
       - ./DAPS/nginx.conf:/etc/nginx/templates/default.conf.template
+      - ./DAPS/keys/TLS/daps.cert:/etc/nginx/daps.cert
+      - ./DAPS/keys/TLS/daps.key:/etc/nginx/daps.key
     networks:
       - local
 
@@ -55,9 +58,9 @@ services:
       - ./DataspaceConnectorA/conf/truststore.p12:/config/truststore.p12
     environment:
       - CONFIGURATION_PATH=/config/config.json
-      - DAPS_URL=http://omejdn
-      - DAPS_TOKEN_URL=http://omejdn/auth/token
-      - DAPS_KEY_URL=http://omejdn/auth/jwks.json
+      - DAPS_URL=https://omejdn
+      - DAPS_TOKEN_URL=https://omejdn/auth/token
+      - DAPS_KEY_URL=https://omejdn/auth/jwks.json
       - DAPS_INCOMING_DAT_DEFAULT_WELLKNOWN=/jwks.json
       - SERVER_SSL_KEY-STORE=file:///config/connectorA.p12
 
@@ -76,9 +79,9 @@ services:
     environment:
       - CONFIGURATION_PATH=/config/config.json
       - SERVER_PORT=8081
-      - DAPS_URL=http://omejdn
-      - DAPS_TOKEN_URL=http://omejdn/auth/token
-      - DAPS_KEY_URL=http://omejdn/auth/jwks.json
+      - DAPS_URL=https://omejdn
+      - DAPS_TOKEN_URL=https://omejdn/auth/token
+      - DAPS_KEY_URL=https://omejdn/auth/jwks.json
       - DAPS_INCOMING_DAT_DEFAULT_WELLKNOWN=/jwks.json
       - SERVER_SSL_KEY-STORE=file:///config/connectorB.p12
 
@@ -89,16 +92,16 @@ services:
       - ./MetadataBroker/server.crt:/etc/cert/server.crt
       - ./MetadataBroker/server.key:/etc/cert/server.key
     ports:
-      - "443:443" # IDS-HTTP API
+      - "444:443" # IDS-HTTP API
       - "81:80"
     networks:
       - local
 
   broker-core:
-    image: broker-core-testbed:4.2.8
+    image: idstestbed/broker-core:4.2.8
     container_name: broker-core
-    build:
-      context: ./MetadataBroker/build
+    volumes:
+      - ./MetadataBroker/isstbroker-keystore.jks:/etc/cert/isstbroker-keystore.jks
     environment:
       - SPARQL_ENDPOINT=http://broker-fuseki:3030/connectorData
       - ELASTICSEARCH_HOSTNAME=broker-elasticsearch
@@ -106,7 +109,7 @@ services:
       - DAPS_VALIDATE_INCOMING=true
       - COMPONENT_URI=https://localhost/
       - COMPONENT_CATALOGURI=https://localhost/connectors/
-      - DAPS_URL=http://omejdn/auth/token
+      - DAPS_URL=https://omejdn/auth/token
     expose:
       - "8080"
     networks:
