@@ -1,5 +1,16 @@
 # IDSA Reference Testbed Installation (CA-DAPS-DSC-MDB)
 
+## Index
+- [Execution modes](https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/InstallationGuide.md#execution-modes)
+    - [Preconfigured testbed](https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/InstallationGuide.md#target-view-preconfigured-testbed)
+    - [Manual testbed set up](https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/InstallationGuide.md#target-view-manual-testbed-set-up)
+- [Target View: Preconfigured testbed](https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/InstallationGuide.md#target-view-preconfigured-testbed)
+- [Target View: Manual testbed set up](https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/InstallationGuide.md#target-view-manual-testbed-set-up)
+    - [Certificate Authority](https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/InstallationGuide.md#certificate-authority)
+    - [DAPS](https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/InstallationGuide.md#daps)
+    - [Dataspace Connector](https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/InstallationGuide.md#dataspace-connector)
+    - [Metadata Broker](https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/InstallationGuide.md#metadata-broker)
+
 The installation and configuration process is explained below for each of the components. To further support this document, the links to the official installation guides will be linked.
 
 ## Execution modes
