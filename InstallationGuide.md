@@ -109,7 +109,7 @@ The process of downloading the images and launching the containers of the differ
 The IDS-testbed will be correctly deployed. The components that are part of the IDS-testbed can be reached at the URLs mentioned below.
 
 DAPS:
-* can be reached at http://localhost:4567
+* can be reached at https://localhost:443
 * needs to be preconfigured to know connector A, B and the Broker
 
 Connectors:
@@ -122,7 +122,7 @@ Connectors:
   * needs to be preconfigured with a self-description and offering a dataset ("goodbye world")
 
 Broker:
-* can be reached at https://localhost[:443]
+* can be reached at https://localhost:444
 * needs to be aware of connector A, connector B and store their self-descriptions
 
 # Target View: Manual testbed set up
@@ -288,7 +288,7 @@ sudo gem install jwt
 First, let us set up the network with
 
 ```
-docker network create broker-localhost_default
+docker network create testbed_local
 ```
 
 ## Download the Testbed
@@ -356,92 +356,100 @@ Every client that wants to use the local Omejdn DAPS must place their `{CERTFILE
 The directory can be found in
 
 ```
-OmejdnDAPS/keys
+DAPS/keys
 ```
+
+Add the certificate provided by the local CA, newly created by the local CA or provided by Fraunhofer AISEC. Place the certificate at the folder `DAPS/keys/omejdn/` with name `omejdn.key` to avoid dependency issues later on.
 
 ## Adding the clients to the DAPS
 
-**Note:** The user must extract the aki/ski extensions from the client's certificate to add the client to the Omejdn DAPS.  If you are not certain on how to do this,  the `keys` directory will have a script called `extensions.sh`. Once executed, input the certificate's filename and it will return the required aki/ski extensions.
+**Note:** The user must execute the `register_connector.sh` file in order to add the client to the Omejdn DAPS. Once executed, the certificate will be included in the DAPS's list of clients.
 
 To execute the script
 
 ```
-chmod +x extensions.sh
-./extensions.sh
+cd DAPS
+./register_connector.sh {CERT_FILENAME} 
 ```
 
 It could look something like this
-
 ```
-chmod +x extensions.sh
-./extensions.sh
-> Input your certificate filename:
-testbed1.cert
-> The aki/ski extension for testbed1.cert is:
-66:07:ED:E5:80:E4:29:6D:1E:DD:F7:43:CA:0E:EB:38:32:C8:3A:43:keyid:07:FC:95:17:C4:95:B9:E4:AD:09:5F:07:1E:D2:20:75:2D:89:66:85
+./register_connector.sh testbed1
 ```
 
-Change the configuration with your favorite editor, e.g. `nano`.
-
-```
-nano config/clients.yml
-```
-
-Add the aki/ski extension from the client's certificate in `client_id`
-
-It could look something like this 
-
-```
-client_id: 66:07:ED:E5:80:E4:29:6D:1E:DD:F7:43:CA:0E:EB:38:32:C8:3A:43:keyid:07:FC:95:17:C4:95:B9:E4:AD:09:5F:07:1E:D2:20:75:2D:89:66:85`
-```
-and change the `certfile` to the {CERTFILE}.cert file dropped earlier in the `keys` directory
-
-It could look something like this 
-
-```
-certile: testbed1.cert
-```
+The certificate will be added to the list of DAPS's clients. You can check it at the file `DAPS/config/clients.yml`
 
 ## Required changes in the configuration
 
-Change the configuration with your favorite editor, e.g. `nano`.
+Change the configuration file `.env` with your favorite editor, e.g. `nano`.
 
 ```
-nano config/omejdn.yml
+nano .env
 ```
 
-Replace `host` and `audience` with `idsc:IDS_CONNECTORS_ALL`
+**Note** The file could be hidden. Select the option `show hidden files` and it should be placed at IDS-testbed root directory.
 
-Replace `issuer` in `token` and `id_token` with `http://omejdn:4567`
-
-```
-host: idsc:IDS_CONNECTORS_ALL
-openid: true
-token:
-  expiration: 3600
-  signing_key: signing_key.pem
-  algorithm: RS256
-  audience: idsc:IDS_CONNECTORS_ALL
-  issuer: http://omejdn:4567
-id_token:
-  expiration: 360000
-  signing_key: signing_key.pem
-  algorithm: RS256
-  issuer: http://omejdn:4567
-user_background:
-- yaml
-```
-
-Build the Omejdn DAPS image
+Replace the following lines with the necessary configuration. It could look something like this
 
 ```
-docker build -t daps .
+COMPOSE_PROJECT_NAME=testbed
+OMEJDN_ENVIRONMENT="production"
+OMEJDN_PROTOCOL="https"
+OMEJDN_VERSION="1.6.0"
+OMEJDN_DOMAIN="omejdn"
+OMEJDN_PATH="/auth"
+
+ADMIN_USERNAME="admin"
+ADMIN_PASSWORD="password"
+
+TLS_KEY="${PWD}/DAPS/keys/TLS/daps.key"
+TLS_CERT="${PWD}/DAPS/keys/TLS/daps.cert"
 ```
 
-Run the Omejdn DAPS server
+Configure the `docker-compose.yml` file with your configuration. Then run the Omejdn DAPS server.
+
+The `docker-compose.yml` could look something like this
 
 ```
-docker run -d --name omejdn -p 4567:4567 -v $PWD/config:/opt/config -v $PWD/keys:/opt/keys --network=broker-localhost_default daps
+services
+
+  omejdn:
+    image: nginx:1.21.6
+    container_name: omejdn
+    ports:
+      - 80:80
+      - 443:443      
+    environment:
+      - OMEJDN_DOMAIN=${OMEJDN_DOMAIN}
+      - OMEJDN_PATH=${OMEJDN_PATH}
+      - UI_PATH=${UI_PATH}
+    volumes:
+      - ./DAPS/nginx.conf:/etc/nginx/templates/default.conf.template
+      - ./DAPS/keys/TLS/daps.cert:/etc/nginx/daps.cert
+      - ./DAPS/keys/TLS/daps.key:/etc/nginx/daps.key
+    networks:
+      - local
+
+  omejdn-server:
+    image: ghcr.io/fraunhofer-aisec/omejdn-server:${OMEJDN_VERSION}
+    container_name: omejdn-server
+    environment:
+      - OMEJDN_ISSUER=${OMEJDN_ISSUER}
+      - OMEJDN_FRONT_URL=${OMEJDN_ISSUER}
+      - OMEJDN_OPENID=true
+      - OMEJDN_ENVIRONMENT=${OMEJDN_ENVIRONMENT}
+      - OMEJDN_ACCEPT_AUDIENCE=idsc:IDS_CONNECTORS_ALL
+      - OMEJDN_DEFAULT_AUDIENCE=idsc:IDS_CONNECTORS_ALL
+      - OMEJDN_ADMIN=${ADMIN_USERNAME}:${ADMIN_PASSWORD}
+    volumes:
+      - ./DAPS/config:/opt/config
+      - ./DAPS/keys:/opt/keys
+    networks:
+      - local
+      
+networks:
+  local:
+    driver: bridge
 ```
 
 ## Required DNS for the DAPS
@@ -456,6 +464,8 @@ It could look something like this
 ```
 openssl req -x509 -newkey rsa:4096 -sha256 -days 2650 -nodes -keyout omejdn.key -out omejdn.crt -subj "/C=ES/ST=Bizkaia/L=Bilbao/O=SQS/CN=omejdn" -addext "subjectAltName=DNS:localhost,DNS:omejdn"
 ```
+
+Place these created certificates at the folder `DAPS/keys/TLS/` and name them as `daps.crt` and `daps.key` to match the above mentioned `docker-compose.yml` file configuration.
 
 # DATASPACE CONNECTOR:
 The testbed will have two built-in Connectors. They will be referred to as ConnectorA and ConnectorB. They will have different configurations, so they will each have their own directory. These directories are going to be referred to as `DataspaceConnectorA` and `DataspaceConnectorB`.
@@ -474,40 +484,30 @@ cd IDS-testbed/DataspaceConnectorB/
 ## Component Documentation
 The official documentation will cover the introductions, deployment, documentation and communication guide of the component.
 
-Official documentation: https://github.com/International-Data-Spaces-Association/DataspaceConnector/tree/release/v7.0.1-ra
+Official documentation: https://github.com/International-Data-Spaces-Association/DataspaceConnector/tree/v7.1.0
 
 ## Continue here after reading the official documentation
 Official configuration documentation: https://international-data-spaces-association.github.io/DataspaceConnector/Deployment/Configuration#configuration
 
-The Dataspace Connector must be configured to work in this environemnt.
+The Dataspace Connector must be configured to work in this environment.
 
 ## Changes to the application.properties file
-Use nano or your most favourite editor.
-```
-nano src/main/resources/application.properties
-```
-### Spring Tomcat
+The configuration necessary for the application properties is located at the `src/main/resources/application.properties` folder of the official DSC repository. 
 
-**ConnectorA** is deployed in port `8080`
+For the IDS-testbed deployment it is configured at the `docker-compose.yml`. Here it is detailed the port, daps configuration and the server ssl keystore. 
+
 ```
-## Spring Tomcat
-server.port=8080
-```
-**ConnectorB** is deployed in port `8081`
-```
-## Spring Tomcat
-server.port=8081
+    ports:
+      - 8080:8080
+    environment:
+      - DAPS_URL=https://omejdn
+      - DAPS_TOKEN_URL=https://omejdn/auth/token
+      - DAPS_KEY_URL=https://omejdn/auth/jwks.json
+      - DAPS_INCOMING_DAT_DEFAULT_WELLKNOWN=/jwks.json
+      - SERVER_SSL_KEY-STORE=file:///config/connectorA.p12
 ```
 
-### DAPS
-Edit the DAPS configuration on both **ConnectorA** and **Connector B**. This will make use of the locally installed DAPS.
-```
-## DAPS
-##daps.url=https://daps.aisec.fraunhofer.de
-##daps.token.url=https://daps.aisec.fraunhofer.de/v2/token
-daps.url=http://omejdn:4567
-daps.token.url=http://omejdn:4567/token
-```
+The server `server.ssl.key-store=file:///config/{TLS_FILENAME}.p12`, where `{TLS_FILENAME}` is to be replaced with the TLS cert that is created in the following section.
 
 ### TLS
 Create a certificate with a specific DNS to use TLS and establish `https` connection. As a Docker network is used in the Testbed, the container name is used as DNS.
@@ -543,33 +543,10 @@ It could look something like this (**ConnectorB**)
 openssl pkcs12 -export -out connectorB.p12 -inkey connectorB.key -in connectorB.crt -passout pass:password
 ```
 
-The main line of interest is `server.ssl.key-store=classpath:conf/{TLS_FILENAME}.p12`, where `{TLS_FILENAME}` is to be replaced with the TLS cert that was created above:
-
-It could look something like this (**ConnectorA**)
-```
-## TLS
-server.ssl.enabled=true
-server.ssl.key-store-type=PKCS12
-server.ssl.key-store=classpath:conf/connectorA.p12
-server.ssl.key-store-password=password
-server.ssl.key-alias=1
-#security.require-ssl=true
-```
-It could look something like this (**ConnectorB**)
-```
-## TLS
-server.ssl.enabled=true
-server.ssl.key-store-type=PKCS12
-server.ssl.key-store=classpath:conf/connectorB.p12
-server.ssl.key-store-password=password
-server.ssl.key-alias=1
-#security.require-ssl=true
-```
-
 ## Changes to the config.json file
 Use nano or your most favourite editor
 ```
-nano src/main/resources/conf/config.json
+nano DataspaceConnectorA/conf/config.json
 ```
 ### Deployment Mode
 Edit `connectorDeployMode` from `TEST_DEPLOYMENT` to `PRODUCTIVE_DEPLOYMENT` for the connector to request and validate incoming DATs
@@ -584,7 +561,7 @@ Edit `connectorDeployMode` from `TEST_DEPLOYMENT` to `PRODUCTIVE_DEPLOYMENT` for
   "ids:keyStore" : {
     "@id" : "file:///conf/{CERT_FILENAME}.p12"
 ```
-{CERT_FILENAME} will be a certificate from the local CA or external to this testbed, provided by Fraunhofer AISEC (Contact Gerd Brost)
+{CERT_FILENAME} will be a certificate from the local CA or external to this testbed, provided by Fraunhofer AISEC (Contact Gerd Brost).
 
 Ensure {CERT_FILENAME} are different for **ConnectorA** and **ConnectorB**
 
@@ -592,7 +569,7 @@ Ensure {CERT_FILENAME} are different for **ConnectorA** and **ConnectorB**
 
 ### Open the `conf` directory
 ```
-src/main/resources/conf/
+DataspaceConnectorA/conf/
 ```
 
 Ensure the {CERT_FILENAME}.p12 file used for `ids:keyStore` is placed in this directory for the `config.json` to access it
@@ -663,36 +640,41 @@ It could look something like this (**ConnectorB**)
 
 ### Additional Changes
 
-For the use of this testbed, the Dataspace Connector must be built via docker.
+For the use of this testbed, the Dataspace Connector must be built via docker-compose.
 
-Official build documentation: https://international-data-spaces-association.github.io/DataspaceConnector/Deployment/Build#docker
+The testbed is run in a docker network defined earlier in this document called `testbed_local`.
 
-The testbed is run in a docker network defined earlier in this document called `broker-localhost_default`.
-
-Before running your images as a container, add `--network=broker-localhost_default` to the `docker run` command
+Configure the `docker-compose.yml` file with your configuration. The `docker-compose.yml` could look something like this for the DataspaceConnectorA.
 
 ```
-docker build -t <IMAGE_NAME:TAG> .
-docker run --publish 8080:8080 --detach --name {CONTAINER_NAME} --network=broker-localhost_default <IMAGE_NAME:TAG>
+services
+
+  connectora:
+    image: ghcr.io/international-data-spaces-association/dataspace-connector:7.1.0
+    container_name: connectora
+    ports:
+      - 8080:8080
+    networks:
+      - local
+    volumes:
+      - ./DataspaceConnectorA/conf/config.json:/config/config.json
+      - ./DataspaceConnectorA/conf/testbed1.p12:/conf/testbed1.p12
+      - ./DataspaceConnectorA/conf/connectorA.p12:/config/connectorA.p12
+      - ./DataspaceConnectorA/conf/truststore.p12:/config/truststore.p12
+    environment:
+      - CONFIGURATION_PATH=/config/config.json
+      - DAPS_URL=https://omejdn
+      - DAPS_TOKEN_URL=https://omejdn/auth/token
+      - DAPS_KEY_URL=https://omejdn/auth/jwks.json
+      - DAPS_INCOMING_DAT_DEFAULT_WELLKNOWN=/jwks.json
+      - SERVER_SSL_KEY-STORE=file:///config/connectorA.p12
+
+networks:
+  local:
+    driver: bridge
 ```
 
-It could look something like this (**ConnectorA**)
-
-```
-docker build -t dsca .
-docker run --publish 8080:8080 --detach --name connectora --network=broker-localhost_default dsca
-```
-
-It could look something like this (**ConnectorB**)
-
-```
-docker build -t dscb .
-docker run --publish 8081:8081 --detach --name connectorb --network=broker-localhost_default dscb
-```
-
-This might take a while when you run it for the first time, as docker has to download some dependencies, build and run some tests.
-
-> DSC will not fly without a daps token now. Make sure the DAPS runs first.
+> DSC will not fly without a DAPS token now. Make sure the DAPS runs first.
 
 
 # METADATA BROKER
@@ -703,6 +685,15 @@ The official documentation will cover the pre-requisites, installation and deplo
 Official documentation: https://github.com/International-Data-Spaces-Association/metadata-broker-open-core
 
 ## Continue here after reading the official documentation
+
+Download the component from the official repository
+
+```
+cd IDS-testbed
+git clone -b 5.0.0 https://github.com/International-Data-Spaces-Association/metadata-broker-open-core.git
+```
+
+Use the downloaded component to build the broker-core image.
 
 ## Changes to the application.properties file
 Use nano or your most favourite editor.
@@ -715,7 +706,7 @@ This will make use of the locally installed DAPS.
 ```
 # DAPS
 # daps.url=https://daps.aisec.fraunhofer.de
-daps.url=http://omejdn:4567/token
+daps.url=https://omejdn/auth/token
 daps.validateIncoming=true
 ```
 
@@ -727,15 +718,11 @@ Add the local DAPS to the trusted hosts
 ...
 jwks.trustedHosts=daps.aisec.fraunhofer.de,omejdn
 ssl.certificatePath=/etc/cert/server.crt
+ssl.javakeystore=/etc/cert/isstbroker-keystore.jks
 ```
 
 ## Changes to the component's keystore
-Use nano or your most favourite editor.
-```
-nano broker-core/src/main/resources/application.properties
-```
-
-Add the certificate provided by the local CA, newly created by the local CA or provided by Fraunhofer AISEC. If it is NOT provided by the local CA, make sure it is correctly added to the local DAPS.
+At the folder `broker-core/src/main/resources/` add the certificate provided by the local CA, newly created by the local CA or provided by Fraunhofer AISEC. If it is NOT provided by the local CA, make sure it is correctly added to the local DAPS.
 
 ```
 keytool -importkeystore -srckeystore {SRCKEYSTORE} -srcstoretype {STORETYPE} -srcstorepass {SRCSTOREPASS} -destkeystore {DESTKEYSTORE} -deststoretype {DESTSTORETYPE} -deststorepass {DESTSTOREPASS}
@@ -763,87 +750,105 @@ It could look something like this
 keytool -v -list -keystore isstbroker-keystore.jks
 ```
 
-## Adding the TLS certificates
+## Build the broker-core image
 
-The TLS certificates are located in the following directory path `MetadataBroker`
-* `server.crt`
-* `server.key`
-
-## Changes in the `docker-compose` file
-
-Use nano or your most favourite editor.
-```
-nano docker/composefiles/broker-localhost
-```
-
-Ensure the container names are consistent with other dependencies by adding `container_name:`.
-
-If port 80 is already in use, the `reverseproxy` container will exit with code 1. Follow the steps in the next block to get around this:
+Go to the main directory and build the project with `maven`:
 
 ```
-services:
-  broker-reverseproxy:
-    ...
-    container_name: broker-reverseproxy
-    ...
-    ports:
-    - "443:443" # IDS-HTTP API
-    - "80:80" # Change to a port of your choosing if taken: "{PORT}:80"
-```
-
-Make sure to edit the following lines to have the Metadata Broker in productive mode:
-
-```
-services:
-  ...
-  broker-core:
-    ...
-    environment:
-    ...
-    DAPS_VALIDATE_INCOMING=true
-    ...
-    DAPS_URL=http://omejdn:4567/token  
-```
-
-## Usage
-
-Go to the directory with the `docker-compose` file and pull the images required
-```
-cd docker/composefiles/broker-localhost
-docker-compose pull
-```
-
-The pulled `core` image contains pre-loaded important information, such as the component's keystore and the Fraunhofer DAPS. This pulled `core` image will not have the configuration required for this testbed and it will be re-created locally.
-
-Delete the pulled `core` image
-
-```
-docker rmi registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker-open/core
-```
-
-Go back to the main directory and build the project with `maven`:
-
-```
-cd ../../..
+cd metadata-broker-open-core
 mvn clean package
 ```
 
 This will create a `.jar` file in `broker-core/target` that will have to be copied into `docker/broker-core`.
 
 ```
-cp broker-core/target/broker-core-4.2.8-SNAPSHOT.jar docker/broker-core
+cp broker-core/target/broker-core-5.0.0.jar docker/broker-core
 ```
 
-Once the file is copied, move to the `docker/broker-core` directory and build the `core` image locally. The `core` image name will be maintained from the previously pulled `core` image. This will avoid dependency issues later on.
+Once the file is copied, move to the `docker/broker-core` directory and place there the TLS certificate that corresponds to the DAPS. For the IDS-testbed it is located at `DAPS/keys/TLS/daps.cert` and use the following command to change the certificate format to `daps.crt`
+
+```
+openssl x509 -inform PEM -in daps.cert -out daps.crt
+```
+
+Then build the `core` image locally using the following command.
 
 ```
 cd docker/broker-core
-docker build -t registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker-open/core .
+docker build -t registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker-open/core:5.0.0 .
+```
+
+## Adding the TLS certificates
+
+At the `IDS-testbed/MetadataBroker/` folder place the TLS certificates together with the keystore.
+* `server.crt`
+* `server.key`
+* `isstbroker-keystore.jks`
+
+## Usage
+
+Take the content from the file `metadata-broker-open-core/docker/composefiles/broker-localhost/docker-compose.yml` and copy it at your docker-compose.yml file. Use nano or your most favourite editor.
+```
+nano docker-compose.yml
+```
+
+Use the TLS certificates and ensure the container names are consistent with other dependencies by adding `container_name:`.
+
+If port 443 is already in use, the `reverseproxy` container will exit with code 1. Follow the steps in the next block to get around this:
+
+```
+services:
+  broker-reverseproxy:
+    image: registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker-open/reverseproxy
+    container_name: broker-reverseproxy
+    volumes:
+      - ./MetadataBroker/server.crt:/etc/cert/server.crt
+      - ./MetadataBroker/server.key:/etc/cert/server.key
+    ports:
+      - "443:443" # Change to a port of your choosing if taken: "{PORT}:443"
+      - "80:80" # Change to a port of your choosing if taken: "{PORT}:80"
+    networks:
+      - local
+
+  broker-core:
+    image: registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker-open/core:5.0.0
+    container_name: broker-core
+    volumes:
+      - ./MetadataBroker/isstbroker-keystore.jks:/etc/cert/isstbroker-keystore.jks
+    environment:
+      - SPARQL_ENDPOINT=http://broker-fuseki:3030/connectorData
+      - ELASTICSEARCH_HOSTNAME=broker-elasticsearch
+      - SHACL_VALIDATION=true
+      - DAPS_VALIDATE_INCOMING=true
+      - COMPONENT_URI=https://localhost/
+      - COMPONENT_CATALOGURI=https://localhost/connectors/
+      - DAPS_URL=https://omejdn/auth/token
+    expose:
+      - "8080" 
+    networks:
+      - local
+
+  broker-fuseki:
+    image: registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker-open/fuseki
+    container_name: broker-fuseki
+    volumes:
+      - broker-fuseki:/fuseki
+    expose:
+      - "3030"
+    networks:
+      - local
+      
+volumes:
+  broker-fuseki:
+
+networks:
+  local:
+    driver: bridge
 ```
 
 Go to the compose file and build the Metadata Broker
 
 ```
-cd ../../docker/composefiles/broker-localhost/
 docker-compose up
 ```
+
