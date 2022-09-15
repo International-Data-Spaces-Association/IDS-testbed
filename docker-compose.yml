@@ -98,7 +98,7 @@ services:
       - local
 
   broker-core:
-    image: idstestbed/broker-core:4.2.8
+    image: idstestbed/broker-core:5.0.0
     container_name: broker-core
     volumes:
       - ./MetadataBroker/isstbroker-keystore.jks:/etc/cert/isstbroker-keystore.jks

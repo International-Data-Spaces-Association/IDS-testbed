@@ -11,14 +11,6 @@ CLIENT_SECURITY_PROFILE=$2
 [ -z "$CLIENT_SECURITY_PROFILE" ] && CLIENT_SECURITY_PROFILE="idsc:BASE_SECURITY_PROFILE"
 
 CLIENT_CERT="keys/$CLIENT_NAME.cert"
-if [ -n "$3" ]; then
-    [ ! -f "$3" ] && (echo "Cert not found"; exit 1)
-    cert_format="DER"
-    openssl x509 -noout -in "$3" 2>/dev/null && cert_format="PEM"
-    openssl x509 -inform "$cert_format" -in "$3" -text > "$CLIENT_CERT"
-else
-    openssl pkcs12 -export -in "$CLIENT_CERT" -inkey "keys/${CLIENT_NAME}.key" -out "keys/${CLIENT_NAME}.p12"
-fi
 
 SKI="$(openssl x509 -in "keys/${CLIENT_NAME}.cert" -noout -text | grep -A1 "Subject Key Identifier" | tail -n 1 | tr -d ' ')"
 AKI="$(openssl x509 -in "keys/${CLIENT_NAME}.cert" -noout -text | grep -A1 "Authority Key Identifier" | tail -n 1 | tr -d ' ')"

@@ -19,9 +19,9 @@ IDS Testbed is a setup with Open Source IDS components which can be used to ve
 
 1. Git clone this repository to your local machine and go into the directory (usually ```cd IDS-testbed```) 
 
-2. Make sure you have installed Docker and Docker Compose on your machine. Run ```docker compose up -d``` or ```docker-compose up -d``` to start the Testbed. 
+2. Make sure you have correctly installed all the [setting up requirements](https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/InstallationGuide.md#target-view-preconfigured-testbed). Run ```docker compose up -d``` to start the Testbed and deploy all the components.
    
-3. Run the [Postman collection](https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/TestbedPreconfiguration.postman_collection.json) to start the tests. Current available components for testing are: Dataspace connector, DAPS, CA, Metadata Broker.
+3. Run the [Postman collection](https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/TestbedPreconfiguration.postman_collection.json) to start the tests. There is a guide with the installation and use of Postman which is located [here](https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/PreparingPreconfiguredSetup.md#guide-for-preparing-and-validating-the-preconfigured-setup). Current available components for testing are: CA, DAPS, Dataspace connector, Metadata Broker.
 
 4. Test the compatibility of your own developed component following the steps of the [Testbed User Guide](./TestbedUserGuide.md).
 
@@ -36,7 +36,7 @@ Used versions of the IDS-testbed components:
 - Certificate Authority (CA)
 - Dynamic Attribute Provisioning Service (DAPS) v1.6.0
 - Dataspace Connector (DSC) v7.1.0
-- MetadataBroker (MDB) v4.2.8
+- MetadataBroker (MDB) v5.0.0
 
 ## Roadmap
 ### Version 2.0 of the test bed
