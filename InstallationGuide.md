@@ -9,7 +9,7 @@
     - [DAPS](https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/InstallationGuide.md#daps)
     - [Dataspace Connector](https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/InstallationGuide.md#dataspace-connector)
     - [Metadata Broker](https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/InstallationGuide.md#metadata-broker)
-- [Stop and delete IDS-testbed set up](https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/InstallationGuide.md#Stop and delete IDS-testbed set up)
+- [Stop and delete testbed set up](https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/InstallationGuide.md#stop-and-delete-testbed-set-up)
 
 The installation and configuration process is explained below for each of the components. To further support this document, the links to the official installation guides will be linked.
 
@@ -875,7 +875,7 @@ Go to the compose file and build the Metadata Broker
 docker-compose up
 ```
 
-## Stop and delete IDS-testbed set up
+## Stop and delete testbed set up
 
 In this section it is detailed how to automatically stop and delete IDS-testbed set up.
 
