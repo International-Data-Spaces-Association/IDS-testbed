@@ -83,15 +83,18 @@ python3 pki.py subca list
 **Creation of key pair and certificate in one step**  
 A device private key with the respective certificate can be created with the following command:
 ```bash
-python3 pki.py cert create --subCA [Sub CA name] --common-name [Cert name] --client --server
+python3 pki.py cert create --subCA [Sub CA name] --common-name [Cert name] --algo [Key algorithm] --bits [Bits of Key] --hash [Algorithm for signing] --client --server
 ```
+Additionally, it can be included country name, organization name and unit name information.
+
 It could look something like this
 ```bash
-python3 pki.py cert create --subCA "Test SubCA" --common-name "Example" --client --server
+python3 pki.py cert create --subCA ReferenceTestbedSubCA --common-name Example --algo rsa --bits 2048 --hash sha256 --country-name ES --organization-name SQS --unit-name TestLab --server --client
 ```
-The Sub CA used for signing the certificate is a required parameter.
+The Sub CA used for signing the certificate is a required parameter. The key algorithm `rsa`, bits of key `2048` and algorithm for signing `sha256` are also required for correct interoperability between IDS-testbed components.
 
 The created key pair is located at the folder `CertificateAuthority/data/cert`
+
 **Creation of a certificate for an existing key pair**  
 If a private-public key pair is already available on the device, the public key can be signed to gain a device certificate with the following command:
 ```bash

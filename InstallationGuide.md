@@ -2,19 +2,31 @@
 
 ## Index
 - [Execution modes](https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/InstallationGuide.md#execution-modes)
-    - [Preconfigured testbed](https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/InstallationGuide.md#target-view-preconfigured-testbed)
-    - [Manual testbed set up](https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/InstallationGuide.md#target-view-manual-testbed-set-up)
+    - [Hardware Requirements](https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/InstallationGuide.md#hardware-requirements)
 - [Target View: Preconfigured testbed](https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/InstallationGuide.md#target-view-preconfigured-testbed)
 - [Target View: Manual testbed set up](https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/InstallationGuide.md#target-view-manual-testbed-set-up)
     - [Certificate Authority](https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/InstallationGuide.md#certificate-authority)
     - [DAPS](https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/InstallationGuide.md#daps)
     - [Dataspace Connector](https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/InstallationGuide.md#dataspace-connector)
     - [Metadata Broker](https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/InstallationGuide.md#metadata-broker)
+- [Stop and delete IDS-testbed set up](https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/InstallationGuide.md#Stop and delete IDS-testbed set up)
 
 The installation and configuration process is explained below for each of the components. To further support this document, the links to the official installation guides will be linked.
 
-## Execution modes
+# Execution modes
 You may either run the preconfigured testbed offered in this repo or follow the instructions for the manual setup below to set it up on your own and possibly adjust it to your needs.
+
+## Hardware Requirements
+
+In this section the minimum requirements of disk space required for operating the IDS-testbed are detailed.
+
+The current minimum requirements for the IDS-Testbed are:
+- 4 GB RAM (however 8GB RAM is recommended)
+- 50 GB storage
+
+It is recommended to use 64bit quad core processor to provide enough processing power for all docker containers.
+
+Take into account that if more components are included at the IDS-testbed or a huge amount of data is uploaded it is possible to run out of disk free space. In this cases it is recommended to provide more free disk storage.
 
 # Target View: Preconfigured testbed
 Follow this section to automatically launch the Preconfigured set up of the Testbed.
@@ -862,4 +874,48 @@ Go to the compose file and build the Metadata Broker
 ```
 docker-compose up
 ```
+
+## Stop and delete IDS-testbed set up
+
+In this section it is detailed how to automatically stop and delete IDS-testbed set up.
+
+Be aware that following this section will stop and delete all the containers launched by the IDS-testbed. It will also remove the `docker-compose.yml` file configuration regarding the images of the different components and the associated docker volumes and network.
+
+Move to your `IDS-testbed` downloaded directory and execute the following command
+```
+docker-compose down --rmi all -v
+```
+
+This is the expected outcome
+```
+Stopping connectorb          ... done
+Stopping omejdn              ... done
+Stopping broker-reverseproxy ... done
+Stopping broker-core         ... done
+Stopping broker-fuseki       ... done
+Stopping omejdn-server       ... done
+Stopping omejdn-ui           ... done
+Stopping connectora          ... done
+Removing connectorb          ... done
+Removing omejdn              ... done
+Removing broker-reverseproxy ... done
+Removing broker-core         ... done
+Removing broker-fuseki       ... done
+Removing omejdn-server       ... done
+Removing omejdn-ui           ... done
+Removing connectora          ... done
+Removing network testbed_local
+Removing volume testbed_broker-fuseki
+Removing image nginx:1.21.6
+Removing image ghcr.io/fraunhofer-aisec/omejdn-server:1.6.0
+Removing image ghcr.io/fraunhofer-aisec/omejdn-ui:dev
+Removing image ghcr.io/international-data-spaces-association/dataspace-connector:7.1.0
+Removing image ghcr.io/international-data-spaces-association/dataspace-connector:7.1.0
+WARNING: Image ghcr.io/international-data-spaces-association/dataspace-connector:7.1.0 not found.
+Removing image registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker-open/reverseproxy
+Removing image idstestbed/broker-core:5.0.0
+Removing image registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker-open/fuseki
+```
+
+As seen above, the containers have been stopped and deleted. The network, volumes and images used by the `docker-compose.yml` file have also been deleted.
 
