@@ -18,7 +18,7 @@ You may either run the preconfigured testbed offered in this repo or follow the 
 
 ## Hardware Requirements
 
-In this section the minimum requirements of disk space required for operating the IDS-testbed are detailed.
+In this section the minimum requirements required for operating the IDS-testbed are detailed.
 
 The current minimum requirements for the IDS-Testbed are:
 - 4 GB RAM (however 8GB RAM is recommended)
