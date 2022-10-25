@@ -46,7 +46,7 @@ python3 pki.py  ca create --common-name [CA name]
 ```
 It could look something like this
 ```bash
-python3 pki.py  ca create --common-name "Test CA"
+python3 pki.py  ca create --common-name "ReferenceTestbedCA"
 ```
 A list of available parameters with their defaults can be obtained by:
 ```bash
@@ -65,7 +65,7 @@ python3 pki.py subca create --CA [CA name] --common-name [Sub CA name]
 ```
 It could look something like this
 ```bash
-python3 pki.py subca create --CA "Test CA" --common-name "Test SubCA"
+python3 pki.py subca create --CA "ReferenceTestbedCA" --common-name "ReferenceTestbedSubCA"
 ```
 The CA used for signing the sub CA is a required parameter.
 
