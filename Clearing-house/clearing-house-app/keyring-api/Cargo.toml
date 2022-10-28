@@ -1,0 +1,32 @@
+[package]
+name = "keyring-api"
+version = "0.8.0"
+authors = [
+    "Mark Gall <mark.gall@aisec.fraunhofer.de>",
+    "Georg Bramm <georg.bramm@aisec.fraunhofer.de>"
+]
+edition = "2018"
+
+[dependencies]
+aes = "0.6.0"
+aes-gcm-siv = "0.9.0"
+base64 = "0.9.3"
+biscuit = { git = "https://github.com/lawliet89/biscuit", branch = "master" }
+chrono = { version = "0.4", features = ["serde"] }
+core-lib = {path = "../core-lib" }
+error-chain = "0.12.4"
+fern = "0.5"
+generic-array = "0.14.4"
+hex = "0.4.3"
+hkdf = "0.10.0"
+log = "0.4.14"
+mongodb = "2.0.0-beta.3"
+openssl = "0.10.32"
+rocket = { version = "0.5.0-rc.1", features = ["json"] }
+sha2 = "0.9.3"
+serde = "1.0"
+serde_derive = "1.0"
+serde_json = "1.0"
+tokio = "1.8.1"
+tokio-test = "0.4.2"
+yaml-rust = "0.4"

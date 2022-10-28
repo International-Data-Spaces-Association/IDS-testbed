@@ -1,0 +1,8 @@
+[workspace]
+
+members = [
+    "core-lib",
+    "document-api",
+    "keyring-api",
+    "logging-service"
+]

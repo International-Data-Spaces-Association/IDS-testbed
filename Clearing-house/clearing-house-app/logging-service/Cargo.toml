@@ -1,0 +1,22 @@
+[package]
+name = "logging-service"
+version = "0.8.0"
+authors = [
+    "Mark Gall <mark.gall@aisec.fraunhofer.de>",
+    "Georg Bramm <georg.bramm@aisec.fraunhofer.de>",
+]
+edition = "2018"
+
+[dependencies]
+biscuit = { git = "https://github.com/lawliet89/biscuit", branch = "master" }
+core-lib = { path = "../core-lib" }
+chrono = { version = "0.4", features = ["serde"] }
+error-chain = "0.12.1"
+fern = "0.5"
+log = "0.4"
+mongodb ="2.0.1"
+percent-encoding = "2.1.0"
+rocket = { version = "0.5.0-rc.1", features = ["json"] }
+serde = "1.0"
+serde_derive = "1.0"
+serde_json = "1.0"

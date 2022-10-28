@@ -1,0 +1,19 @@
+[global]
+limits = { json = 5242880 }
+daps_api_url = "http://omejdn"
+
+[debug]
+address = "0.0.0.0"
+port = 8002
+log_level = "normal"
+limits = { forms = 32768 }
+database_url = "mongodb://localhost:27018"
+clear_db = true
+
+[release]
+address = "0.0.0.0"
+port = 8002
+log_level = "normal"
+limits = { forms = 32768 }
+database_url = "mongodb://keyring-mongo:27017"
+clear_db = false
