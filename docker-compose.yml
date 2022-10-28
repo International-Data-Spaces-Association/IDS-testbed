@@ -63,6 +63,7 @@ services:
       - DAPS_KEY_URL=https://omejdn/auth/jwks.json
       - DAPS_INCOMING_DAT_DEFAULT_WELLKNOWN=/jwks.json
       - SERVER_SSL_KEY-STORE=file:///config/connectorA.p12
+      - CLEARING_HOUSE_URL=https://consumer-core:9999
 
   connectorb:
     image: ghcr.io/international-data-spaces-association/dataspace-connector:7.1.0
@@ -84,6 +85,7 @@ services:
       - DAPS_KEY_URL=https://omejdn/auth/jwks.json
       - DAPS_INCOMING_DAT_DEFAULT_WELLKNOWN=/jwks.json
       - SERVER_SSL_KEY-STORE=file:///config/connectorB.p12
+      - CLEARING_HOUSE_URL=https://consumer-core:9999
 
   broker-reverseproxy:
     image: registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker-open/reverseproxy
@@ -122,6 +124,117 @@ services:
       - broker-fuseki:/fuseki
     expose:
       - "3030"
+    networks:
+      - local
+      
+  logging-service-mongo:
+    image: mongo:latest
+    container_name: "logging-service-mongo"
+    environment:
+      MONGO_INITDB_DATABASE: process
+    ports:
+      - 27019:27017
+    networks:
+      - local
+      
+  logging-service:
+    build:
+      context: ./Clearing-house
+      dockerfile: ./docker/logging-service-multistage.Dockerfile
+    container_name: "logging-service"
+    depends_on:
+        - document-api
+        - keyring-api
+        - logging-service-mongo
+    environment:
+        # Allowed levels: Off, Error, Warn, Info, Debug, Trace
+        - API_LOG_LEVEL=Debug
+    ports:
+        - "8000:8000"
+    volumes:
+        - ./Clearing-house/clearing-house-app/logging-service/Rocket.toml:/server/Rocket.toml
+        - ./Clearing-house/clearing-house-app/logging-service/keys:/server/keys
+        - ./Clearing-house/clearing-house-app/certs:/server/certs
+    networks:
+      - local
+      
+  consumer-core:
+    container_name: "consumer-core"
+    image: fraunhoferaisec/trusted-connector-core:6.3.0
+    tty: true
+    stdin_open: true
+    volumes:
+        - ./Clearing-house/trusted-connector/allow-all-flows.pl:/root/deploy/allow-all-flows.pl
+        - ./Clearing-house/trusted-connector/consumer-keystore.p12:/root/etc/keystore.p12
+        - ./Clearing-house/trusted-connector/truststore.p12:/root/etc/truststore.p12
+        - ./Clearing-house/trusted-connector/clearing-house-processors-0.8.0.jar:/root/jars/clearing-house-processors.jar
+        - ./Clearing-house/trusted-connector/routes/clearing-house-routes.xml:/root/deploy/clearing-house-routes.xml
+        - //var/run/docker.sock://var/run/docker.sock
+    environment:
+      TC_CH_ISSUER_CONNECTOR: "https://w3id.org/idsa/core/issuerConnector"
+      TC_CH_AGENT: "https://w3id.org/idsa/core/Agent"
+      TC_DAPS_URL: "http://omejdn"
+    ports:
+        - "8443:8443"
+        - "9999:9999"
+    networks:
+      - local
+      
+  document-mongo:
+    image: mongo:latest
+    container_name: "document-mongo"
+    environment:
+      MONGO_INITDB_DATABASE: document
+    ports:
+      - 27017:27017
+    networks:
+      - local
+      
+  keyring-mongo:
+    image: mongo:latest
+    container_name: "keyring-mongo"
+    environment:
+      MONGO_INITDB_DATABASE: keyring
+    ports:
+      - 27018:27017
+    networks:
+      - local
+      
+  document-api:
+    build:
+      context: ./Clearing-house
+      dockerfile: ./docker/document-api-multistage.Dockerfile
+    container_name: "document-api"
+    depends_on:
+        - keyring-api
+        - document-mongo
+    environment:
+        # Allowed levels: Off, Error, Warn, Info, Debug, Trace
+        - API_LOG_LEVEL=Debug
+    ports:
+        - "8001:8001"
+    volumes:
+        - ./Clearing-house/clearing-house-app/document-api/Rocket.toml:/server/Rocket.toml
+        - ./Clearing-house/clearing-house-app/certs:/server/certs
+    networks:
+      - local
+      
+  keyring-api:
+    build:
+      context: ./Clearing-house
+      dockerfile: ./docker/keyring-api-multistage.Dockerfile
+    container_name: "keyring-api"
+    depends_on:
+        - keyring-mongo
+    environment:
+        # Allowed levels: Off, Error, Warn, Info, Debug, Trace
+        - API_LOG_LEVEL=Debug
+    ports:
+        - "8002:8002"
+    volumes:
+        - ./Clearing-house/clearing-house-app/keyring-api/init_db:/server/init_db
+        - ./Clearing-house/clearing-house-app/keyring-api/Rocket.toml:/server/Rocket.toml
+        - ./Clearing-house/clearing-house-app/certs:/server/certs
     networks:
       - local
 
