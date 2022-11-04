@@ -39,10 +39,9 @@ Used versions of the IDS-testbed components:
 - MetadataBroker (MDB) v5.0.0
 
 ## IDS Reference Testbed implementations
-| Provider      | Description     |   Components used |
-| ------------- | --------------- |   --------------- |
-| VTT           | Testbed used for x and y           |   2 Dataspace connectors v7.1.0, 1 Metadata Broker vX, 1 DAPS vX, 1 CA.   |
-| ...           | ...             |   ...    |
+| Provider      | Description     |   Components used |  Public or Private Use? |
+| ------------- | --------------- |   --------------- | ------------------------
+| ...           | ...             |   ...    | .... |
 
 ## Roadmap
 ### Version 2.0 of the test bed
