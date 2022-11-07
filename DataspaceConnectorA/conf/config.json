@@ -31,7 +31,7 @@
       "@type" : "ids:ConnectorEndpoint",
       "@id" : "https://w3id.org/idsa/autogen/connectorEndpoint/e5e2ab04-633a-44b9-87d9-a097ae6da3cf",
       "ids:accessURL" : {
-        "@id" : "https://connectora:8080/api/ids/data"
+        "@id" : "https://connectora:8082/api/ids/data"
       }
     },
     "ids:outboundModelVersion" : "4.2.7",
@@ -57,6 +57,6 @@
     "@id" : "idsc:CONNECTOR_ONLINE"
   },
   "ids:keyStore" : {
-    "@id" : "file:///conf/testbed1.p12"
+    "@id" : "file:///config/testbed1.p12"
   }
 }

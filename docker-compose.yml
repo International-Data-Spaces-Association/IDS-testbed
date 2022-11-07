@@ -44,28 +44,77 @@ services:
     networks:
       - local
 
+  postgres:
+    image: postgres:13
+    container_name: 'postgres-container'
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=connector
+      - POSTGRES_PASSWORD=12345
+      - POSTGRES_DB=connectordb
+    networks:
+      - local
+    volumes:
+      - connector-data:/var/lib/postgresql/data
+    # restart: always
+
   connectora:
-    image: ghcr.io/international-data-spaces-association/dataspace-connector:7.1.0
+    # image: ghcr.io/international-data-spaces-association/dataspace-connector:7.1.0
+    image: ghcr.io/international-data-spaces-association/dataspace-connector:8.0.2
+    # image: ghcr.io/international-data-spaces-association/dataspace-connector:latest # current 8.0.2
     container_name: connectora
     ports:
-      - 8080:8080
+      - 8082:8082
     networks:
       - local
     volumes:
       - ./DataspaceConnectorA/conf/config.json:/config/config.json
-      - ./DataspaceConnectorA/conf/testbed1.p12:/conf/testbed1.p12
+      - ./DataspaceConnectorA/conf/testbed1.p12:/config/testbed1.p12
       - ./DataspaceConnectorA/conf/connectorA.p12:/config/connectorA.p12
       - ./DataspaceConnectorA/conf/truststore.p12:/config/truststore.p12
     environment:
       - CONFIGURATION_PATH=/config/config.json
+      - CONFIGURATION_KEYSTOREPASSWORD=password
+      - CAMEL_TRUSTSTORE_PATH=/config/truststore.p12
+      - CONFIGURATION_FORCE_RELOAD=false
+
+      - SERVER_PORT=8082
+      - SERVER_SSL_ENABLED=true
+      - SERVER_SSL_KEY-ALIAS=1
+      - SERVER_SSL_KEY-STORE-PASSWORD=password
+      - SERVER_SSL_KEY-STORE=/config/connectorA.p12
+
       - DAPS_URL=https://omejdn
       - DAPS_TOKEN_URL=https://omejdn/auth/token
       - DAPS_KEY_URL=https://omejdn/auth/jwks.json
       - DAPS_INCOMING_DAT_DEFAULT_WELLKNOWN=/jwks.json
-      - SERVER_SSL_KEY-STORE=file:///config/connectorA.p12
+      # - DAPS_WHITELISTED_URL=https://omejdn
+      
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/connectordb 
+      - SPRING_DATASOURCE_USERNAME=connector
+      - SPRING_DATASOURCE_PASSWORD=12345
+      - SPRING_DATASOURCE_PLATFORM=postgres
+      - SPRING_DATASOURCE_DRIVERCLASSNAME=org.postgresql.Driver
+      - SPRING_JPA_DATABASEPLATFORM=org.hibernate.dialect.PostgreSQLDialect
+      - SPRING_FLYWAY_BASELINEVERSION=8.0.1
+      - SPRING_FLYWAY_BASELINEONMIGRATE=false
+      - SPRING_JPA_HIBERNATE_DDLAUTO=update
+      - SPRING_SECURITY_USER_NAME=admin
+      - SPRING_SECURITY_USER_PASSWORD=password
+      - SPRING_SECURITY_APP_NAME=app
+      - SPRING_SECURITY_APP_PASSWORD=password
+
+      # - CLEARING_HOUSE_URL=https://clearing.test.mobility-dataspace.eu
+      # - REFERRED_CHECK=true
+      - DEBUG=true
+    depends_on:
+      - postgres
 
   connectorb:
-    image: ghcr.io/international-data-spaces-association/dataspace-connector:7.1.0
+    # image: ghcr.io/international-data-spaces-association/dataspace-connector:7.1.0
+    image: ghcr.io/international-data-spaces-association/dataspace-connector:8.0.2
+    # image: ghcr.io/international-data-spaces-association/dataspace-connector:latest # current 8.0.2
     container_name: connectorb
     ports:
       - 8081:8081
@@ -73,20 +122,23 @@ services:
       - local
     volumes:
       - ./DataspaceConnectorB/conf/config.json:/config/config.json
-      - ./DataspaceConnectorB/conf/testbed2.p12:/conf/testbed2.p12
+      - ./DataspaceConnectorB/conf/testbed2.p12:/config/testbed2.p12
       - ./DataspaceConnectorB/conf/connectorB.p12:/config/connectorB.p12
       - ./DataspaceConnectorB/conf/truststore.p12:/config/truststore.p12
     environment:
-      - CONFIGURATION_PATH=/config/config.json
       - SERVER_PORT=8081
+      - CONFIGURATION_PATH=/config/config.json
       - DAPS_URL=https://omejdn
       - DAPS_TOKEN_URL=https://omejdn/auth/token
       - DAPS_KEY_URL=https://omejdn/auth/jwks.json
       - DAPS_INCOMING_DAT_DEFAULT_WELLKNOWN=/jwks.json
       - SERVER_SSL_KEY-STORE=file:///config/connectorB.p12
+      - DEBUG=true
 
   broker-reverseproxy:
     image: registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker-open/reverseproxy
+    # image: registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker-open/reverseproxy:latest # for testbed
+    # image: registry.gitlab.cc-asp.fraunhofer.de:4567/eis-ids/broker-open/reverseproxy # new one
     container_name: broker-reverseproxy
     volumes:
       - ./MetadataBroker/server.crt:/etc/cert/server.crt
@@ -96,37 +148,136 @@ services:
       - "81:80"
     networks:
       - local
+    environment:
+      - DEBUG=true
 
   broker-core:
-    image: idstestbed/broker-core:5.0.0
+    # image: idstestbed/broker-core:5.0.0
+    image: idstestbed/broker-core:5.0.3 # build from https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/master/InstallationGuide.md
+    # image: registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker-open/core:latest
+    # image: registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker-open/core:5.0.0
+    # image: idstestbed/broker-core:4.2.8 # only for testbed
+    # image: registry.gitlab.cc-asp.fraunhofer.de:4567/eis-ids/broker-open/core # new one
+    # image: registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker/core # for using with broker UI
     container_name: broker-core
     volumes:
       - ./MetadataBroker/isstbroker-keystore.jks:/etc/cert/isstbroker-keystore.jks
     environment:
       - SPARQL_ENDPOINT=http://broker-fuseki:3030/connectorData
-      - ELASTICSEARCH_HOSTNAME=broker-elasticsearch
+      # - ELASTICSEARCH_HOSTNAME=broker-elasticsearch
       - SHACL_VALIDATION=true
       - DAPS_VALIDATE_INCOMING=true
+      # - DAPS_VALIDATE_INCOMING=false
       - COMPONENT_URI=https://localhost/
       - COMPONENT_CATALOGURI=https://localhost/connectors/
       - DAPS_URL=https://omejdn/auth/token
-    expose:
-      - "8080"
+      # - DAPS_TOKEN_URL=https://omejdn/auth/token
+      # - DAPS_KEY_URL=https://omejdn/auth/jwks.json
+      - DAPS_INCOMING_DAT_DEFAULT_WELLKNOWN=/jwks.json
+      - JWKS_TRUSTEDHOSTS=daps.aisec.fraunhofer.de,omejdn
+      - DEBUG=true
+    ports:
+      - "8080:8080"
     networks:
       - local
+    depends_on:
+      # - "broker-elasticsearch"
+      - "broker-fuseki"
 
   broker-fuseki:
     image: registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker-open/fuseki
+    # image: registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker-open/fuseki:latest # for testbed
+    # image: registry.gitlab.cc-asp.fraunhofer.de:4567/eis-ids/broker-open/fuseki # new one
     container_name: broker-fuseki
     volumes:
       - broker-fuseki:/fuseki
-    expose:
-      - "3030"
+    ports:
+      - "3030:3030"
     networks:
       - local
+    environment:
+      - DEBUG=true
+
+  A-dataspace-connector-ui:
+    image: dataspace-connector-ui # first build docker # IDS/DataspaceConnectorUI/buildDockerImage.sh
+    container_name: connectoraui
+    environment:
+      - CONNECTOR_URL=https://connectora:8082
+      - CONNECTOR_USER=admin
+      - CONNECTOR_PASSWORD=password
+      - UI_TITLE=MDS Dataspace Connector UI for A
+      - DEBUG=true
+    ports:
+      - "8083:8083"
+    networks:
+      - local
+    depends_on:
+      - connectora
+    # restart: always
+
+  B-dataspace-connector-ui:
+    # image: dataspace-connector-ui # first build docker # IDS/DataspaceConnectorUI/buildDockerImage.sh
+    image: ghcr.io/mobility-data-space/dataspaceconnectorui:10.2.0-mds1 # at this moment this is the lastest
+    container_name: connectorbui
+    environment:
+      - CONNECTOR_URL=https://connectorb:8081
+      - CONNECTOR_USER=admin
+      - CONNECTOR_PASSWORD=password
+      - UI_TITLE=MDS Dataspace Connector UI for B
+      - DEBUG=true
+    ports:
+      - "8084:8083"
+    networks:
+      - local
+    depends_on:
+      - connectorb
+    # restart: always
+
+  # broker-elasticsearch:
+  #   image: elasticsearch:7.9.3
+  #   environment:
+  #     - http.port=9200
+  #     - http.cors.enabled=true
+  #     - http.cors.allow-origin=http://localhost:3000
+  #     - http.cors.allow-headers=*
+  #     - http.cors.allow-credentials=true
+  #     - discovery.type=single-node
+  #   volumes:
+  #     - broker-esdata:/usr/share/elasticsearch/data
+  #   ports:
+  #     - "9200:9200"
+  #   networks:
+  #     - local
+
+  # mongodb:
+  #   image: mongo:latest
+  #   volumes:
+  #     - db:/data/db
+  #   expose:
+  #     - "27017"
+  #   networks:
+  #     - local
+
+  # mongodb-handler:
+  #   image: registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker/mongodb-handler # build docker # IDS/DataspaceConnectorUI/buildDockerImage.sh
+  #   ports:
+  #     - "4000:4000"
+  #   environment:
+  #     - MONGODB_ENDPOINT=mongodb://mongodb:27017/users
+  #     - JWT_SECRET=somethingsecret
+  #     - ADMIN_PASSWORD=admin
+  #     # - BROKER_URL=http://broker-core:8080 # with broker UI
+  #     - BROKER_URL=https://broker-reverseproxy
+  #   depends_on:
+  #     - "mongodb"
+  #   networks:
+  #     - local
 
 volumes:
-  broker-fuseki:
+  broker-fuseki: {}
+  # broker-esdata: {}
+  # db:
+  connector-data: {}
 
 networks:
   local:

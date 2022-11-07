@@ -1,9 +1,10 @@
 {
 	"info": {
-		"_postman_id": "19b2b13a-da98-4454-ac60-dbc513a7c477",
+		"_postman_id": "808615a3-962f-4727-960b-f1a013aa29bc",
 		"name": "TestBed_Guide",
 		"description": "Example deployment of DSC provider to DSC consumer communication",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8688583"
 	},
 	"item": [
 		{
@@ -21,7 +22,10 @@
 										"exec": [
 											"pm.test(\"Retrieve Offer ID\", function () {",
 											"    var jsonData = pm.response.json();",
-											"    pm.collectionVariables.set(\"offers\", jsonData[\"_links\"][\"self\"][\"href\"])",
+											"    var offerLong = jsonData[\"_links\"][\"self\"][\"href\"];",
+											"    var offerId = offerLong.replace(\"https://localhost:8082/api/offers/\", \"\");",
+											"    pm.collectionVariables.set(\"offers\", offerLong);",
+											"    pm.collectionVariables.set(\"offerId\", offerId);",
 											"});",
 											"",
 											"pm.test(\"Status code is 201\", function () {",
@@ -226,7 +230,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"title\": \"Contract\",\n    \"description\": \"This is an example contract\",\n    \"provider\":\"https://connectora:8080/\",\n    \"start\": \"2021-10-22T07:48:37.068Z\",\n    \"end\": \"2023-10-22T07:48:37.068Z\"\n} ",
+									"raw": "{\n    \"title\": \"Contract\",\n    \"description\": \"This is an example contract\",\n    \"provider\":\"https://connectora:8082/\",\n    \"start\": \"2021-10-22T07:48:37.068Z\",\n    \"end\": \"2023-10-22T07:48:37.068Z\"\n} ",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -511,7 +515,51 @@
 							"response": []
 						},
 						{
-							"name": "Register Connector A at MetaData Broker: POST /api/ids/connector/update",
+							"name": "Add broker to Connector A",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(201);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {},
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"Broker for connector A\",\n    \"location\": \"{{BROKER}}\",\n    \"description\": \"Broker added to be used for connector A\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{CONNECTORA_URL}}/api/brokers",
+									"host": [
+										"{{CONNECTORA_URL}}"
+									],
+									"path": [
+										"api",
+										"brokers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Register Connector A at MetaData Broker: POST /api/ids/connector/update Copy",
 							"event": [
 								{
 									"listen": "test",
@@ -557,6 +605,106 @@
 											"key": "recipient",
 											"value": "{{BROKER}}"
 										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Adding offer from Connector A at MetaData Broker",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {},
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{CONNECTORA_URL}}/api/ids/resource/update?recipient={{BROKER}}&resourceId={{offerId}}",
+									"host": [
+										"{{CONNECTORA_URL}}"
+									],
+									"path": [
+										"api",
+										"ids",
+										"resource",
+										"update"
+									],
+									"query": [
+										{
+											"key": "recipient",
+											"value": "{{BROKER}}"
+										},
+										{
+											"key": "resourceId",
+											"value": "{{offerId}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add broker to Connector B",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(201);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {},
+								"strictSSL": false
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"Broker for connector B\",\n    \"location\": \"{{BROKER}}\",\n    \"description\": \"Broker added to be used for connector B\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{CONNECTORB_URL}}/api/brokers",
+									"host": [
+										"{{CONNECTORB_URL}}"
+									],
+									"path": [
+										"api",
+										"brokers"
 									]
 								}
 							},
@@ -1100,7 +1248,7 @@
 										"method": "POST",
 										"header": [],
 										"url": {
-											"raw": "{{CONNECTORA_URL}}/api/ids/description?recipient=https://localhost:8080/api/ids/data",
+											"raw": "{{CONNECTORA_URL}}/api/ids/description?recipient=https://localhost:8082/api/ids/data",
 											"host": [
 												"{{CONNECTORA_URL}}"
 											],
@@ -1112,7 +1260,7 @@
 											"query": [
 												{
 													"key": "recipient",
-													"value": "https://localhost:8080/api/ids/data"
+													"value": "https://localhost:8082/api/ids/data"
 												}
 											]
 										}
@@ -1194,7 +1342,7 @@
 										"method": "POST",
 										"header": [],
 										"url": {
-											"raw": "{{CONNECTORB_URL}}/api/ids/description?recipient=https://connectora:8080/api/ids/data&elementId={{Provider_catalog}}",
+											"raw": "{{CONNECTORB_URL}}/api/ids/description?recipient=https://connectora:8082/api/ids/data&elementId={{Provider_catalog}}",
 											"host": [
 												"{{CONNECTORB_URL}}"
 											],
@@ -1206,7 +1354,7 @@
 											"query": [
 												{
 													"key": "recipient",
-													"value": "https://connectora:8080/api/ids/data"
+													"value": "https://connectora:8082/api/ids/data"
 												},
 												{
 													"key": "elementId",
@@ -1485,7 +1633,7 @@
 	"variable": [
 		{
 			"key": "CONNECTORA_URL",
-			"value": "https://localhost:8080"
+			"value": "https://localhost:8082"
 		},
 		{
 			"key": "CONNECTORB_URL",
@@ -1533,7 +1681,7 @@
 		},
 		{
 			"key": "Recipient_url",
-			"value": "https://connectora:8080/api/ids/data"
+			"value": "https://connectora:8082/api/ids/data"
 		},
 		{
 			"key": "Consumer agreement ID",
@@ -1553,6 +1701,10 @@
 		},
 		{
 			"key": "Broker_catalog",
+			"value": ""
+		},
+		{
+			"key": "offerId",
 			"value": ""
 		}
 	]
