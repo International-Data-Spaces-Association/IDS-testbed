@@ -35,8 +35,8 @@ Minimal setup with essential and already available components
 Used versions of the IDS-testbed components: 
 - Certificate Authority (CA)
 - Dynamic Attribute Provisioning Service (DAPS) v1.6.0
-- Dataspace Connector (DSC) v7.1.0
-- MetadataBroker (MDB) v5.0.0
+- Dataspace Connector (DSC) v8.0.2
+- MetadataBroker (MDB) v5.0.3
 
 ## Roadmap
 ### Version 2.0 of the test bed

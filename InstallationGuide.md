@@ -507,17 +507,56 @@ cd IDS-testbed/DataspaceConnectorB/
 ## Component Documentation
 The official documentation will cover the introductions, deployment, documentation and communication guide of the component.
 
-Official documentation: https://github.com/International-Data-Spaces-Association/DataspaceConnector/tree/v7.1.0
+Official documentation: https://github.com/International-Data-Spaces-Association/DataspaceConnector/tree/v8.0.2
 
 ## Continue here after reading the official documentation
 Official configuration documentation: https://international-data-spaces-association.github.io/DataspaceConnector/Deployment/Configuration#configuration
 
 The Dataspace Connector must be configured to work in this environment.
 
+## Define the PostgreSQL containers
+Define the PostgreSQL container to be used by DataspaceConnectorA and DataspaceConnectorB.
+For the IDS-testbed deployment it is configured at the `docker-compose.yml` file.
+
+It could look something like this (**ConnectorA**)
+
+```
+  postgresa:
+    image: postgres:13
+    container_name: 'postgresa-container'
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgresusera
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=connectoradb
+    volumes:
+      - connector-dataa:/var/lib/postgresql/data
+    networks:
+      - local
+```
+
+It could look something like this (**ConnectorB**)
+```
+  postgresb:
+    image: postgres:13
+    container_name: 'postgresb-container'
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_USER=postgresuserb
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=connectorbdb
+    volumes:
+      - connector-datab:/var/lib/postgresql/data
+    networks:
+      - local
+```
+
 ## Changes to the application.properties file
 The configuration necessary for the application properties is located at the `src/main/resources/application.properties` folder of the official DSC repository. 
 
-For the IDS-testbed deployment it is configured at the `docker-compose.yml`. Here it is detailed the port, daps configuration and the server ssl keystore. 
+For the IDS-testbed deployment it is configured at the `docker-compose.yml`. Here it is detailed the port, daps configuration and the server ssl keystore. It is also defined the PostgreSQL database setup.
 
 ```
     ports:
@@ -528,6 +567,13 @@ For the IDS-testbed deployment it is configured at the `docker-compose.yml`. Her
       - DAPS_KEY_URL=https://omejdn/auth/jwks.json
       - DAPS_INCOMING_DAT_DEFAULT_WELLKNOWN=/jwks.json
       - SERVER_SSL_KEY-STORE=file:///config/connectorA.p12
+      # Define the PostgreSQL setup
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresa:5432/connectoradb 
+      - SPRING_DATASOURCE_PLATFORM=postgres
+      - SPRING_DATASOURCE_DRIVERCLASSNAME=org.postgresql.Driver
+      - SPRING_DATASOURCE_USERNAME=postgresusera
+      - SPRING_DATASOURCE_PASSWORD=password
+      - SPRING_JPA_DATABASE_PLATFORM=org.hibernate.dialect.PostgreSQLDialect
 ```
 
 The server `server.ssl.key-store=file:///config/{TLS_FILENAME}.p12`, where `{TLS_FILENAME}` is to be replaced with the TLS cert that is created in the following section.
@@ -673,17 +719,10 @@ Configure the `docker-compose.yml` file with your configuration. The `docker-com
 services
 
   connectora:
-    image: ghcr.io/international-data-spaces-association/dataspace-connector:7.1.0
+    image: ghcr.io/international-data-spaces-association/dataspace-connector:8.0.2
     container_name: connectora
     ports:
       - 8080:8080
-    networks:
-      - local
-    volumes:
-      - ./DataspaceConnectorA/conf/config.json:/config/config.json
-      - ./DataspaceConnectorA/conf/testbed1.p12:/conf/testbed1.p12
-      - ./DataspaceConnectorA/conf/connectorA.p12:/config/connectorA.p12
-      - ./DataspaceConnectorA/conf/truststore.p12:/config/truststore.p12
     environment:
       - CONFIGURATION_PATH=/config/config.json
       - DAPS_URL=https://omejdn
@@ -691,7 +730,23 @@ services
       - DAPS_KEY_URL=https://omejdn/auth/jwks.json
       - DAPS_INCOMING_DAT_DEFAULT_WELLKNOWN=/jwks.json
       - SERVER_SSL_KEY-STORE=file:///config/connectorA.p12
-
+      # Define the PostgreSQL setup
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresa:5432/connectoradb 
+      - SPRING_DATASOURCE_PLATFORM=postgres
+      - SPRING_DATASOURCE_DRIVERCLASSNAME=org.postgresql.Driver
+      - SPRING_DATASOURCE_USERNAME=postgresusera
+      - SPRING_DATASOURCE_PASSWORD=password
+      - SPRING_JPA_DATABASE_PLATFORM=org.hibernate.dialect.PostgreSQLDialect
+    volumes:
+      - ./DataspaceConnectorA/conf/config.json:/config/config.json
+      - ./DataspaceConnectorA/conf/testbed1.p12:/conf/testbed1.p12
+      - ./DataspaceConnectorA/conf/connectorA.p12:/config/connectorA.p12
+      - ./DataspaceConnectorA/conf/truststore.p12:/config/truststore.p12
+    networks:
+      - local
+    depends_on:
+      - postgresa
+            
 networks:
   local:
     driver: bridge
@@ -713,7 +768,7 @@ Download the component from the official repository
 
 ```
 cd IDS-testbed
-git clone -b 5.0.0 https://github.com/International-Data-Spaces-Association/metadata-broker-open-core.git
+git clone -b 5.0.3 https://github.com/International-Data-Spaces-Association/metadata-broker-open-core.git
 ```
 
 Use the downloaded component to build the broker-core image.
@@ -785,7 +840,7 @@ mvn clean package
 This will create a `.jar` file in `broker-core/target` that will have to be copied into `docker/broker-core`.
 
 ```
-cp broker-core/target/broker-core-5.0.0.jar docker/broker-core
+cp broker-core/target/broker-core-5.0.3.jar docker/broker-core
 ```
 
 Once the file is copied, move to the `docker/broker-core` directory and place there the TLS certificate that corresponds to the DAPS. For the IDS-testbed it is located at `DAPS/keys/TLS/daps.cert` and use the following command to change the certificate format to `daps.crt`
@@ -798,7 +853,7 @@ Then build the `core` image locally using the following command.
 
 ```
 cd docker/broker-core
-docker build -t registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker-open/core:5.0.0 .
+docker build -t registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker-open/core:5.0.3 .
 ```
 
 ## Adding the TLS certificates
@@ -834,7 +889,7 @@ services:
       - local
 
   broker-core:
-    image: registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker-open/core:5.0.0
+    image: registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker-open/core:5.0.3
     container_name: broker-core
     volumes:
       - ./MetadataBroker/isstbroker-keystore.jks:/etc/cert/isstbroker-keystore.jks
@@ -909,11 +964,11 @@ Removing volume testbed_broker-fuseki
 Removing image nginx:1.21.6
 Removing image ghcr.io/fraunhofer-aisec/omejdn-server:1.6.0
 Removing image ghcr.io/fraunhofer-aisec/omejdn-ui:dev
-Removing image ghcr.io/international-data-spaces-association/dataspace-connector:7.1.0
-Removing image ghcr.io/international-data-spaces-association/dataspace-connector:7.1.0
-WARNING: Image ghcr.io/international-data-spaces-association/dataspace-connector:7.1.0 not found.
+Removing image ghcr.io/international-data-spaces-association/dataspace-connector:8.0.2
+Removing image ghcr.io/international-data-spaces-association/dataspace-connector:8.0.2
+WARNING: Image ghcr.io/international-data-spaces-association/dataspace-connector:8.0.2 not found.
 Removing image registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker-open/reverseproxy
-Removing image idstestbed/broker-core:5.0.0
+Removing image idstestbed/broker-core:5.0.3
 Removing image registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker-open/fuseki
 ```
 
