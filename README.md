@@ -41,7 +41,8 @@ Used versions of the IDS-testbed components:
 ## IDS Reference Testbed implementations
 | Provider      | Description     |   Components used |  Public or Private Use? |
 | ------------- | --------------- |   --------------- | ------------------------
-| ...           | ...             |   ...    | .... |
+|  Engineering | Verifying TRUEConnector compatibility with reference implementation | DSC v7, MDB v5, Omejdn v1.6 | Private |
+
 
 ## Roadmap
 ### Version 2.0 of the test bed
