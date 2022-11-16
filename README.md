@@ -48,7 +48,7 @@ Please include in issue [#104](https://github.com/International-Data-Spaces-Asso
 
 | Provider      | Description     |   Components used |  Public or Private Use? |
 | ------------- | --------------- |   --------------- | ------------------------
-|  Engineering | Verifying TRUEConnector compatibility with reference implementation | DSC v7, MDB v5, Omejdn v1.6 | Private |
+|  Engineering | Verifying TRUEConnector compatibility with reference implementation | DSC v7.1.0, MDB v5.0.0, DAPS v1.6.0 | Private |
 
 
 ## Roadmap
