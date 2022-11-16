@@ -39,6 +39,13 @@ Used versions of the IDS-testbed components:
 - MetadataBroker (MDB) v5.0.0
 
 ## IDS Reference Testbed implementations
+
+Please include in issue [#104](https://github.com/International-Data-Spaces-Association/IDS-testbed/issues/104) the successful IDS Reference Testbed implementations you have made. Including:
+-	Provider (company) name
+-	A brief description of the testbed: what are you using it for?
+-	Version of IDS-testbed components used (i.e. DSC v7.1.0, MDB v5.0.0, DAPS v1.6.0)
+-	Whether it is public or private
+
 | Provider      | Description     |   Components used |  Public or Private Use? |
 | ------------- | --------------- |   --------------- | ------------------------
 |  Engineering | Verifying TRUEConnector compatibility with reference implementation | DSC v7, MDB v5, Omejdn v1.6 | Private |
