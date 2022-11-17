@@ -84,7 +84,7 @@ services:
       - DAPS_TOKEN_URL=https://omejdn/auth/token
       - DAPS_KEY_URL=https://omejdn/auth/jwks.json
       - DAPS_INCOMING_DAT_DEFAULT_WELLKNOWN=/jwks.json
-      - SERVER_SSL_KEY-STORE=file:///config/connectorA.p12
+      - SERVER_SSL_KEY-STORE=file:///conf/testbed1.p12
       # Define the PostgreSQL setup
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresa:5432/connectoradb 
       - SPRING_DATASOURCE_PLATFORM=postgres
@@ -95,7 +95,6 @@ services:
     volumes:
       - ./DataspaceConnectorA/conf/config.json:/config/config.json
       - ./DataspaceConnectorA/conf/testbed1.p12:/conf/testbed1.p12
-      - ./DataspaceConnectorA/conf/connectorA.p12:/config/connectorA.p12
       - ./DataspaceConnectorA/conf/truststore.p12:/config/truststore.p12
     networks:
       - local
@@ -114,7 +113,7 @@ services:
       - DAPS_TOKEN_URL=https://omejdn/auth/token
       - DAPS_KEY_URL=https://omejdn/auth/jwks.json
       - DAPS_INCOMING_DAT_DEFAULT_WELLKNOWN=/jwks.json
-      - SERVER_SSL_KEY-STORE=file:///config/connectorB.p12
+      - SERVER_SSL_KEY-STORE=file:///conf/testbed2.p12
       # Define the PostgreSQL setup     
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresb:5432/connectorbdb 
       - SPRING_DATASOURCE_USERNAME=postgresuserb
@@ -125,7 +124,6 @@ services:
     volumes:
       - ./DataspaceConnectorB/conf/config.json:/config/config.json
       - ./DataspaceConnectorB/conf/testbed2.p12:/conf/testbed2.p12
-      - ./DataspaceConnectorB/conf/connectorB.p12:/config/connectorB.p12
       - ./DataspaceConnectorB/conf/truststore.p12:/config/truststore.p12
     networks:
       - local

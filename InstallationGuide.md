@@ -334,7 +334,7 @@ Official documentation: [CertificateAuthority/README.md](./CertificateAuthority/
 The preconfigured setup includes certificates for:
 * a root CA called "ReferenceTestbedCA"
 * a subCA called "ReferenceTestbedSubCA" and
-* certificates for devices called "testbed1", ... , "testbed10"
+* certificates for devices called "testbed1", ... , "testbed4"
 
 ## Continue here after the official documentation has been followed
 
@@ -475,20 +475,7 @@ networks:
     driver: bridge
 ```
 
-## Required DNS for the DAPS
-Create a certificate with a specific DNS to use TLS and establish https connection. As a Docker network is used in the Testbed, the container name is used as DNS.
-
-```
-openssl req -x509 -newkey rsa:4096 -sha256 -days 2650 -nodes -keyout {NAME.key} -out {NAME.crt} -subj "/C={COUNTRY}/ST={STATE}/L={LOCALITY}/O={ORGANIZATION}/CN={COMMON_NAME}" -addext "subjectAltName=DNS:localhost,DNS:{CONTAINER_NAME}"
-```
-
-It could look something like this
-
-```
-openssl req -x509 -newkey rsa:4096 -sha256 -days 2650 -nodes -keyout omejdn.key -out omejdn.crt -subj "/C=ES/ST=Bizkaia/L=Bilbao/O=SQS/CN=omejdn" -addext "subjectAltName=DNS:localhost,DNS:omejdn"
-```
-
-Place these created certificates at the folder `DAPS/keys/TLS/` and name them as `daps.crt` and `daps.key` to match the above mentioned `docker-compose.yml` file configuration.
+Place the local CA created certificate at the folder `DAPS/keys/TLS/` and name it as `daps.crt` and `daps.key` to match the above mentioned `docker-compose.yml` file configuration.
 
 # DATASPACE CONNECTOR:
 The testbed will have two built-in Connectors. They will be referred to as ConnectorA and ConnectorB. They will have different configurations, so they will each have their own directory. These directories are going to be referred to as `DataspaceConnectorA` and `DataspaceConnectorB`.
@@ -534,6 +521,9 @@ It could look something like this (**ConnectorA**)
       - connector-dataa:/var/lib/postgresql/data
     networks:
       - local
+
+volumes:
+  connector-dataa: {}
 ```
 
 It could look something like this (**ConnectorB**)
@@ -551,6 +541,9 @@ It could look something like this (**ConnectorB**)
       - connector-datab:/var/lib/postgresql/data
     networks:
       - local
+
+volumes:
+  connector-datab: {}
 ```
 
 ## Changes to the application.properties file
@@ -566,7 +559,7 @@ For the IDS-testbed deployment it is configured at the `docker-compose.yml`. Her
       - DAPS_TOKEN_URL=https://omejdn/auth/token
       - DAPS_KEY_URL=https://omejdn/auth/jwks.json
       - DAPS_INCOMING_DAT_DEFAULT_WELLKNOWN=/jwks.json
-      - SERVER_SSL_KEY-STORE=file:///config/connectorA.p12
+      - SERVER_SSL_KEY-STORE=file:///conf/testbed1.p12
       # Define the PostgreSQL setup
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresa:5432/connectoradb 
       - SPRING_DATASOURCE_PLATFORM=postgres
@@ -576,41 +569,7 @@ For the IDS-testbed deployment it is configured at the `docker-compose.yml`. Her
       - SPRING_JPA_DATABASE_PLATFORM=org.hibernate.dialect.PostgreSQLDialect
 ```
 
-The server `server.ssl.key-store=file:///config/{TLS_FILENAME}.p12`, where `{TLS_FILENAME}` is to be replaced with the TLS cert that is created in the following section.
-
-### TLS
-Create a certificate with a specific DNS to use TLS and establish `https` connection. As a Docker network is used in the Testbed, the container name is used as DNS.
-
-```
-openssl req -x509 -newkey rsa:4096 -sha256 -days 2650 -nodes -keyout {NAME.key} -out {NAME.crt} -subj "/C={COUNTRY}/ST={STATE}/L={LOCALITY}/O={ORGANIZATION}/CN={COMMON_NAME}" -addext "subjectAltName=DNS:localhost,DNS:{CONTAINER_NAME}"
-```
-
-It could look something like this (**ConnectorA**)
-
-```
-openssl req -x509 -newkey rsa:4096 -sha256 -days 2650 -nodes -keyout connectorA.key -out connectorA.crt -subj "/C=ES/ST=Bizkaia/L=Bilbao/O=SQS/CN=connectorA" -addext "subjectAltName=DNS:localhost,DNS:connectora"
-```
-
-It could look something like this (**ConnectorB**)
-
-```
-openssl req -x509 -newkey rsa:4096 -sha256 -days 2650 -nodes -keyout connectorB.key -out connectorB.crt -subj "/C=ES/ST=Bizkaia/L=Bilbao/O=SQS/CN=connectorB" -addext "subjectAltName=DNS:localhost,DNS:connectorb"
-```
-
-The Dataspace Connector expects the TLS certificate in `.p12` format. Here is the command required:
-
-```
-openssl pkcs12 -export -out {NAME.p12) -inkey {NAME.key} -in {NAME.crt} -passout pass:password
-```
-
-It could look something like this (**ConnectorA**)
-```
-openssl pkcs12 -export -out connectorA.p12 -inkey connectorA.key -in connectorA.crt -passout pass:password
-```
-It could look something like this (**ConnectorB**)
-```
-openssl pkcs12 -export -out connectorB.p12 -inkey connectorB.key -in connectorB.crt -passout pass:password
-```
+The server `server.ssl.key-store=file:///config/{TLS_FILENAME}.p12`, where `{TLS_FILENAME}` is to be replaced with the certificate created previously by the local CA. The Dataspace Connector expects the TLS certificate in `.p12` format.
 
 ## Changes to the config.json file
 Use nano or your most favourite editor
@@ -650,17 +609,22 @@ keytool -import -alias {NAME} -file {NAME.crt} -storetype PKCS12 -keystore {trus
 
 It could look something like this (**ConnectorA**)
 ```
-keytool -import -alias connectorA -file connectorA.crt -storetype PKCS12 -keystore truststore.p12
+keytool -import -alias connectorA -file testbed1.crt -storetype PKCS12 -keystore truststore.p12
 ```
 
 It could look something like this (**ConnectorB**)
 ```
-keytool -import -alias connectorB -file connectorB.crt -storetype PKCS12 -keystore truststore.p12
+keytool -import -alias connectorB -file testbed2.crt -storetype PKCS12 -keystore truststore.p12
+```
+
+It could look something like this (**Metadata Broker**)
+```
+keytool -import -alias brokerreverseproxy -file testbed3.crt -storetype PKCS12 -keystore truststore.p12
 ```
 
 It could look something like this (**Omejdn DAPS**)
 ```
-keytool -import -alias omejdn -file omejdn.crt -storetype PKCS12 -keystore truststore.p12
+keytool -import -alias omejdn -file testbed4.crt -storetype PKCS12 -keystore truststore.p12
 ```
 
 You will be asked the following in the terminal:
@@ -729,7 +693,7 @@ services
       - DAPS_TOKEN_URL=https://omejdn/auth/token
       - DAPS_KEY_URL=https://omejdn/auth/jwks.json
       - DAPS_INCOMING_DAT_DEFAULT_WELLKNOWN=/jwks.json
-      - SERVER_SSL_KEY-STORE=file:///config/connectorA.p12
+      - SERVER_SSL_KEY-STORE=file:///conf/testbed1.p12
       # Define the PostgreSQL setup
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresa:5432/connectoradb 
       - SPRING_DATASOURCE_PLATFORM=postgres
@@ -740,7 +704,6 @@ services
     volumes:
       - ./DataspaceConnectorA/conf/config.json:/config/config.json
       - ./DataspaceConnectorA/conf/testbed1.p12:/conf/testbed1.p12
-      - ./DataspaceConnectorA/conf/connectorA.p12:/config/connectorA.p12
       - ./DataspaceConnectorA/conf/truststore.p12:/config/truststore.p12
     networks:
       - local
@@ -858,7 +821,7 @@ docker build -t registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker-open/core:5.
 
 ## Adding the TLS certificates
 
-At the `IDS-testbed/MetadataBroker/` folder place the TLS certificates together with the keystore.
+At the `IDS-testbed/MetadataBroker/` folder place the TLS certificates created by the local CA together with the keystore.
 * `server.crt`
 * `server.key`
 * `isstbroker-keystore.jks`
