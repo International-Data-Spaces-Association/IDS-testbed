@@ -24,6 +24,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 - none
 
+## [1.1.0] - 2022-12-15
+
+### Added
+- Introduced a PostgreSQL database for each connector
+- Created new IDS-testbed certificates for the deployment of the components
+
+### Changed
+- Updated component versions:
+  - DSC version 7.1.0 --> 8.0.2
+  - MDB version 5.0.0 --> 5.0.3 
+- Updated CA to include IP Addresses and Subject Alternative Names to the created certificates
+- Changed IDS-testbed component's certificates with new CA provided certificates
+- Updated `InstallationGuide.md` and `README.md` files
+- Updated `CertificateAuthority/README.md` file
+
 
 ## [1.0.4] - 2022-11-18
 
