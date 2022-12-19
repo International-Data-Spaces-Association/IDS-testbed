@@ -30,7 +30,7 @@ IDS Testbed is a setup with Open Source IDS components which can be used to ve
 ## Current version (V1.0)
 
 Minimal setup with essential and already available components
-![first_version](./pictures/Testbed_1.0.png)
+![first_version](./pictures/MVDS-Testbed_1.0.png)
 
 Used versions of the IDS-testbed components: 
 - Certificate Authority (CA)
