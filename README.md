@@ -49,7 +49,7 @@ Please include in issue [#104](https://github.com/International-Data-Spaces-Asso
 | Provider      | Description     |   Components used |  Public or Private Use? |
 | ------------- | --------------- |   --------------- | ------------------------
 |  Engineering | Verifying TRUEConnector compatibility with reference implementation | DSC v7.1.0, MDB v5.0.0, DAPS v1.6.0 | Private |
-
+|  VTT | IDS-testbed has been utilized for hands-on experience during educational sessions organized by VTT. We have also used the components from IDS-testbed (DAPS, Broker and IDS connector) in VTT Data Space Innovation Lab (DSIL).| MDB v4.2.8, DAPS v1.0.0, DSC v7.0.2 | Private & Public (on demand) |
 
 ## Roadmap
 ### Version 2.0 of the test bed
