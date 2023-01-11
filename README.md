@@ -50,6 +50,8 @@ Please include in issue [#104](https://github.com/International-Data-Spaces-Asso
 | ------------- | --------------- |   --------------- | ------------------------
 |  Engineering | Verifying TRUEConnector compatibility with reference implementation | DSC v7.1.0, MDB v5.0.0, DAPS v1.6.0 | Private |
 |  VTT | IDS-testbed has been utilized for hands-on experience during educational sessions organized by VTT. We have also used the components from IDS-testbed (DAPS, Broker and IDS connector) in VTT Data Space Innovation Lab (DSIL).| MDB v4.2.8, DAPS v1.0.0, DSC v7.0.2 | Private & Public (on demand) |
+|  [ATOS](https://atos.net/es/spain) | [How to deploy an IDS-Testbed using Kubernetes](https://github.com/International-Data-Spaces-Association/IDS-Deployment-Scenarios/blob/main/Deployment-Scenarios/minimum-viable-data-space-using-k8s.md) | DSC v8.0.2,  MDB v5.0.3, DAPS v1.6.0 | Public |
+
 
 ## Roadmap
 ### Version 2.0 of the test bed
