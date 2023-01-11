@@ -49,7 +49,7 @@ Please include in issue [#104](https://github.com/International-Data-Spaces-Asso
 | Provider      | Description     |   Components used |  Public or Private Use? |
 | ------------- | --------------- |   --------------- | ------------------------
 |  Engineering | Verifying TRUEConnector compatibility with reference implementation | DSC v7.1.0, MDB v5.0.0, DAPS v1.6.0 | Private |
-|  [ATOS](https://atos.net/es/spain) | [How to deploy an IDS-Testbed using Kubernetes](https://github.com/International-Data-Spaces-Association/IDS-Deployment-Scenarios/blob/main/Deployment-Scenarios/minimum-viable-data-space-using-k8s.md) | DSC v7.1.0,  MDB v5.0.0, DAPS v1.6.0 | Public |
+|  [ATOS](https://atos.net/es/spain) | [How to deploy an IDS-Testbed using Kubernetes](https://github.com/International-Data-Spaces-Association/IDS-Deployment-Scenarios/blob/main/Deployment-Scenarios/minimum-viable-data-space-using-k8s.md) | DSC v8.0.2,  MDB v5.0.3, DAPS v1.6.0 | Public |
 
 ## Roadmap
 ### Version 2.0 of the test bed
