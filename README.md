@@ -38,9 +38,9 @@ Used versions of the IDS-testbed components:
 - Dataspace Connector (DSC) v7.1.0
 - MetadataBroker (MDB) v5.0.0
 
-## IDS Reference Testbed implementations
+## Deployment Scenarios based on IDS Testbed
 
-Please include in issue [#104](https://github.com/International-Data-Spaces-Association/IDS-testbed/issues/104) the successful IDS Reference Testbed implementations you have made. Including:
+Please include in issue [#104](https://github.com/International-Data-Spaces-Association/IDS-testbed/issues/104) the successful Testbed implementations you have made. Including:
 -	Provider (company) name
 -	A brief description of the testbed: what are you using it for?
 -	Version of IDS-testbed components used (i.e. DSC v7.1.0, MDB v5.0.0, DAPS v1.6.0)
