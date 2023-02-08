@@ -44,38 +44,68 @@ services:
     networks:
       - local
 
+# Add the PostgreSQL container to be used by DataspaceConnectorA and DataspaceConnectorB
+  postgresa:
+    image: postgres:13
+    container_name: 'postgresa-container'
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgresusera
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=connectoradb
+    volumes:
+      - connector-dataa:/var/lib/postgresql/data
+    networks:
+      - local
+      
+  postgresb:
+    image: postgres:13
+    container_name: 'postgresb-container'
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_USER=postgresuserb
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=connectorbdb
+    volumes:
+      - connector-datab:/var/lib/postgresql/data
+    networks:
+      - local
+      
   connectora:
-    image: ghcr.io/international-data-spaces-association/dataspace-connector:7.1.0
+    image: ghcr.io/international-data-spaces-association/dataspace-connector:8.0.2
     container_name: connectora
     ports:
       - 8080:8080
-    networks:
-      - local
-    volumes:
-      - ./DataspaceConnectorA/conf/config.json:/config/config.json
-      - ./DataspaceConnectorA/conf/testbed1.p12:/conf/testbed1.p12
-      - ./DataspaceConnectorA/conf/connectorA.p12:/config/connectorA.p12
-      - ./DataspaceConnectorA/conf/truststore.p12:/config/truststore.p12
     environment:
       - CONFIGURATION_PATH=/config/config.json
       - DAPS_URL=https://omejdn
       - DAPS_TOKEN_URL=https://omejdn/auth/token
       - DAPS_KEY_URL=https://omejdn/auth/jwks.json
       - DAPS_INCOMING_DAT_DEFAULT_WELLKNOWN=/jwks.json
-      - SERVER_SSL_KEY-STORE=file:///config/connectorA.p12
-
+      - SERVER_SSL_KEY-STORE=file:///conf/testbed1.p12
+      # Define the PostgreSQL setup
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresa:5432/connectoradb 
+      - SPRING_DATASOURCE_PLATFORM=postgres
+      - SPRING_DATASOURCE_DRIVERCLASSNAME=org.postgresql.Driver
+      - SPRING_DATASOURCE_USERNAME=postgresusera
+      - SPRING_DATASOURCE_PASSWORD=password
+      - SPRING_JPA_DATABASE_PLATFORM=org.hibernate.dialect.PostgreSQLDialect
+    volumes:
+      - ./DataspaceConnectorA/conf/config.json:/config/config.json
+      - ./DataspaceConnectorA/conf/testbed1.p12:/conf/testbed1.p12
+      - ./DataspaceConnectorA/conf/truststore.p12:/config/truststore.p12
+    networks:
+      - local
+    depends_on:
+      - postgresa
+      
   connectorb:
-    image: ghcr.io/international-data-spaces-association/dataspace-connector:7.1.0
+    image: ghcr.io/international-data-spaces-association/dataspace-connector:8.0.2
     container_name: connectorb
     ports:
       - 8081:8081
-    networks:
-      - local
-    volumes:
-      - ./DataspaceConnectorB/conf/config.json:/config/config.json
-      - ./DataspaceConnectorB/conf/testbed2.p12:/conf/testbed2.p12
-      - ./DataspaceConnectorB/conf/connectorB.p12:/config/connectorB.p12
-      - ./DataspaceConnectorB/conf/truststore.p12:/config/truststore.p12
     environment:
       - CONFIGURATION_PATH=/config/config.json
       - SERVER_PORT=8081
@@ -83,7 +113,22 @@ services:
       - DAPS_TOKEN_URL=https://omejdn/auth/token
       - DAPS_KEY_URL=https://omejdn/auth/jwks.json
       - DAPS_INCOMING_DAT_DEFAULT_WELLKNOWN=/jwks.json
-      - SERVER_SSL_KEY-STORE=file:///config/connectorB.p12
+      - SERVER_SSL_KEY-STORE=file:///conf/testbed2.p12
+      # Define the PostgreSQL setup     
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresb:5432/connectorbdb 
+      - SPRING_DATASOURCE_USERNAME=postgresuserb
+      - SPRING_DATASOURCE_PASSWORD=password
+      - SPRING_DATASOURCE_PLATFORM=postgres
+      - SPRING_DATASOURCE_DRIVERCLASSNAME=org.postgresql.Driver
+      - SPRING_JPA_DATABASE_PLATFORM=org.hibernate.dialect.PostgreSQLDialect
+    volumes:
+      - ./DataspaceConnectorB/conf/config.json:/config/config.json
+      - ./DataspaceConnectorB/conf/testbed2.p12:/conf/testbed2.p12
+      - ./DataspaceConnectorB/conf/truststore.p12:/config/truststore.p12
+    networks:
+      - local
+    depends_on:
+      - postgresb
 
   broker-reverseproxy:
     image: registry.gitlab.cc-asp.fraunhofer.de/eis-ids/broker-open/reverseproxy
@@ -98,7 +143,7 @@ services:
       - local
 
   broker-core:
-    image: idstestbed/broker-core:5.0.0
+    image: idstestbed/broker-core:5.0.3
     container_name: broker-core
     volumes:
       - ./MetadataBroker/isstbroker-keystore.jks:/etc/cert/isstbroker-keystore.jks
@@ -126,7 +171,9 @@ services:
       - local
 
 volumes:
-  broker-fuseki:
+  broker-fuseki: {}
+  connector-dataa: {}
+  connector-datab: {}
 
 networks:
   local:

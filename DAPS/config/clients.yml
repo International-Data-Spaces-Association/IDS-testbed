@@ -1,5 +1,5 @@
 ---
-- client_id: 66:07:ED:E5:80:E4:29:6D:1E:DD:F7:43:CA:0E:EB:38:32:C8:3A:43:keyid:07:FC:95:17:C4:95:B9:E4:AD:09:5F:07:1E:D2:20:75:2D:89:66:85
+- client_id: E2:C4:24:73:A1:0A:B1:20:E6:EE:77:5B:CB:24:98:7E:39:74:25:49:keyid:41:30:3C:7E:87:C2:EF:66:72:27:91:82:EF:56:E9:0C:5C:2B:BC:2B
   client_name: testbed1
   grant_types: client_credentials
   token_endpoint_auth_method: private_key_jwt
@@ -16,8 +16,8 @@
   - key: "@context"
     value: https://w3id.org/idsa/contexts/context.jsonld
   - key: transportCertsSha256
-    value: a1da7cfeac22ddffa4ebbe67b323d9af1c05e9d92a9d3dfbc098f6c45609caa9
-- client_id: 4B:4A:0E:81:99:6A:19:B9:3A:04:37:B6:7C:86:83:17:19:5A:6E:68:keyid:07:FC:95:17:C4:95:B9:E4:AD:09:5F:07:1E:D2:20:75:2D:89:66:85
+    value: a82df8ba258599522a4d7516ecca09d76494ee568fc3b84ec59c32d2fc2179dc
+- client_id: F0:29:3D:CE:68:FA:07:14:FA:DF:47:C1:3C:E2:37:63:FC:95:A1:0D:keyid:41:30:3C:7E:87:C2:EF:66:72:27:91:82:EF:56:E9:0C:5C:2B:BC:2B
   client_name: testbed2
   grant_types: client_credentials
   token_endpoint_auth_method: private_key_jwt
@@ -34,8 +34,8 @@
   - key: "@context"
     value: https://w3id.org/idsa/contexts/context.jsonld
   - key: transportCertsSha256
-    value: cf0dd49a552008eacd0b82cbf7850cbaacbf9c2a8942e542801db9bf4c2f0f5a
-- client_id: B7:6D:DD:B3:FD:6E:41:52:A8:89:95:B0:0D:8E:4C:BA:0A:1F:72:FD:keyid:07:FC:95:17:C4:95:B9:E4:AD:09:5F:07:1E:D2:20:75:2D:89:66:85
+    value: 5cefdb731f0764b8d48a72dec4d28aabef0d8d7e0d92bc4598d2ac028f786eef
+- client_id: 07:69:AC:6A:83:BE:38:C2:B6:CA:80:A8:70:5A:97:EB:7C:AA:81:B2:keyid:41:30:3C:7E:87:C2:EF:66:72:27:91:82:EF:56:E9:0C:5C:2B:BC:2B
   client_name: testbed3
   grant_types: client_credentials
   token_endpoint_auth_method: private_key_jwt
@@ -52,4 +52,4 @@
   - key: "@context"
     value: https://w3id.org/idsa/contexts/context.jsonld
   - key: transportCertsSha256
-    value: 0d9eb3600540532c69c7345e7ab04e0f420434b693e26e415783875a93e9fc4b
+    value: 58718395a04a600099a819b867b73ff9ae7a87266cd38be17aea741d58a45a8f

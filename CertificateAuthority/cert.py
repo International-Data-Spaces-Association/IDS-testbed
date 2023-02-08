@@ -68,11 +68,19 @@ def create(args):
         exit(1)
 
     cert.add_extensions([
-            crypto.X509Extension(b'basicConstraints', True, b'CA:FALSE'),
-            crypto.X509Extension(b'extendedKeyUsage', True, ','.join(eku).encode('utf-8')),
-            crypto.X509Extension(b'keyUsage', True, b'digitalSignature,keyEncipherment,keyAgreement'),
-            crypto.X509Extension(b'subjectKeyIdentifier', True, b'hash', subject=cert),
-            crypto.X509Extension(b'authorityKeyIdentifier', True, b'keyid, issuer', issuer=ca_crt)
+        crypto.X509Extension(b'basicConstraints', True, b'CA:FALSE'),
+        crypto.X509Extension(b'extendedKeyUsage', True, ','.join(eku).encode('utf-8')),
+        crypto.X509Extension(b'keyUsage', True, b'digitalSignature,keyEncipherment,keyAgreement'),
+        crypto.X509Extension(b'subjectKeyIdentifier', True, b'hash', subject=cert),
+        crypto.X509Extension(b'authorityKeyIdentifier', True, b'keyid, issuer', issuer=ca_crt)
+    ])
+
+    if args.san_name or args.san_ip:
+        san_list = [f'IP:{item}' for item in args.san_ip or []]
+        san_list += [f'DNS:{item}' for item in args.san_name or []]
+
+        cert.add_extensions([
+            crypto.X509Extension(b'subjectAltName', False, ', '.join(san_list).encode('utf-8'))
         ])
 
     cert.sign(ca_key, args.hash)

@@ -42,11 +42,11 @@ python3 pki.py  init
 
 A root CA can then be created with the following command:
 ```bash
-python3 pki.py  ca create --common-name [CA name]
+python3 pki.py  ca create --common-name [CA name] --organization-name [O] --country-name [C] --unit-name [OU] --hash [Algorithm for signing] 
 ```
 It could look something like this
 ```bash
-python3 pki.py  ca create --common-name "ReferenceTestbedCA"
+python3 pki.py ca create --common-name ReferenceTestbedCA --organization-name SQS --country-name ES --unit-name TestLab --hash sha512 
 ```
 A list of available parameters with their defaults can be obtained by:
 ```bash
@@ -61,11 +61,11 @@ python3 pki.py ca list
 
 A sub CA can then be created with the following command:
 ```bash
-python3 pki.py subca create --CA [CA name] --common-name [Sub CA name]
+python3 pki.py subca create --CA [CA name] --common-name [Sub CA name] --organization-name [O] --country-name [C] --unit-name [OU] --hash [Algorithm for signing]
 ```
 It could look something like this
 ```bash
-python3 pki.py subca create --CA "ReferenceTestbedCA" --common-name "ReferenceTestbedSubCA"
+python3 pki.py subca create --CA "ReferenceTestbedCA" --common-name "ReferenceTestbedSubCA" --organization-name SQS --country-name ES --unit-name TestLab --hash sha384
 ```
 The CA used for signing the sub CA is a required parameter.
 
@@ -83,15 +83,16 @@ python3 pki.py subca list
 **Creation of key pair and certificate in one step**  
 A device private key with the respective certificate can be created with the following command:
 ```bash
-python3 pki.py cert create --subCA [Sub CA name] --common-name [Cert name] --algo [Key algorithm] --bits [Bits of Key] --hash [Algorithm for signing] --client --server
+python3 pki.py cert create --subCA [Sub CA name] --common-name [Cert name] --algo [Key algorithm] --bits [Bits of Key] --hash [Algorithm for signing] --client --server --san-name [DNS Name] --san-ip [IP Address]
 ```
+
 Additionally, it can be included country name, organization name and unit name information.
 
 It could look something like this
 ```bash
-python3 pki.py cert create --subCA ReferenceTestbedSubCA --common-name Example --algo rsa --bits 2048 --hash sha256 --country-name ES --organization-name SQS --unit-name TestLab --server --client
+python3 pki.py cert create --subCA ReferenceTestbedSubCA --common-name Example --algo rsa --bits 2048 --hash sha256 --country-name ES --organization-name SQS --unit-name TestLab --server --client --san-name ExampleDNS --san-ip 127.0.0.1
 ```
-The Sub CA used for signing the certificate is a required parameter. The key algorithm `rsa`, bits of key `2048` and algorithm for signing `sha256` are also required for correct interoperability between IDS-testbed components.
+The Sub CA used for signing the certificate is a required parameter. The key algorithm `rsa`, bits of key `2048`, algorithm for signing `sha256` and Subject Alternative Name with DNS Name and IP Address are also required for correct interoperability between IDS-testbed components.
 
 The created key pair is located at the folder `CertificateAuthority/data/cert`
 
