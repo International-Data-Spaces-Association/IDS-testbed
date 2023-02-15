@@ -100,7 +100,7 @@ CPython version: 3.8.10
 OpenSSL version: OpenSSL 1.1.1f  31 Mar 2020
 ```
 
-If your docker-compose version is not the required one execute the following commands.
+If your docker-compose version is not the required one, execute the following command:
 
 ```
 sudo apt-get install curl
@@ -118,7 +118,7 @@ Move to the downloaded directory and execute the `docker-compose.yml` script.
 cd IDS-testbed
 docker-compose up
 ```
-If you face problems with docker or user rights execute the following commands and log out and back so that your group membership is re-evaluated.
+If you face problems with docker or user right, execute the following commands and log out and back so that your group membership is re-evaluated.
 ```
 sudo groupadd docker
 sudo usermod -aG docker $USER 
@@ -333,7 +333,7 @@ Official documentation: [CertificateAuthority/README.md](./CertificateAuthority/
 
 The preconfigured setup includes certificates for:
 * a root CA called "ReferenceTestbedCA"
-* a subCA called "ReferenceTestbedSubCA" and
+* a subCA called "ReferenceTestbedSubCA"
 * certificates for devices called "testbed1", ... , "testbed4"
 
 ## Continue here after the official documentation has been followed
