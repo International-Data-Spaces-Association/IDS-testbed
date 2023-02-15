@@ -8,7 +8,7 @@
 * [Guide for Preparing and Validating the Preconfigured Setup](./PreparingPreconfiguredSetup.md)
 * [Change Management](./ChangeManagement/README.md)
 * [References](./References.md)
-* [Testsuite](./Testsuite)
+* [Testsuite](./Testsuite/README.md)
 
 ## Details on IDS Reference Testbed Components
 
