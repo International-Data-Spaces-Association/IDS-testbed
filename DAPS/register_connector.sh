@@ -16,11 +16,18 @@ SKI="$(openssl x509 -in "keys/${CLIENT_NAME}.cert" -noout -text | grep -A1 "Subj
 AKI="$(openssl x509 -in "keys/${CLIENT_NAME}.cert" -noout -text | grep -A1 "Authority Key Identifier" | tail -n 1 | tr -d ' ')"
 SUB='keyid'
 
-if [ "$AKI" = *"$SUB"* ];then
-   CLIENT_ID="$SKI:$AKI"
-else
-   CLIENT_ID="$SKI:keyid:$AKI"
-fi
+contains() {
+    string="$AKI"
+    substring="$SUB"
+    if test "${string#*$substring}" != "$string"
+    then
+        CLIENT_ID="$SKI:$AKI"    # $substring is in $string
+    else
+        CLIENT_ID="$SKI:keyid:$AKI"    # $substring is not in $string
+    fi
+}
+
+contains "$AKI" "$SUB"
 
 CLIENT_CERT_SHA="$(openssl x509 -in "$CLIENT_CERT" -noout -sha256 -fingerprint | tr '[:upper:]' '[:lower:]' | tr -d : | sed 's/.*=//')"
 
