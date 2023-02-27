@@ -571,6 +571,13 @@ For the IDS-testbed deployment it is configured at the `docker-compose.yml`. Her
 
 The server `server.ssl.key-store=file:///config/{TLS_FILENAME}.p12`, where `{TLS_FILENAME}` is to be replaced with the certificate created previously by the local CA. The Dataspace Connector expects the TLS certificate in `.p12` format.
 
+**Note** Make sure the created certificates have the correct permissions. For the Dataspace Connector this `.p12` format certificate must be configured with read and write rights for the `user permissions` and `group permissions`. 
+The file permissions can be viewed and changed using the following commands:
+```
+ls -l
+chmod 664 {TLS_FILENAME.p12}
+````
+
 ## Changes to the config.json file
 Use nano or your most favourite editor
 ```
