@@ -14,7 +14,13 @@ CLIENT_CERT="keys/$CLIENT_NAME.cert"
 
 SKI="$(openssl x509 -in "keys/${CLIENT_NAME}.cert" -noout -text | grep -A1 "Subject Key Identifier" | tail -n 1 | tr -d ' ')"
 AKI="$(openssl x509 -in "keys/${CLIENT_NAME}.cert" -noout -text | grep -A1 "Authority Key Identifier" | tail -n 1 | tr -d ' ')"
-CLIENT_ID="$SKI:$AKI"
+SUB='keyid'
+
+if [ "$AKI" = *"$SUB"* ];then
+   CLIENT_ID="$SKI:$AKI"
+else
+   CLIENT_ID="$SKI:keyid:$AKI"
+fi
 
 CLIENT_CERT_SHA="$(openssl x509 -in "$CLIENT_CERT" -noout -sha256 -fingerprint | tr '[:upper:]' '[:lower:]' | tr -d : | sed 's/.*=//')"
 
