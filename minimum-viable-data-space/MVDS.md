@@ -9,8 +9,12 @@ The [IDS Deployment Scenarios](https://github.com/International-Data-Spaces-Asso
 
 # What are the components required for a MVDS (as specified by IDSA)?
 A minimum viable data space consists of: 
+
+
 1️⃣ Two connectors (one acting as a data provider, and one as a data consumer)
+
 2️⃣ An identity provider (Dynamic Attribute Provisioning Service, Certificate Authority)
+
 3️⃣ Optional and additional components, such as a metadata broker, an app store, a clearing house, or a vocabulary provider, can be added to the MVDS to extend its functionality and enable more advanced features, such as searching for data sets. 
 
 The MVDS provides a starting point for experimenters to create a functional Dataspace that can be customized and expanded as needed to meet specific requirements.
@@ -19,10 +23,9 @@ The MVDS provides a starting point for experimenters to create a functional Data
 
 # How can I start implementing a MVDS? 
 To implement a Minimum Viable Data Space, you have two alternative paths to follow: 
-:one: You can form this MVDS by (re)using and customizing the open-source components listed on [IDS Github](https://github.com/International-Data-Spaces-Association/idsa/blob/main/overview_repositories.md). For solutions that have a higher maturity level, you can check the ones that are part of [IDS Graduation Scheme](https://github.com/International-Data-Spaces-Association/idsa/blob/main/graduation_scheme/Projects.md)
+:one: You can form this MVDS by (re)using and customizing the open-source components listed on [IDS Github](https://github.com/International-Data-Spaces-Association/idsa/blob/main/overview_repositories.md). Some of these solutions are also being used in [IDS Reference Testbed](../README.md). For solutions with a higher maturity level, you can check the ones that are part of [IDS Graduation Scheme](https://github.com/International-Data-Spaces-Association/idsa/blob/main/graduation_scheme/Projects.md)
 
-:two: You can 
-- Should start by checking the available open-source components listed on [IDS Github]. [IDS Graduation Scheme] for more mature solutions.
+:two: You can start by developing some or all components from scratch, by following the specifications on [IDS-G](https://github.com/International-Data-Spaces-Association/IDS-G)
 
 :arrow_forward: At the end of both paths, we highly recommend to use [IDS-testbed](https://github.com/International-Data-Spaces-Association/IDS-testbed) to ensure the compatibility and interoperability of the components you will be using in your MVDS.
 
