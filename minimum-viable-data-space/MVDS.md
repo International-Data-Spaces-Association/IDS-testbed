@@ -19,7 +19,7 @@ A minimum viable data space consists of:
 
 The MVDS provides a starting point for experimenters to create a functional Dataspace that can be customized and expanded as needed to meet specific requirements.
 
-![Minimum Viable Data Space](../pictures/MVDS-Testbed_1.0.png)
+![Minimum Viable Data Space](../pictures/MVDS-Visual1.png)
 
 # How can I start implementing a MVDS? 
 To implement a Minimum Viable Data Space, you have two alternative paths to follow: 
