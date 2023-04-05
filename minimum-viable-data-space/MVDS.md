@@ -29,7 +29,7 @@ To implement a Minimum Viable Data Space, you have two alternative paths to foll
 
 :two: You can start by developing some or all components from scratch, by following the component specifications listed on [IDS-G](https://github.com/International-Data-Spaces-Association/IDS-G)
 
-:arrow_forward: At the end of both paths, we highly recommend to use [IDS-testbed](https://github.com/International-Data-Spaces-Association/IDS-testbed) to ensure the compatibility and interoperability of the components you will be using in your MVDS.
+🚩 At the final stage of both paths, we highly recommend to use [IDS-testbed](https://github.com/International-Data-Spaces-Association/IDS-testbed) to ensure the compatibility and interoperability of the components you will be using in your MVDS.
 
 And of course, [IDS Certification](https://internationaldataspaces.org/use/certification/) is an essential aspect to ensure the trustworthiness of the implemented minimum viable data space. By following the path of IDS Certification, you can rest assured that all components and operational environments are thoroughly validated, providing an additional trust layer that ensures optimal functionality within clearly specified boundaries. In short, IDS Certification is a great way to secure a trustworthy minimum viable data space.
 
