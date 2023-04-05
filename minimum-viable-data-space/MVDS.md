@@ -23,14 +23,13 @@ The MVDS provides a starting point for experimenters to create a functional Data
 
 # How can I start implementing a MVDS? 
 To implement a Minimum Viable Data Space, you have two alternative paths to follow: 
-:one: You can form this MVDS by (re)using and customizing the open-source components listed on [IDS Github](https://github.com/International-Data-Spaces-Association/idsa/blob/main/overview_repositories.md). Some of these solutions are also being used in [IDS Reference Testbed](../README.md). For solutions with a higher maturity level, you can check the ones that are part of [IDS Graduation Scheme](https://github.com/International-Data-Spaces-Association/idsa/blob/main/graduation_scheme/Projects.md)
 
-:two: You can start by developing some or all components from scratch, by following the specifications on [IDS-G](https://github.com/International-Data-Spaces-Association/IDS-G)
+
+:one: You can form this MVDS by (re)using and customizing the open-source components listed on [IDS Github](https://github.com/International-Data-Spaces-Association/idsa/blob/main/overview_repositories.md). Some of these solutions are also being used in [IDS Reference Testbed](../README.md). For solutions with a higher maturity level, you can check the ones that are part of [IDS Graduation Scheme](https://github.com/International-Data-Spaces-Association/idsa/blob/main/graduation_scheme/Projects.md).
+
+:two: You can start by developing some or all components from scratch, by following the component specifications listed on [IDS-G](https://github.com/International-Data-Spaces-Association/IDS-G)
 
 :arrow_forward: At the end of both paths, we highly recommend to use [IDS-testbed](https://github.com/International-Data-Spaces-Association/IDS-testbed) to ensure the compatibility and interoperability of the components you will be using in your MVDS.
 
 And of course, [IDS Certification](https://internationaldataspaces.org/use/certification/) is an essential aspect to ensure the trustworthiness of the implemented minimum viable data space. By following the path of IDS Certification, you can rest assured that all components and operational environments are thoroughly validated, providing an additional trust layer that ensures optimal functionality within clearly specified boundaries. In short, IDS Certification is a great way to secure a trustworthy minimum viable data space.
-
-# Are the IDS Reference Testbed and MVDS the same thing? 
-
 
