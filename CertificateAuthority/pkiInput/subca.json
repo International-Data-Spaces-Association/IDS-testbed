@@ -1,0 +1,19 @@
+{
+  "CN": "ReferenceTestbedSubCA",
+  "key": {
+    "algo": "ecdsa",
+    "size": 521
+  },
+  "names": [
+  {
+    "C": "DE",
+    "L": "Dortmund",
+    "O": "IDSA",
+    "OU": "IDS Reference Testbed"
+  }
+ ],
+  "key": {
+    "algo": "ecdsa",
+    "size": 384
+  }
+}

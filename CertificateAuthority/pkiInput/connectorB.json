@@ -1,0 +1,19 @@
+{
+  "CN": "Connector B",
+  "key": {
+    "algo": "ecdsa",
+    "size": 521
+  },
+  "names": [
+  {
+    "C": "DE",
+    "L": "Dortmund",
+    "O": "IDSA",
+    "OU": "IDS Reference Testbed"
+  }
+  ],
+  "hosts": [
+    "localhost",
+    "127.0.0.1"
+  ]
+}

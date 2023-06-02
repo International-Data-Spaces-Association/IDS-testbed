@@ -1,0 +1,18 @@
+{
+  "CN": "ReferenceTestbedCA",
+  "key": {
+    "algo": "ecdsa",
+    "size": 521
+  },
+  "names": [
+  {
+    "C": "DE",
+    "L": "Dortmund",
+    "O": "IDSA",
+    "OU": "IDS Reference Testbed"
+  }
+ ],
+ "expiry": "87660h",
+ "usages": ["cert sign"],
+ "ca_constraint": {"is_ca": true}
+}
