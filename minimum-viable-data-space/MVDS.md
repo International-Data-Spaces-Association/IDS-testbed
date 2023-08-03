@@ -1,5 +1,5 @@
 # What is a Minimum Viable Data Space? 
-A Minimum Viable Dataspace (MVDS) is a combination of components that enable the creation of a Dataspace with just enough features to be usable for secure and sovereign data exchange, as specified by the International Dataspaces Association (IDSA). The goal of an MVDS is to streamline the implementation process, making it easier and faster for experimenters to create a working Dataspace with secure and sovereign data exchange. By starting with an MVDS, the development team can iterate quickly and respond to the requirements of the Dataspace, making adjustments as necessary to meet the needs of users.
+A Minimum Viable Data Space (MVDS) is a combination of components that enable the creation of a data space with just enough features to be usable for secure and sovereign data exchange, as specified by the International Data Spaces Association (IDSA). The goal of an MVDS is to streamline the implementation process, making it easier and faster for experimenters to create a working data space with secure and sovereign data exchange. By starting with an MVDS, the development team can iterate quickly and respond to the requirements of the data space, making adjustments as necessary to meet the needs of users.
 
 It aims to facilitate the work of experimenters by shortening the implementation time (by avoiding lengthy details that would slow down the first release). This allows them to start with a first working version (where secure and sovereign data exchange is granted), where the development team can iterate, identify and respond to the assumptions about the requirements of the data space. 
 
@@ -17,7 +17,7 @@ A minimum viable data space consists of:
 
 3️⃣ Optional and additional components, such as a metadata broker, an app store, a clearing house, or a vocabulary provider, can be added to the MVDS to extend its functionality and enable more advanced features, such as searching for data sets. 
 
-The MVDS provides a starting point for experimenters to create a functional Dataspace that can be customized and expanded as needed to meet specific requirements.
+The MVDS provides a starting point for experimenters to create a functional data space that can be customized and expanded as needed to meet specific requirements.
 
 ![Minimum Viable Data Space](../pictures/MVDS-Visual1.png)
 
