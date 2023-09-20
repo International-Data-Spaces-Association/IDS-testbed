@@ -69,12 +69,15 @@ cfssl sign -ca "$SUBCADIR/subca.pem" -ca-key "$SUBCADIR/subca-key.pem"  -db-conf
 # 6. TODO: Revoke connectorA_revoked automatically
 # manually it can be done with
 # cfssl certinfo -cert $COMPDIR/connectorA_revoked.pem
-# cfssl revoke -db-config ocsp/sqlite_db_users.json -serial "<serial>" -aki "<aki>" -reason="<reason>" (aki as numerical as shown by certinfo, aki in hex without ":" with all letters in lower case
+# cfssl revoke -db-config ocsp/sqlite_db_components.json -serial "<serial>" -aki "<aki>" -reason="<reason>" (aki as numerical as shown by certinfo, aki in hex without ":" with all letters in lower case
+# -> cfssl revoke -db-config data-cfssl/ocsp/sqlite_db_components.json -serial "684884757867154147174595483456917541554534961223" -aki "3a37c80b479b17cedd8da3a8a8ae518e0fcc2b46" -reason="superseded" for the connectorA_revoked certificate
 
 # 7. Prepare the OCSP provider for components
 cfssl ocsprefresh -db-config "$OCSPDIR/sqlite_db_components.json" -ca "$SUBCADIR/subca.pem" -responder "$OCSPDIR/ocsp_components.pem" -responder-key "$OCSPDIR/ocsp_components-key.pem"
 cfssl ocspdump -db-config "$OCSPDIR/sqlite_db_components.json" >"$OCSPDIR/ocspdump_components.txt"
 # Run the OCSP provider with: cfssl ocspserve -port=8888 -responses="$OCSPDIR/ocspdump_components.txt" -loglevel=0
+# Query status of revoked certificate connectorA_revoked with: $ openssl ocsp -issuer data-cfssl/ocsp/ocsp_components.pem -issuer data-cfssl/subca/subca.pem -no_nonce -cert data-cfssl/certs/connectorA_revoked.pem -CAfile data-cfssl/ca/ca.pem -text -url http://localhost:8888
+
 
 # 7. Prepare the OCSP provider for subCA
 cfssl ocsprefresh -db-config "$OCSPDIR/sqlite_db_subcas.json" -ca "$CADIR/ca.pem" -responder "$OCSPDIR/ocsp_subcas.pem" -responder-key "$OCSPDIR/ocsp_subcas-key.pem"
