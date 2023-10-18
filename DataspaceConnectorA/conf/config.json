@@ -57,6 +57,6 @@
     "@id" : "idsc:CONNECTOR_ONLINE"
   },
   "ids:keyStore" : {
-    "@id" : "file:///conf/testbed1.p12"
+    "@id" : "file:///conf/connectorA.p12"
   }
 }

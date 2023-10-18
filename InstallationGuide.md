@@ -324,17 +324,17 @@ git clone https://github.com/International-Data-Spaces-Association/IDS-testbed.g
 Move to right directory, and make the files executable:
 
 ```
-cd IDS-testbed/CertificateAuthority/
+cd IDS-testbed/CertificateAuthority
 ```
 
-The official documentation will cover the scope, dependencies and usage of the component.
-
-Official documentation: [CertificateAuthority/README.md](./CertificateAuthority/README.md)
+Follow the documentation detailed at the "README.md" file which covers the scope, dependencies and usage of the component.
 
 The preconfigured setup includes certificates for:
 * a root CA called "ReferenceTestbedCA"
 * a subCA called "ReferenceTestbedSubCA"
-* certificates for devices called "testbed1", ... , "testbed4"
+* certificates for devices called "connectorA", "connectorB", "broker", "daps" and "connectorA_revoked"
+
+which are located at `CertificateAuthority/data-cfssl` folder.
 
 ## Continue here after the official documentation has been followed
 
@@ -344,7 +344,7 @@ Now convert the generated certificates in `data/cert` using openssl to then use 
 
 ```
 ## navigate to the following directory data/cert
-cd data/cert
+cd data-cfssl/cert
 ls
 ```
 The output should look similar to
@@ -360,7 +360,7 @@ openssl pkcs12 -in {CERT_FILENAME}.p12 -out {CERT_FILENAME}.cert -nokeys -nodes 
 
 ```
 
-You should now have two additional files in data/cert
+You should now have two additional files in data-cfssl/cert
 
 ```
 {CERT_FILENAME}.cert  {CERT_FILENAME}.crt  {CERT_FILENAME}.key  {CERT_FILENAME}.p12
@@ -397,7 +397,7 @@ cd DAPS
 
 It could look something like this
 ```
-./register_connector.sh testbed1
+./register_connector.sh connectorA
 ```
 
 The certificate will be added to the list of DAPS's clients. You can check it at the file `DAPS/config/clients.yml`
@@ -559,7 +559,7 @@ For the IDS-testbed deployment it is configured at the `docker-compose.yml`. Her
       - DAPS_TOKEN_URL=https://omejdn/auth/token
       - DAPS_KEY_URL=https://omejdn/auth/jwks.json
       - DAPS_INCOMING_DAT_DEFAULT_WELLKNOWN=/jwks.json
-      - SERVER_SSL_KEY-STORE=file:///conf/testbed1.p12
+      - SERVER_SSL_KEY-STORE=file:///conf/connectorA.p12
       # Define the PostgreSQL setup
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresa:5432/connectoradb 
       - SPRING_DATASOURCE_PLATFORM=postgres
@@ -616,22 +616,22 @@ keytool -import -alias {NAME} -file {NAME.crt} -storetype PKCS12 -keystore {trus
 
 It could look something like this (**ConnectorA**)
 ```
-keytool -import -alias connectorA -file testbed1.crt -storetype PKCS12 -keystore truststore.p12
+keytool -import -alias connectorA -file connectorA.crt -storetype PKCS12 -keystore truststore.p12
 ```
 
 It could look something like this (**ConnectorB**)
 ```
-keytool -import -alias connectorB -file testbed2.crt -storetype PKCS12 -keystore truststore.p12
+keytool -import -alias connectorB -file connectorB.crt -storetype PKCS12 -keystore truststore.p12
 ```
 
 It could look something like this (**Metadata Broker**)
 ```
-keytool -import -alias brokerreverseproxy -file testbed3.crt -storetype PKCS12 -keystore truststore.p12
+keytool -import -alias metadatabroker -file broker.crt -storetype PKCS12 -keystore truststore.p12
 ```
 
 It could look something like this (**Omejdn DAPS**)
 ```
-keytool -import -alias omejdn -file testbed4.crt -storetype PKCS12 -keystore truststore.p12
+keytool -import -alias omejdn -file daps.crt -storetype PKCS12 -keystore truststore.p12
 ```
 
 You will be asked the following in the terminal:
@@ -700,7 +700,7 @@ services
       - DAPS_TOKEN_URL=https://omejdn/auth/token
       - DAPS_KEY_URL=https://omejdn/auth/jwks.json
       - DAPS_INCOMING_DAT_DEFAULT_WELLKNOWN=/jwks.json
-      - SERVER_SSL_KEY-STORE=file:///conf/testbed1.p12
+      - SERVER_SSL_KEY-STORE=file:///conf/connectorA.p12
       # Define the PostgreSQL setup
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresa:5432/connectoradb 
       - SPRING_DATASOURCE_PLATFORM=postgres
@@ -710,7 +710,7 @@ services
       - SPRING_JPA_DATABASE_PLATFORM=org.hibernate.dialect.PostgreSQLDialect
     volumes:
       - ./DataspaceConnectorA/conf/config.json:/config/config.json
-      - ./DataspaceConnectorA/conf/testbed1.p12:/conf/testbed1.p12
+      - ./DataspaceConnectorA/conf/connectorA.p12:/conf/connectorA.p12
       - ./DataspaceConnectorA/conf/truststore.p12:/config/truststore.p12
     networks:
       - local
@@ -778,7 +778,7 @@ keytool -importkeystore -srckeystore {SRCKEYSTORE} -srcstoretype {STORETYPE} -sr
 It could look something like this
 
 ```
-keytool -importkeystore -srckeystore testbed3.p12 -srcstoretype pkcs12 -srcstorepass password -destkeystore isstbroker-keystore.jks -deststoretype jks -deststorepass password
+keytool -importkeystore -srckeystore broker.p12 -srcstoretype pkcs12 -srcstorepass password -destkeystore isstbroker-keystore.jks -deststoretype jks -deststorepass password
 ```
 
 Expected outcome:
