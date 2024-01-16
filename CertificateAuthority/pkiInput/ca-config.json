@@ -29,10 +29,26 @@
                     "signing",
                     "digital signature",
                     "content committment",
-                    "code signing"
+                    "code signing",
+                    "client auth",
+                    "server auth"
                 ],
                 "ocsp_url": "127.0.0.1:8888"
-            }
+            },
+            "ocsp": {
+              "key": {
+                  "algo": "ecdsa",
+                  "size": 256
+              },
+              "expiry": "26298h",
+                "usages": [
+                    "digital signature",
+                    "key encipherment",
+                    "client auth",
+                    "server auth",
+                    "ocsp signing"
+                ]
+            }                
     	}
   }
 }

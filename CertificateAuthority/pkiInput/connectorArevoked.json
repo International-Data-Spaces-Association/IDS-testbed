@@ -1,8 +1,8 @@
 {
   "CN": "Connector A revoked",
   "key": {
-    "algo": "ecdsa",
-    "size": 521
+    "algo": "rsa",
+    "size": 2048
   },
   "names": [
   {
@@ -14,6 +14,7 @@
   ],
   "hosts": [
     "localhost",
+    "connectorarevoked",
     "127.0.0.1"
   ]
 }

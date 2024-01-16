@@ -1,41 +1,5 @@
 ---
-- client_id: F4:26:82:CF:6C:83:9C:C0:0B:41:AA:9C:50:8E:6A:5A:62:FB:05:CA:keyid:2D:69:EC:D2:F4:62:FA:19:18:45:65:30:7E:96:AB:B7:51:46:A2:E2
-  client_name: connectorA
-  grant_types: client_credentials
-  token_endpoint_auth_method: private_key_jwt
-  scope: idsc:IDS_CONNECTOR_ATTRIBUTES_ALL
-  attributes:
-  - key: idsc
-    value: IDS_CONNECTOR_ATTRIBUTES_ALL
-  - key: securityProfile
-    value: idsc:BASE_SECURITY_PROFILE
-  - key: referringConnector
-    value: http://connectorA.demo
-  - key: "@type"
-    value: ids:DatPayload
-  - key: "@context"
-    value: https://w3id.org/idsa/contexts/context.jsonld
-  - key: transportCertsSha256
-    value: 7029f56f4b0406bbb46107c4d71962f5060cef7b28a71ebab2eb76d988fdba15
-- client_id: 48:9C:E3:4A:63:BE:43:84:51:06:0D:F3:75:4E:36:B6:8D:E9:EA:B6:keyid:2D:69:EC:D2:F4:62:FA:19:18:45:65:30:7E:96:AB:B7:51:46:A2:E2
-  client_name: connectorB
-  grant_types: client_credentials
-  token_endpoint_auth_method: private_key_jwt
-  scope: idsc:IDS_CONNECTOR_ATTRIBUTES_ALL
-  attributes:
-  - key: idsc
-    value: IDS_CONNECTOR_ATTRIBUTES_ALL
-  - key: securityProfile
-    value: idsc:BASE_SECURITY_PROFILE
-  - key: referringConnector
-    value: http://connectorB.demo
-  - key: "@type"
-    value: ids:DatPayload
-  - key: "@context"
-    value: https://w3id.org/idsa/contexts/context.jsonld
-  - key: transportCertsSha256
-    value: 6ba7198a0e84a8d03ad688df20c6bbaf9810d31638d3e5537495688a485e38af
-- client_id: D5:6A:BE:D8:B6:1D:A7:3D:3D:1E:D4:04:2E:02:53:FE:77:52:DB:3B:keyid:2D:69:EC:D2:F4:62:FA:19:18:45:65:30:7E:96:AB:B7:51:46:A2:E2
+- client_id: EB:D2:46:C7:7A:B8:DC:48:9D:AB:1D:31:2A:08:41:48:D7:5F:12:55:keyid:C4:76:D0:AA:CD:93:79:35:0F:EB:A7:64:60:90:A4:6B:B4:38:4D:33
   client_name: broker
   grant_types: client_credentials
   token_endpoint_auth_method: private_key_jwt
@@ -52,4 +16,40 @@
   - key: "@context"
     value: https://w3id.org/idsa/contexts/context.jsonld
   - key: transportCertsSha256
-    value: de9f4ece9827f77a4d5f2b39ec0e8b6d8219c25201b867c361f74298fac42864
+    value: edd4bf74e9850f8a55b82f410db228e1a46d884ea533d721e18405e2769edcb9
+- client_id: 05:7E:2E:7C:71:33:28:0D:18:0E:BB:40:7D:A7:6C:1C:64:37:8A:62:keyid:C4:76:D0:AA:CD:93:79:35:0F:EB:A7:64:60:90:A4:6B:B4:38:4D:33
+  client_name: connectorA
+  grant_types: client_credentials
+  token_endpoint_auth_method: private_key_jwt
+  scope: idsc:IDS_CONNECTOR_ATTRIBUTES_ALL
+  attributes:
+  - key: idsc
+    value: IDS_CONNECTOR_ATTRIBUTES_ALL
+  - key: securityProfile
+    value: idsc:BASE_SECURITY_PROFILE
+  - key: referringConnector
+    value: http://connectorA.demo
+  - key: "@type"
+    value: ids:DatPayload
+  - key: "@context"
+    value: https://w3id.org/idsa/contexts/context.jsonld
+  - key: transportCertsSha256
+    value: 45599b692a3892cd6c492bc95fae95b194c496155ee9d237153e15cd43d19016
+- client_id: E7:23:AA:9F:21:18:6A:0F:CB:99:37:A3:5D:B8:DF:65:F0:5B:31:FE:keyid:C4:76:D0:AA:CD:93:79:35:0F:EB:A7:64:60:90:A4:6B:B4:38:4D:33
+  client_name: connectorB
+  grant_types: client_credentials
+  token_endpoint_auth_method: private_key_jwt
+  scope: idsc:IDS_CONNECTOR_ATTRIBUTES_ALL
+  attributes:
+  - key: idsc
+    value: IDS_CONNECTOR_ATTRIBUTES_ALL
+  - key: securityProfile
+    value: idsc:BASE_SECURITY_PROFILE
+  - key: referringConnector
+    value: http://connectorB.demo
+  - key: "@type"
+    value: ids:DatPayload
+  - key: "@context"
+    value: https://w3id.org/idsa/contexts/context.jsonld
+  - key: transportCertsSha256
+    value: 31741d12bd09dff4d0beb31b6d42811788e4d8954910a985d70d3127630a188d

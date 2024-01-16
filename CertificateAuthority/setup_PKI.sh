@@ -39,7 +39,7 @@ echo "{\"driver\":\"sqlite3\",\"data_source\":\"$OCSPDIR/certdb_subcas.db\"}" > 
 
 # Generate key/certificate for OCSP Signing
 cfssl genkey "$PKIINPUT/ocsp_subcas.json" | cfssljson -bare "$OCSPDIR/ocsp_subcas"
-cfssl sign -ca "$CADIR/ca.pem" -ca-key "$CADIR/ca-key.pem" "$OCSPDIR/ocsp_subcas.csr" | cfssljson -bare "$OCSPDIR/ocsp_subcas"
+cfssl sign -ca "$CADIR/ca.pem" --config "$PKIINPUT/ca-config.json" -profile ocsp -ca-key "$CADIR/ca-key.pem" "$OCSPDIR/ocsp_subcas.csr" | cfssljson -bare "$OCSPDIR/ocsp_subcas"
 
 # 3. Set up the subCA (using sub_ca.json)
 cfssl genkey "$PKIINPUT/subca.json" | cfssljson -bare "$SUBCADIR/subca" 
@@ -52,7 +52,7 @@ echo "{\"driver\":\"sqlite3\",\"data_source\":\"$OCSPDIR/certdb_components.db\"}
 
 # Generate key/certificate for OCSP Signing
 cfssl genkey "$PKIINPUT/ocsp_components.json" | cfssljson -bare "$OCSPDIR/ocsp_components"
-cfssl sign -ca "$SUBCADIR/subca.pem" -ca-key "$SUBCADIR/subca-key.pem" "$OCSPDIR/ocsp_components.csr" | cfssljson -bare "$OCSPDIR/ocsp_components"
+cfssl sign -ca "$SUBCADIR/subca.pem" --config "$PKIINPUT/ca-config.json" -profile ocsp -ca-key "$SUBCADIR/subca-key.pem" "$OCSPDIR/ocsp_components.csr" | cfssljson -bare "$OCSPDIR/ocsp_components"
 
 # 5. Generate and sign certificates for components in the testbed
 cfssl genkey "$PKIINPUT/connectorA.json" | cfssljson -bare "$COMPDIR/connectorA"
@@ -63,8 +63,8 @@ cfssl genkey "$PKIINPUT/broker.json" | cfssljson -bare "$COMPDIR/broker"
 cfssl sign -ca "$SUBCADIR/subca.pem" -ca-key "$SUBCADIR/subca-key.pem"  -db-config "$PKIDIR/ocsp/sqlite_db_components.json" --config "$PKIINPUT/ca-config.json"  -profile "component" "$COMPDIR/broker.csr" | cfssljson -bare "$COMPDIR/broker"
 cfssl genkey "$PKIINPUT/daps.json" | cfssljson -bare "$COMPDIR/daps"
 cfssl sign -ca "$SUBCADIR/subca.pem" -ca-key "$SUBCADIR/subca-key.pem"  -db-config "$PKIDIR/ocsp/sqlite_db_components.json" --config "$PKIINPUT/ca-config.json"  -profile "component" "$COMPDIR/daps.csr" | cfssljson -bare "$COMPDIR/daps"
-cfssl genkey "$PKIINPUT/connectorA_revoked.json" | cfssljson -bare "$COMPDIR/connectorA_revoked"
-cfssl sign -ca "$SUBCADIR/subca.pem" -ca-key "$SUBCADIR/subca-key.pem"  -db-config "$PKIDIR/ocsp/sqlite_db_components.json" --config "$PKIINPUT/ca-config.json"  -profile "component" "$COMPDIR/connectorA_revoked.csr" | cfssljson -bare "$COMPDIR/connectorA_revoked"
+cfssl genkey "$PKIINPUT/connectorArevoked.json" | cfssljson -bare "$COMPDIR/connectorArevoked"
+cfssl sign -ca "$SUBCADIR/subca.pem" -ca-key "$SUBCADIR/subca-key.pem"  -db-config "$PKIDIR/ocsp/sqlite_db_components.json" --config "$PKIINPUT/ca-config.json"  -profile "component" "$COMPDIR/connectorArevoked.csr" | cfssljson -bare "$COMPDIR/connectorArevoked"
 
 # 6. TODO: Revoke connectorA_revoked automatically
 # manually it can be done with

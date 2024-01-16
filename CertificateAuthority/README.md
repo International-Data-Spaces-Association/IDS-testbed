@@ -27,19 +27,19 @@ It could look something like this:
 ### Revoke certificates
 
 At this section, it is detailed the neccessary steps to manually revoke any of the previous step generated certificates.
-For the already existent folder "data-cfssl", the following certificate is revoked "connectorA_revoked".
+For the already existent folder "data-cfssl", the following certificate is revoked "connectorArevoked".
 
 The steps required to revoke a certificate are detailed at the following commands which need to be executed inside "data-cfssl" folder where the certificates are located.
 
 ```
 cd data-cfssl
 # Obtain certificate information to extract serial and AKI number identifiers.
-cfssl certinfo -cert certs/connectorA_revoked.pem
+cfssl certinfo -cert certs/connectorArevoked.pem
 # Command to revoke the certificate
 # cfssl revoke -db-config ocsp/sqlite_db_components.json -serial {SERIAL_NUMBER} -aki {AKI_CERTIFICATE} -reason={REASON}
 # where AKI must be included as shown by certinfo without ":" and with all lowercase letters.
-# It could look something like this for the connectorA_revoked certificate
-cfssl revoke -db-config ocsp/sqlite_db_components.json -serial "695979835967312185272726942513180144183156985185" -aki "2d69ecd2f462fa19184565307e96abb75146a2e2" -reason="superseded"
+# It could look something like this for the connectorArevoked certificate
+cfssl revoke -db-config ocsp/sqlite_db_components.json -serial "581921879588615033625472730240878974097738102962" -aki "c476d0aacd9379350feba7646090a46bb4384d33" -reason="superseded"
 ```
 
 ###  Refresh the OCSP server to include the changes
@@ -65,7 +65,7 @@ openssl ocsp -issuer ocsp/ocsp_components.pem -issuer subca/subca.pem -no_nonce 
 It could look something like this:
 
 ```
-openssl ocsp -issuer ocsp/ocsp_components.pem -issuer subca/subca.pem -no_nonce -cert certs/connectorA_revoked.pem -CAfile subca/subca.pem -text -url http://localhost:8888
+openssl ocsp -issuer ocsp/ocsp_components.pem -issuer subca/subca.pem -no_nonce -cert certs/connectorArevoked.pem -CAfile subca/subca.pem -text -url http://localhost:8888
 ```
 
 ### Extra commands for device certificates
@@ -93,16 +93,16 @@ openssl pkcs12 -export -out broker.p12 -in broker.pem -inkey broker-key.pem -pas
 openssl pkcs12 -in broker.p12 -clcerts -nokeys -out broker.crt -passin pass:password
 openssl pkcs12 -in broker.p12 -out broker.cert -nokeys -nodes -passin pass:password
 
-openssl pkcs12 -export -out connectorA_revoked.p12 -in connectorA_revoked.pem -inkey connectorA_revoked-key.pem -passout pass:password
-openssl pkcs12 -in connectorA_revoked.p12 -clcerts -nokeys -out connectorA_revoked.crt -passin pass:password
-openssl pkcs12 -in connectorA_revoked.p12 -out connectorA_revoked.cert -nokeys -nodes -passin pass:password
+openssl pkcs12 -export -out connectorArevoked.p12 -in connectorArevoked.pem -inkey connectorArevoked-key.pem -passout pass:password
+openssl pkcs12 -in connectorArevoked.p12 -clcerts -nokeys -out connectorArevoked.crt -passin pass:password
+openssl pkcs12 -in connectorArevoked.p12 -out connectorArevoked.cert -nokeys -nodes -passin pass:password
 
 
 cp connectorA-key.pem connectorA.key
 cp connectorB-key.pem connectorB.key
 cp daps-key.pem daps.key
 cp broker-key.pem broker.key
-cp connectorA_revoked-key.pem connectorA_revoked.key
+cp connectorArevoked-key.pem connectorArevoked.key
 
 chmod 664 broker.cert 
 chmod 664 broker.p12 
@@ -120,10 +120,10 @@ chmod 664 connectorB.cert
 chmod 664 connectorB.crt
 chmod 664 connectorB.key
 chmod 664 connectorB.p12
-chmod 664 connectorA_revoked.cert
-chmod 664 connectorA_revoked.crt
-chmod 664 connectorA_revoked.key
-chmod 664 connectorA_revoked.p12
+chmod 664 connectorArevoked.cert
+chmod 664 connectorArevoked.crt
+chmod 664 connectorArevoked.key
+chmod 664 connectorArevoked.p12
 ```
 
 ### Extra commands for CA certificate
@@ -153,5 +153,3 @@ chmod 664 subca.crt
 chmod 664 subca.key
 chmod 664 subca.p12
 ```
-
-

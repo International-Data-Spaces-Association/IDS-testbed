@@ -2,7 +2,7 @@
   "CN": "ReferenceTestbedSubCA",
   "key": {
     "algo": "ecdsa",
-    "size": 521
+    "size": 384
   },
   "names": [
   {
@@ -11,9 +11,5 @@
     "O": "IDSA",
     "OU": "IDS Reference Testbed"
   }
- ],
-  "key": {
-    "algo": "ecdsa",
-    "size": 384
-  }
+ ]
 }

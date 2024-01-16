@@ -1,7 +1,7 @@
 services:
 
   omejdn:
-    image: nginx:1.21.6
+    image: nginx:1.25.3
     container_name: omejdn
     ports:
       - 80:80
