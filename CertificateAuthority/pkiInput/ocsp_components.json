@@ -1,0 +1,20 @@
+{
+  "CN": "OCSP_Devices",
+  "key": {
+      "algo": "ecdsa",
+      "size": 256
+  },
+  "names": [
+    {
+      "C": "DE",
+      "L": "Garching",
+      "O": "Fraunhofer AISEC",
+      "OU": "OCSP for Device CA"
+    }
+  ],
+  "usages": [
+          "digital signature",
+          "ocsp signing"
+        ],
+  "expiry": "336h"
+}

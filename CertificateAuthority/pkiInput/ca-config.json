@@ -1,0 +1,54 @@
+{
+    "signing": {
+        "profiles": {
+            "intermediate": {
+                "expiry": "43830h",
+                "usages": [
+                    "signing",
+                    "cert sign",
+                    "crl sign",
+                    "ocsp signing",
+                    "digital signature",
+                    "client auth",
+                    "server auth"
+                ],
+                "ca_constraint": {
+                    "is_ca": true,
+                    "max_path_len": 0, 
+                    "max_path_len_zero": true
+                },
+                "ocsp_url": "127.0.0.1:8887"              
+            },           
+            "component": {
+                "key": {
+                    "algo": "ecdsa",
+                    "size": 256
+                },
+                "expiry": "26298h",
+                "usages": [
+                    "signing",
+                    "digital signature",
+                    "content committment",
+                    "code signing",
+                    "client auth",
+                    "server auth"
+                ],
+                "ocsp_url": "127.0.0.1:8888"
+            },
+            "ocsp": {
+              "key": {
+                  "algo": "ecdsa",
+                  "size": 256
+              },
+              "expiry": "26298h",
+                "usages": [
+                    "digital signature",
+                    "key encipherment",
+                    "client auth",
+                    "server auth",
+                    "ocsp signing"
+                ]
+            }                
+    	}
+  }
+}

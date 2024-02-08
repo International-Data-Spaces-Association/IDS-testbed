@@ -1,7 +1,7 @@
 services:
 
   omejdn:
-    image: nginx:1.21.6
+    image: nginx:1.25.3
     container_name: omejdn
     ports:
       - 80:80
@@ -84,7 +84,7 @@ services:
       - DAPS_TOKEN_URL=https://omejdn/auth/token
       - DAPS_KEY_URL=https://omejdn/auth/jwks.json
       - DAPS_INCOMING_DAT_DEFAULT_WELLKNOWN=/jwks.json
-      - SERVER_SSL_KEY-STORE=file:///conf/testbed1.p12
+      - SERVER_SSL_KEY-STORE=file:///conf/connectorA.p12
       # Define the PostgreSQL setup
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresa:5432/connectoradb 
       - SPRING_DATASOURCE_PLATFORM=postgres
@@ -94,7 +94,7 @@ services:
       - SPRING_JPA_DATABASE_PLATFORM=org.hibernate.dialect.PostgreSQLDialect
     volumes:
       - ./DataspaceConnectorA/conf/config.json:/config/config.json
-      - ./DataspaceConnectorA/conf/testbed1.p12:/conf/testbed1.p12
+      - ./DataspaceConnectorA/conf/connectorA.p12:/conf/connectorA.p12
       - ./DataspaceConnectorA/conf/truststore.p12:/config/truststore.p12
     networks:
       - local
@@ -113,7 +113,7 @@ services:
       - DAPS_TOKEN_URL=https://omejdn/auth/token
       - DAPS_KEY_URL=https://omejdn/auth/jwks.json
       - DAPS_INCOMING_DAT_DEFAULT_WELLKNOWN=/jwks.json
-      - SERVER_SSL_KEY-STORE=file:///conf/testbed2.p12
+      - SERVER_SSL_KEY-STORE=file:///conf/connectorB.p12
       # Define the PostgreSQL setup     
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresb:5432/connectorbdb 
       - SPRING_DATASOURCE_USERNAME=postgresuserb
@@ -123,7 +123,7 @@ services:
       - SPRING_JPA_DATABASE_PLATFORM=org.hibernate.dialect.PostgreSQLDialect
     volumes:
       - ./DataspaceConnectorB/conf/config.json:/config/config.json
-      - ./DataspaceConnectorB/conf/testbed2.p12:/conf/testbed2.p12
+      - ./DataspaceConnectorB/conf/connectorB.p12:/conf/connectorB.p12
       - ./DataspaceConnectorB/conf/truststore.p12:/config/truststore.p12
     networks:
       - local
@@ -143,7 +143,7 @@ services:
       - local
 
   broker-core:
-    image: idstestbed/broker-core:5.0.3
+    image: idstestbed/metadatabroker-core:5.0.3
     container_name: broker-core
     volumes:
       - ./MetadataBroker/isstbroker-keystore.jks:/etc/cert/isstbroker-keystore.jks

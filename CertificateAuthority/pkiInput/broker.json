@@ -1,0 +1,20 @@
+{
+  "CN": "Broker",
+  "key": {
+    "algo": "rsa",
+    "size": 2048
+  },
+  "names": [
+  {
+    "C": "DE",
+    "L": "Dortmund",
+    "O": "IDSA",
+    "OU": "IDS Reference Testbed"
+  }
+  ],
+  "hosts": [
+    "localhost",
+    "broker-reverseproxy",
+    "127.0.0.1"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "CN": "DAPS",
+  "key": {
+    "algo": "rsa",
+    "size": 2048
+  },
+  "names": [
+  {
+    "C": "DE",
+    "L": "Dortmund",
+    "O": "IDSA",
+    "OU": "IDS Reference Testbed"
+  }
+  ],
+  "hosts": [
+    "localhost",
+    "omejdn",
+    "127.0.0.1"
+  ]
+}
