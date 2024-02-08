@@ -24,6 +24,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 - none
 
+## [1.2.0] - 2024-02-08
+
+### Added
+- Added script to generate PKI certificates for IDS-testbed using CFSSL
+- Created new IDS-testbed certificates for the deployment of the components
+
+### Changed
+- Certificate Authority using CFSSL
+  - CA certificates include IP Addresses and Subject Alternative Names to the created certificates
+- Changed IDS-testbed component's certificates with new CA provided certificates
+- Updated `CertificateAuthority/README.md` file to highlight the new CFSSL process for certificate generation
+- Updated docker-compose nginx version to 1.25.3 and proper certificate used names
+
+  
 ## [1.1.0] - 2022-12-15
 
 ### Added
