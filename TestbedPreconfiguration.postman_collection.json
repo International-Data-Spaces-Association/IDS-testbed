@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "19b2b13a-da98-4454-ac60-dbc513a7c477",
+		"_postman_id": "92925e8d-f89f-4ba4-ba7c-c29a345a05c9",
 		"name": "TestBed_Guide",
 		"description": "Example deployment of DSC provider to DSC consumer communication",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -630,7 +630,8 @@
 											"    pm.response.to.have.status(200);\r",
 											"});"
 										],
-										"type": "text/javascript"
+										"type": "text/javascript",
+										"packages": {}
 									}
 								}
 							],
@@ -641,7 +642,7 @@
 								"method": "POST",
 								"header": [],
 								"url": {
-									"raw": "{{CONNECTORB_URL}}/api/ids/description?recipient={{BROKER}}&elementId=https://localhost/connectors/",
+									"raw": "{{CONNECTORB_URL}}/api/ids/description?recipient={{BROKER}}&elementId={{BROKER_REV_PROXY}}/connectors/",
 									"host": [
 										"{{CONNECTORB_URL}}"
 									],
@@ -657,7 +658,7 @@
 										},
 										{
 											"key": "elementId",
-											"value": "https://localhost/connectors/"
+											"value": "{{BROKER_REV_PROXY}}/connectors/"
 										}
 									]
 								}
@@ -777,7 +778,8 @@
 											"pm.test(\"Retrieve Consumer agreement ID\", function () {\r",
 											"    var jsonData = pm.response.json();\r",
 											"    var agreementLong = jsonData[\"_links\"][\"self\"][\"href\"]\r",
-											"    var agreementId = agreementLong.replace(\"https://localhost:8081/api/agreements/\", \"\")\r",
+											"    var urlParts = agreementLong.split(\"/\"); \r",
+											"    var agreementId = urlParts[urlParts.length - 1]; \r",
 											"    pm.collectionVariables.set(\"Consumer agreement ID\", agreementId)\r",
 											"});\r",
 											"\r",
@@ -1227,8 +1229,9 @@
 													"pm.test(\"Retrieve Consumer agreement ID\", function () {\r",
 													"    var jsonData = pm.response.json();\r",
 													"    var agreementLong = jsonData[\"_links\"][\"self\"][\"href\"]\r",
-													"    var agreementId = agreementLong.replace(\"https://localhost:8081/api/agreements/\", \"\")\r",
-													"    pm.collectionVariables.set(\"Consumer agreement ID\", agreementId)\r",
+													"    var urlParts = agreementLong.split(\"/\"); \r",
+													"    var agreementId = urlParts[urlParts.length - 1]; \r",
+												    "    pm.collectionVariables.set(\"Consumer agreement ID\", agreementId)\r",
 													"});\r",
 													"\r",
 													"pm.test(\"Status code is 201\", function () {\r",
