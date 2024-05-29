@@ -48,48 +48,47 @@ Create a base resource with the following Request Body
 The response body should give code 201 and should have this structure:
 ```json
 {
-  "creationDate": "2021-12-15T15:50:58.703+0000",
-  "modificationDate": "2021-12-15T15:50:58.703+0000",
-  "title": "DWD Weather Warnings",
-  "description": "DWD weather warnings for Germany.",
-  "keywords": [
-    "DWD"
-  ],
-  "publisher": "https://dwd.com",
-  "language": "DE",
-  "license": "",
-  "version": 1,
-  "sovereign": "https://dwd.com",
-  "endpointDocumentation": "",
-  "paymentModality": "undefined",
-  "samples": [],
-  "additional": {},
-  "_links": {
-    "self": {
-      "href": "https://localhost:8080/api/offers/03735877-0111-49a4-b20d-51734c81a991"
-    },
-    "contracts": {
-      "href": "https://localhost:8080/api/offers/03735877-0111-49a4-b20d-51734c81a991/contracts{?page,size}",
-      "templated": true
-    },
-    "representations": {
-      "href": "https://localhost:8080/api/offers/03735877-0111-49a4-b20d-51734c81a991/representations{?page,size}",
-      "templated": true
-    },
-    "catalogs": {
-      "href": "https://localhost:8080/api/offers/03735877-0111-49a4-b20d-51734c81a991/catalogs{?page,size}",
-      "templated": true
-    },
-    "subscriptions": {
-      "href": "https://localhost:8080/api/offers/03735877-0111-49a4-b20d-51734c81a991/subscriptions{?page,size}",
-      "templated": true
-    },
-    "brokers": {
-      "href": "https://localhost:8080/api/offers/03735877-0111-49a4-b20d-51734c81a991/brokers{?page,size}",
-      "templated": true
+    "creationDate": "2024-05-29T10:36:09.482+0000",
+    "modificationDate": "2024-05-29T10:36:09.482+0000",
+    "title": "DWD Weather Warnings",
+    "description": "DWD weather warnings for germany.",
+    "keywords": [
+        "DWD"
+    ],
+    "publisher": "https://dwd.com",
+    "language": "DE",
+    "license": "",
+    "version": 1,
+    "sovereign": "https://dwd.com",
+    "endpointDocumentation": "",
+    "paymentModality": "undefined",
+    "samples": [],
+    "additional": {},
+    "_links": {
+        "self": {
+            "href": "https://localhost:8080/api/offers/6c052834-4a59-474e-9a6f-ba8291f91ae6"
+        },
+        "contracts": {
+            "href": "https://localhost:8080/api/offers/6c052834-4a59-474e-9a6f-ba8291f91ae6/contracts{?page,size}",
+            "templated": true
+        },
+        "representations": {
+            "href": "https://localhost:8080/api/offers/6c052834-4a59-474e-9a6f-ba8291f91ae6/representations{?page,size}",
+            "templated": true
+        },
+        "catalogs": {
+            "href": "https://localhost:8080/api/offers/6c052834-4a59-474e-9a6f-ba8291f91ae6/catalogs{?page,size}",
+            "templated": true
+        },
+        "subscriptions": {
+            "href": "https://localhost:8080/api/offers/6c052834-4a59-474e-9a6f-ba8291f91ae6/subscriptions{?page,size}",
+            "templated": true
+        },
+        "brokers": {
+            "href": "https://localhost:8080/api/offers/6c052834-4a59-474e-9a6f-ba8291f91ae6/brokers{?page,size}",
+            "templated": true
+        }
     }
-  }
-}
 ```
 
 #### Create Catalog: POST /api/catalogs
@@ -104,20 +103,20 @@ Create a base resource with the following Request body
 The response body should give code 201 and should have this structure:
 ```json
 {
-  "creationDate": "2021-12-16T10:08:51.817+0000",
-  "modificationDate": "2021-12-16T10:08:51.817+0000",
-  "title": "IDS Catalog",
-  "description": "This catalog is created from an IDS infomodel catalog.",
-  "additional": {},
-  "_links": {
-    "self": {
-      "href": "https://localhost:8080/api/catalogs/2cd59c94-54e4-4979-9842-36ee45dd354f"
-    },
-    "offers": {
-      "href": "https://localhost:8080/api/catalogs/2cd59c94-54e4-4979-9842-36ee45dd354f/offers{?page,size}",
-      "templated": true
+    "creationDate": "2024-05-29T10:37:36.346+0000",
+    "modificationDate": "2024-05-29T10:37:36.346+0000",
+    "title": "IDS Catalog",
+    "description": "This catalog is created from an IDS infomodel catalog.",
+    "additional": {},
+    "_links": {
+        "self": {
+            "href": "https://localhost:8080/api/catalogs/824d97c3-d9e8-404f-8659-e89f3f7bf3fa"
+        },
+        "offers": {
+            "href": "https://localhost:8080/api/catalogs/824d97c3-d9e8-404f-8659-e89f3f7bf3fa/offers{?page,size}",
+            "templated": true
+        }
     }
-  }
 }
 ```
 
@@ -125,74 +124,74 @@ The response body should give code 201 and should have this structure:
 Link the created offer to the created catalog.
 
 Insert the catalog id
-> 2cd59c94-54e4-4979-9842-36ee45dd354f
+> 824d97c3-d9e8-404f-8659-e89f3f7bf3fa
 
 Use the offer as the Request body
 >[
-  "https://localhost:8080/api/offers/03735877-0111-49a4-b20d-51734c81a991"
+  "https://localhost:8080/api/offers/6c052834-4a59-474e-9a6f-ba8291f91ae6"
 ]
 
 The response body should give code 200 and should have this structure:
 ```json
 {
-  "_embedded": {
-    "resources": [
-      {
-        "creationDate": "2021-12-15T15:50:58.703+0000",
-        "modificationDate": "2021-12-15T15:50:58.703+0000",
-        "title": "DWD Weather Warnings",
-        "description": "DWD weather warnings for Germany.",
-        "keywords": [
-          "DWD"
-        ],
-        "publisher": "https://dwd.com",
-        "language": "DE",
-        "license": "",
-        "version": 1,
-        "sovereign": "https://dwd.com",
-        "endpointDocumentation": "",
-        "paymentModality": "undefined",
-        "samples": [],
-        "additional": {},
-        "_links": {
-          "self": {
-            "href": "https://localhost:8080/api/offers/03735877-0111-49a4-b20d-51734c81a991"
-          },
-          "contracts": {
-            "href": "https://localhost:8080/api/offers/03735877-0111-49a4-b20d-51734c81a991/contracts{?page,size}",
-            "templated": true
-          },
-          "representations": {
-            "href": "https://localhost:8080/api/offers/03735877-0111-49a4-b20d-51734c81a991/representations{?page,size}",
-            "templated": true
-          },
-          "catalogs": {
-            "href": "https://localhost:8080/api/offers/03735877-0111-49a4-b20d-51734c81a991/catalogs{?page,size}",
-            "templated": true
-          },
-          "subscriptions": {
-            "href": "https://localhost:8080/api/offers/03735877-0111-49a4-b20d-51734c81a991/subscriptions{?page,size}",
-            "templated": true
-          },
-          "brokers": {
-            "href": "https://localhost:8080/api/offers/03735877-0111-49a4-b20d-51734c81a991/brokers{?page,size}",
-            "templated": true
-          }
+    "_embedded": {
+        "resources": [
+            {
+                "creationDate": "2024-05-29T10:36:09.482+0000",
+                "modificationDate": "2024-05-29T10:36:09.482+0000",
+                "title": "DWD Weather Warnings",
+                "description": "DWD weather warnings for germany.",
+                "keywords": [
+                    "DWD"
+                ],
+                "publisher": "https://dwd.com",
+                "language": "DE",
+                "license": "",
+                "version": 1,
+                "sovereign": "https://dwd.com",
+                "endpointDocumentation": "",
+                "paymentModality": "undefined",
+                "samples": [],
+                "additional": {},
+                "_links": {
+                    "self": {
+                        "href": "https://localhost:8080/api/offers/6c052834-4a59-474e-9a6f-ba8291f91ae6"
+                    },
+                    "contracts": {
+                        "href": "https://localhost:8080/api/offers/6c052834-4a59-474e-9a6f-ba8291f91ae6/contracts{?page,size}",
+                        "templated": true
+                    },
+                    "representations": {
+                        "href": "https://localhost:8080/api/offers/6c052834-4a59-474e-9a6f-ba8291f91ae6/representations{?page,size}",
+                        "templated": true
+                    },
+                    "catalogs": {
+                        "href": "https://localhost:8080/api/offers/6c052834-4a59-474e-9a6f-ba8291f91ae6/catalogs{?page,size}",
+                        "templated": true
+                    },
+                    "subscriptions": {
+                        "href": "https://localhost:8080/api/offers/6c052834-4a59-474e-9a6f-ba8291f91ae6/subscriptions{?page,size}",
+                        "templated": true
+                    },
+                    "brokers": {
+                        "href": "https://localhost:8080/api/offers/6c052834-4a59-474e-9a6f-ba8291f91ae6/brokers{?page,size}",
+                        "templated": true
+                    }
+                }
+            }
+        ]
+    },
+    "_links": {
+        "self": {
+            "href": "https://localhost:8080/api/catalogs/824d97c3-d9e8-404f-8659-e89f3f7bf3fa/offers?page=0&size=30"
         }
-      }
-    ]
-  },
-  "_links": {
-    "self": {
-      "href": "https://localhost:8080/api/catalogs/2cd59c94-54e4-4979-9842-36ee45dd354f/offers?page=0&size=30"
+    },
+    "page": {
+        "size": 30,
+        "totalElements": 1,
+        "totalPages": 1,
+        "number": 0
     }
-  },
-  "page": {
-    "size": 30,
-    "totalElements": 1,
-    "totalPages": 1,
-    "number": 0
-  }
 }
 ```
 
@@ -250,21 +249,21 @@ Create a rule for provide access usage policy with the following Request body (i
 The response body should give code 201 and should have this structure:
 ```json
 {
-  "creationDate": "2021-12-16T10:22:02.982+0000",
-  "modificationDate": "2021-12-16T10:22:02.982+0000",
-  "title": "[\"Example Usage Policy\"^^http://www.w3.org/2001/XMLSchema#string]",
-  "description": "",
-  "value": "{\n  \"@context\" : {\n    \"ids\" : \"https://w3id.org/idsa/core/\",\n    \"idsc\" : \"https://w3id.org/idsa/code/\"\n  },\n  \"@type\" : \"ids:Permission\",\n  \"@id\" : \"https://w3id.org/idsa/autogen/permission/51f5f7e4-f97f-4f91-bc57-b243714642be\",\n  \"ids:description\" : [ {\n    \"@value\" : \"Usage policy provide access applied\",\n    \"@type\" : \"http://www.w3.org/2001/XMLSchema#string\"\n  } ],\n  \"ids:title\" : [ {\n    \"@value\" : \"Example Usage Policy\",\n    \"@type\" : \"http://www.w3.org/2001/XMLSchema#string\"\n  } ],\n    \"ids:action\" : [ {\n    \"@id\" : \"https://w3id.org/idsa/code/USE\"\n  } ]\n }",
-  "additional": {},
-  "_links": {
-    "self": {
-      "href": "https://localhost:8080/api/rules/fac53177-3e4c-45cf-bdfc-181c3f3e3802"
-    },
-    "contracts": {
-      "href": "https://localhost:8080/api/rules/fac53177-3e4c-45cf-bdfc-181c3f3e3802/contracts{?page,size}",
-      "templated": true
+    "creationDate": "2024-05-29T10:40:18.525+0000",
+    "modificationDate": "2024-05-29T10:40:18.525+0000",
+    "title": "Example Usage Policy",
+    "description": "Usage policy provide access applied",
+    "value": "{\n  \"@context\" : {\n    \"ids\" : \"https://w3id.org/idsa/core/\",\n    \"idsc\" : \"https://w3id.org/idsa/code/\"\n  },\n  \"@type\" : \"ids:Permission\",\n  \"@id\" : \"https://w3id.org/idsa/autogen/permission/51f5f7e4-f97f-4f91-bc57-b243714642be\",\n  \"ids:description\" : [ {\n    \"@value\" : \"Usage policy provide access applied\",\n    \"@type\" : \"http://www.w3.org/2001/XMLSchema#string\"\n  } ],\n  \"ids:title\" : [ {\n    \"@value\" : \"Example Usage Policy\",\n    \"@type\" : \"http://www.w3.org/2001/XMLSchema#string\"\n  } ],\n    \"ids:action\" : [ {\n    \"@id\" : \"https://w3id.org/idsa/code/USE\"\n  } ]\n }",
+    "additional": {},
+    "_links": {
+        "self": {
+            "href": "https://localhost:8080/api/rules/c873c14a-7ada-456b-998b-1bd0f8a46060"
+        },
+        "contracts": {
+            "href": "https://localhost:8080/api/rules/c873c14a-7ada-456b-998b-1bd0f8a46060/contracts{?page,size}",
+            "templated": true
+        }
     }
-  }
 }
 ```
 
@@ -275,35 +274,35 @@ Create a contract defining the provider url, the start and end dates at the foll
     "title": "Contract",
     "description": "This is an example contract",
     "provider":"https://connectora:8080/",
-    "start": "2021-10-22T07:48:37.068Z",
-    "end": "2023-10-22T07:48:37.068Z"
-}
+    "start": "2023-10-22T07:48:37.068Z",
+    "end": "2028-10-22T07:48:37.068Z"
+} 
 ```
 
 The response body should give code 201 and should have this structure:
 ```json
 {
-  "creationDate": "2021-12-16T10:24:10.248+0000",
-  "modificationDate": "2021-12-16T10:24:10.248+0000",
-  "title": "Contract",
-  "description": "This is an example contract",
-  "start": "2021-12-16T10:24:10.230+0000",
-  "end": "2023-10-22T07:48:37.068+0000",
-  "consumer": "",
-  "additional": {},
-  "_links": {
-    "self": {
-      "href": "https://localhost:8080/api/contracts/122355bd-f49a-423e-9a3d-15bd55b639ea"
-    },
-    "rules": {
-      "href": "https://localhost:8080/api/contracts/122355bd-f49a-423e-9a3d-15bd55b639ea/rules{?page,size}",
-      "templated": true
-    },
-    "offers": {
-      "href": "https://localhost:8080/api/contracts/122355bd-f49a-423e-9a3d-15bd55b639ea/offers{?page,size}",
-      "templated": true
+    "creationDate": "2024-05-29T10:40:57.025+0000",
+    "modificationDate": "2024-05-29T10:40:57.025+0000",
+    "title": "Contract",
+    "description": "This is an example contract",
+    "start": "2023-10-22T07:48:37.068+0000",
+    "end": "2028-10-22T07:48:37.068+0000",
+    "consumer": "",
+    "additional": {},
+    "_links": {
+        "self": {
+            "href": "https://localhost:8080/api/contracts/247ef8d0-d053-4069-90bf-e8aab7908435"
+        },
+        "rules": {
+            "href": "https://localhost:8080/api/contracts/247ef8d0-d053-4069-90bf-e8aab7908435/rules{?page,size}",
+            "templated": true
+        },
+        "offers": {
+            "href": "https://localhost:8080/api/contracts/247ef8d0-d053-4069-90bf-e8aab7908435/offers{?page,size}",
+            "templated": true
+        }
     }
-  }
 }
 ```
 
@@ -311,48 +310,48 @@ The response body should give code 201 and should have this structure:
 Link the created rule to the created contract
 
 Insert the contract id
-> 122355bd-f49a-423e-9a3d-15bd55b639ea
+> 247ef8d0-d053-4069-90bf-e8aab7908435
 
 Use the rule as the Request body
 > [
-  "https://localhost:8080/api/rules/fac53177-3e4c-45cf-bdfc-181c3f3e3802"
+  "https://localhost:8080/api/rules/c873c14a-7ada-456b-998b-1bd0f8a46060"
 ]
 
 The response body should give code 200 and should have this structure:
 ```json
 {
-  "_embedded": {
-    "rules": [
-      {
-        "creationDate": "2021-12-16T10:22:02.982+0000",
-        "modificationDate": "2021-12-16T10:22:02.982+0000",
-        "title": "Example Usage Policy",
-        "description": "Usage policy provide access applied",
-        "value": "{\n  \"@context\" : {\n    \"ids\" : \"https://w3id.org/idsa/core/\",\n    \"idsc\" : \"https://w3id.org/idsa/code/\"\n  },\n  \"@type\" : \"ids:Permission\",\n  \"@id\" : \"https://w3id.org/idsa/autogen/permission/51f5f7e4-f97f-4f91-bc57-b243714642be\",\n  \"ids:description\" : [ {\n    \"@value\" : \"Usage policy provide access applied\",\n    \"@type\" : \"http://www.w3.org/2001/XMLSchema#string\"\n  } ],\n  \"ids:title\" : [ {\n    \"@value\" : \"Example Usage Policy\",\n    \"@type\" : \"http://www.w3.org/2001/XMLSchema#string\"\n  } ],\n    \"ids:action\" : [ {\n    \"@id\" : \"https://w3id.org/idsa/code/USE\"\n  } ]\n }",
-        "additional": {},
-        "_links": {
-          "self": {
-            "href": "https://localhost:8080/api/rules/fac53177-3e4c-45cf-bdfc-181c3f3e3802"
-          },
-          "contracts": {
-            "href": "https://localhost:8080/api/rules/fac53177-3e4c-45cf-bdfc-181c3f3e3802/contracts{?page,size}",
-            "templated": true
-          }
+    "_embedded": {
+        "rules": [
+            {
+                "creationDate": "2024-05-29T10:40:18.525+0000",
+                "modificationDate": "2024-05-29T10:40:18.525+0000",
+                "title": "Example Usage Policy",
+                "description": "Usage policy provide access applied",
+                "value": "{\n  \"@context\" : {\n    \"ids\" : \"https://w3id.org/idsa/core/\",\n    \"idsc\" : \"https://w3id.org/idsa/code/\"\n  },\n  \"@type\" : \"ids:Permission\",\n  \"@id\" : \"https://w3id.org/idsa/autogen/permission/51f5f7e4-f97f-4f91-bc57-b243714642be\",\n  \"ids:description\" : [ {\n    \"@value\" : \"Usage policy provide access applied\",\n    \"@type\" : \"http://www.w3.org/2001/XMLSchema#string\"\n  } ],\n  \"ids:title\" : [ {\n    \"@value\" : \"Example Usage Policy\",\n    \"@type\" : \"http://www.w3.org/2001/XMLSchema#string\"\n  } ],\n    \"ids:action\" : [ {\n    \"@id\" : \"https://w3id.org/idsa/code/USE\"\n  } ]\n }",
+                "additional": {},
+                "_links": {
+                    "self": {
+                        "href": "https://localhost:8080/api/rules/c873c14a-7ada-456b-998b-1bd0f8a46060"
+                    },
+                    "contracts": {
+                        "href": "https://localhost:8080/api/rules/c873c14a-7ada-456b-998b-1bd0f8a46060/contracts{?page,size}",
+                        "templated": true
+                    }
+                }
+            }
+        ]
+    },
+    "_links": {
+        "self": {
+            "href": "https://localhost:8080/api/contracts/247ef8d0-d053-4069-90bf-e8aab7908435/rules?page=0&size=30"
         }
-      }
-    ]
-  },
-  "_links": {
-    "self": {
-      "href": "https://localhost:8080/api/contracts/122355bd-f49a-423e-9a3d-15bd55b639ea/rules?page=0&size=30"
+    },
+    "page": {
+        "size": 30,
+        "totalElements": 1,
+        "totalPages": 1,
+        "number": 0
     }
-  },
-  "page": {
-    "size": 30,
-    "totalElements": 1,
-    "totalPages": 1,
-    "number": 0
-  }
 }
 ```
 
@@ -370,35 +369,38 @@ Create an artifact that contains DWD weather data with the following Request bod
 The response body should give code 201 and should have this structure:
 ```json
 {
-  "creationDate": "2021-12-16T10:35:37.850+0000",
-  "modificationDate": "2021-12-16T10:35:37.850+0000",
-  "remoteId": "genesis",
-  "title": "Example artifact with weather data",
-  "description": "This is an example artifact that contains information about weather data",
-  "numAccessed": 0,
-  "byteSize": 761,
-  "checkSum": 976845905,
-  "additional": {},
-  "_links": {
-    "self": {
-      "href": "https://localhost:8080/api/artifacts/d5eb7f14-b99b-4bbf-94e7-4e612a4ccac6"
-    },
-    "data": {
-      "href": "https://localhost:8080/api/artifacts/d5eb7f14-b99b-4bbf-94e7-4e612a4ccac6/data"
-    },
-    "representations": {
-      "href": "https://localhost:8080/api/artifacts/d5eb7f14-b99b-4bbf-94e7-4e612a4ccac6/representations{?page,size}",
-      "templated": true
-    },
-    "agreements": {
-      "href": "https://localhost:8080/api/artifacts/d5eb7f14-b99b-4bbf-94e7-4e612a4ccac6/agreements{?page,size}",
-      "templated": true
-    },
-    "subscriptions": {
-      "href": "https://localhost:8080/api/artifacts/d5eb7f14-b99b-4bbf-94e7-4e612a4ccac6/subscriptions{?page,size}",
-      "templated": true
+    "creationDate": "2024-05-29T10:43:02.929+0000",
+    "modificationDate": "2024-05-29T10:43:02.929+0000",
+    "remoteId": "genesis",
+    "title": "Example artifact with weather data",
+    "description": "This is an example artifact that contains information about weather data",
+    "numAccessed": 0,
+    "byteSize": 456,
+    "checkSum": 1078006432,
+    "additional": {},
+    "_links": {
+        "self": {
+            "href": "https://localhost:8080/api/artifacts/95b43d79-9560-4ca5-8bdf-06dd5d109182"
+        },
+        "data": {
+            "href": "https://localhost:8080/api/artifacts/95b43d79-9560-4ca5-8bdf-06dd5d109182/data"
+        },
+        "representations": {
+            "href": "https://localhost:8080/api/artifacts/95b43d79-9560-4ca5-8bdf-06dd5d109182/representations{?page,size}",
+            "templated": true
+        },
+        "agreements": {
+            "href": "https://localhost:8080/api/artifacts/95b43d79-9560-4ca5-8bdf-06dd5d109182/agreements{?page,size}",
+            "templated": true
+        },
+        "subscriptions": {
+            "href": "https://localhost:8080/api/artifacts/95b43d79-9560-4ca5-8bdf-06dd5d109182/subscriptions{?page,size}",
+            "templated": true
+        },
+        "route": {
+            "href": "https://localhost:8080/api/artifacts/95b43d79-9560-4ca5-8bdf-06dd5d109182/route"
+        }
     }
-  }
 }
 ```
 
@@ -416,31 +418,31 @@ Create a representation with the following Request body
 The response body should give code 201 and should have this structure:
 ```json
 {
-  "creationDate": "2021-12-16T10:37:10.751+0000",
-  "modificationDate": "2021-12-16T10:37:10.751+0000",
-  "remoteId": "genesis",
-  "title": "Example Representation",
-  "description": "",
-  "mediaType": "json",
-  "language": "https://w3id.org/idsa/code/EN",
-  "additional": {},
-  "_links": {
-    "self": {
-      "href": "https://localhost:8080/api/representations/b734b25b-042f-462e-8203-6c8f2ba6852d"
-    },
-    "artifacts": {
-      "href": "https://localhost:8080/api/representations/b734b25b-042f-462e-8203-6c8f2ba6852d/artifacts{?page,size}",
-      "templated": true
-    },
-    "offers": {
-      "href": "https://localhost:8080/api/representations/b734b25b-042f-462e-8203-6c8f2ba6852d/offers{?page,size}",
-      "templated": true
-    },
-    "subscriptions": {
-      "href": "https://localhost:8080/api/representations/b734b25b-042f-462e-8203-6c8f2ba6852d/subscriptions{?page,size}",
-      "templated": true
+    "creationDate": "2024-05-29T10:43:25.197+0000",
+    "modificationDate": "2024-05-29T10:43:25.197+0000",
+    "remoteId": "genesis",
+    "title": "Example Representation",
+    "description": "",
+    "mediaType": "application/json",
+    "language": "https://w3id.org/idsa/code/EN",
+    "additional": {},
+    "_links": {
+        "self": {
+            "href": "https://localhost:8080/api/representations/8d99b0d5-3f93-479d-9551-ab74d500018e"
+        },
+        "artifacts": {
+            "href": "https://localhost:8080/api/representations/8d99b0d5-3f93-479d-9551-ab74d500018e/artifacts{?page,size}",
+            "templated": true
+        },
+        "offers": {
+            "href": "https://localhost:8080/api/representations/8d99b0d5-3f93-479d-9551-ab74d500018e/offers{?page,size}",
+            "templated": true
+        },
+        "subscriptions": {
+            "href": "https://localhost:8080/api/representations/8d99b0d5-3f93-479d-9551-ab74d500018e/subscriptions{?page,size}",
+            "templated": true
+        }
     }
-  }
 }
 ```
 
@@ -448,65 +450,65 @@ The response body should give code 201 and should have this structure:
 Link the created representation to the created artifact
 
 Insert the representation id
-> b734b25b-042f-462e-8203-6c8f2ba6852d
+> 8d99b0d5-3f93-479d-9551-ab74d500018e
 
 Use the artifact as the Request body
 > [
-  "https://localhost:8080/api/artifacts/d5eb7f14-b99b-4bbf-94e7-4e612a4ccac6"
+  "https://localhost:8080/api/artifacts/95b43d79-9560-4ca5-8bdf-06dd5d109182"
 ]
 
 The response body should give code 200 and should have this structure:
 ```json
 {
-  "_embedded": {
-    "artifacts": [
-      {
-        "creationDate": "2021-12-16T10:35:37.850+0000",
-        "modificationDate": "2021-12-16T10:35:37.850+0000",
-        "remoteId": "genesis",
-        "title": "Example artifact with weather data",
-        "description": "This is an example artifact that contains information about weather data",
-        "numAccessed": 0,
-        "byteSize": 761,
-        "checkSum": 976845905,
-        "additional": {},
-        "_links": {
-          "self": {
-            "href": "https://localhost:8080/api/artifacts/d5eb7f14-b99b-4bbf-94e7-4e612a4ccac6"
-          },
-          "data": {
-            "href": "https://localhost:8080/api/artifacts/d5eb7f14-b99b-4bbf-94e7-4e612a4ccac6/data"
-          },
-          "representations": {
-            "href": "https://localhost:8080/api/artifacts/d5eb7f14-b99b-4bbf-94e7-4e612a4ccac6/representations{?page,size}",
-            "templated": true
-          },
-          "agreements": {
-            "href": "https://localhost:8080/api/artifacts/d5eb7f14-b99b-4bbf-94e7-4e612a4ccac6/agreements{?page,size}",
-            "templated": true
-          },
-          "subscriptions": {
-            "href": "https://localhost:8080/api/artifacts/d5eb7f14-b99b-4bbf-94e7-4e612a4ccac6/subscriptions{?page,size}",
-            "templated": true
-          },
-          "route": {
-            "href": "https://localhost:8080/api/artifacts/d5eb7f14-b99b-4bbf-94e7-4e612a4ccac6/route"
-          }
+    "_embedded": {
+        "artifacts": [
+            {
+                "creationDate": "2024-05-29T10:43:02.929+0000",
+                "modificationDate": "2024-05-29T10:43:02.929+0000",
+                "remoteId": "genesis",
+                "title": "Example artifact with weather data",
+                "description": "This is an example artifact that contains information about weather data",
+                "numAccessed": 0,
+                "byteSize": 456,
+                "checkSum": 1078006432,
+                "additional": {},
+                "_links": {
+                    "self": {
+                        "href": "https://localhost:8080/api/artifacts/95b43d79-9560-4ca5-8bdf-06dd5d109182"
+                    },
+                    "data": {
+                        "href": "https://localhost:8080/api/artifacts/95b43d79-9560-4ca5-8bdf-06dd5d109182/data"
+                    },
+                    "representations": {
+                        "href": "https://localhost:8080/api/artifacts/95b43d79-9560-4ca5-8bdf-06dd5d109182/representations{?page,size}",
+                        "templated": true
+                    },
+                    "agreements": {
+                        "href": "https://localhost:8080/api/artifacts/95b43d79-9560-4ca5-8bdf-06dd5d109182/agreements{?page,size}",
+                        "templated": true
+                    },
+                    "subscriptions": {
+                        "href": "https://localhost:8080/api/artifacts/95b43d79-9560-4ca5-8bdf-06dd5d109182/subscriptions{?page,size}",
+                        "templated": true
+                    },
+                    "route": {
+                        "href": "https://localhost:8080/api/artifacts/95b43d79-9560-4ca5-8bdf-06dd5d109182/route"
+                    }
+                }
+            }
+        ]
+    },
+    "_links": {
+        "self": {
+            "href": "https://localhost:8080/api/representations/8d99b0d5-3f93-479d-9551-ab74d500018e/artifacts?page=0&size=30"
         }
-      }
-    ]
-  },
-  "_links": {
-    "self": {
-      "href": "https://localhost:8080/api/representations/b734b25b-042f-462e-8203-6c8f2ba6852d/artifacts?page=0&size=30"
+    },
+    "page": {
+        "size": 30,
+        "totalElements": 1,
+        "totalPages": 1,
+        "number": 0
     }
-  },
-  "page": {
-    "size": 30,
-    "totalElements": 1,
-    "totalPages": 1,
-    "number": 0
-  }
 }
 ```
 
@@ -514,58 +516,58 @@ The response body should give code 200 and should have this structure:
 Link the created representation to the created offer.
 
 Insert the offer id
-> 03735877-0111-49a4-b20d-51734c81a991
+> 6c052834-4a59-474e-9a6f-ba8291f91ae6
 
 Use the representation as the Request body
 > [
-  "https://localhost:8080/api/representations/b734b25b-042f-462e-8203-6c8f2ba6852d"
+  "https://localhost:8080/api/representations/8d99b0d5-3f93-479d-9551-ab74d500018e"
 ]
 
 The response body should give code 200 and should have this structure:
 ```json
 {
-  "_embedded": {
-    "representations": [
-      {
-        "creationDate": "2021-12-16T10:37:10.751+0000",
-        "modificationDate": "2021-12-16T10:37:10.751+0000",
-        "remoteId": "genesis",
-        "title": "Example Representation",
-        "description": "",
-        "mediaType": "json",
-        "language": "https://w3id.org/idsa/code/EN",
-        "additional": {},
-        "_links": {
-          "self": {
-            "href": "https://localhost:8080/api/representations/b734b25b-042f-462e-8203-6c8f2ba6852d"
-          },
-          "artifacts": {
-            "href": "https://localhost:8080/api/representations/b734b25b-042f-462e-8203-6c8f2ba6852d/artifacts{?page,size}",
-            "templated": true
-          },
-          "offers": {
-            "href": "https://localhost:8080/api/representations/b734b25b-042f-462e-8203-6c8f2ba6852d/offers{?page,size}",
-            "templated": true
-          },
-          "subscriptions": {
-            "href": "https://localhost:8080/api/representations/b734b25b-042f-462e-8203-6c8f2ba6852d/subscriptions{?page,size}",
-            "templated": true
-          }
+    "_embedded": {
+        "representations": [
+            {
+                "creationDate": "2024-05-29T10:43:25.197+0000",
+                "modificationDate": "2024-05-29T10:43:25.197+0000",
+                "remoteId": "genesis",
+                "title": "Example Representation",
+                "description": "",
+                "mediaType": "application/json",
+                "language": "https://w3id.org/idsa/code/EN",
+                "additional": {},
+                "_links": {
+                    "self": {
+                        "href": "https://localhost:8080/api/representations/8d99b0d5-3f93-479d-9551-ab74d500018e"
+                    },
+                    "artifacts": {
+                        "href": "https://localhost:8080/api/representations/8d99b0d5-3f93-479d-9551-ab74d500018e/artifacts{?page,size}",
+                        "templated": true
+                    },
+                    "offers": {
+                        "href": "https://localhost:8080/api/representations/8d99b0d5-3f93-479d-9551-ab74d500018e/offers{?page,size}",
+                        "templated": true
+                    },
+                    "subscriptions": {
+                        "href": "https://localhost:8080/api/representations/8d99b0d5-3f93-479d-9551-ab74d500018e/subscriptions{?page,size}",
+                        "templated": true
+                    }
+                }
+            }
+        ]
+    },
+    "_links": {
+        "self": {
+            "href": "https://localhost:8080/api/offers/6c052834-4a59-474e-9a6f-ba8291f91ae6/representations?page=0&size=30"
         }
-      }
-    ]
-  },
-  "_links": {
-    "self": {
-      "href": "https://localhost:8080/api/offers/03735877-0111-49a4-b20d-51734c81a991/representations?page=0&size=30"
+    },
+    "page": {
+        "size": 30,
+        "totalElements": 1,
+        "totalPages": 1,
+        "number": 0
     }
-  },
-  "page": {
-    "size": 30,
-    "totalElements": 1,
-    "totalPages": 1,
-    "number": 0
-  }
 }
 ```
 
@@ -573,54 +575,54 @@ The response body should give code 200 and should have this structure:
 Link the created contract to the created offer.
 
 Insert the offer id
-> 03735877-0111-49a4-b20d-51734c81a991
+> 6c052834-4a59-474e-9a6f-ba8291f91ae6
 
 Use the contract as the Request body
 > [
-  "https://localhost:8080/api/contracts/122355bd-f49a-423e-9a3d-15bd55b639ea"
+  "https://localhost:8080/api/contracts/247ef8d0-d053-4069-90bf-e8aab7908435"
 ]
 
 The response body should give code 200 and should have this structure:
 ```json
 {
-  "_embedded": {
-    "contracts": [
-      {
-        "creationDate": "2021-12-16T10:24:10.248+0000",
-        "modificationDate": "2021-12-16T10:24:10.248+0000",
-        "title": "Contract",
-        "description": "This is an example contract",
-        "start": "2021-12-16T10:24:10.230+0000",
-        "end": "2023-10-22T07:48:37.068+0000",
-        "consumer": "",
-        "additional": {},
-        "_links": {
-          "self": {
-            "href": "https://localhost:8080/api/contracts/122355bd-f49a-423e-9a3d-15bd55b639ea"
-          },
-          "rules": {
-            "href": "https://localhost:8080/api/contracts/122355bd-f49a-423e-9a3d-15bd55b639ea/rules{?page,size}",
-            "templated": true
-          },
-          "offers": {
-            "href": "https://localhost:8080/api/contracts/122355bd-f49a-423e-9a3d-15bd55b639ea/offers{?page,size}",
-            "templated": true
-          }
+    "_embedded": {
+        "contracts": [
+            {
+                "creationDate": "2024-05-29T10:40:57.025+0000",
+                "modificationDate": "2024-05-29T10:40:57.025+0000",
+                "title": "Contract",
+                "description": "This is an example contract",
+                "start": "2023-10-22T07:48:37.068+0000",
+                "end": "2028-10-22T07:48:37.068+0000",
+                "consumer": "",
+                "additional": {},
+                "_links": {
+                    "self": {
+                        "href": "https://localhost:8080/api/contracts/247ef8d0-d053-4069-90bf-e8aab7908435"
+                    },
+                    "rules": {
+                        "href": "https://localhost:8080/api/contracts/247ef8d0-d053-4069-90bf-e8aab7908435/rules{?page,size}",
+                        "templated": true
+                    },
+                    "offers": {
+                        "href": "https://localhost:8080/api/contracts/247ef8d0-d053-4069-90bf-e8aab7908435/offers{?page,size}",
+                        "templated": true
+                    }
+                }
+            }
+        ]
+    },
+    "_links": {
+        "self": {
+            "href": "https://localhost:8080/api/offers/6c052834-4a59-474e-9a6f-ba8291f91ae6/contracts?page=0&size=30"
         }
-      }
-    ]
-  },
-  "_links": {
-    "self": {
-      "href": "https://localhost:8080/api/offers/03735877-0111-49a4-b20d-51734c81a991/contracts?page=0&size=30"
+    },
+    "page": {
+        "size": 30,
+        "totalElements": 1,
+        "totalPages": 1,
+        "number": 0
     }
-  },
-  "page": {
-    "size": 30,
-    "totalElements": 1,
-    "totalPages": 1,
-    "number": 0
-  }
 }
 ```
 
@@ -652,18 +654,20 @@ Left the elementId empty because the id of the requested resource is not known.
 The response body should give code 200 and be euqivalent to the following:
 ```json
 {
-  "@context" : {
-    "ids" : "https://w3id.org/idsa/core/",
-    "idsc" : "https://w3id.org/idsa/code/"
-  },
-  "@type" : "ids:BaseConnector",
-  "@id" : "https://connector_A",
-  "ids:version" : "7.0.1",
-  "ids:description" : [ {
-    "@value" : "IDS Connector A with static example resources",
-    "@type" : "http://www.w3.org/2001/XMLSchema#string"
-  } ],
-  "ids:publicKey": {
+    "@context": {
+        "ids": "https://w3id.org/idsa/core/",
+        "idsc": "https://w3id.org/idsa/code/"
+    },
+    "@type": "ids:BaseConnector",
+    "@id": "https://connector_A",
+    "ids:version": "8.0.2",
+    "ids:description": [
+        {
+            "@value": "IDS Connector A with static example resources",
+            "@type": "http://www.w3.org/2001/XMLSchema#string"
+        }
+    ],
+    "ids:publicKey": {
         "@type": "ids:PublicKey",
         "@id": "https://w3id.org/idsa/autogen/publicKey/78eb73a3-3a2a-4626-a0ff-631ab50a00f9",
         "ids:keyType": {
@@ -671,33 +675,35 @@ The response body should give code 200 and be euqivalent to the following:
         },
         "ids:keyValue": "VFVsSlFrbHFRVTVDWjJ0eGFHdHBSemwzTUVKQlVVVkdRVUZQUTBGUk9FRk5TVWxDUTJkTFEwRlJSVUYxZHpadFJuSmtabXhZV2xSS1owWlBRVFZ6YlVSWVF6QTVVMjF3U2xkdlIzQjVSVkphVGtWNU16RndTMlJ6VWtkb1ZHbHdVakkzYWpscGNtMXRjV2xvZGpkblNXZDZRMjU0Tm10SlVrNUhTVEoxTUc5R1VUVkdaM1pQTVhoNFozcGphV2hrY0VZd1EyaGxUMlk1U1U1bmFYTlFhM0UxYUdvNFFXVXZSRmxZYTNacWFGRTJZelpoYXk5YVdXWnFNRTV3Y1hsRlVHTktOVTFNVW0xWlIyVjRUV0ZOV20xVVluRkVTblpLYkRWS1J6TXJZa1V6V1dFeU1XaFVXbGxQZUdsVGFXTndaa1puU2pNd2EyNDFZVlZKUVhSa01EVkpXbmszZWpGelJHbFdUSFJVV0d4TVptVXZXbEZETkhCdWFrWjBjeXQwWXpFeWMxZzVhV2hKYlc1RGEyUXdWM1o2TTBOVVdtOTVRbE56WXpGVVpFSnJZamx0TUVNMWRIWm5NR1pSVURSUlowWXZla2d5VVc5YWJtNXlTVFV5ZFVGYU9FMXZiVmQwV1RKc2RETkVNR3RyY0ZJMk9YQm1Wa1JLTjNremRrNHZaWGRKUkVGUlFVST0="
     },
-  "ids:title" : [ {
-    "@value" : "Dataspace Connector",
-    "@type" : "http://www.w3.org/2001/XMLSchema#string"
-  } ],
-  "ids:hasDefaultEndpoint" : {
-    "@type" : "ids:ConnectorEndpoint",
-    "@id" : "https://w3id.org/idsa/autogen/connectorEndpoint/e5e2ab04-633a-44b9-87d9-a097ae6da3cf",
-    "ids:accessURL" : {
-      "@id" : "https://connectora:8080/api/ids/data"
-      }
+    "ids:title": [
+        {
+            "@value": "Dataspace Connector",
+            "@type": "http://www.w3.org/2001/XMLSchema#string"
+        }
+    ],
+    "ids:hasDefaultEndpoint": {
+        "@type": "ids:ConnectorEndpoint",
+        "@id": "https://w3id.org/idsa/autogen/connectorEndpoint/e5e2ab04-633a-44b9-87d9-a097ae6da3cf",
+        "ids:accessURL": {
+            "@id": "https://connectora:8080/api/ids/data"
+        }
     },
-  "ids:resourceCatalog" : [ {
-    "@type" : "ids:ResourceCatalog",
-    "@id" : "https://connectora:8080/api/catalogs/2cd59c94-54e4-4979-9842-36ee45dd354f"
-  } ],
-  "ids:securityProfile" : {
-    "@id" : "https://w3id.org/idsa/code/BASE_SECURITY_PROFILE"
-  },
-  "ids:maintainer": {
-        "@id": "https://www.isst.fraunhofer.de/"
+    "ids:resourceCatalog": [
+        {
+            "@type": "ids:ResourceCatalog",
+            "@id": "https://connectora:8080/api/catalogs/824d97c3-d9e8-404f-8659-e89f3f7bf3fa"
+        }
+    ],
+    "ids:securityProfile": {
+        "@id": "https://w3id.org/idsa/code/BASE_SECURITY_PROFILE"
+    },
+    "ids:maintainer": {
+        "@id": "https://sovity.de/"
     },
     "ids:curator": {
-        "@id": "https://www.isst.fraunhofer.de/"
+        "@id": "https://sovity.de/"
     },
     "ids:inboundModelVersion": [
-        "4.2.6",
-        "4.2.7",
         "4.2.0",
         "4.1.2",
         "4.2.1",
@@ -706,14 +712,16 @@ The response body should give code 200 and be euqivalent to the following:
         "4.2.4",
         "4.2.5",
         "4.2.2",
-        "4.2.3"
+        "4.2.3",
+        "4.2.6",
+        "4.2.7"
     ],
     "ids:outboundModelVersion": "4.2.7"
 }
 ```
 
 From this Response body obtain the resource catalog @id
-> https://connectora:8080/api/catalogs/2cd59c94-54e4-4979-9842-36ee45dd354f
+> https://connectora:8080/api/catalogs/824d97c3-d9e8-404f-8659-e89f3f7bf3fa
 
 ### Request Information regarding the desired resource: POST /api/ids/description
 Request the specific resource catalog of Connector A using POST /api/ids/description
@@ -722,132 +730,172 @@ Insert the recipient url of Connector A (recipient)
 > https://connectora:8080/api/ids/data
 
 Insert the id of the requested resource (elementId)
-> https://connectora:8080/api/catalogs/2cd59c94-54e4-4979-9842-36ee45dd354f
+> https://connectora:8080/api/catalogs/824d97c3-d9e8-404f-8659-e89f3f7bf3fa
 
 The response body should give code 200 and should have this structure:
 ```json
 {
-  "@context" : {
-    "ids" : "https://w3id.org/idsa/core/",
-    "idsc" : "https://w3id.org/idsa/code/"
-  },
-  "@type" : "ids:ResourceCatalog",
-  "@id" : "https://connectora:8080/api/catalogs/2cd59c94-54e4-4979-9842-36ee45dd354f",
-  "ids:offeredResource" : [ {
-    "@type" : "ids:Resource",
-    "@id" : "https://connectora:8080/api/offers/03735877-0111-49a4-b20d-51734c81a991",
-    "ids:version": "1",
-    "ids:language": [
-                {"@id": "https://w3id.org/idsa/code/DE"
-    }],  
-    "ids:description" : [ {
-      "@value" : "DWD weather warnings for Germany.",
-      "@language" : "DE"
-    } ],
-    "ids:title" : [ {
-      "@value" : "DWD Weather Warnings",
-      "@language" : "DE"
-    } ],
-    "ids:representation" : [ {
-      "@type" : "ids:Representation",
-      "@id" : "https://connectora:8080/api/representations/b734b25b-042f-462e-8203-6c8f2ba6852d",
-      "ids:mediaType" : {
-        "@type" : "ids:IANAMediaType",
-        "@id" : "https://w3id.org/idsa/autogen/iANAMediaType/bbd0d6d4-0fb2-4d68-a941-6bef561a334f",
-        "ids:filenameExtension" : "json"
-     },
-     "ids:language" : {
-        "@id" : "https://w3id.org/idsa/code/EN"
-     },
-     "ids:instance" : [ {
-        "@type" : "ids:Artifact",
-        "@id" : "https://connectora:8080/api/artifacts/d5eb7f14-b99b-4bbf-94e7-4e612a4ccac6",
-        "ids:fileName" : "Example artifact with weather data",
-        "ids:creationDate" : {
-          "@value" : "2021-12-16T10:35:37.850Z",
-          "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
-        },
-        "ids:byteSize" : 761,
-        "ids:checkSum" : "976845905"
-      } ],
-     "ids:created" : {
-      "@value" : "2021-12-15T15:50:58.703Z",
-      "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+    "@context": {
+        "ids": "https://w3id.org/idsa/core/",
+        "idsc": "https://w3id.org/idsa/code/"
     },
-    "ids:modified" : {
-      "@value" : "2021-12-15T15:50:58.703Z",
-      "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
-    },
-    "ids:representationStandard": {
-      "@id": ""
-    }}],
-    "ids:publisher": {"@id": "https://dwd.com"},
-    "ids:sovereign": {"@id": "https://dwd.com"},
-    "ids:created" : {
-      "@value" : "2021-12-15T15:50:58.703Z",
-      "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
-    },
-    "ids:standardLicense": {"@id": ""},
-    "ids:resourceEndpoint" : [ {
-      "@type" : "ids:ConnectorEndpoint",
-      "@id" : "https://w3id.org/idsa/autogen/connectorEndpoint/e3e0fb5a-f0bd-4c29-8200-f6c8e138d04c",        
-      "ids:endpointDocumentation": [{"@id": ""}],      
-      "ids:accessURL" : {
-        "@id" : "https://connectora:8080/api/offers/03735877-0111-49a4-b20d-51734c81a991"
-      }}],
-    "ids:contractOffer" : [ {
-      "@type" : "ids:ContractOffer",
-      "@id" : "https://connectora:8080/api/contracts/122355bd-f49a-423e-9a3d-15bd55b639ea",
-      "ids:provider": {"@id": "https://connectora:8080/"},
-      
-      
-      "ids:permission" : [ {
-        "@type" : "ids:Permission",
-        "@id" : "https://connectora:8080/api/rules/fac53177-3e4c-45cf-bdfc-181c3f3e3802",
-        "ids:description" : [ {
-          "@value" : "Usage policy provide access applied",
-          "@type" : "http://www.w3.org/2001/XMLSchema#string"
-        } ],
-        "ids:title" : [ {
-          "@value" : "Example Usage Policy",
-          "@type" : "http://www.w3.org/2001/XMLSchema#string"
-        } ],
-        "ids:action" : [ {
-          "@id" : "https://w3id.org/idsa/code/USE"
-        } ],
-      } ],
-      "ids:consumer" : {
-        "@id" : ""
-      },
-      "ids:contractEnd" : {
-        "@value" : "2023-10-22T07:48:37.068Z",
-        "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
-      },
-      "ids:contractStart" : {
-        "@value" : "2021-12-16T10:24:10.230Z",
-        "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
-      },
-      "ids:contractDate" : {
-        "@value" : "2021-12-16T13:20:30.521Z",
-        "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
-      }}],
-      "ids:keyword" : [ {
-      "@value" : "DWD",
-      "@language" : "DE"
-    } ],
-      "ids:modified" : {
-        "@value" : "2021-12-16T10:37:10.751Z",
-        "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
-      }}]
+    "@type": "ids:ResourceCatalog",
+    "@id": "https://connectora:8080/api/catalogs/824d97c3-d9e8-404f-8659-e89f3f7bf3fa",
+    "ids:offeredResource": [
+        {
+            "@type": "ids:Resource",
+            "@id": "https://connectora:8080/api/offers/6c052834-4a59-474e-9a6f-ba8291f91ae6",
+            "ids:version": "1",
+            "ids:language": [
+                {
+                    "@id": "https://w3id.org/idsa/code/DE"
+                }
+            ],
+            "ids:description": [
+                {
+                    "@value": "DWD weather warnings for germany.",
+                    "@language": "DE"
+                }
+            ],
+            "ids:title": [
+                {
+                    "@value": "DWD Weather Warnings",
+                    "@language": "DE"
+                }
+            ],
+            "ids:representation": [
+                {
+                    "@type": "ids:Representation",
+                    "@id": "https://connectora:8080/api/representations/8d99b0d5-3f93-479d-9551-ab74d500018e",
+                    "ids:mediaType": {
+                        "@type": "ids:IANAMediaType",
+                        "@id": "https://w3id.org/idsa/autogen/iANAMediaType/b1144236-a3dc-42f5-bff5-8bba8e1a4468",
+                        "ids:filenameExtension": "application/json"
+                    },
+                    "ids:language": {
+                        "@id": "https://w3id.org/idsa/code/EN"
+                    },
+                    "ids:created": {
+                        "@value": "2024-05-29T10:43:25.197Z",
+                        "@type": "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+                    },
+                    "ids:modified": {
+                        "@value": "2024-05-29T10:43:25.197Z",
+                        "@type": "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+                    },
+                    "ids:instance": [
+                        {
+                            "@type": "ids:Artifact",
+                            "@id": "https://connectora:8080/api/artifacts/95b43d79-9560-4ca5-8bdf-06dd5d109182",
+                            "ids:fileName": "Example artifact with weather data",
+                            "ids:creationDate": {
+                                "@value": "2024-05-29T10:43:02.929Z",
+                                "@type": "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+                            },
+                            "ids:byteSize": 456,
+                            "ids:checkSum": "1078006432"
+                        }
+                    ],
+                    "ids:representationStandard": {
+                        "@id": ""
+                    }
+                }
+            ],
+            "ids:publisher": {
+                "@id": "https://dwd.com"
+            },
+            "ids:sovereign": {
+                "@id": "https://dwd.com"
+            },
+            "ids:standardLicense": {
+                "@id": ""
+            },
+            "ids:resourceEndpoint": [
+                {
+                    "@type": "ids:ConnectorEndpoint",
+                    "@id": "https://w3id.org/idsa/autogen/connectorEndpoint/a0ba310e-8b66-4b83-8a4e-d747be7947ff",
+                    "ids:endpointDocumentation": [
+                        {
+                            "@id": ""
+                        }
+                    ],
+                    "ids:accessURL": {
+                        "@id": "https://connectora:8080/api/offers/6c052834-4a59-474e-9a6f-ba8291f91ae6"
+                    }
+                }
+            ],
+            "ids:contractOffer": [
+                {
+                    "@type": "ids:ContractOffer",
+                    "@id": "https://connectora:8080/api/contracts/247ef8d0-d053-4069-90bf-e8aab7908435",
+                    "ids:provider": {
+                        "@id": "https://connectora:8080/"
+                    },
+                    "ids:permission": [
+                        {
+                            "@type": "ids:Permission",
+                            "@id": "https://connectora:8080/api/rules/c873c14a-7ada-456b-998b-1bd0f8a46060",
+                            "ids:description": [
+                                {
+                                    "@value": "Usage policy provide access applied",
+                                    "@type": "http://www.w3.org/2001/XMLSchema#string"
+                                }
+                            ],
+                            "ids:title": [
+                                {
+                                    "@value": "Example Usage Policy",
+                                    "@type": "http://www.w3.org/2001/XMLSchema#string"
+                                }
+                            ],
+                            "ids:action": [
+                                {
+                                    "@id": "https://w3id.org/idsa/code/USE"
+                                }
+                            ]
+                        }
+                    ],
+                    "ids:contractEnd": {
+                        "@value": "2028-10-22T07:48:37.068Z",
+                        "@type": "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+                    },
+                    "ids:consumer": {
+                        "@id": ""
+                    },
+                    "ids:contractStart": {
+                        "@value": "2023-10-22T07:48:37.068Z",
+                        "@type": "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+                    },
+                    "ids:contractDate": {
+                        "@value": "2024-05-29T10:50:16.879Z",
+                        "@type": "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+                    }
+                }
+            ],
+            "ids:keyword": [
+                {
+                    "@value": "DWD",
+                    "@language": "DE"
+                }
+            ],
+            "ids:created": {
+                "@value": "2024-05-29T10:36:09.482Z",
+                "@type": "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+            },
+            "ids:modified": {
+                "@value": "2024-05-29T10:36:09.482Z",
+                "@type": "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+            }
+        }
+    ]
 }
 ```
 
 From this response body it is obtained the necessary information in order to negotiate the contract (Connector A: offer id, artifact id, rule id)
-> https://connectora:8080/api/offers/03735877-0111-49a4-b20d-51734c81a991
+> https://connectora:8080/api/offers/6c052834-4a59-474e-9a6f-ba8291f91ae6
 >
-> https://connectora:8080/api/rules/fac53177-3e4c-45cf-bdfc-181c3f3e3802
+> https://connectora:8080/api/rules/c873c14a-7ada-456b-998b-1bd0f8a46060
 >
-> https://connectora:8080/api/artifacts/d5eb7f14-b99b-4bbf-94e7-4e612a4ccac6
+> https://connectora:8080/api/artifacts/95b43d79-9560-4ca5-8bdf-06dd5d109182
 
 ### Start Negotiation: POST /api/ids/contract
 Send IDS contract request message POST /api/ids/contract.
@@ -856,10 +904,10 @@ Insert the recipient url of Connector A (recipient)
 > https://connectora:8080/api/ids/data
 
 Insert the ids resource that should be requested (resourceIds)
-> https://connectora:8080/api/offers/03735877-0111-49a4-b20d-51734c81a991
+> https://connectora:8080/api/offers/6c052834-4a59-474e-9a6f-ba8291f91ae6
 
 Insert the artifact that should be requested (artifactIds)
-> https://connectora:8080/api/artifacts/d5eb7f14-b99b-4bbf-94e7-4e612a4ccac6
+> https://connectora:8080/api/artifacts/95b43d79-9560-4ca5-8bdf-06dd5d109182
 
 Put the connector automatically download data of an artifact to False (download)
 > false
@@ -870,7 +918,7 @@ Include in it the id of the Connector A rule and as ids:target the artifact.
 ```json
  [ {
         "@type" : "ids:Permission",
-        "@id" : "https://connectora:8080/api/rules/fac53177-3e4c-45cf-bdfc-181c3f3e3802",
+        "@id" : "https://connectora:8080/api/rules/c873c14a-7ada-456b-998b-1bd0f8a46060",
         "ids:description" : [ {
           "@value" : "Usage policy provide access applied",
           "@type" : "http://www.w3.org/2001/XMLSchema#string"
@@ -882,100 +930,100 @@ Include in it the id of the Connector A rule and as ids:target the artifact.
         "ids:action" : [ {
           "@id" : "https://w3id.org/idsa/code/USE"
         }],
-        "ids:target" : "https://connectora:8080/api/artifacts/d5eb7f14-b99b-4bbf-94e7-4e612a4ccac6"
+        "ids:target" : "https://connectora:8080/api/artifacts/95b43d79-9560-4ca5-8bdf-06dd5d109182"
 } ]
 ```
 
 The response body should give code 201 and should have this structure:
 ```json
 {
-  "creationDate": "2021-12-16T13:27:38.959+0000",
-  "modificationDate": "2021-12-16T13:27:38.959+0000",
-  "remoteId": "https://connectora:8080/api/agreements/01c29b32-b202-46d3-ade1-e9401b43ed0f",
-  "confirmed": true,
-  "value": "{\n  \"@context\" : {\n    \"ids\" : \"https://w3id.org/idsa/core/\",\n    \"idsc\" : \"https://w3id.org/idsa/code/\"\n  },\n  \"@type\" : \"ids:ContractAgreement\",\n  \"@id\" : \"https://connectora:8080/api/agreements/d01c29b32-b202-46d3-ade1-e9401b43ed0f\",\n  \"ids:provider\" : {\n    \"@id\" : \"https://connector_A\"\n  },\n  \"ids:permission\" : [ {\n    \"@type\" : \"ids:Permission\",\n    \"@id\" : \"https://connectora:8080/api/rules/fac53177-3e4c-45cf-bdfc-181c3f3e3802\",\n    \"ids:description\" : [ {\n      \"@value\" : \"Usage policy provide access applied\",\n      \"@type\" : \"http://www.w3.org/2001/XMLSchema#string\"\n    } ],\n    \"ids:title\" : [ {\n      \"@value\" : \"Example Usage Policy\",\n      \"@type\" : \"http://www.w3.org/2001/XMLSchema#string\"\n    } ],\n    \"ids:assignee\" : [ {\n      \"@id\" : \"https://connector_B\"\n    } ],\n    \"ids:assigner\" : [ {\n      \"@id\" : \"https://connector_A\"\n    } ],\n    \"ids:action\" : [ {\n      \"@id\" : \"https://w3id.org/idsa/code/USE\"\n    } ],\n    \"ids:target\" : {\n      \"@id\" : \"https://connectora:8080/api/artifacts/d5eb7f14-b99b-4bbf-94e7-4e612a4ccac6\"\n    }\n  } ],\n  \"ids:consumer\" : {\n    \"@id\" : \"https://connector_B\"\n  },\n  \"ids:contractEnd\" : {\n    \"@value\" : \"2023-10-22T07:48:37.068Z\",\n    \"@type\" : \"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"\n  },\n  \"ids:contractStart\" : {\n    \"@value\" : \"2021-12-16T13:27:37.868Z\",\n    \"@type\" : \"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"\n  },\n  \"ids:contractDate\" : {\n    \"@value\" : \"2021-12-16T13:27:37.868Z\",\n    \"@type\" : \"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"\n  }\n}",
-  "_links": {
-    "self": {
-      "href": "https://localhost:8081/api/agreements/3a638d21-07fb-40a0-be14-bea6d353825e"
-    },
-    "artifacts": {
-      "href": "https://localhost:8081/api/agreements/3a638d21-07fb-40a0-be14-bea6d353825e/artifacts{?page,size}",
-      "templated": true
+    "creationDate": "2024-05-29T10:51:37.773+0000",
+    "modificationDate": "2024-05-29T10:51:37.773+0000",
+    "remoteId": "https://connectora:8080/api/agreements/5b9c0883-1f3c-43d8-9b2d-c0d7c787b545",
+    "confirmed": true,
+    "value": "{\n  \"@context\" : {\n    \"ids\" : \"https://w3id.org/idsa/core/\",\n    \"idsc\" : \"https://w3id.org/idsa/code/\"\n  },\n  \"@type\" : \"ids:ContractAgreement\",\n  \"@id\" : \"https://connectora:8080/api/agreements/5b9c0883-1f3c-43d8-9b2d-c0d7c787b545\",\n  \"ids:provider\" : {\n    \"@id\" : \"https://connector_A\"\n  },\n  \"ids:permission\" : [ {\n    \"@type\" : \"ids:Permission\",\n    \"@id\" : \"https://connectora:8080/api/rules/c873c14a-7ada-456b-998b-1bd0f8a46060\",\n    \"ids:description\" : [ {\n      \"@value\" : \"Usage policy provide access applied\",\n      \"@type\" : \"http://www.w3.org/2001/XMLSchema#string\"\n    } ],\n    \"ids:title\" : [ {\n      \"@value\" : \"Example Usage Policy\",\n      \"@type\" : \"http://www.w3.org/2001/XMLSchema#string\"\n    } ],\n    \"ids:assignee\" : [ {\n      \"@id\" : \"https://connector_B\"\n    } ],\n    \"ids:assigner\" : [ {\n      \"@id\" : \"https://connector_A\"\n    } ],\n    \"ids:action\" : [ {\n      \"@id\" : \"https://w3id.org/idsa/code/USE\"\n    } ],\n    \"ids:target\" : {\n      \"@id\" : \"https://connectora:8080/api/artifacts/95b43d79-9560-4ca5-8bdf-06dd5d109182\"\n    }\n  } ],\n  \"ids:contractEnd\" : {\n    \"@value\" : \"2028-10-22T07:48:37.068Z\",\n    \"@type\" : \"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"\n  },\n  \"ids:consumer\" : {\n    \"@id\" : \"https://connector_B\"\n  },\n  \"ids:contractStart\" : {\n    \"@value\" : \"2024-05-29T10:51:37.249Z\",\n    \"@type\" : \"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"\n  },\n  \"ids:contractDate\" : {\n    \"@value\" : \"2024-05-29T10:51:37.249Z\",\n    \"@type\" : \"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"\n  }\n}",
+    "_links": {
+        "self": {
+            "href": "https://localhost:8081/api/agreements/4c49257a-097e-47ba-89fa-cb1a8775f2d0"
+        },
+        "artifacts": {
+            "href": "https://localhost:8081/api/agreements/4c49257a-097e-47ba-89fa-cb1a8775f2d0/artifacts{?page,size}",
+            "templated": true
+        }
     }
-  }
 }
 ```
 
 From this response body it is obtained the Connector B agreement
-> https://localhost:8081/api/agreements/3a638d21-07fb-40a0-be14-bea6d353825e
+> https://localhost:8081/api/agreements/4c49257a-097e-47ba-89fa-cb1a8775f2d0
 
 ### Request the Artifact based on the Existing Agreement: POST /api/agreements/{id}/artifacts
 To get the artifact and their data link, make the following request: POST /api/agreements/{id}/artifacts
 
 Insert the agreement id
-> 3a638d21-07fb-40a0-be14-bea6d353825e
+> 4c49257a-097e-47ba-89fa-cb1a8775f2d0
 
 The response body should give code 200 and should have this structure:
 ```json
 {
-  "_embedded": {
-    "artifacts": [
-      {
-        "creationDate": "2021-12-16T13:27:40.183+0000",
-        "modificationDate": "2021-12-16T15:32:57.815+0000",
-        "remoteId": "https://connectora:8080/api/artifacts/d5eb7f14-b99b-4bbf-94e7-4e612a4ccac6",
-        "title": "Example artifact with weather data",
-        "description": "",
-        "numAccessed": 0,
-        "byteSize": 0,
-        "checkSum": 0,
-        "additional": {
-          "ids:byteSize": "761",
-          "ids:creationDate": "2021-12-16T10:35:37.850Z",
-          "ids:checkSum": "976845905"
-        },
-        "_links": {
-          "self": {
-            "href": "https://localhost:8081/api/artifacts/1d06f1c0-8b64-465a-b5f0-3e185914a67d"
-          },
-          "data": {
-            "href": "https://localhost:8081/api/artifacts/1d06f1c0-8b64-465a-b5f0-3e185914a67d/data"
-          },
-          "representations": {
-            "href": "https://localhost:8081/api/artifacts/1d06f1c0-8b64-465a-b5f0-3e185914a67d/representations{?page,size}",
-            "templated": true
-          },
-          "agreements": {
-            "href": "https://localhost:8081/api/artifacts/1d06f1c0-8b64-465a-b5f0-3e185914a67d/agreements{?page,size}",
-            "templated": true
-          },
-          "subscriptions": {
-            "href": "https://localhost:8081/api/artifacts/1d06f1c0-8b64-465a-b5f0-3e185914a67d/subscriptions{?page,size}",
-            "templated": true
-          },
-          "route": {
-            "href": "https://localhost:8081/api/artifacts/1d06f1c0-8b64-465a-b5f0-3e185914a67d/route"
-          }
+    "_embedded": {
+        "artifacts": [
+            {
+                "creationDate": "2024-05-29T10:51:38.210+0000",
+                "modificationDate": "2024-05-29T10:51:38.210+0000",
+                "remoteId": "https://connectora:8080/api/artifacts/95b43d79-9560-4ca5-8bdf-06dd5d109182",
+                "title": "Example artifact with weather data",
+                "description": "",
+                "numAccessed": 0,
+                "byteSize": 0,
+                "checkSum": 0,
+                "additional": {
+                    "ids:byteSize": "456",
+                    "ids:creationDate": "2024-05-29T10:43:02.929Z",
+                    "ids:checkSum": "1078006432"
+                },
+                "_links": {
+                    "self": {
+                        "href": "https://localhost:8081/api/artifacts/37cba4ea-1036-438f-907b-52b8ffde06b7"
+                    },
+                    "data": {
+                        "href": "https://localhost:8081/api/artifacts/37cba4ea-1036-438f-907b-52b8ffde06b7/data"
+                    },
+                    "representations": {
+                        "href": "https://localhost:8081/api/artifacts/37cba4ea-1036-438f-907b-52b8ffde06b7/representations{?page,size}",
+                        "templated": true
+                    },
+                    "agreements": {
+                        "href": "https://localhost:8081/api/artifacts/37cba4ea-1036-438f-907b-52b8ffde06b7/agreements{?page,size}",
+                        "templated": true
+                    },
+                    "subscriptions": {
+                        "href": "https://localhost:8081/api/artifacts/37cba4ea-1036-438f-907b-52b8ffde06b7/subscriptions{?page,size}",
+                        "templated": true
+                    },
+                    "route": {
+                        "href": "https://localhost:8081/api/artifacts/37cba4ea-1036-438f-907b-52b8ffde06b7/route"
+                    }
+                }
+            }
+        ]
+    },
+    "_links": {
+        "self": {
+            "href": "https://localhost:8081/api/agreements/4c49257a-097e-47ba-89fa-cb1a8775f2d0/artifacts?page=0&size=30"
         }
-      }
-    ]
-  },
-  "_links": {
-    "self": {
-      "href": "https://localhost:8081/api/agreements/3a638d21-07fb-40a0-be14-bea6d353825e/artifacts?page=0&size=30"
+    },
+    "page": {
+        "size": 30,
+        "totalElements": 1,
+        "totalPages": 1,
+        "number": 0
     }
-  },
-  "page": {
-    "size": 30,
-    "totalElements": 1,
-    "totalPages": 1,
-    "number": 0
-  }
 }
 ```
 
 From this response body it is obtained the url to obtain the data
-> https://localhost:8081/api/artifacts/1d06f1c0-8b64-465a-b5f0-3e185914a67d/data
+> https://localhost:8081/api/artifacts/37cba4ea-1036-438f-907b-52b8ffde06b7/data
 
 If you paste it in a browser and download it is obtained the corresponding DWD weather data.
 
@@ -991,67 +1039,91 @@ Insert the recipient url
 The response body should give code 200 and should have this structure:
 ```json
 {
-  "@context" : {
-    "ids" : "https://w3id.org/idsa/core/",
-    "idsc" : "https://w3id.org/idsa/code/"
-  },
-  "@type" : "ids:Broker",
-  "@id" : "https://localhost/",
-  "ids:description" : [ {
-    "@value" : "A Broker with a graph persistence layer",
-    "@language" : "en"
-  } ],
-  "ids:title" : [ {
-    "@value" : "IDS Metadata Broker",
-    "@language" : "en"
-  } ],
-  "ids:hasDefaultEndpoint": {
-    "@type": "ids:ConnectorEndpoint",
-    "@id": "https://w3id.org/idsa/autogen/connectorEndpoint/2d4cf2c8-2023-4e5e-8f3e-0906ba278295",
-    "ids:path": "/",
-    "ids:accessURL": {
-       "@id": "https://localhost/"
+    "@context": {
+        "ids": "https://w3id.org/idsa/core/",
+        "idsc": "https://w3id.org/idsa/code/"
     },
-    "ids:endpointInformation": [
-    {
-      "@value": "Dieser Endpunkt liefert eine Selbstbeschreibung dieses IDS Connectors",
-      "@language": "de"
+    "@type": "ids:Broker",
+    "@id": "https://broker-reverseproxy/",
+    "ids:description": [
+        {
+            "@value": "A Broker with a graph persistence layer",
+            "@language": "en"
+        }
+    ],
+    "ids:title": [
+        {
+            "@value": "IDS Metadata Broker",
+            "@language": "en"
+        }
+    ],
+    "ids:hasDefaultEndpoint": {
+        "@type": "ids:ConnectorEndpoint",
+        "@id": "https://w3id.org/idsa/autogen/connectorEndpoint/fbcb92e9-084b-4846-a957-f7cd417ccc94",
+        "ids:path": "/",
+        "ids:accessURL": {
+            "@id": "https://broker-reverseproxy/"
+        },
+        "ids:endpointInformation": [
+            {
+                "@value": "Dieser Endpunkt liefert eine Selbstbeschreibung dieses IDS Connectors",
+                "@language": "de"
+            },
+            {
+                "@value": "Endpoint providing a self-description of this connector",
+                "@language": "en"
+            }
+        ]
     },
-    {
-      "@value": "Endpoint providing a self-description of this connector",
-      "@language": "en"
-    }]},
-    "ids:hasEndpoint" : [ {
-    "@type" : "ids:ConnectorEndpoint",
-    "@id" : "https://w3id.org/idsa/autogen/connectorEndpoint/2d4cf2c8-2023-4e5e-8f3e-0906ba278295",
-    "ids:path" : "/infrastructure",
-    "ids:endpointDocumentation" : [ {
-      "@id" : "https://app.swaggerhub.com/apis/idsa/IDS-Broker/1.3.1#/Multipart%20Interactions/post_infrastructure"
-    } ],
-    "ids:accessURL" : {
-      "@id" : "https://localhost/infrastructure"
-    },
-    "ids:endpointInformation" : [ {
-      "@value" : "This endpoint provides IDS Connector and IDS Resource registration and search capabilities at the IDS Metadata Broker.",
-      "@language" : "en"
-    }, {
-      "@value" : "Dieser Endpunkt ermÃ¶glicht die Registrierung von und das Suchen nach IDS Connectoren und IDS Ressourcen am IDS Metadata Broker.",
-      "@language" : "de"
-    } ]
-  } ],
-  "ids:resourceCatalog" : [ {
-    "@type" : "ids:ResourceCatalog",
-    "@id" : "https://w3id.org/idsa/autogen/resourceCatalog/b76c559b-359d-4e2f-bb2e-cd2692ed985e",
-    "ids:offeredResource" : [ {
-      "@type" : "ids:DataResource",
-      "@id" : "https://w3id.org/idsa/autogen/dataResource/41ea3278-89ed-4e5a-800c-836f01731dbd",
-      "ids:representation" : [ {
-        "@type" : "ids:DataRepresentation",
-        "@id" : "https://w3id.org/idsa/autogen/dataRepresentation/44c079d3-0e53-40d3-8634-0a15f424e459",
-      "ids:instance" : [ {
-          "@type" : "ids:Artifact",
-          "@id" : "https://localhost/connectors/"
-      }]}]}]}],
+    "ids:hasEndpoint": [
+        {
+            "@type": "ids:ConnectorEndpoint",
+            "@id": "https://w3id.org/idsa/autogen/connectorEndpoint/002793f6-8d61-468a-8d06-d035c1ed9e77",
+            "ids:path": "/infrastructure",
+            "ids:endpointDocumentation": [
+                {
+                    "@id": "https://app.swaggerhub.com/apis/idsa/IDS-Broker/1.3.1#/Multipart%20Interactions/post_infrastructure"
+                }
+            ],
+            "ids:accessURL": {
+                "@id": "https://broker-reverseproxy/infrastructure"
+            },
+            "ids:endpointInformation": [
+                {
+                    "@value": "This endpoint provides IDS Connector and IDS Resource registration and search capabilities at the IDS Metadata Broker.",
+                    "@language": "en"
+                },
+                {
+                    "@value": "Dieser Endpunkt ermÃ¶glicht die Registrierung von und das Suchen nach IDS Connectoren und IDS Ressourcen am IDS Metadata Broker.",
+                    "@language": "de"
+                }
+            ]
+        }
+    ],
+    "ids:resourceCatalog": [
+        {
+            "@type": "ids:ResourceCatalog",
+            "@id": "https://w3id.org/idsa/autogen/resourceCatalog/24263dca-47a5-4b95-980e-48f88eff32c9",
+            "ids:offeredResource": [
+                {
+                    "@type": "ids:DataResource",
+                    "@id": "https://w3id.org/idsa/autogen/dataResource/34582161-2e82-4541-b79a-dfd8f2348761",
+                    "ids:representation": [
+                        {
+                            "@type": "ids:DataRepresentation",
+                            "@id": "https://w3id.org/idsa/autogen/dataRepresentation/577087e0-b1d5-41c0-8503-19f08b11d34c",
+                            "ids:instance": [
+                                {
+                                    "@type": "ids:Artifact",
+                                    "@id": "https://broker-reverseproxy/connectors/"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
     "ids:securityProfile": {
         "@id": "https://w3id.org/idsa/code/BASE_SECURITY_PROFILE"
     },
@@ -1065,7 +1137,7 @@ The response body should give code 200 and should have this structure:
         "4.0.3"
     ],
     "ids:outboundModelVersion": "4.0.3"
-} 
+}
 ```
 
 ### Query List of Connectors to Check Successful Registration: POST /api/ids/description
@@ -1076,120 +1148,165 @@ Insert the recipient url
 > https://broker-reverseproxy/infrastructure
 
 Insert the element id of the requested resource
-> https://localhost/connectors/
+> https://broker-reverseproxy/connectors/
 
 The response body should give code 200 and contain both connectors (A and B) in the list of connector as follows:
 ```json
 {
-  "@graph" : [ {
-    "@id" : "https://localhost/connectors/",
-    "@type" : "ids:ConnectorCatalog",
-    "listedConnector" : [ "https://localhost/connectors/2129657531", "https://localhost/connectors/2129657530" ]
-  }, {
-    "@id" : "https://localhost/connectors/2129657530",
-    "@type" : "ids:BaseConnector",
-    "sameAs" : "https://connector_A",
-    "curator" : "https://www.isst.fraunhofer.de/",
-    "description" : "IDS Connector A with static example resources",
-    "hasDefaultEndpoint" : "https://w3id.org/idsa/autogen/connectorEndpoint/e5e2ab04-633a-44b9-87d9-a097ae6da3cf",
-    "inboundModelVersion" : [ "4.2.4", "4.2.6", "4.2.0", "4.2.3", "4.0.0", "4.2.2", "4.1.0", "4.2.5", "4.2.7", "4.1.2", "4.2.1" ],
-    "maintainer" : "https://www.isst.fraunhofer.de/",
-    "outboundModelVersion" : "4.2.7",
-    "publicKey" : "https://w3id.org/idsa/autogen/publicKey/78eb73a3-3a2a-4626-a0ff-631ab50a00f9",
-    "resourceCatalog" : "https://localhost/connectors/2129657530/-733289566",
-    "securityProfile" : "https://w3id.org/idsa/code/BASE_SECURITY_PROFILE",
-    "title" : "Dataspace Connector",
-    "version" : "7.0.1"
-  }, {
-    "@id" : "https://localhost/connectors/2129657530/-733289566",
-    "@type" : "ids:ResourceCatalog",
-    "sameAs" : "https://localhost:8080/api/catalogs/2cd59c94-54e4-4979-9842-36ee45dd354f"
-  }, {
-    "@id" : "https://localhost/connectors/2129657531",
-    "@type" : "ids:BaseConnector",
-    "sameAs" : "https://connector_B",
-    "curator" : "https://www.isst.fraunhofer.de/",
-    "description" : "IDS Connector B with static example resources",
-    "hasDefaultEndpoint" : "https://w3id.org/idsa/autogen/connectorEndpoint/e5e2ab04-633a-44b9-87d9-a097ae6da3cf",
-    "inboundModelVersion" : [ "4.2.4", "4.2.6", "4.2.0", "4.2.3", "4.0.0", "4.2.2", "4.1.0", "4.2.5", "4.2.7", "4.1.2", "4.2.1"],
-    "maintainer" : "https://www.isst.fraunhofer.de/",
-    "outboundModelVersion" : "4.2.7",
-    "publicKey" : "https://w3id.org/idsa/autogen/publicKey/78eb73a3-3a2a-4626-a0ff-631ab50a00f9",
-    "securityProfile" : "https://w3id.org/idsa/code/BASE_SECURITY_PROFILE",
-    "title" : "Dataspace Connector",
-    "version" : "7.0.1"
-  }, {
-    "@id" : "https://w3id.org/idsa/autogen/connectorEndpoint/e5e2ab04-633a-44b9-87d9-a097ae6da3cf",
-    "@type" : "ids:ConnectorEndpoint",
-    "accessURL" : [ "https://connectorb:8081/api/ids/data", "https://connectora:8080/api/ids/data" ]
-  }, {
-    "@id" : "https://w3id.org/idsa/autogen/publicKey/78eb73a3-3a2a-4626-a0ff-631ab50a00f9",
-    "@type" : "ids:PublicKey",
-    "keyType" : "https://w3id.org/idsa/code/RSA",
-    "keyValue" : "VkZWc1NsRnJiSEZSVlRWRFdqSjBlR0ZIZEhCU2Vtd3pUVVZLUWxWVlZrZFJWVVpRVVRCR1VrOUZSazVUVld4RFVUSmtURkV3UmxKU1ZVWXhaSHBhZEZKdVNtdGFiWGhaVjJ4U1Mxb3dXbEJSVkZaNllsVlNXVkY2UVRWVk1qRjNVMnhrZGxJelFqVlNWa3BoVkd0V05VMTZSbmRUTWxKNlZXdGtiMVpIYkhkVmFra3pZV3BzY0dOdE1YUmpWMnh2Wkdwa2JsTlhaRFpSTWpVMFRtMTBTbFZyTlVoVFZFb3hUVWM1UjFWVVZrZGFNMXBRVFZob05Gb3pjR3BoVjJoclkwVlpkMUV5YUd4VU1sazFVMVUxYm1GWVRsRmhNMFV4WVVkdk5GRlhWWFpTUm14WllUTmFjV0ZHUlRKWmVscG9ZWGs1WVZkWFduRk5SVFYzWTFoc1JsVkhUa3RPVlRGTlZXMHhXbEl5VmpSVVYwWk9WMjB4VlZsdVJrVlRibHBMWWtSV1MxSjZUWEpaYTFWNlYxZEZlVTFYYUZWWGJHeFFaVWRzVkdGWFRuZGFhMXB1VTJwTmQyRXlOREZaVmxaS1VWaFNhMDFFVmtwWGJtc3paV3BHZWxKSGJGZFVTRkpWVjBkNFRWcHRWWFpYYkVaRVRraENkV0ZyV2pCamVYUXdXWHBGZVdNeFp6VmhWMmhLWWxjMVJHRXlVWGRXTTFvMlRUQk9WVmR0T1RWUmJFNTZXWHBHVlZwRlNuSlphbXgwVFVWTk1XUklXbTVOUjFwU1ZVUlNVbG93V1habGEyZDVWVmM1WVdKdE5YbFRWRlY1WkZWR1lVOUZNWFppVm1Rd1YxUktjMlJFVGtWTlIzUnlZMFpKTWs5WVFtMVdhMUpMVGpOcmVtUnJOSFphV0dSS1VrVkdVbEZWU1QwPQ=="
-  } ],
-  "@context" : {
-  "sameAs": {
-     "@id": "http://www.w3.org/2002/07/owl#sameAs",
-     "@type": "@id"
-  },
-  "accessURL": {
-     "@id": "https://w3id.org/idsa/core/accessURL",
-     "@type": "@id"
-  },
-  "resourceCatalog": {
-      "@id": "https://w3id.org/idsa/core/resourceCatalog",
-      "@type": "@id"
-  },
-  "inboundModelVersion": {
-      "@id": "https://w3id.org/idsa/core/inboundModelVersion"
-  },
-  "description": {
-      "@id": "https://w3id.org/idsa/core/description"
-  },
-  "hasDefaultEndpoint": {
-      "@id": "https://w3id.org/idsa/core/hasDefaultEndpoint",
-      "@type": "@id"
-   },
-   "publicKey": {
-      "@id": "https://w3id.org/idsa/core/publicKey",
-      "@type": "@id"
-   },
-   "curator": {
-      "@id": "https://w3id.org/idsa/core/curator",
-      "@type": "@id"
-   },
-   "outboundModelVersion": {
-      "@id": "https://w3id.org/idsa/core/outboundModelVersion"
-   },
-   "title": {
-      "@id": "https://w3id.org/idsa/core/title"
-   },
-   "securityProfile": {
-      "@id": "https://w3id.org/idsa/core/securityProfile",
-      "@type": "@id"
-   },
-   "maintainer": {
-      "@id": "https://w3id.org/idsa/core/maintainer",
-      "@type": "@id"
-   },
-   "version": {
-      "@id": "https://w3id.org/idsa/core/version"
-   },
-   "listedConnector": {
-      "@id": "https://w3id.org/idsa/core/listedConnector",
-      "@type": "@id"
-   },
-   "keyValue": {
-   "@id": "https://w3id.org/idsa/core/keyValue"
-   },
-   "keyType": {
-      "@id": "https://w3id.org/idsa/core/keyType",
-      "@type": "@id"
-   },
-   "owl": "http://www.w3.org/2002/07/owl#",
-   "ids": "https://w3id.org/idsa/core/"
-   }
+    "@graph": [
+        {
+            "@id": "https://broker-reverseproxy/connectors/",
+            "@type": "ids:ConnectorCatalog",
+            "listedConnector": [
+                "https://broker-reverseproxy/connectors/2129657530",
+                "https://broker-reverseproxy/connectors/2129657531"
+            ]
+        },
+        {
+            "@id": "https://broker-reverseproxy/connectors/2129657530",
+            "@type": "ids:BaseConnector",
+            "sameAs": "https://connector_A",
+            "curator": "https://sovity.de/",
+            "description": "IDS Connector A with static example resources",
+            "hasDefaultEndpoint": "https://w3id.org/idsa/autogen/connectorEndpoint/e5e2ab04-633a-44b9-87d9-a097ae6da3cf",
+            "inboundModelVersion": [
+                "4.2.0",
+                "4.2.1",
+                "4.1.0",
+                "4.0.0",
+                "4.2.2",
+                "4.2.3",
+                "4.2.7",
+                "4.1.2",
+                "4.2.4",
+                "4.2.5",
+                "4.2.6"
+            ],
+            "maintainer": "https://sovity.de/",
+            "outboundModelVersion": "4.2.7",
+            "publicKey": "https://w3id.org/idsa/autogen/publicKey/78eb73a3-3a2a-4626-a0ff-631ab50a00f9",
+            "resourceCatalog": "https://broker-reverseproxy/connectors/2129657530/1127754494",
+            "securityProfile": "https://w3id.org/idsa/code/BASE_SECURITY_PROFILE",
+            "title": "Dataspace Connector",
+            "version": "8.0.2"
+        },
+        {
+            "@id": "https://broker-reverseproxy/connectors/2129657530/1127754494",
+            "@type": "ids:ResourceCatalog",
+            "sameAs": "https://localhost:8080/api/catalogs/824d97c3-d9e8-404f-8659-e89f3f7bf3fa"
+        },
+        {
+            "@id": "https://broker-reverseproxy/connectors/2129657531",
+            "@type": "ids:BaseConnector",
+            "sameAs": "https://connector_B",
+            "curator": "https://sovity.de/",
+            "description": "IDS Connector B with static example resources",
+            "hasDefaultEndpoint": "https://w3id.org/idsa/autogen/connectorEndpoint/e5e2ab04-633a-44b9-87d9-a097ae6da3cf",
+            "inboundModelVersion": [
+                "4.2.6",
+                "4.0.0",
+                "4.2.7",
+                "4.2.0",
+                "4.1.0",
+                "4.2.1",
+                "4.2.2",
+                "4.2.3",
+                "4.1.2",
+                "4.2.4",
+                "4.2.5"
+            ],
+            "maintainer": "https://sovity.de/",
+            "outboundModelVersion": "4.2.7",
+            "publicKey": "https://w3id.org/idsa/autogen/publicKey/78eb73a3-3a2a-4626-a0ff-631ab50a00f9",
+            "securityProfile": "https://w3id.org/idsa/code/BASE_SECURITY_PROFILE",
+            "title": "Dataspace Connector",
+            "version": "8.0.2"
+        },
+        {
+            "@id": "https://w3id.org/idsa/autogen/connectorEndpoint/e5e2ab04-633a-44b9-87d9-a097ae6da3cf",
+            "@type": "ids:ConnectorEndpoint",
+            "accessURL": [
+                "https://connectora:8080/api/ids/data",
+                "https://connectorb:8081/api/ids/data"
+            ]
+        },
+        {
+            "@id": "https://w3id.org/idsa/autogen/publicKey/78eb73a3-3a2a-4626-a0ff-631ab50a00f9",
+            "@type": "ids:PublicKey",
+            "keyType": "https://w3id.org/idsa/code/RSA",
+            "keyValue": "VkZWc1NsRnJiSEZSVlRWRFdqSjBlR0ZIZEhCU2Vtd3pUVVZLUWxWVlZrZFJWVVpRVVRCR1VrOUZSazVUVld4RFVUSmtURkV3UmxKU1ZVWXhaSHBhZEZKdVNtdGFiWGhaVjJ4U1Mxb3dXbEJSVkZaNllsVlNXVkY2UVRWVk1qRjNVMnhrZGxJelFqVlNWa3BoVkd0V05VMTZSbmRUTWxKNlZXdGtiMVpIYkhkVmFra3pZV3BzY0dOdE1YUmpWMnh2Wkdwa2JsTlhaRFpSTWpVMFRtMTBTbFZyTlVoVFZFb3hUVWM1UjFWVVZrZGFNMXBRVFZob05Gb3pjR3BoVjJoclkwVlpkMUV5YUd4VU1sazFVMVUxYm1GWVRsRmhNMFV4WVVkdk5GRlhWWFpTUm14WllUTmFjV0ZHUlRKWmVscG9ZWGs1WVZkWFduRk5SVFYzWTFoc1JsVkhUa3RPVlRGTlZXMHhXbEl5VmpSVVYwWk9WMjB4VlZsdVJrVlRibHBMWWtSV1MxSjZUWEpaYTFWNlYxZEZlVTFYYUZWWGJHeFFaVWRzVkdGWFRuZGFhMXB1VTJwTmQyRXlOREZaVmxaS1VWaFNhMDFFVmtwWGJtc3paV3BHZWxKSGJGZFVTRkpWVjBkNFRWcHRWWFpYYkVaRVRraENkV0ZyV2pCamVYUXdXWHBGZVdNeFp6VmhWMmhLWWxjMVJHRXlVWGRXTTFvMlRUQk9WVmR0T1RWUmJFNTZXWHBHVlZwRlNuSlphbXgwVFVWTk1XUklXbTVOUjFwU1ZVUlNVbG93V1habGEyZDVWVmM1WVdKdE5YbFRWRlY1WkZWR1lVOUZNWFppVm1Rd1YxUktjMlJFVGtWTlIzUnlZMFpKTWs5WVFtMVdhMUpMVGpOcmVtUnJOSFphV0dSS1VrVkdVbEZWU1QwPQ=="
+        },
+        {
+            "@id": "https://w3id.org/idsa/code/BASE_SECURITY_PROFILE",
+            "@type": "ids:SecurityProfile"
+        },
+        {
+            "@id": "https://w3id.org/idsa/code/RSA",
+            "@type": "ids:KeyType"
+        }
+    ],
+    "@context": {
+        "description": {
+            "@id": "https://w3id.org/idsa/core/description"
+        },
+        "title": {
+            "@id": "https://w3id.org/idsa/core/title"
+        },
+        "sameAs": {
+            "@id": "http://www.w3.org/2002/07/owl#sameAs",
+            "@type": "@id"
+        },
+        "inboundModelVersion": {
+            "@id": "https://w3id.org/idsa/core/inboundModelVersion"
+        },
+        "hasDefaultEndpoint": {
+            "@id": "https://w3id.org/idsa/core/hasDefaultEndpoint",
+            "@type": "@id"
+        },
+        "maintainer": {
+            "@id": "https://w3id.org/idsa/core/maintainer",
+            "@type": "@id"
+        },
+        "resourceCatalog": {
+            "@id": "https://w3id.org/idsa/core/resourceCatalog",
+            "@type": "@id"
+        },
+        "version": {
+            "@id": "https://w3id.org/idsa/core/version"
+        },
+        "outboundModelVersion": {
+            "@id": "https://w3id.org/idsa/core/outboundModelVersion"
+        },
+        "securityProfile": {
+            "@id": "https://w3id.org/idsa/core/securityProfile",
+            "@type": "@id"
+        },
+        "curator": {
+            "@id": "https://w3id.org/idsa/core/curator",
+            "@type": "@id"
+        },
+        "publicKey": {
+            "@id": "https://w3id.org/idsa/core/publicKey",
+            "@type": "@id"
+        },
+        "accessURL": {
+            "@id": "https://w3id.org/idsa/core/accessURL",
+            "@type": "@id"
+        },
+        "listedConnector": {
+            "@id": "https://w3id.org/idsa/core/listedConnector",
+            "@type": "@id"
+        },
+        "keyValue": {
+            "@id": "https://w3id.org/idsa/core/keyValue"
+        },
+        "keyType": {
+            "@id": "https://w3id.org/idsa/core/keyType",
+            "@type": "@id"
+        },
+        "owl": "http://www.w3.org/2002/07/owl#",
+        "ids": "https://w3id.org/idsa/core/"
+    }
 }
 ```
 
@@ -1203,87 +1320,112 @@ Insert the recipient url
 > https://broker-reverseproxy/infrastructure
 
 Insert the element id of the requested connector A
-> https://localhost/connectors/2129657530
+> https://broker-reverseproxy/connectors/2129657530
 
 The response body should give code 200 and should have this structure
 ```json
 {
-  "@graph" : [ {
-    "@id" : "https://localhost/connectors/2129657530",
-    "@type" : "ids:BaseConnector",
-    "sameAs" : "https://connector_A",
-    "curator" : "https://www.isst.fraunhofer.de/",
-    "description" : "IDS Connector A with static example resources",
-    "hasDefaultEndpoint" : "https://w3id.org/idsa/autogen/connectorEndpoint/e5e2ab04-633a-44b9-87d9-a097ae6da3cf",
-    "inboundModelVersion" : [ "4.2.4", "4.2.6", "4.2.0", "4.2.3", "4.0.0", "4.2.2", "4.1.0", "4.2.5", "4.2.7", "4.1.2", "4.2.1" ],
-    "maintainer" : "https://www.isst.fraunhofer.de/",
-    "outboundModelVersion" : "4.2.7",
-    "publicKey" : "https://w3id.org/idsa/autogen/publicKey/78eb73a3-3a2a-4626-a0ff-631ab50a00f9",
-    "resourceCatalog" : "https://localhost/connectors/2129657530/-733289566",
-    "securityProfile" : "https://w3id.org/idsa/code/BASE_SECURITY_PROFILE",
-    "title" : "Dataspace Connector",
-    "version" : "7.0.1"
-  }, {
-    "@id" : "https://localhost/connectors/2129657530/-733289566",
-    "@type" : "ids:ResourceCatalog",
-    "sameAs" : "https://localhost:8080/api/catalogs/2cd59c94-54e4-4979-9842-36ee45dd354f"
-  }, {
-    "@id" : "https://w3id.org/idsa/autogen/connectorEndpoint/e5e2ab04-633a-44b9-87d9-a097ae6da3cf",
-    "@type" : "ids:ConnectorEndpoint",
-    "accessURL" : "https://connectora:8080/api/ids/data"
-  }, {
-    "@id" : "https://w3id.org/idsa/autogen/publicKey/78eb73a3-3a2a-4626-a0ff-631ab50a00f9",
-    "@type" : "ids:PublicKey",
-    "keyType" : "https://w3id.org/idsa/code/RSA",
-    "keyValue" : "VkZWc1NsRnJiSEZSVlRWRFdqSjBlR0ZIZEhCU2Vtd3pUVVZLUWxWVlZrZFJWVVpRVVRCR1VrOUZSazVUVld4RFVUSmtURkV3UmxKU1ZVWXhaSHBhZEZKdVNtdGFiWGhaVjJ4U1Mxb3dXbEJSVkZaNllsVlNXVkY2UVRWVk1qRjNVMnhrZGxJelFqVlNWa3BoVkd0V05VMTZSbmRUTWxKNlZXdGtiMVpIYkhkVmFra3pZV3BzY0dOdE1YUmpWMnh2Wkdwa2JsTlhaRFpSTWpVMFRtMTBTbFZyTlVoVFZFb3hUVWM1UjFWVVZrZGFNMXBRVFZob05Gb3pjR3BoVjJoclkwVlpkMUV5YUd4VU1sazFVMVUxYm1GWVRsRmhNMFV4WVVkdk5GRlhWWFpTUm14WllUTmFjV0ZHUlRKWmVscG9ZWGs1WVZkWFduRk5SVFYzWTFoc1JsVkhUa3RPVlRGTlZXMHhXbEl5VmpSVVYwWk9WMjB4VlZsdVJrVlRibHBMWWtSV1MxSjZUWEpaYTFWNlYxZEZlVTFYYUZWWGJHeFFaVWRzVkdGWFRuZGFhMXB1VTJwTmQyRXlOREZaVmxaS1VWaFNhMDFFVmtwWGJtc3paV3BHZWxKSGJGZFVTRkpWVjBkNFRWcHRWWFpYYkVaRVRraENkV0ZyV2pCamVYUXdXWHBGZVdNeFp6VmhWMmhLWWxjMVJHRXlVWGRXTTFvMlRUQk9WVmR0T1RWUmJFNTZXWHBHVlZwRlNuSlphbXgwVFVWTk1XUklXbTVOUjFwU1ZVUlNVbG93V1habGEyZDVWVmM1WVdKdE5YbFRWRlY1WkZWR1lVOUZNWFppVm1Rd1YxUktjMlJFVGtWTlIzUnlZMFpKTWs5WVFtMVdhMUpMVGpOcmVtUnJOSFphV0dSS1VrVkdVbEZWU1QwPQ=="
-  } ],
-  "@context": {
+    "@graph": [
+        {
+            "@id": "https://broker-reverseproxy/connectors/2129657530",
+            "@type": "ids:BaseConnector",
+            "sameAs": "https://connector_A",
+            "curator": "https://sovity.de/",
+            "description": "IDS Connector A with static example resources",
+            "hasDefaultEndpoint": "https://w3id.org/idsa/autogen/connectorEndpoint/e5e2ab04-633a-44b9-87d9-a097ae6da3cf",
+            "inboundModelVersion": [
+                "4.2.0",
+                "4.2.1",
+                "4.1.0",
+                "4.0.0",
+                "4.2.2",
+                "4.2.3",
+                "4.2.7",
+                "4.1.2",
+                "4.2.4",
+                "4.2.5",
+                "4.2.6"
+            ],
+            "maintainer": "https://sovity.de/",
+            "outboundModelVersion": "4.2.7",
+            "publicKey": "https://w3id.org/idsa/autogen/publicKey/78eb73a3-3a2a-4626-a0ff-631ab50a00f9",
+            "resourceCatalog": "https://broker-reverseproxy/connectors/2129657530/1127754494",
+            "securityProfile": "https://w3id.org/idsa/code/BASE_SECURITY_PROFILE",
+            "title": "Dataspace Connector",
+            "version": "8.0.2"
+        },
+        {
+            "@id": "https://broker-reverseproxy/connectors/2129657530/1127754494",
+            "@type": "ids:ResourceCatalog",
+            "sameAs": "https://localhost:8080/api/catalogs/824d97c3-d9e8-404f-8659-e89f3f7bf3fa"
+        },
+        {
+            "@id": "https://w3id.org/idsa/autogen/connectorEndpoint/e5e2ab04-633a-44b9-87d9-a097ae6da3cf",
+            "@type": "ids:ConnectorEndpoint",
+            "accessURL": "https://connectora:8080/api/ids/data"
+        },
+        {
+            "@id": "https://w3id.org/idsa/autogen/publicKey/78eb73a3-3a2a-4626-a0ff-631ab50a00f9",
+            "@type": "ids:PublicKey",
+            "keyType": "https://w3id.org/idsa/code/RSA",
+            "keyValue": "VkZWc1NsRnJiSEZSVlRWRFdqSjBlR0ZIZEhCU2Vtd3pUVVZLUWxWVlZrZFJWVVpRVVRCR1VrOUZSazVUVld4RFVUSmtURkV3UmxKU1ZVWXhaSHBhZEZKdVNtdGFiWGhaVjJ4U1Mxb3dXbEJSVkZaNllsVlNXVkY2UVRWVk1qRjNVMnhrZGxJelFqVlNWa3BoVkd0V05VMTZSbmRUTWxKNlZXdGtiMVpIYkhkVmFra3pZV3BzY0dOdE1YUmpWMnh2Wkdwa2JsTlhaRFpSTWpVMFRtMTBTbFZyTlVoVFZFb3hUVWM1UjFWVVZrZGFNMXBRVFZob05Gb3pjR3BoVjJoclkwVlpkMUV5YUd4VU1sazFVMVUxYm1GWVRsRmhNMFV4WVVkdk5GRlhWWFpTUm14WllUTmFjV0ZHUlRKWmVscG9ZWGs1WVZkWFduRk5SVFYzWTFoc1JsVkhUa3RPVlRGTlZXMHhXbEl5VmpSVVYwWk9WMjB4VlZsdVJrVlRibHBMWWtSV1MxSjZUWEpaYTFWNlYxZEZlVTFYYUZWWGJHeFFaVWRzVkdGWFRuZGFhMXB1VTJwTmQyRXlOREZaVmxaS1VWaFNhMDFFVmtwWGJtc3paV3BHZWxKSGJGZFVTRkpWVjBkNFRWcHRWWFpYYkVaRVRraENkV0ZyV2pCamVYUXdXWHBGZVdNeFp6VmhWMmhLWWxjMVJHRXlVWGRXTTFvMlRUQk9WVmR0T1RWUmJFNTZXWHBHVlZwRlNuSlphbXgwVFVWTk1XUklXbTVOUjFwU1ZVUlNVbG93V1habGEyZDVWVmM1WVdKdE5YbFRWRlY1WkZWR1lVOUZNWFppVm1Rd1YxUktjMlJFVGtWTlIzUnlZMFpKTWs5WVFtMVdhMUpMVGpOcmVtUnJOSFphV0dSS1VrVkdVbEZWU1QwPQ=="
+        },
+        {
+            "@id": "https://w3id.org/idsa/code/BASE_SECURITY_PROFILE",
+            "@type": "ids:SecurityProfile"
+        },
+        {
+            "@id": "https://w3id.org/idsa/code/RSA",
+            "@type": "ids:KeyType"
+        }
+    ],
+    "@context": {
+        "description": {
+            "@id": "https://w3id.org/idsa/core/description"
+        },
+        "title": {
+            "@id": "https://w3id.org/idsa/core/title"
+        },
         "sameAs": {
             "@id": "http://www.w3.org/2002/07/owl#sameAs",
-            "@type": "@id"
-        },
-        "accessURL": {
-            "@id": "https://w3id.org/idsa/core/accessURL",
-            "@type": "@id"
-        },
-        "resourceCatalog": {
-            "@id": "https://w3id.org/idsa/core/resourceCatalog",
             "@type": "@id"
         },
         "inboundModelVersion": {
             "@id": "https://w3id.org/idsa/core/inboundModelVersion"
         },
-        "description": {
-            "@id": "https://w3id.org/idsa/core/description"
-        },
         "hasDefaultEndpoint": {
             "@id": "https://w3id.org/idsa/core/hasDefaultEndpoint",
-            "@type": "@id"
-        },
-        "publicKey": {
-            "@id": "https://w3id.org/idsa/core/publicKey",
-            "@type": "@id"
-        },
-        "curator": {
-            "@id": "https://w3id.org/idsa/core/curator",
-            "@type": "@id"
-        },
-        "outboundModelVersion": {
-            "@id": "https://w3id.org/idsa/core/outboundModelVersion"
-        },
-        "title": {
-            "@id": "https://w3id.org/idsa/core/title"
-        },
-        "securityProfile": {
-            "@id": "https://w3id.org/idsa/core/securityProfile",
             "@type": "@id"
         },
         "maintainer": {
             "@id": "https://w3id.org/idsa/core/maintainer",
             "@type": "@id"
         },
+        "resourceCatalog": {
+            "@id": "https://w3id.org/idsa/core/resourceCatalog",
+            "@type": "@id"
+        },
         "version": {
             "@id": "https://w3id.org/idsa/core/version"
+        },
+        "outboundModelVersion": {
+            "@id": "https://w3id.org/idsa/core/outboundModelVersion"
+        },
+        "securityProfile": {
+            "@id": "https://w3id.org/idsa/core/securityProfile",
+            "@type": "@id"
+        },
+        "curator": {
+            "@id": "https://w3id.org/idsa/core/curator",
+            "@type": "@id"
+        },
+        "publicKey": {
+            "@id": "https://w3id.org/idsa/core/publicKey",
+            "@type": "@id"
+        },
+        "accessURL": {
+            "@id": "https://w3id.org/idsa/core/accessURL",
+            "@type": "@id"
         },
         "keyValue": {
             "@id": "https://w3id.org/idsa/core/keyValue"
