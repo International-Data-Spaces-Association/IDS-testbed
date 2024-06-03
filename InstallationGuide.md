@@ -868,8 +868,8 @@ services:
       - ELASTICSEARCH_HOSTNAME=broker-elasticsearch
       - SHACL_VALIDATION=true
       - DAPS_VALIDATE_INCOMING=true
-      - COMPONENT_URI=https://localhost/
-      - COMPONENT_CATALOGURI=https://localhost/connectors/
+      - COMPONENT_URI=https://broker-reverseproxy/
+      - COMPONENT_CATALOGURI=https://broker-reverseproxy/connectors/
       - DAPS_URL=https://omejdn/auth/token
     expose:
       - "8080" 
