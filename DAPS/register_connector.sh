@@ -31,7 +31,8 @@ contains "$AKI" "$SUB"
 
 CLIENT_CERT_SHA="$(openssl x509 -in "$CLIENT_CERT" -noout -sha256 -fingerprint | tr '[:upper:]' '[:lower:]' | tr -d : | sed 's/.*=//')"
 
-cat >> config/clients.yml <<EOF
+cat >>config/clients.yml <<EOF
+$([ "$(tail -c 1 config/clients.yml)" != $'\n' ] && echo)
 - client_id: $CLIENT_ID
   client_name: $CLIENT_NAME
   grant_types: client_credentials
