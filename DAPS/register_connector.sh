@@ -1,8 +1,8 @@
 #!/bin/sh
 
 if [ ! $# -ge 1 ] || [ ! $# -le 3 ]; then
-    echo "Usage: $0 NAME (SECURITY_PROFILE) (CERTFILE)"
-    exit 1
+  echo "Usage: $0 NAME (SECURITY_PROFILE) (CERTFILE)"
+  exit 1
 fi
 
 CLIENT_NAME=$1
@@ -17,19 +17,24 @@ AKI="$(openssl x509 -in "keys/${CLIENT_NAME}.cert" -noout -text | grep -A1 "Auth
 SUB='keyid'
 
 contains() {
-    string="$AKI"
-    substring="$SUB"
-    if test "${string#*$substring}" != "$string"
-    then
-        CLIENT_ID="$SKI:$AKI"    # $substring is in $string
-    else
-        CLIENT_ID="$SKI:keyid:$AKI"    # $substring is not in $string
-    fi
+  string="$AKI"
+  substring="$SUB"
+  if test "${string#*$substring}" != "$string"; then
+    CLIENT_ID="$SKI:$AKI" # $substring is in $string
+  else
+    CLIENT_ID="$SKI:keyid:$AKI" # $substring is not in $string
+  fi
 }
 
 contains "$AKI" "$SUB"
 
 CLIENT_CERT_SHA="$(openssl x509 -in "$CLIENT_CERT" -noout -sha256 -fingerprint | tr '[:upper:]' '[:lower:]' | tr -d : | sed 's/.*=//')"
+
+# Check if client with the same ID or name already exists
+if grep -q "client_id: $CLIENT_ID" config/clients.yml || grep -q "client_name: $CLIENT_NAME" config/clients.yml; then
+  echo "Client with ID $CLIENT_ID or name $CLIENT_NAME already exists in config/clients.yml. Skipping addition."
+  exit 0
+fi
 
 cat >>config/clients.yml <<EOF
 $([ "$(tail -c 1 config/clients.yml)" != $'\n' ] && echo)
