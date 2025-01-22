@@ -25,7 +25,7 @@ IDS Testbed is a setup with Open Source IDS components which can be used to ve
 
 4. Test the compatibility of your own developed component following the steps of the [Testbed User Guide](./TestbedUserGuide.md).
 
-5. Download the [Test Suite](https://gitlab.cc-asp.fraunhofer.de/ksa/ids-certification-testing) and follow the instructions to conduct automated tests for your own developed connector
+5. Download the [Test Suite](https://github.com/International-Data-Spaces-Association/IDS-testbed/tree/master/Testsuite) and follow the instructions to conduct automated tests for your own developed connector
 
 ## Current version (V1.0)
 
