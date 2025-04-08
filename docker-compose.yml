@@ -91,6 +91,11 @@ services:
       - SPRING_DATASOURCE_USERNAME=postgresusera
       - SPRING_DATASOURCE_PASSWORD=password
       - SPRING_JPA_DATABASE_PLATFORM=org.hibernate.dialect.PostgreSQLDialect
+      # Timeouts for HTTP requests
+      - HTTP_TIMEOUT_CONNECT=20000
+      - HTTP_TIMEOUT_READ=20000
+      - HTTP_TIMEOUT_WRITE=20000
+      - HTTP_TIMEOUT_CALL=20000
     volumes:
       - ./DataspaceConnectorA/conf/config.json:/config/config.json
       - ./DataspaceConnectorA/conf/connectorA.p12:/conf/connectorA.p12
@@ -120,6 +125,11 @@ services:
       - SPRING_DATASOURCE_PLATFORM=postgres
       - SPRING_DATASOURCE_DRIVERCLASSNAME=org.postgresql.Driver
       - SPRING_JPA_DATABASE_PLATFORM=org.hibernate.dialect.PostgreSQLDialect
+      # Timeouts for HTTP requests
+      - HTTP_TIMEOUT_CONNECT=20000
+      - HTTP_TIMEOUT_READ=20000
+      - HTTP_TIMEOUT_WRITE=20000
+      - HTTP_TIMEOUT_CALL=20000
     volumes:
       - ./DataspaceConnectorB/conf/config.json:/config/config.json
       - ./DataspaceConnectorB/conf/connectorB.p12:/conf/connectorB.p12
